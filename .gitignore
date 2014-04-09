@@ -1,0 +1,437 @@
+ESPAÑOL
+ENGLISH
+Diseñando apps para móviles
+Comprar libro
+El proyectoContenidosEventosContacto
+Presentación
+1. Las aplicaciones
+2. Entendiendo las posibilidades
+3. Irene Pereyra
+4. Explorando ideas
+5. Definiendo la propuesta
+6. Dustin Barker
+7. Interacción y patrones
+8. Diseño visual
+9. Dustin Mierau
+10. Probando con usuarios
+11. Preparando los archivos
+12. Loren Brichter
+13. Ejemplos a seguir
+14. El mundo tableta
+15. Erik Spiekermann
+16. Lanzando la app
+17. Firefox OS y Ubuntu
+18. Reflexiones finales
+Glosario
+Referencias
+Créditos de imágenes
+Agradecimientos
+cap07
+CAPÍTULO 8
+Diseño visual
+
+El diseño visual es para muchos diseñadores la etapa más divertida del proceso. Aquí se da vida a los wireframes con un estilo que está marcado tanto por el diseñador como por la personalidad de cada sistema operativo.
+
+El estilo de las interfaces
+
+La interfaz de una aplicación es como la ropa que viste para salir a la calle. Es también la capa que hay entre el usuario y el corazón funcional de la app, el lugar donde nacen las interacciones.
+
+En mayor medida está compuesta por botones, gráficos, íconos y fondos, que tienen una apariencia visual diferente en cada uno de los sistemas operativos, porque Android, iOS y Windows Phone tienen su propia forma de entender el diseño.
+
+El trabajo del diseñador consiste en interpretar la personalidad de cada sistema operativo, aportando su propia visión y estilo de diseño, para conseguir aplicaciones que, además de ser fáciles de usar, sean distintas a las demás y tengan coherencia visual con la plataforma que las acoge.
+
+La belleza simple de Android
+
+El diseño en Android está basado en una pulcritud brillante en la composición de la interfaz. Cada gráfico, botón y texto está acompañado por la idea de limpieza visual pero, a la vez, deslumbra con pequeños detalles.
+
+Estilo de diseño visual en Android
+FIGURA 8.1.Android tiene un estilo de diseño simple basado en Roboto como fuente principal.
+
+Roboto, la tipografía propia de este sistema operativo, es en gran parte su seña de identidad y se combina con un estilo de botones y colores bien definido. Android se apoya en la simplicidad, controlada pero no aburrida, que, en ocasiones, rompe o trasciende sus propios formalismos para encantar al usuario.
+
+iPhone, en busca de la ligereza visual
+
+Dejando atrás el estilo que lo marcó hasta su versión 6, iOS defiende actualmente una ideología compartida también con otros sistemas operativos: despojarse de elementos innecesarios, privilegiando el contenido sobre el contenedor.
+
+Estilo de diseño visual en iOS7
+FIGURA 8.2.La claridad visual, conseguida por la elección cromática y de tipografía de iOS, intenta jerarquizar el contenido sobre fondos y elementos secundarios.
+
+Para conseguir esto, reduce controles y gráficos a su mínima expresión, siempre con la idea de aligerar visualmente los elementos en pantalla. Este concepto se respalda con la elección tipográfica —Neue Helvética, muchas veces en sus variables más light— y los colores —blancos para fondos y fuertes para íconos y textos—.
+
+Cada componente de la interfaz se trata como una capa superpuesta a la otra, a veces con cierta transparencia y difuminado, transmitiendo una sensación de continuidad y permanencia en el contexto.
+
+El diseño plano de Windows Phone
+
+El estilo de diseño de Windows Phone se basa en un diseño plano, despojado de relieves, degradados y decoraciones estéticas excesivas. Esta limpieza visual también se aplica a los contenidos, donde solo aquellos importantes permanecen en pantalla, luciéndose en su contexto.
+
+Estilo de diseño visual en Windows Phone
+FIGURA 8.3.El diseño de Windows Phone tiene con Metro un estilo plano, muy basado en su retícula y tipografía, evocando la escuela suiza de diseño.
+
+La interfaz consiste en una aproximación infográfica para sus íconos, con un marcado uso de la retícula y la tipografía como uno de los principales recursos para dotar de personalidad al diseño.
+
+Interfaces nativas o personalizadas
+
+Las interfaces nativas se basan en elementos —botones, listas y encabezados— que vienen preestablecidos en cada plataforma. Tienen un aspecto ya definido en cuanto a las características básicas de su apariencia como color, tamaño o tipo de fuente, que pueden ajustarse en mayor o menor medida para que se correspondan con la estética buscada.
+
+En el momento de comenzar a diseñar es recomendable definir la interfaz con elementos nativos. De esta forma, se consigue una buena base sobre la cual trabajar y no es necesario crear todos los elementos desde cero.
+
+El inconveniente de las interfaces nativas es que limitan la personalidad del diseño y, en algunos casos, es necesario ir un paso más allá. En situaciones como esta, todos o algunos elementos de la interfaz pueden ser personalizados, lo cual se logra creándolos de nuevo como imágenes. Por ejemplo, un elemento visual personalizado podría ser un campo de entrada de texto de un formulario que se genera como imagen, para aprovechar la posibilidad de incluir texturas, relieves o sombras específicas, que un elemento nativo no ofrece.
+
+App de Wunderlist
+FIGURA 8.4.La app de Wunderlist incorpora elementos personalizados en su interfaz —como el campo de texto— bien integrados.
+
+Diseñar una interfaz personalizada tiene que planearse de antemano porque representa una mayor complejidad y tiempo de desarrollo. De la misma manera, no siempre los diseños de este tipo de interfaces se trasladan a la aplicación funcional de forma fidedigna, pues su correcta implementación queda en manos de la pericia del desarrollador.
+
+¿Cuándo usar una u otra interfaz?
+
+En la mayoría de los casos no se trata de elegir entre una u otra, sino de alcanzar el balance adecuado combinando ambas. La situación más habitual suele ser partir de una interfaz nativa y personalizar solo aquellos elementos que se consideren necesarios.
+
+El tipo de aplicación también tiene incidencia en este asunto. Por ejemplo, las aplicaciones que dan valor a los detalles visuales y a la experiencia en general, suelen contar con más de un elemento personalizado. Tal es el caso es Path y su forma de añadir «momentos», algo diseñado y desarrollado a medida.
+
+Por el contrario, hay otras aplicaciones que dan más valor al cumplimiento de tareas y que se benefician de tener una apariencia más limpia que no distraiga del proceso. Un ejemplo de ellas es Whatsapp, cuyo aspecto visual está completamente basado en elementos nativos del sistema operativo.
+
+Además del objetivo o del tipo de aplicación, hay otras variables para considerar. Las interfaces nativas tienen un punto a favor y es que están constituidas por elementos que el usuario ya conoce y a los que está habituado, por lo tanto, no representan un nuevo aprendizaje. Esto puede incidir favorablemente en la usabilidad de la app.
+
+Por otro lado, las interfaces personalizadas pueden ofrecer una apariencia más acabada, pero al trabajar con ellas hay que considerar la compatibilidad con múltiples dispositivos —cómo se visualiza el mismo diseño en teléfonos diferentes— y el rendimiento general —un uso excesivo de imágenes puede hacer que la app sea más lenta—.
+
+La identidad visual
+
+Una aplicación es, entre otras cosas, una pieza de comunicación. Forma parte de un sistema y es una oportunidad para extender la identidad de una empresa o producto.
+
+A través de las diferentes pantallas de la app, los colores, tipografías y fondos actúan como elementos que reflejan esa identidad.
+
+App de Vine
+FIGURA 8.5.Vine combina su color corporativo en la cabecera con otros colores en los hashtags.
+
+Claramente, uno de los componentes de la identidad es la marca. Aunque sea tentador hacer un uso extensivo y repetido de ella, se recomienda incluirla en lugares propicios para tal fin, como pantallas introductoras, pantallas para ingresar clave y usuario, o en la sección «Acerca de». De esta forma, se puede asegurar una correcta exhibición de la identidad sin afectar la navegación y la experiencia de uso.
+
+Íconos y pantalla inicial
+
+Dicen que la primera impresión es la que cuenta. En el mundo de las aplicaciones esa primera impresión está limitada a dos componentes visuales: el ícono de lanzamiento y la pantalla inicial —también llamada splash— que se mostrará muchas veces al abrir la aplicación.
+
+Estos elementos se verán antes que nada, incluso, antes de empezar a usar realmente la aplicación. No menospreciar su importancia y darles la atención que merecen, garantiza arrancar con el pie derecho.
+
+Ícono de lanzamiento
+
+Hay que pensar en la aplicación como un producto que estará en un escaparate junto a muchos otros y el ícono de lanzamiento es el packaging que lo envuelve.
+
+En primer lugar, este ícono servirá para representar a la app en las diferentes tiendas de aplicaciones —junto a las pantallas y textos promocionales— como elemento de venta para convencer al usuario de descargarla.
+
+Aplicaciones de tareas en la tienda de Android
+FIGURA 8.6.Una aplicación compite con muchas otras cuando un usuario llega a ella a través de los resultados de búsqueda, en este caso Google Play.
+
+Sorteado este paso, y una vez instalada en el teléfono, la aplicación convivirá con muchas otras que el usuario haya instalado; por eso, el ícono de lanzamiento debe ser distintivo y representativo de la app. Distintivo, porque tiene que separarla de las demás, incluso de aquellas que cumplan funciones similares, y representativo, porque sus características visuales tienen que comunicar claramente el objetivo principal de la aplicación. Las formas simples, no muy cargadas y cuidadas en sus detalles, suelen ser las que tienen mayor efectividad.
+
+Íconos de lanzamiento de las apps Cheddar, Clear, MindsLite, ToDoPro, ListBook, Mussedo, Fousquare, Flow, Things y Kickoff
+FIGURA 8.7.El ícono de lanzamiento de una app debe tener personalidad para diferenciarla de las demás en una tienda, pero también representar claramente lo que hace. En el ejemplo, hay íconos de diferentes apps de tareas y una red social, ¿puedes descubrir cuál es?
+
+El tamaño también es algo a tener en cuenta. Algunas veces, el ícono se verá realmente grande, por ejemplo en las tiendas de aplicaciones, pero otras, como cuando la app está instalada, se verá mucho más pequeño. Al diseñarlo hay que considerar todas las posibilidades, añadiendo más o menos detalle a la imagen en función de sus dimensiones.
+
+Siendo aún más específicos, cada uno de los SO tiene diferentes requisitos que debe cumplir el ícono de lanzamiento. Tanto Android1 como iOS2 ofrecen detalladas guías del estilo visual y características técnicas que debe tener esta imagen.
+
+Estilo de íconos de lanzamiento en Android
+FIGURA 8.8.En Android los íconos suele tener sombras y juegan con una ligera perspectiva.
+
+En Android los íconos son objetos representados frontalmente con una ligera perspectiva, como si fueran vistos desde arriba. Dan sensación de volumen y profundidad, jugando con transparencias para integrarse mejor a la pantalla. Las formas son distintivas y con medido realismo.
+
+Estilo de íconos de lanzamient en iOS
+FIGURA 8.9.Íconos encerrados en formas contenedoras con esquinas redondeadas, el sello de identidad de iOS.
+
+La situación es diferente en iOS: los íconos son por lo general representaciones muy simplificadas de objetos reales o abstracciones del concepto de la app. Por lo general el ícono contiene un solo elemento principal, sin muchos detalles, que reposa sobre un fondo opaco. Para completar la apariencia visual que el ícono tiene en la pantalla del teléfono, iOS añade bordes redondeados a la imagen, que debe ser cuadrada y cubrir la totalidad del tamaño requerido en cada caso.
+
+Estilo de íconos de lanzamiento en Windows Phone
+FIGURA 8.10.Aunque hay excepciones, las buenas prácticas en Windows Phone indican que los íconos de lanzamiento deben ser formas simples y blancas.
+
+Por su parte, en Windows Phone tienen un estilo bastante característico: los íconos son pictogramas. Formas extraordinariamente simples y de colores planos —sobre todo blanco—, casi sin detalles e integradas perfectamente a su contenedor. En este caso, la transparencia es fundamental ya que las imágenes están ubicadas dentro de una forma cuadrada, que puede cambiar el color de fondo de acuerdo a las preferencias cromáticas del usuario.
+
+Íconos interiores
+
+Ya dentro de la aplicación, los íconos interiores tienen un papel menos estelar y más funcional que los de lanzamiento. Puede ser que pasen desapercibidos, pero su trabajo es importante y silencioso y, como tal, digno de tener en cuenta.
+
+Su uso suele estar asociado a tres escenarios. El primero, como ayuda visual para reforzar información, por ejemplo, en un cuadro de diálogo con una alerta. En el segundo caso, los íconos interiores actúan como complemento de elementos interactivos, como cuando se encuentran dentro de botones o pestañas. Finalmente, su función puede ser la de mejorar la utilización del espacio, en este caso, el ícono resume visualmente algo que en forma de texto sería muy extenso o complejo de entender.
+
+Los íconos tienen que transmitir por sí solos la acción que ejecutan y esto depende del contexto. Por ejemplo, un ícono de «eliminar» puede referirse a un solo elemento en particular o a varios, dependiendo de dónde esté ubicado y a qué elemento de la interfaz esté visualmente asociado.
+
+Estilo de íconos interiores
+FIGURA 8.11.De arriba hacia abajo, íconos interiores en Android, iOS y Windows Phone.
+
+Cuando los íconos acompañan determinadas acciones —si no tienen etiquetas de texto que ayuden a ejemplificar su función— se vuelve más importante que sean claros y representativos. Esto ocurre cuando, por limitaciones de espacio, no puede incluirse un ícono y texto al mismo tiempo. Además, es una tendencia que está empezando a verse cada vez más en las aplicaciones.
+
+La interpretación de íconos supone cierta subjetividad que hay que tratar de eliminar haciendo un uso correcto de ellos. Por ejemplo, en cada plataforma algunas acciones como «buscar», «guardar» o «editar» tienen íconos asociados. El usuario ya los conoce y sabe qué significan, por lo tanto, darles el uso que se espera de ellos ayudará a alcanzar consistencia y mejorará la usabilidad de la aplicación.
+
+Pantalla inicial
+
+Conocida también como splash, es la primera pantalla que verá el usuario al iniciar la app. Su uso está siendo cada vez más limitado —y evitado—, por lo que generalmente se muestra rápidamente la primera vez que se abre la aplicación. Esta pantalla sirve como presentación del contenido mientras se realiza la carga inicial, por tanto, es normal que se incluya un elemento indicativo de carga junto a los demás elementos gráficos.
+
+Pantallas iniciales en Android
+FIGURA 8.12.Las pantallas iniciales en Android contienen poca información y solo se muestran brevemente durante la carga inicial.
+
+La pantalla inicial tiene un carácter tan efímero que pocas veces se ve más de un par de segundos. Debido al poco tiempo de vida que tiene, la información que muestra se debería limitar al nombre, versión de la aplicación y poco más, ya que desaparecerá tan pronto como la aplicación termine de cargarse.
+
+Pantallas iniciales en iOS
+FIGURA 8.13.La recomendación en iOS es usar una pantalla inicial que sea una representación del contenedor, vacío de información, para conseguir una sensación de inmediatez en la carga.
+
+En algunos casos, este splash se trata de una representación del contenedor de la aplicación: una imagen casi idéntica a la que verá el usuario cuando la carga haya finalizado, pero sin aquellos datos que pueden llegar a cambiar como textos, etiquetas en botones y elementos de la barra de estado, haciendo que, aparentemente, la carga resulte más fluida3.
+
+En el caso de Windows Phone, el sistema operativo se encarga de gestionar la pantalla de inicio que consiste en una ampliación del ícono de lanzamiento.
+
+En cuanto a la orientación de esta pantalla en teléfonos móviles, hay que recordar que suele mostrarse de forma vertical, mientras que en las tabletas, es necesario determinar la orientación que se está usando al momento de mostrar el splash y, en función de eso, hacer uso de la versión correspondiente al modo horizontal o vertical.
+
+Grilla o retícula de construcción
+
+La grilla o retícula —grid en inglés— es la estructura invisible sobre la cual se apoyan todos los elementos visuales. Su función es la de separar cada uno de los componentes de la interfaz en un espacio ordenado, organizando los sitios que quedarán en blanco y aquellos que contendrán formas. Una retícula bien definida se transforma en una ayuda al diseño que, generando orden y simplicidad, mejora la usabilidad de la app.
+
+En su forma más básica consta de un módulo base: un cuadrado de un tamaño determinado que se usa como medida de referencia. A su vez, este módulo puede dividirse en submúltiplos para espaciados más pequeños.
+
+Mientras el diseño de la interfaz está en desarrollo, la retícula se representa por medio de líneas guía. Una vez terminada la estructura, se puede percibir por el llamado «ritmo visual» que ubica los elementos armónicamente en el espacio.
+
+En el diseño de interfaces para móviles, la grilla permite establecer márgenes y determinar la ubicación de los botones, la separación de la tipografía y el espacio interior y exterior de los contenedores. Por supuesto, cada uno de los sistemas operativos tiene diferentes retículas y por lo tanto, distintos módulos.
+
+Android
+
+En Android, el módulo base es de 48dp que equivale aproximadamente a nueve milímetros, tamaño mínimo recomendado para elementos interactivos. Basarse en este tamaño y respetar estas dimensiones para los botones, permite asegurar que estos podrán ser tocados con el dedo sin problemas, cuestión fundamental en el diseño para móviles.
+
+Retícula en Android
+FIGURA 8.14.En la imagen se puede ver claramente cómo una interfaz en Android está compuesta por un módulo base de 48dp.
+
+Para el espaciado y separación, en cambio, se usa un módulo de 8dp. Por ejemplo, el contenido de filas tiene una separación —superior e inferior— de 4dp, lo que hace que cuando dos filas están una sobre otra, se sumen conformando un espacio total de 8dp entre ellas. En los márgenes laterales, los diseños suelen tener 16dp o, dicho de otra forma, dos módulos de 8dp juntos4.
+
+iPhone
+
+Los diseños para iPhone también se basan en una retícula, solo que en este caso el tamaño del módulo base es de 44px, asegurando que botones y elementos en listas puedan ser pulsados sin problemas. En ese ritmo se basan muchas aplicaciones diseñadas para iPhone y es el mismo que recomienda Apple.
+
+Retícula en iOS
+FIGURA 8.15.En iOS el módulo base es de 44px.
+
+Este módulo de 44px se divide en otros de 11px que, repetidos la cantidad de veces deseada, crean los espacios y separación entre tablas, botones y otros elementos de la interfaz, generando un ritmo vertical5.
+
+Windows Phone
+
+En Windows Phone la retícula se hace más evidente debido al uso que hace de formas cuadradas en la interfaz. La pantalla principal del sistema operativo está basada en los llamados azulejos o tiles, que permiten apreciar claramente la distribución y tamaño de los elementos principales.
+
+En este caso, la retícula se apoya en un módulo de 25px con separaciones de 12px. Esta fórmula, repetida por toda la pantalla, crea una estructura visual sobre la cual se crean los diseños. Adicionalmente, las filas y columnas pueden agruparse de distintas maneras para lograr diseños personalizados que hacen diferentes usos del espacio.
+
+Retícula en Windows Phone
+FIGURA 8.16.En Windows Phone la retícula es un pilar fundamental sobre el cual se apoyan todos los elementos en pantalla.
+
+Listas, gráficos, miniaturas de fotos y botones, toman como base esta retícula, logrando una apariencia estable y dando sensación de orden, simplicidad y limpieza visual, a través de todas las pantallas de una app de Windows Phone.
+
+Tipografía
+
+Como en cualquier diseño, el objetivo de la tipografía es conseguir que el texto se lea con claridad. Esto se logra no solo con una adecuada elección de la fuente, sino también gestionando su tamaño, separación entre líneas, ancho de columnas y contraste visual con el fondo.
+
+Este último punto, el contraste, es más importante de lo que puede creerse a simple vista. Un móvil es un dispositivo que muchas veces se usará fuera de casa, por ejemplo, en la calle. En algunos momentos el sol dará directamente sobre la pantalla y si no hay un buen contraste entre tipografía y fondo, la información en pantalla será imposible de leer.
+
+La tipografía es un componente que, como botones y gráficos, también se asienta en una retícula que definirá su ubicación y posición dentro del contexto general de la pantalla.
+
+Serif o sans-serif
+
+Generalmente el debate sobre la elección de la fuente suele concentrarse mayormente entre las tipografías que tienen serifa y las que no. Si bien es cierto que en tamaños pequeños y bajas resoluciones rinden mejor aquellas fuentes más limpias, abiertas y sans-serif, también pueden considerarse las serif para los títulos principales, cuando cuenten con un tamaño en el que las serifas no sean un impedimento para la lectura.
+
+Aunque en móviles no sea habitual una lectura de texto prolongada, la correcta legibilidad es una parte fundamental del diseño; por esta razón, la tipografía es tan importante como cualquier otro elemento visual que se incorpore en una interfaz y su elección no debería descuidarse.
+
+Legibilidad y resolución
+
+Por ser un soporte digital, los móviles tienen características propias y algunas limitaciones ajenas a los medios impresos tradicionales. La pantalla influye bastante en el comportamiento y desempeño tipográfico si se tiene en cuenta que, en algunos casos, es sumamente pequeña.
+
+Letra 'a' vista en diferentes resoluciones de pantalla
+FIGURA 8.17.En terminales con buena calidad de pantalla los caracteres son más legibles. En pantallas de poca densidad la elección tipográfica puede representar un problema mayor.
+
+Actualmente, muchos dispositivos tienen pantallas con buena resolución, lo que elimina un factor de complejidad y una gran preocupación a la hora de elegir qué fuente se usará. Este tipo de pantallas suele encontrarse en móviles de alta gama, sin embargo, hay otros teléfonos con características no tan interesantes.
+
+En este último caso, elegir la tipografía es una tarea bastante difícil que no se limita a la elección de familia y tamaño, ya que, mientras más pequeña sea la pantalla, hay más posibilidades de que la forma en que se pintan en ella los caracteres, sea más pobre.
+
+Tamaños mínimos
+
+En soportes digitales, como un móvil o una tableta, algo que condiciona el tamaño tipográfico es la distancia a la cual se sujeta el dispositivo. Los móviles suelen sostenerse de forma que la pantalla está más cerca del ojo del lector que en el caso de una tableta, lo que permite que el tamaño de la tipografía sea más pequeño.
+
+Un iPad y un iPhone con diferentes tamaños de tipografía
+FIGURA 8.18.El tamaño de pantalla y la distancia de lectura condicionan la elección de los tamaños de la fuente, el interlineado e interletrado.
+
+Al mismo tiempo, en los teléfonos el espacio en pantalla es mucho menor, lo cual obliga a ajustar el interlineado y la separación entre caracteres, para aprovechar el área disponible sin perjudicar la lectura.
+
+Los tamaños mínimos pueden variar dependiendo del sistema operativo, la resolución de la pantalla y la fuente que se elija. En todo caso, cuando se trata de tamaños pequeños, se aconseja elegir fuentes de formas simples y abiertas, con espaciado entre caracteres, líneas y márgenes para dar aire visual que facilite la lectura.
+
+La mejor forma de asegurar una correcta legibilidad no es otra que ponerla a prueba en el teléfono para el cual se diseña. Los diseños en pantalla de ordenador suelen ser engañosos y comprobarlos en el entorno más real posible, permite realizar ajustes y correcciones hasta conseguir el tamaño adecuado.
+
+Esquema mostrando diferentes tamaños de fuente en Android
+FIGURA 8.19.Diferentes tamaños de fuentes en Android de acuerdo al uso y jerarquía de los elementos.
+
+En Android, el tamaño tipográfico se mide en sp —scaled pixels o píxeles escalados—, una forma de modificar la escala de las fuentes de acuerdo al tamaño de pantalla y a las preferencias definidas por el usuario en su configuración del teléfono. Los tamaños más comunes van desde 12sp hasta 22sp.
+
+El tamaño es variable en iOS, dependiendo de dónde está ubicado el texto. En el caso de la densidad «retina», los títulos principales rondan los 34px y el tamaño en etiquetas dentro de botones importantes es aproximadamente 28px. A partir de allí, va disminuyendo en los diferentes elementos hasta llegar al tamaño más pequeño, cercano a los 14px. Sin embargo, se recomienda no usar dimensiones inferiores a 20px en los textos de lectura.
+
+En Windows Phone, más que otras plataformas, el diseño recae en la tipografía. Una mala elección del tamaño de la fuente en una app que cuenta con pocos elementos visuales, puede llevarla a la ruina. Las recomendaciones son: no usar un tamaño menor a 20px para los textos más pequeños y en el caso de títulos, considerar tamaños que pueden llegar, incluso, a 70px.
+
+Jerarquías
+
+Como elemento visual y componente de una interfaz, la tipografía también es susceptible de ser jerarquizada. Su importancia depende no solo de la función que cumple, sino también de la información que contiene y su posición en pantalla.
+
+Para definir diferentes niveles de protagonismo en un texto se puede apelar, además del tamaño, a las variantes —negrita, regular o light, por ejemplo— y al color.
+
+Esquema mostrando jerarquías tipográficas
+FIGURA 8.20.Mientras que en la pantalla de la izquierda no se aprecia una jerarquía clara, a la derecha es más evidente la importancia de cada elemento de acuerdo al tamaño de la tipografía.
+
+Un texto con mayor jerarquía sería aquel que se ubica como título principal de sección. Por otro lado, en la información contenida dentro de una fila en una lista, puede haber varias jerarquías, por ejemplo, en el caso de un correo, podría verse el nombre de la persona que lo envía, un resumen del contenido y la fecha de envío; todos estos elementos tienen diferente importancia y definirla es el primer paso para saber qué estilo tipográfico aplicar.
+
+Las tipografías de cada sistema operativo
+
+Tanto Android, como iOS y Windows Phone, tienen sus preferencias tipográficas y su propio set de fuentes de sistema. Esto no quiere decir que el diseñador deba apegarse necesariamente a esta selección, pero elegir alguna de las opciones disponibles ayudará a vincularse con la identidad de cada plataforma.
+
+Esquema de fuentes en Android
+FIGURA 8.21.Roboto es la fuente emblema de Android, pensada con variables para móviles con buena calidad de pantalla.
+
+En el caso de Android, la familia Droid Sans fue una de las más utilizadas y marcó una época dentro de esa plataforma. Sin embargo, en las últimas versiones de este sistema operativo ha sido reemplazada por Roboto, especialmente diseñada para móviles de alta resolución y con variantes que van desde una extra delgada hasta una black6.
+
+Esquema de fuente en iOS
+FIGURA 8.22.Neue Helvética es un clásico de iOS a pesar de los problemas que puede presentar en tamaños reducidos.
+
+La fuente emblemática de iOS en los últimos años ha sido Neue Helvética y es normal encontrar muchas aplicaciones que la usan. Con el paso del tiempo se ha transformado casi en una marca de identidad de este sistema operativo; no obstante, hay más de 260 fuentes disponibles que pueden usarse de forma nativa7.
+
+Esquema de fuente en Windows Phone
+FIGURA 8.23.Segoe UI es la fuente característica en Windows Phone, en sus interfaces tiene un gran protagonismo.
+
+Windows Phone introdujo Segoe UI como un sello que acompaña el estilo limpio, moderno y geométrico de su interfaz. Aun así, cuenta con una serie de familias tipográficas que la acompañan, sobre todo en casos que requieren caracteres especiales que no se encuentran en Segoe UI, como aquellos de idiomas extranjeros8.
+
+Cada uno de estos sistemas operativos también permite incorporar en el diseño fuentes adicionales a las predefinidas. Aunque esto sea posible, es importante recordar que variedad y calidad son dos cosas diferentes: muchas de las fuentes que pueden encontrarse, no han sido pensadas ni preparadas especialmente para una buena legibilidad en pantalla.
+
+Color
+
+El color es un recurso vital en el diseño de una aplicación. Su uso abarca encabezados, textos, botones, fondos y muchos otros elementos que conforman la interfaz. En algunas ocasiones, está asociado a la identidad —color corporativo— y en otras, responde a criterios estéticos y decisiones de diseño.
+
+Un color por sí solo, salvo en el caso de colores reservados, no indica mucho. Como parte de un sistema cromático, el uso consistente, consciente y vinculado al contexto donde se aplica, es lo que lo llena de significado para el usuario.
+
+Colores reservados
+
+Hay ciertos colores que deben emplearse de forma cuidadosa porque tienen connotaciones que no pueden obviarse. Se llaman justamente «colores reservados» porque su uso debería limitarse especialmente a los nombrados a continuación:
+
+Colores reservados
+FIGURA 8.24.Colores como el amarillo y rojo suelen reservarse para reforzar el significado y la importancia de algunos elementos visuales.
+
+Rojo: Para errores y alertas importantes. Es un color que naturalmente indica peligro y llama la atención para centrarse inmediatamente en lo que está ocurriendo.
+Amarillo: Prevención. Señala que la acción que va a realizarse implica la toma de una decisión que ocasiona alguna consecuencia, por lo cual hay que estar alerta.
+Verde: Mensajes de éxito y confirmación de que una acción se ha realizado correctamente.
+En textos
+
+El color se puede usar para destacar aquellas frases o palabras que pueden ser pulsadas, como enlaces. En este caso, es importante mantener la consistencia visual para permitir al usuario, intuitivamente y a simple vista, saber cuáles son los elementos tipográficos interactivos.
+
+Otra función que cumple el color al ser usado en textos es la de jerarquizar el contenido. La información complementaria puede ser destacada o minimizada dependiendo del color que se use; por ejemplo, aquella que reviste cierta importancia podría destacarse en el texto con un color diferente. De la misma forma, el color también puede usarse para identificar información secundaria, usando tonos más claros sin tanto protagonismo.
+
+En fondos
+
+En el caso del color de fondo, este debe estar en consonancia con el elegido para la tipografía, ya que es necesario un contraste mínimo por cuestiones de legibilidad y accesibilidad.
+
+Hay que tener en cuenta que los fondos oscuros suelen cansar la vista más rápidamente, por lo tanto, si la app es de uso frecuente o requiere pasar cierto tiempo leyendo, es conveniente revisar la elección cromática y llevar el color de fondo hacia alternativas más claras. Sin embargo, los colores oscuros en el fondo sí pueden ser una buena alternativa cuando el contenido sea muy visual, como fotografías o videos, ya que ayuda a resaltar estos elementos.
+
+En elementos interactivos
+
+El color puede utilizarse como respuesta o feedback a acciones concretas del usuario, un uso que muchas veces no se tiene en cuenta. Para ilustrar con un ejemplo, los elementos seleccionados o pulsados, como botones o filas, pueden destacarse con un color que indique visualmente dónde se ha pulsado, lo cual suele ser particularmente difícil de saber en un móvil.
+
+En el caso de elementos deshabilitados, generalmente el color es más claro que cuando están en su estado normal, incluso, puede apelarse al uso de transparencias. De cualquier forma, el objetivo es indicar de una forma evidente que ese elemento no producirá ningún efecto al ser pulsado.
+
+En encabezados
+
+Además de destacarlos como elemento principal, cuando el color se usa en encabezados tiene que armonizar completamente con el fondo y los otros elementos de la pantalla. A fin de cuentas, se trata de un importante espacio que se usará, por ejemplo, para poner los diferentes títulos de sección y otros elementos interactivos que tengan incidencia en el contenido de la pantalla que se está viendo.
+
+Colores en encabezados en la app The Guardian
+FIGURA 8.25.La aplicación de «The Guardian» usa el color en los encabezados para diferenciar cada una de las secciones principales.
+
+Idealmente, como los encabezados están presentes en diferentes secciones de la aplicación, debe haber una consistencia cromática a medida que se navega por las diferentes partes de la app. Sin embargo, otras apps —como la del periódico inglés «The Guardian»— aprovechan los encabezados para jugar con variaciones de color que marcan una diferencia visual entre cada una de las secciones. De esta forma, el encabezado sirve también para extender su identidad visual y al mismo tiempo, darle una pista al usuario de la sección en la que se encuentra.
+
+Colores por defecto de cada sistema operativo
+
+Android y Windows Phone usan temas —themes en inglés— que afectan el color de sus aplicaciones y pueden ser claros u oscuros. En Windows Phone la elección entre los temas disponibles está también en manos del usuario, ya que pueden cambiarse en las preferencias del teléfono, modificando la visualización de la interfaz a través de todo el sistema operativo.
+
+Colores en los temas de Windows Phone
+FIGURA 8.26.Windows Phone deja elegir al usuario temas claros u oscuros y un color que se utiliza para resaltar aquellos elementos más importantes.
+
+Todos los elementos nativos de las aplicaciones se ven afectados por esta decisión: diálogos, botones y fondos de listas se verán en consonancia con el tema elegido. Sin embargo, en Windows Phone, respetar la elección del usuario queda en manos de cada aplicación, porque aun cuando este haya elegido un color para su tema, la app puede decidir usar una opción cromática diferente. Por ejemplo, incluso si el usuario elige un color oscuro como tema, la aplicación puede mostrar elementos en blanco si así se ha establecido previamente.
+
+Mantener o no la selección que hace el usuario del tema, tiene ventajas y desventajas que deben valorarse cuando se decide el diseño de la app. Por ejemplo, usar el color del tema elegido brinda consistencia visual y comodidad a través de todo el sistema operativo, además, el usuario se siente siempre dentro del mismo contexto. No obstante, la diferenciación respecto a otras apps puede ser baja y disminuye la posibilidad de incorporar a la aplicación los colores corporativos.
+
+Colores recomendados en Android
+FIGURA 8.27.Android sugiere una paleta de colores, aunque su recomendación principal es usar el azul.
+
+En Android, la elección del tema no es una opción para el usuario; son los diseñadores quienes deben decidir si aplicar temas oscuros o claros a toda la aplicación, o solo a determinadas pantallas.
+
+En los dos casos, los colores de los temas se combinan con otros secundarios que tienen la función de resaltar aquellos elementos que requieren atención. En Windows Phone, este color secundario también puede ser elegido por el usuario dentro de una lista de opciones en las preferencias, pero también en este caso, la app puede haber optado por un color diferente. Mientras tanto, aunque su paleta cromática propone otras opciones que pueden ser tenidas en cuenta a la hora de plantear el diseño visual, en Android se recomienda el azul como color secundario.
+
+Colores en iOS
+FIGURA 8.28.Los colores por defecto de iOS están basados en los negros y azules.
+
+Por último, el caso de iPhone es diferente porque no usa temas. Su propuesta de color nativa, establecida por defecto, se basa en la claridad: blanco y grises muy claros para fondos, barras de herramientas y encabezados de secciones. Estos elementos cuentan también con cierta transparencia que deja ver lo que se encuentra detrás. Mientras que el negro se destina para elementos informativos, el azul se usa como color para resaltar la tipografía en etiquetas de botones y formularios, y otros elementos que necesitan destacarse (íconos, pestañas seleccionadas, controles). Aun así, los colores de estos elementos pueden cambiarse fácilmente.
+
+El lenguaje: cuidando las palabras
+
+En una aplicación hay infinidad de lugares donde usar textos: en encabezados y títulos, botones, mensajes de error y avisos en pantallas vacías. En cada caso, las palabras son tan importantes como el elemento gráfico que las contiene o acompaña. Lenguaje textual y visual van de la mano, unidos para lograr una experiencia de usuario consistente en todos los sentidos.
+
+La incidencia de la palabra equivocada
+
+Cómo formular una frase es algo que generalmente no suele considerarse importante en un primer momento, pero tiene influencia directa en la forma en que el usuario usa la aplicación y se relaciona con ella. Por ejemplo, escribir mal la etiqueta de un botón —el texto que contiene— puede llevar a confusiones sobre el resultado de la acción que indica, provocando incertidumbre y frustración en el usuario que se equivoca.
+
+Situaciones como esta son habituales. Aunque pueda parecer obvio, un mensaje debe ser comprendido fácilmente por el usuario, sin obligarlo a esforzarse para interpretarlo. Esto se consigue, entre otras cosas, con un lenguaje simple y directo; haciendo gala de la economía de palabras, donde lo importante se dice primero y lo innecesario, no se dice.
+
+El receptor
+
+Como cualquier mensaje, una aplicación también tiene un receptor. Conocer quién es, permite saber cómo hablarle. Esto es importante para determinar la forma en que se articulan las frases y el lenguaje que se utiliza. No es lo mismo hablarle a un niño que a un adulto, como no es igual dirigirse a un usuario técnico que a un principiante tecnológico. Todo influye en la elección de las palabras.
+
+En el mundo de las aplicaciones se tiende a llevar a un plano muy tecnológico la forma de expresarse, esto hace que muchas veces se escriban mensajes cargados de tecnicismos o palabras complejas que un usuario no preparado podría tener dificultad para asimilar o que suenan demasiado duras. Por ejemplo, la palabra «acceder» puede ser simplemente reemplazada por «entrar», un sinónimo mucho más ameno.
+
+Comunicando errores
+
+La manera de comunicar los errores merece un párrafo aparte. De entrada, esta es una situación estresante o desagradable para el usuario, pero a través de mensajes amables —que no usen tecnicismos incomprensibles o un tono acusatorio— puede sobrellevarse de una forma menos traumática. Un ejemplo de esto, es el sentido del humor para comunicar los errores de Letterpress, que al ser una aplicación de entretenimiento aprovecha la predisposición de sus usuarios a divertirse.
+
+Mensaje de error en Letterpress
+FIGURA 8.29.Los mensajes de error en Letterpress son tan divertidos como jugar con esta app, quitándole dramatismo al asunto.
+
+Textos en otros idiomas
+
+Como comentario adicional, se puede mencionar que cuando la aplicación está disponible en diferentes idiomas, hay que tener cuidado al incorporar los textos traducidos para asegurase de que sigan viéndose correctamente en el espacio visual que tienen asignado. Dependiendo del idioma, algunas palabras son —a veces mucho— más largas que en el idioma original y podrían verse cortadas u ocultas bajo otros elementos de la interfaz.
+
+Detalles visuales
+
+Es verdad que la diferencia radica en los detalles. Ellos pueden separar una aplicación regular de una genial. En una primera instancia no se presta atención a estos detalles que mejoran la experiencia del usuario e incluso, cambian su estado de ánimo; y es normal, al principio hay otros aspectos de diseño de los cuales hay que ocuparse. Pero a medida que la interfaz va llegando a su fin, es importante considerarlos para no pasar por alto algo que pueda arruinar el trabajo realizado.
+
+Pantallas vacías
+
+Los diseños tienen que considerar no solo los escenarios ideales, como una lista que ya está completa o una pantalla llena. Es necesario plantear también el diseño para cuando la aplicación comienza a ser utilizada y aún no se dispone de cierta información. Por ejemplo, cómo se vería una pantalla vacía, sin ítems, cuando todavía no hay nada para mostrar.
+
+Pantalla de favoritos vacía
+FIGURA 8.30.También hay que diseñar las pantallas vacías, para cuando aún no hay información. En este caso también se aprovechan para explicar el funcionamiento de esta sección.
+
+Otro escenario a tener en cuenta, es aquel relacionado con los fondos que irán detrás de aquellas listas que no alcanzan a cubrir toda la pantalla o los gráficos contenedores donde aparecerán las imágenes una vez que estén cargadas.
+
+Gráficos efímeros
+
+Es necesario considerar también el diseño de aquellos elementos que aparecen por poco tiempo en la pantalla. Por ejemplo, si la conexión es lenta, puede ser que el usuario tenga que pasar más tiempo de lo esperado viendo la pantalla de carga y en ese caso, estos detalles visuales tienen su momento de gloria.
+
+Pantalla que muestra el diseño cuando aún no se cargan todos los elementos
+FIGURA 8.31.De acuerdo a la velocidad de conexión a Internet los elementos pueden tardar en aparecer en pantalla y es bueno considerar qué se verá cuando aún no están visibles.
+
+Secretos visuales
+
+A la hora de darse pequeños lujos visuales, se puede pensar en aquellos gráficos que están ocultos a primera vista, que no son de fácil acceso para el usuario, pero que una vez descubiertos generan un placer especial ayudados por la complicidad. Por ejemplo, en la aplicación de Google+9 cuando se arrastra y suelta la pantalla para actualizar los contenidos, aparece una serie de tiras de colores, un detalle no visible hasta que realizamos esta acción.
+
+Google+ muestra unas bandas de color que se estiran mientras se arrastra para actualizar los contenidos
+FIGURA 8.32.Google+ aprovecha espacios ocultos para añadir un toque de color.
+
+Animando la app
+
+Las animaciones son más difíciles de diseñar y, en ocasiones, de percibir que los llamados detalles visuales, pero también hacen una diferencia en la experiencia de usuario10, pues llenan de vida la aplicación y hacen más agradable su uso, a la vez que acompañan una función principal o una acción. Seguramente no son fundamentales, porque lo mismo podría representarse sin estar animado, pero sin duda influyen mucho en cómo se siente el usuario al interactuar con los elementos en pantalla.
+
+De acuerdo a su función o a la forma de utilizarlas, las animaciones pueden servir para diferentes cosas:
+
+Como feedback. Los gráficos en pantalla pueden animarse para mostrar el resultado de una acción. Tal sería el caso de un elemento que desaparece de la pantalla después de ejecutarse una acción, mostrando hacia dónde va y qué ha pasado con él.
+Secuencia de pantallas al completar una tarea en Clear
+FIGURA 8.33.Clear usa las animaciones como indicador para saber qué pasa con las tareas una vez que se completan.
+
+Como transiciones. Las animaciones pueden ayudar a hacer las transiciones entre pantallas más fluidas. Esto puede representar una buena experiencia de navegación cuando se va de un contenido hacia otro.
+Animación como transiciones en Windows Phone
+FIGURA 8.34.En Windows Phone abundan las transiciones entre pantallas, enriqueciendo la experiencia de navegación.
+
+Como herramientas informativas. Especialmente cuando se usa la app por primera vez, puede ser necesario mostrar algún elemento en la pantalla señalando cómo se usa o destacar la presencia de un componente nuevo que no existía en versiones anteriores. En casos como estos, la animación puede ayudar para dirigir la atención, que es, de hecho, una de sus funciones principales.
+Puro «caramelo visual». A veces, una animación no cumple otra función más que «endulzar» el ojo del usuario. Puede ser un simple detalle que no todos vean, pero que sin duda causará una buena impresión visual al ser notado.
+↑ SubirDustin Mierau: Path y el valor de los detalles →
+Imprime el libro y consúltalo sin conexión a internet. Descárgalo ahora
+
+Condiciones de usoPrensaPreguntas frecuentes

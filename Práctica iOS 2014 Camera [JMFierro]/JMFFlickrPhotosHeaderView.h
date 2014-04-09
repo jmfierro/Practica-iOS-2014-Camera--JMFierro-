@@ -1,5 +1,5 @@
 //
-//  JMFCollectionViewController.h
+//  JMFFlickrPhotoHeaderView.h
 //  Práctica iOS 2014 Camera [JMFierro]
 //
 //  Created by José Manuel Fierro Conchouso on 05/04/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JMFCollectionViewController : UIViewController
-
+@interface JMFFlickrPhotosHeaderView : UICollectionReusableView
+- (void) setSearchText:(NSString *)text;
 @end

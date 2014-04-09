@@ -1,15 +1,21 @@
 //
 //  Flickr.m
-//  Flickr Search
+//  Práctica iOS 2014 Camera [JMFierro]
 //
-//  Created by Brandon Trebitowski on 6/28/12.
-//  Copyright (c) 2012 Brandon Trebitowski. All rights reserved.
+//  Created by José Manuel Fierro Conchouso on 05/04/14.
+//  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
+
+/*
+ * Realiza búsquedas y devuelve un arreglo de FlickrPhotos.
+ */
 
 #import "Flickr.h"
 #import "FlickrPhoto.h"
 
-#define kFlickrAPIKey @"d02c877c0a4220890f14fc95f8b16983"
+//#define kFlickrAPIKey @"d02c877c0a4220890f14fc95f8b16983"
+#define kFlickrAPIKey @"a5dc780c8fd28cfef0b50cefd39c9d8d"
+
 
 @implementation Flickr
 
@@ -64,11 +70,21 @@
                     NSMutableArray *flickrPhotos = [@[] mutableCopy];
                     for(NSMutableDictionary *objPhoto in objPhotos)
                     {
+                        /* 
+                         * Obtención de Metadatos
+                         */
+                        
                         FlickrPhoto *photo = [[FlickrPhoto alloc] init];
                         photo.farm = [objPhoto[@"farm"] intValue];
                         photo.server = [objPhoto[@"server"] intValue];
                         photo.secret = objPhoto[@"secret"];
                         photo.photoID = [objPhoto[@"id"] longLongValue];
+                        
+                        photo.isfamily = [objPhoto[@"isfamily"] intValue] == 0 ? @"No familia" : @"Familia";
+                        photo.isfriend = [objPhoto[@"isfriend"] intValue] == 0 ? @"Desconocido" : @"Amigos";
+                        photo.ispublic = [objPhoto[@"ispublic"] intValue] == 0 ? @"Privada" : @"Pública";
+                        photo.owner = objPhoto[@"owner"];
+                        photo.title = objPhoto[@"title"];
                         
                         NSString *searchURL = [Flickr flickrPhotoURLForFlickrPhoto:photo size:@"m"];
                         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:searchURL]
@@ -92,7 +108,10 @@
     
     NSString *size = thumbnail ? @"m" : @"b";
     
+    // Obtiene la url con la API personal.
     NSString *searchURL = [Flickr flickrPhotoURLForFlickrPhoto:flickrPhoto size:size];
+    
+    // Hilo para descargar la imagen de Flickr.
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     dispatch_async(queue, ^{

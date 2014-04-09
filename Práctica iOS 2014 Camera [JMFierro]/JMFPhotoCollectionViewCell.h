@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JMFCollectionViewCellPhoto : UICollectionViewCell
+@class FlickrPhoto;
+
+@interface JMFPhotoCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imagePhoto;
-
 @property (weak, nonatomic) IBOutlet UILabel *labelPhoto;
+
+@property(nonatomic, strong) FlickrPhoto *photo;
 
 @end

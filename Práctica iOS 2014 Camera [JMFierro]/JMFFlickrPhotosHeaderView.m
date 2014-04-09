@@ -1,19 +1,18 @@
 //
-//  FlickrPhotoHeaderView.m
-//  Flickr Search
+//  JMFFlickrPhotoHeaderView.m
+///  Práctica iOS 2014 Camera [JMFierro]
 //
-//  Created by Brandon Trebitowski on 7/12/12.
-//  Copyright (c) 2012 Brandon Trebitowski. All rights reserved.
+//  Created by José Manuel Fierro Conchouso on 05/04/14.
+//  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
+#import "JMFFlickrPhotosHeaderView.h"
 
-#import "FlickrPhotoHeaderView.h"
-
-@interface FlickrPhotoHeaderView ()
+@interface JMFFlickrPhotosHeaderView ()
 @property(weak) IBOutlet UIImageView *backgroundImageView;
 @property(weak) IBOutlet UILabel *searchLabel;
 @end
 
-@implementation FlickrPhotoHeaderView
+@implementation JMFFlickrPhotosHeaderView
 
 - (id)initWithFrame:(CGRect)frame
 {
