@@ -2,8 +2,11 @@
 //  Flickr.h
 //  Práctica iOS 2014 Camera [JMFierro]
 //
-//  Created by José Manuel Fierro Conchouso on 05/04/14.
-//  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
+// ************************************************
+//  Modificado por Jose Manuel Fierro Conchouso
+// ************************************************
+//  Created by Brandon Trebitowski on 6/28/12.
+//  Copyright (c) 2012 Brandon Trebitowski. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

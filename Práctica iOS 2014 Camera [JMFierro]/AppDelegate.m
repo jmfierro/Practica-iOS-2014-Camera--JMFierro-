@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "JMFFlickrPhotosCollectionViewController.h"
+#import "JMFCollectionView.h"
 
 @implementation AppDelegate
 
@@ -15,7 +15,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[JMFFlickrPhotosCollectionViewController alloc] init]];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[JMFCollectionView alloc] init]];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
