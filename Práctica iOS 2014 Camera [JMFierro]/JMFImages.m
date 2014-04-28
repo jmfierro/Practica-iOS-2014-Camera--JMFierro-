@@ -27,6 +27,17 @@
 }
 
 
+-(NSInteger) countTotal {
+    
+    NSInteger numImagesFlickr = 0;
+    for (NSString *termSearch in self.termsSearchesFlickr) {
+        numImagesFlickr += [[self.photosSearchResultsFlickr objectForKey:termSearch] count];
+    }
+    
+    return [self.photosCamera count] + numImagesFlickr;
+}
+
+
 -(NSInteger) countSections{
     
 //    NSInteger i = [self.photosCamera count]>0 ? 1:0;

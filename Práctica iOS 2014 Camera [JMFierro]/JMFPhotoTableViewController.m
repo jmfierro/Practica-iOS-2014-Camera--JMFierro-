@@ -6,20 +6,22 @@
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
-#import <ImageIO/ImageIO.h>
+//#import <ImageIO/ImageIO.h>
+
+#import <AssetsLibrary/AssetsLibrary.h>
 
 #import "JMFPhotoTableViewController.h"
 #import "JMFLocationViewController.h"
 #import "Flickr.h"
 
 // Celdas
-#import "ImageCell.h"
-#import "DetailLocationCell.h"
-#import "AddressLocationCell.h"
-#import "UserCell.h"
+#import "CellFilters.h"
+#import "CellImage.h"
+#import "CellDetailLocation.h"
+#import "CellAddressLocation.h"
+#import "CellUser.h"
 
-#define kCellImage
-
+#import "UIImageView+Curled.h"
 
 
 
@@ -34,6 +36,7 @@
     CLPlacemark *infoGeocoder;
     
     // Altura de las celdas
+    CGFloat height_CellFilters;
     CGFloat height_CellImage;
     CGFloat height_CellDetalle;
     CGFloat height_CellAddress;
@@ -48,8 +51,56 @@
 
 @implementation JMFPhotoTableViewController
 
-
-#pragma mark - Init methods
+-(UIImage *) filter:(UIImage *)image {
+    //    // Create a CIFilter using the image and one of Apple's document filters
+    //    CIFilter *invertColour = [CIFilter filterWithName:@"CIColorInvert" keysAndValues:@"inputImage", image, nil];
+    //
+    //    // Create a pointer to the image output by the filter
+    //    CIImage *filteredImage = [invertColour 	outputImage];
+    //
+    //    return [UIImage imageWithCIImage:filteredImage];
+    
+    
+    //    CIContext *context = [CIContext contextWithOptions:nil];
+    //    CIFilter *filters = [CIFilter filterWithName:@"CIColorInvert" keysAndValues:@"inputImage", image, nil];
+    //
+    //    CIImage *myImageOut =[filters valueForKey:@"inputImage"];
+    //    CGImageRef imgReference = [context createCGImage:myImageOut fromRect:[myImageOut extent]];
+    //
+    //    return [UIImage imageWithCGImage:imgReference];
+    //
+    ////    [ImageViewer setImage:invertedImage];
+    
+    
+    //    CIContext *context = [CIContext contextWithOptions:nil];               // 1
+    ////    CIImage *image = [CIImage imageWithContentsOfURL:myURL];               // 2
+    //    CIFilter *filter = [CIFilter filterWithName:@"CISepiaTone"];           // 3
+    //    [filter setValue:image forKey:kCIInputImageKey];
+    //    [filter setValue:@0.8f forKey:kCIInputIntensityKey];
+    //    CIImage *result = [filter valueForKey:kCIOutputImageKey];              // 4
+    //    CGRect extent = [result extent];
+    //    CGImageRef cgImage = [context createCGImage:result fromRect:extent];
+    //
+    //    return [UIImage imageWithCGImage:cgImage];
+    
+    
+    
+//        image = [UIImage imageNamed:@"image.png"] ;
+//    
+//        // 3
+//        CIFilter *filter = [CIFilter filterWithName:@"CISepiaTone"
+//                                      keysAndValues: kCIInputImageKey, image,
+//                            @"inputIntensity", @0.8, nil];
+//       CIImage *outputImage = [filter outputImage];
+//    
+//        // 4
+//        UIImage *newImage = [UIImage imageWithCIImage:outputImage];
+    
+    
+    return image;
+    
+}
+#pragma mark - View lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,16 +112,52 @@
 }
 
 
-/*....................................
+
+/*..................................
  *
  *  ** Imagen bajada de Flickr.  **
  *
- .....................................*/
+ ...................................*/
 -(id) initWithFlickrPhoto:(FlickrPhoto *)flickrPhoto {
     
     if (self = [super initWithNibName:nil bundle:nil]) {
         _flickrPhoto = flickrPhoto;
         
+        /*
+         *  Imagen de Flickr.
+         */
+        if(self.flickrPhoto.largeImage)
+        {
+            //            [spinner stopAnimating];
+            //                [spinner setHidden:YES];
+            _image = self.flickrPhoto.largeImage;
+            //                [tableViewPhotoSelectMetaData reloadData];
+            
+            //            cell.imagePhotoFlickr.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
+        }
+        else
+        {
+            //        cell.photo.image = self.flickrPhoto.thumbnail;
+            [Flickr loadImageForPhoto:self.flickrPhoto thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
+                
+                //                [spinner stopAnimating];
+                //                    [spinner setHidden:YES];
+                
+                if(!error)
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        /*-------------------------------------------------------------------
+                         *
+                         * Cuando la imagen es descargada se actualiza datos de la TableView
+                         *
+                         --------------------------------------------------------------------*/
+                        _image = self.flickrPhoto.largeImage;
+                        [tableViewPhotoSelectMetaData reloadData];
+                    });
+                }
+                
+            }];
+        }
     }
     
     return self;
@@ -86,6 +173,7 @@
     
     if (self = [super initWithNibName:nil bundle:nil]) {
         _image = image;
+        
     }
     
     return self;
@@ -124,25 +212,34 @@
      * Registro celdas
      *
      --------------------------------------------------------------------------------*/
-    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kImageCell bundle:nil] forCellReuseIdentifier:kImageCell];
-    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kDetalleCell bundle:nil] forCellReuseIdentifier:kDetalleCell];
-    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kAddressCell bundle:nil] forCellReuseIdentifier:kAddressCell];
-    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kUserCell bundle:nil] forCellReuseIdentifier:kUserCell];
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellImage bundle:nil] forCellReuseIdentifier:kCellImage];
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellFilters bundle:nil] forCellReuseIdentifier:kCellFilters];
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellDetalle bundle:nil] forCellReuseIdentifier:kCellDetalle];
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellAddress bundle:nil] forCellReuseIdentifier:kCellAddress];
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellUser bundle:nil] forCellReuseIdentifier:kCellUser];
     
     
     // Añade la tabla a la vista del controlador
     [self.view addSubview:tableViewPhotoSelectMetaData];
     
     // Guarda altura de las celdas personalizadas
-    UITableViewCell *cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kImageCell];
+    UITableViewCell *cell = [UITableViewCell new];
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellImage];
     height_CellImage = cell.frame.size.height;
-    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kDetalleCell];
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellFilters];
+    height_CellFilters = cell.frame.size.height;
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetalle];
     height_CellDetalle = cell.frame.size.height;
-    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kAddressCell];
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
     height_CellAddress = cell.frame.size.height;
-    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kUserCell];
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellUser];
     height_CellUser = cell.frame.size.height;
-
+    
+//    // Configuración de bordes
+//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellImage];
+//    [cell.imageView setContentMode:UIViewContentModeScaleToFill];
+//    [cell.imageView setImage:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"] borderWidth:5.0 shadowDepth:10.0 controlPointXOffset:30.0 controlPointYOffset:70.0];
+   
 }
 
 - (void)didReceiveMemoryWarning
@@ -159,10 +256,10 @@
  *
  ...................................*/
 
-#pragma mark - Tableview delegates
+#pragma mark - Tableview Data Sourde
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -172,11 +269,13 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSInteger numCell = 0;
+    
     /*
      * Para cada celda muestra una información diferente.
      */
     
-    if (indexPath.row == 0) {
+    if (indexPath.row == numCell++) {
         
         /** ------------------------------------------------------------------
          *
@@ -187,8 +286,19 @@
          ---------------------------------------------------------------------*/
         return [self cellImage:tableView cellForRowAtIndexPath:indexPath];
         
+    } else if (indexPath.row == numCell++) {
         
-    } else if (indexPath.row == 1) {
+        /** ------------------------------------------------------------------
+         *
+         *  CELDA:
+         *
+         *      - Filter1    Filter2    Filtert3    Filter4    Filter5
+         *
+         ---------------------------------------------------------------------*/
+        return [self cellFilters:tableView cellForRowAtIndexPath:indexPath];
+        
+        
+    } else if (indexPath.row == numCell++) {
         /** ------------------------------------------------------------------
          *
          *  CELDA:
@@ -201,7 +311,7 @@
         
         
         
-    } else if (indexPath.row == 2) {
+    } else if (indexPath.row == numCell++) {
         
         /** ------------------------------------------------------------------
          *
@@ -214,9 +324,9 @@
          ---------------------------------------------------------------------*/
         return [self cellAddressLocation:tableView cellForRowAtIndexPath:indexPath];
         
-    } else if (indexPath.row == 3) {
+    } else if (indexPath.row == numCell++) {
         
-        UserCell * cell = (UserCell *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kUserCell];
+        CellUser * cell = (CellUser *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellUser];
         
         return cell;
         
@@ -233,28 +343,38 @@
 
 
 
+#pragma mark - TableviewDelegate
+
 /*............................................
  *
  * ** Desactivacion de la seleccion de los **
  * ** elementos de la 'TableView'          **
  *
  .............................................*/
-
 -(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
 
 
 
+/*.................................................
+ *
+ * ** Alto de las celdas segun el fichero 'xib' **
+ *
+ ...................................................*/
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0)
+    NSInteger numCell = 0;
+    
+    if (indexPath.row == numCell++)
         return height_CellImage;   // 600;
-    else if (indexPath.row == 1)
+    else if (indexPath.row == numCell++)
+        return height_CellFilters;
+    else if (indexPath.row == numCell++)
         return height_CellDetalle;  // 249.f;
-    else if (indexPath.row == 2)
+    else if (indexPath.row == numCell++)
         return height_CellAddress;    // 400.f;
-    else if (indexPath.row == 3)
+    else if (indexPath.row == numCell++)
         return height_CellUser;   // 234.f;
     else
         return 0;
@@ -262,7 +382,7 @@
 }
 
 
-
+#pragma mark - ?
 
 /*..............................
  *
@@ -300,6 +420,8 @@
 //                                                                   0,
 //                                                                   self.view.frame.size.height,
 //                                                                   self.view.frame.size.width)];
+    
+    
 }
 
 
@@ -366,6 +488,7 @@
 
 #pragma mark - Métodos privados para celdas personalizadas
 
+
 -(UITableViewCell *) cellImage:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     /** ------------------------------------------------------------------
@@ -375,66 +498,98 @@
      *      - Imagen
      *
      ---------------------------------------------------------------------*/
-    ImageCell *cell = (ImageCell *) [tableView dequeueReusableCellWithIdentifier:kImageCell];
+    CellImage *cell = (CellImage *) [tableView dequeueReusableCellWithIdentifier:kCellImage];
     
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
-    // Locate spinner in the center of the cell at end of text
-    [spinner setFrame:CGRectMake(768/2, 261, 0, 0)];
-    [[cell contentView] addSubview:spinner];
     
-    [spinner startAnimating];
-    [spinner setHidesWhenStopped:YES];
+    /*
+     * Si la imagen todavia no esta descargada, se muestra un spinner.
+     */
+    if (self.image == nil) {
+        // Centrar spinner.
+        [spinner setFrame:CGRectMake(768/2, 261, 0, 0)];
+        [[cell contentView] addSubview:spinner];
+        
+        [spinner startAnimating];
+        [spinner setHidesWhenStopped:YES];
+    }
+    else {
+        [spinner stopAnimating];
+    }
+    
+    cell.photo.image = self.image;
     
 
-    /*
-     *  Imagen de la cámara.
-     */
-    if (self.image) {
-        
-        [spinner stopAnimating];
-        
-        cell.photo.image = self.image;
-    }
-    
-    /*
-     *  Imagen de Flickr.
-     */
-    else {
-        if(self.flickrPhoto.largeImage)
-        {
-            [spinner stopAnimating];
-            //                [spinner setHidden:YES];
-            cell.photo.image = self.flickrPhoto.largeImage;
-            //                [tableViewPhotoSelectMetaData reloadData];
-            
-            //            cell.imagePhotoFlickr.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
-        }
-        else
-        {
-            //        cell.photo.image = self.flickrPhoto.thumbnail;
-            [Flickr loadImageForPhoto:self.flickrPhoto thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
-                
-                [spinner stopAnimating];
-                //                    [spinner setHidden:YES];
-                
-                if(!error)
-                {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        cell.photo.image = self.flickrPhoto.largeImage;
-                        //                        cell.imagePhotoFlickr.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
-                        
-                        [tableViewPhotoSelectMetaData reloadData];
-                    });
-                }
-                
-            }];
-        }
-    }
-    
+//    /*
+//     *  Imagen de la cámara.
+//     */
+//    if (self.image) {
+//        
+//        [spinner stopAnimating];
+//        
+//        cell.photo.image = [self filter:self.image];
+//    }
+//    
+//    /*
+//     *  Imagen de Flickr.
+//     */
+//    else {
+//        if(self.flickrPhoto.largeImage)
+//        {
+//            [spinner stopAnimating];
+//            //                [spinner setHidden:YES];
+//            cell.photo.image = self.flickrPhoto.largeImage;
+//            //                [tableViewPhotoSelectMetaData reloadData];
+//            
+//            //            cell.imagePhotoFlickr.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
+//        }
+//        else
+//        {
+//            //        cell.photo.image = self.flickrPhoto.thumbnail;
+//            [Flickr loadImageForPhoto:self.flickrPhoto thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
+//                
+//                [spinner stopAnimating];
+//                //                    [spinner setHidden:YES];
+//                
+//                if(!error)
+//                {
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        cell.photo.image = self.flickrPhoto.largeImage;
+//                        //                        cell.imagePhotoFlickr.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
+//                        
+//                        [tableViewPhotoSelectMetaData reloadData];
+//                    });
+//                }
+//                
+//            }];
+//        }
+//    }
+//    
     
     return cell;
     
+}
+
+
+-(UITableViewCell *) cellFilters:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    /** ------------------------------------------------------------------
+     *
+     *  CELDA:
+     *
+     *      - Filter1    Filter2    Filtert3    Filter4    Filter5
+     *
+     ---------------------------------------------------------------------*/
+    CellFilters *cell = (CellFilters *) [tableView dequeueReusableCellWithIdentifier:kCellFilters];
+    
+    cell.imgFilter1.image = self.image;
+    cell.imgFilter2.image = self.image;
+    cell.imgFilter3.image = self.image;
+    cell.imgFilter4.image = self.image;
+    cell.imgFilter5.image = self.image;
+    
+    return cell;
 }
 
 
@@ -447,7 +602,7 @@
      *       - Descripción
      *
      ---------------------------------------------------------------------*/
-    DetailLocationCell * cell = (DetailLocationCell *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kDetalleCell];
+    CellDetailLocation * cell = (CellDetailLocation *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetalle];
     
     //        self.flickrPhoto.description;
     cell.lblTitle.text = self.flickrPhoto.title;
@@ -531,7 +686,7 @@
      *       - Longitud
      *
      ---------------------------------------------------------------------*/
-    AddressLocationCell * cell = (AddressLocationCell *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kAddressCell];
+    CellAddressLocation * cell = (CellAddressLocation *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
     //
     //        JMFLocationViewController *lVC = [[JMFLocationViewController alloc] initWithMapView:cell.mapkit];
     //        lVC.delegate = self;

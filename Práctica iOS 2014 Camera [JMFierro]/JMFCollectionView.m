@@ -16,6 +16,7 @@
 #import "JMFHeaderView.h"
 
 
+
 @interface JMFCollectionView () {
     
     // Accesible en toda la clase
@@ -37,7 +38,7 @@
 @implementation JMFCollectionView
 
 
-#pragma mark - Init methods
+#pragma mark - View lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -187,46 +188,51 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    JMFPhotoTableViewController *tablePhotoVC = [[JMFPhotoTableViewController alloc] init];
-
-    if (indexPath.section == 0) {  // & [self.photosCamera count]>0) {
-        /*-----------------------------------------------------------------------------
-         *
-         * SELECCION para fotos tomadas con la camara.
-         *
-         ------------------------------------------------------------------------------*/
-//        tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImage:[self.photosCamera objectAtIndex:indexPath.row]];
-
-        tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImage:[self.model.photosCamera objectAtIndex:indexPath.row]];
-
-
-    } else {
-        /*-----------------------------------------------------------------------------
-         *
-         * SELECCION para imagenes descargadas de Flickr.
-         *
-         ------------------------------------------------------------------------------*/
-//        NSString *searchTerm = self.searches[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
-//        flickrPhoto = self.searchResults[searchTerm][indexPath.row];
-
-        NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
-        FlickrPhoto *flickrPhoto = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
-
-        //    tableFlickrPhotoVC.delegate = self;
+        JMFPhotoTableViewController *tablePhotoVC = [[JMFPhotoTableViewController alloc] init];
         
-        tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithFlickrPhoto:flickrPhoto];
-        
-        //    ProfileScrollViewController *tableFlickrPhotoVC = [ProfileScrollViewController new];
-        
-        //    [self.delegate setFlickrPhoto:flickrPhoto];
-    }
+        if (indexPath.section == 0) {  // & [self.photosCamera count]>0) {
+            /*-----------------------------------------------------------------------------
+             *
+             * SELECCION para fotos tomadas con la camara.
+             *
+             ------------------------------------------------------------------------------*/
+            //        tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImage:[self.photosCamera objectAtIndex:indexPath.row]];
+            
+            // Evita que la imagen inicial de "void" , que índica que no hay fotos tomadas por la cámara, se seleccione. 
+            if ([self.model countOfPhotosCamera]) {
 
-    [self.navigationController pushViewController:tablePhotoVC animated:YES];
+                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImage:[self.model.photosCamera objectAtIndex:indexPath.row]];
+                [self.navigationController pushViewController:tablePhotoVC animated:YES];
+            }
+            
+            
+        } else {
+            /*-----------------------------------------------------------------------------
+             *
+             * SELECCION para imagenes descargadas de Flickr.
+             *
+             ------------------------------------------------------------------------------*/
+            //        NSString *searchTerm = self.searches[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
+            //        flickrPhoto = self.searchResults[searchTerm][indexPath.row];
+            
+            NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
+            FlickrPhoto *flickrPhoto = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
+            
+            //    tableFlickrPhotoVC.delegate = self;
+            
+            tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithFlickrPhoto:flickrPhoto];
+            
+            //    ProfileScrollViewController *tableFlickrPhotoVC = [ProfileScrollViewController new];
+            
+            //    [self.delegate setFlickrPhoto:flickrPhoto];
+            [self.navigationController pushViewController:tablePhotoVC animated:YES];
+        }
+        
 }
 
 
 //- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    // TODO: Deselect item
+//
 //}
 
 
@@ -237,6 +243,7 @@
  ** Protocolo de UICollectionViewDelegateFlowLayout **
  *
  ....................................................*/
+
 #pragma mark – UICollectionViewDelegateFlowLayout Delegates
 
 /********************************************
@@ -509,6 +516,13 @@
     JMFLocationViewController *locationVC = [[JMFLocationViewController alloc] init];
     
     [self.navigationController pushViewController:locationVC animated:NO];
+    
+}
+
+- (IBAction)btnFilters:(id)sender {
+//    ViewController *vc = [ViewController new];
+//    [self.navigationController pushViewController:vc animated:NO];
+    
     
 }
 

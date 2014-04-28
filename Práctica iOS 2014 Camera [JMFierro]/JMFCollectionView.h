@@ -20,5 +20,6 @@
 
 - (IBAction)btnTakePhoto:(id)sender;
 - (IBAction)btnLocation:(id)sender;
+- (IBAction)btnFilters:(id)sender;
 
 @end

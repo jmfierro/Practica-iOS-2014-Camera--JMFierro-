@@ -19,6 +19,7 @@
 
 -(id)initWith;
 
+-(NSInteger) countTotal;
 -(NSInteger) countSections;
 -(NSInteger) countOfPhotosCamera;
 -(NSInteger) countOfPhotosFlickrSearchResults:(NSString *)termSearchFlickr;
