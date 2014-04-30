@@ -22,4 +22,6 @@
 - (IBAction)btnLocation:(id)sender;
 - (IBAction)btnFilters:(id)sender;
 
+- (IBAction)clickBackground:(id)sender;
+
 @end

@@ -58,6 +58,12 @@
 {
     [super viewDidLoad];
     
+    CGRect rectMain=[[UIScreen mainScreen] bounds];
+    CGFloat scale=[[UIScreen mainScreen] scale];
+    
+    NSLog(@"Actual Pixel Resolution: width :% f,height :%f",rectMain.size.width * scale,rectMain.size.height * scale);
+    NSLog(@" Actual Size width :% f,height :%f",rectMain.size.width ,rectMain.size.height );
+    
     
 //    [self loadModel];
     
@@ -526,6 +532,10 @@
     
 }
 
+- (IBAction)clickBackground:(id)sender {
+    [self.view endEditing:YES];
+}
+
 -(CGSize) scaleFactor:(UIImage *)image widthNewFrame:(CGFloat)width {
     /*
      * Escala thumbail.
@@ -538,5 +548,8 @@
     
     return size;
 }
+
+
+
 
 @end

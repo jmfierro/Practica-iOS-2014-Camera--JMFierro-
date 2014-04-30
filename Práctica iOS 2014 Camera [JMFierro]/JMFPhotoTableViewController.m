@@ -488,6 +488,45 @@
 
 #pragma mark - Métodos privados para celdas personalizadas
 
+-(void)face:(UITableViewCell *)cell {
+    
+    // draw a CI image with the previously loaded face detection picture
+    
+    CIImage* ciImage = [[CIImage alloc] initWithImage:self.image];
+    
+    // create a face detector - since speed is not an issue we'll use a high accuracy
+    // detector
+    CIDetector* detector = [CIDetector detectorOfType:CIDetectorTypeFace
+                                              context:nil options:[NSDictionary dictionaryWithObject:CIDetectorAccuracyHigh forKey:CIDetectorAccuracy]];
+    
+    // create an array containing all the detected faces from the detector
+    NSArray* features = [detector featuresInImage:ciImage];
+    
+    // we'll iterate through every detected face. CIFaceFeature provides us
+    // with the width for the entire face, and the coordinates of each eye
+    // and the mouth if detected. Also provided are BOOL's for the eye's and
+    // mouth so we can check if they already exist.
+    for(CIFaceFeature* faceFeature in features)
+    {
+        // get the width of the face
+        CGFloat faceWidth = faceFeature.bounds.size.width;
+        
+        // create a UIView using the bounds of the face
+        UIView* faceView = [[UIView alloc] initWithFrame:faceFeature.bounds];
+        
+        // add a border around the newly created UIView
+        faceView.layer.borderWidth = 4;
+        faceView.layer.borderColor = [[UIColor redColor] CGColor];
+        
+        // add the new view to create a box around the face
+//        [self.window addSubview:faceView];
+//        cell.imageView.image = [UIImage alloc] im
+//        [cell.imageView addSubview:faceView];
+    }
+    
+    
+}
+
 
 -(UITableViewCell *) cellImage:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -500,7 +539,7 @@
      ---------------------------------------------------------------------*/
     CellImage *cell = (CellImage *) [tableView dequeueReusableCellWithIdentifier:kCellImage];
     
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    UIActivityIndicatorView *indicatorLoadImagen = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
     
     /*
@@ -508,17 +547,45 @@
      */
     if (self.image == nil) {
         // Centrar spinner.
-        [spinner setFrame:CGRectMake(768/2, 261, 0, 0)];
-        [[cell contentView] addSubview:spinner];
+        [indicatorLoadImagen setFrame:CGRectMake(768/2, 261, 0, 0)];
+        [[cell contentView] addSubview:indicatorLoadImagen];
         
-        [spinner startAnimating];
-        [spinner setHidesWhenStopped:YES];
+        [indicatorLoadImagen startAnimating];
+        [indicatorLoadImagen setHidesWhenStopped:YES];
     }
     else {
-        [spinner stopAnimating];
+        [indicatorLoadImagen stopAnimating];
+        
+//        cell.photo.image = self.image;
+        //    self.detectingView.hidden = NO;
+        //	self.scrollView.scrollEnabled = NO;
+        
+//        __block UIImage *image = self.image;
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            
+//            CIImage *ciImage = [[CIImage alloc] initWithImage:self.image];;   // [[CIImage alloc] initWithImage:[FACE_IMAGES objectAtIndex:self.currentIndex]];
+//            
+//            NSString *accuracy = CIDetectorAccuracyHigh;
+//            //        NSString *accuracy = CIDetectorAccuracyLow;
+//            NSDictionary *options = [NSDictionary dictionaryWithObject:accuracy forKey:CIDetectorAccuracy];
+//            CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:options];
+//            
+//            NSArray *features = [detector featuresInImage:ciImage];
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self drawImageAnnotatedWithFeatures:features];
+//                [self ]
+////                cell.photo.image = image;
+//            });
+//            
+//        });
+        
+//        [self face:cell];
+
     }
     
-    cell.photo.image = self.image;
+    
+    cell.photoView.image = self.image;
     
 
 //    /*
@@ -773,7 +840,13 @@
     
 }
 
+/*..................
+ *
+ * ** Delegados **
+ *
+ ..................*/
 
+#pragma mark - Delegates
 
 -(void) setLastLocation:(CLLocation *)aLastLocation {
     location = aLastLocation;
@@ -784,17 +857,5 @@
 }
 
 
-//#pragma mark - carga de modelo
-//- (void)loadDataModel{
-//    
-//   
-//
-////    FlickrPhoto *flickrPhoto = [self.delegate getFlickrPhoto];
-//    
-//    modelo = @[@"Madrid",
-//               @"Granada",
-//               @"Sevilla",
-//               @"Cuenca"];
-//}
 
 @end

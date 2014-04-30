@@ -36,12 +36,17 @@
 		503E384018F2F96F00A9FBDF /* pushpin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 503E382C18F2F96F00A9FBDF /* pushpin@2x.png */; };
 		503E384A18F2FC4D00A9FBDF /* Flickr.m in Sources */ = {isa = PBXBuildFile; fileRef = 503E384718F2FC4D00A9FBDF /* Flickr.m */; };
 		503E384B18F2FC4D00A9FBDF /* FlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 503E384918F2FC4D00A9FBDF /* FlickrPhoto.m */; };
+		506441641911232A00B18D70 /* Face-Detection-Icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 506441631911232A00B18D70 /* Face-Detection-Icon1.png */; };
+		50644166191124D000B18D70 /* iconFaceDetection.png in Resources */ = {isa = PBXBuildFile; fileRef = 50644165191124D000B18D70 /* iconFaceDetection.png */; };
+		50644168191124D900B18D70 /* iconFaceDetectionTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 50644167191124D900B18D70 /* iconFaceDetectionTransparent.png */; };
 		50722FBB1907ABEE009E079D /* Slice 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FB91907ABEE009E079D /* Slice 1.png */; };
 		50722FBC1907ABEE009E079D /* Slice 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FBA1907ABEE009E079D /* Slice 1@2x.png */; };
 		50722FBF1907BC4F009E079D /* JMFHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50722FBE1907BC4F009E079D /* JMFHeaderView.m */; };
 		50722FC31907CC9D009E079D /* Cinta carrocero.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FC21907CC9D009E079D /* Cinta carrocero.png */; };
 		50722FC51907CCCD009E079D /* papel-rasgado-54166.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FC41907CCCD009E079D /* papel-rasgado-54166.png */; };
 		507E1122190915680038ECB7 /* JMFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 507E1121190915680038ECB7 /* JMFImages.m */; };
+		508A487E190FAD0300FFEBAA /* gente_750x469--647x300.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */; };
+		508A4880190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */; };
 		5095895D1905418C00E70193 /* JMFHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5095895C1905418C00E70193 /* JMFHeader.xib */; };
 		50A5206118F7F105007F6F7B /* CellDetailLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5205618F7F105007F6F7B /* CellDetailLocation.m */; };
 		50A5206218F7F105007F6F7B /* CellDetailLocation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A5205718F7F105007F6F7B /* CellDetailLocation.xib */; };
@@ -67,7 +72,6 @@
 		50A5208A18F7F13D007F6F7B /* btn_post@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A5207918F7F13D007F6F7B /* btn_post@2x.png */; };
 		50A5208B18F7F13D007F6F7B /* btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A5207A18F7F13D007F6F7B /* btn_back.png */; };
 		50A5208F18F81034007F6F7B /* CellAddressLocation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A5208E18F81034007F6F7B /* CellAddressLocation.xib */; };
-		50A5209118F83030007F6F7B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50A5209018F83030007F6F7B /* ImageIO.framework */; };
 		50B8594A18F2EBAB00E91D44 /* JMFPushpinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B8594818F2EBAB00E91D44 /* JMFPushpinCell.m */; };
 		50BB8AC218F6CC7D008EC1F3 /* CellImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50BB8ABF18F6CC7D008EC1F3 /* CellImage.xib */; };
 		50BB8AC318F6CC7D008EC1F3 /* CellImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB8AC118F6CC7D008EC1F3 /* CellImage.m */; };
@@ -75,9 +79,9 @@
 		50C1F72018F435C9004A1296 /* JMFHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C1F71F18F435C9004A1296 /* JMFHeader.m */; };
 		50C1F72318F44341004A1296 /* JMFPhotoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C1F72218F44341004A1296 /* JMFPhotoTableViewController.m */; };
 		50C1F72818F44A2C004A1296 /* famous-face-dementia-617x416.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50C1F72718F44A2C004A1296 /* famous-face-dementia-617x416.jpg */; };
-		50C299F0190E4AA200879269 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C299EF190E4AA200879269 /* ImageIO.framework */; };
 		50C299F8190E509C00879269 /* CellFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C299F7190E509C00879269 /* CellFilters.m */; };
 		50C299FA190E514900879269 /* CellFilters.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50C299F9190E514900879269 /* CellFilters.xib */; };
+		50C29A03190E997F00879269 /* marilyn.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C29A02190E997F00879269 /* marilyn.png */; };
 		50C8849718FD769B00283DDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D8086A18FC28B300172322 /* MapKit.framework */; };
 		50D2763219094AAB007A0193 /* can-stock-photo_csp12611066.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D2763119094AAB007A0193 /* can-stock-photo_csp12611066.png */; };
 		50D2763819094E37007A0193 /* d619-vector-vector-camera-lens-app-icon-with-blends-and-transparent-all-layers-well-organized-and-easy-to-edit-154360043.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D2763719094E37007A0193 /* d619-vector-vector-camera-lens-app-icon-with-blends-and-transparent-all-layers-well-organized-and-easy-to-edit-154360043.png */; };
@@ -136,6 +140,9 @@
 		503E384718F2FC4D00A9FBDF /* Flickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Flickr.m; sourceTree = "<group>"; };
 		503E384818F2FC4D00A9FBDF /* FlickrPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhoto.h; sourceTree = "<group>"; };
 		503E384918F2FC4D00A9FBDF /* FlickrPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhoto.m; sourceTree = "<group>"; };
+		506441631911232A00B18D70 /* Face-Detection-Icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Face-Detection-Icon1.png"; sourceTree = "<group>"; };
+		50644165191124D000B18D70 /* iconFaceDetection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconFaceDetection.png; sourceTree = "<group>"; };
+		50644167191124D900B18D70 /* iconFaceDetectionTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconFaceDetectionTransparent.png; sourceTree = "<group>"; };
 		50722FB91907ABEE009E079D /* Slice 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slice 1.png"; sourceTree = "<group>"; };
 		50722FBA1907ABEE009E079D /* Slice 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slice 1@2x.png"; sourceTree = "<group>"; };
 		50722FBD1907BC4F009E079D /* JMFHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFHeaderView.h; sourceTree = "<group>"; };
@@ -144,6 +151,9 @@
 		50722FC41907CCCD009E079D /* papel-rasgado-54166.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "papel-rasgado-54166.png"; sourceTree = "<group>"; };
 		507E1120190915680038ECB7 /* JMFImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFImages.h; sourceTree = "<group>"; };
 		507E1121190915680038ECB7 /* JMFImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFImages.m; sourceTree = "<group>"; };
+		508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "gente_750x469--647x300.jpg"; sourceTree = "<group>"; };
+		508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg"; sourceTree = "<group>"; };
+		508A4881190FCCCF00FFEBAA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5095895C1905418C00E70193 /* JMFHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMFHeader.xib; sourceTree = "<group>"; };
 		50A5205518F7F105007F6F7B /* CellDetailLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellDetailLocation.h; sourceTree = "<group>"; };
 		50A5205618F7F105007F6F7B /* CellDetailLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellDetailLocation.m; sourceTree = "<group>"; };
@@ -185,10 +195,10 @@
 		50C1F72118F44341004A1296 /* JMFPhotoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFPhotoTableViewController.h; sourceTree = "<group>"; };
 		50C1F72218F44341004A1296 /* JMFPhotoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFPhotoTableViewController.m; sourceTree = "<group>"; };
 		50C1F72718F44A2C004A1296 /* famous-face-dementia-617x416.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "famous-face-dementia-617x416.jpg"; sourceTree = "<group>"; };
-		50C299EF190E4AA200879269 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ImageIO.framework; sourceTree = "<group>"; };
 		50C299F6190E509C00879269 /* CellFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellFilters.h; sourceTree = "<group>"; };
 		50C299F7190E509C00879269 /* CellFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellFilters.m; sourceTree = "<group>"; };
 		50C299F9190E514900879269 /* CellFilters.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellFilters.xib; sourceTree = "<group>"; };
+		50C29A02190E997F00879269 /* marilyn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marilyn.png; sourceTree = "<group>"; };
 		50D2763119094AAB007A0193 /* can-stock-photo_csp12611066.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "can-stock-photo_csp12611066.png"; sourceTree = "<group>"; };
 		50D2763719094E37007A0193 /* d619-vector-vector-camera-lens-app-icon-with-blends-and-transparent-all-layers-well-organized-and-easy-to-edit-154360043.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d619-vector-vector-camera-lens-app-icon-with-blends-and-transparent-all-layers-well-organized-and-easy-to-edit-154360043.png"; sourceTree = "<group>"; };
 		50D8086518FC23BB00172322 /* JMFLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFLocationViewController.h; sourceTree = "<group>"; };
@@ -205,8 +215,6 @@
 			files = (
 				50C8849718FD769B00283DDB /* MapKit.framework in Frameworks */,
 				50D8086D18FC291E00172322 /* CoreLocation.framework in Frameworks */,
-				50C299F0190E4AA200879269 /* ImageIO.framework in Frameworks */,
-				50A5209118F83030007F6F7B /* ImageIO.framework in Frameworks */,
 				50382F1E18F0243D0061B90C /* CoreGraphics.framework in Frameworks */,
 				50382F2018F0243D0061B90C /* UIKit.framework in Frameworks */,
 				50382F1C18F0243D0061B90C /* Foundation.framework in Frameworks */,
@@ -248,7 +256,7 @@
 		50382F1A18F0243D0061B90C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				50C299EF190E4AA200879269 /* ImageIO.framework */,
+				508A4881190FCCCF00FFEBAA /* QuartzCore.framework */,
 				502AC62B190A900300EFB9B3 /* CoreImage.framework */,
 				50D8086C18FC291E00172322 /* CoreLocation.framework */,
 				50D8086A18FC28B300172322 /* MapKit.framework */,
@@ -264,6 +272,7 @@
 		50382F2118F0243D0061B90C /* Práctica iOS 2014 Camera [JMFierro] */ = {
 			isa = PBXGroup;
 			children = (
+				50C29A01190E89AB00879269 /* FaceDetection */,
 				50C1F72718F44A2C004A1296 /* famous-face-dementia-617x416.jpg */,
 				50382F2A18F0243D0061B90C /* AppDelegate.h */,
 				50382F2B18F0243D0061B90C /* AppDelegate.m */,
@@ -386,6 +395,9 @@
 		50A5206918F7F125007F6F7B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				50644167191124D900B18D70 /* iconFaceDetectionTransparent.png */,
+				50644165191124D000B18D70 /* iconFaceDetection.png */,
+				506441631911232A00B18D70 /* Face-Detection-Icon1.png */,
 				502AC634190ABB4000EFB9B3 /* image.png */,
 				50A5206A18F7F13D007F6F7B /* KICamera.png */,
 				50A5206B18F7F13D007F6F7B /* KICamera@2x.png */,
@@ -440,6 +452,16 @@
 				50A5205418F7F0F3007F6F7B /* Cells */,
 			);
 			name = TableView;
+			sourceTree = "<group>";
+		};
+		50C29A01190E89AB00879269 /* FaceDetection */ = {
+			isa = PBXGroup;
+			children = (
+				508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */,
+				508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */,
+				50C29A02190E997F00879269 /* marilyn.png */,
+			);
+			name = FaceDetection;
 			sourceTree = "<group>";
 		};
 		50D8085A18FC236600172322 /* Location */ = {
@@ -527,18 +549,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				50A5208818F7F13D007F6F7B /* btn_back@2x.png in Resources */,
+				506441641911232A00B18D70 /* Face-Detection-Icon1.png in Resources */,
 				50722FC31907CC9D009E079D /* Cinta carrocero.png in Resources */,
 				50A5207F18F7F13D007F6F7B /* pin_map_blue.png in Resources */,
+				50C29A03190E997F00879269 /* marilyn.png in Resources */,
 				50A5208918F7F13D007F6F7B /* btn_post.png in Resources */,
 				50A5208018F7F13D007F6F7B /* pin_map_blue@2x.png in Resources */,
 				50722FC51907CCCD009E079D /* papel-rasgado-54166.png in Resources */,
 				503E383A18F2F96F00A9FBDF /* header_bg@2x.png in Resources */,
+				508A487E190FAD0300FFEBAA /* gente_750x469--647x300.jpg in Resources */,
 				503E383118F2F96F00A9FBDF /* bg_cork.png in Resources */,
 				503E383D18F2F96F00A9FBDF /* polaroid1_border.png in Resources */,
 				50A5206818F7F105007F6F7B /* CellTip.xib in Resources */,
 				50722FBC1907ABEE009E079D /* Slice 1@2x.png in Resources */,
 				50A5208618F7F13D007F6F7B /* btn_round_next.png in Resources */,
 				50722FBB1907ABEE009E079D /* Slice 1.png in Resources */,
+				50644168191124D900B18D70 /* iconFaceDetectionTransparent.png in Resources */,
 				50A5208218F7F13D007F6F7B /* icon_phone@2x.png in Resources */,
 				50382F5318F024DC0061B90C /* JMFCollectionView.xib in Resources */,
 				503E383918F2F96F00A9FBDF /* header_bg.png in Resources */,
@@ -549,6 +575,7 @@
 				50C1F72818F44A2C004A1296 /* famous-face-dementia-617x416.jpg in Resources */,
 				50A5207B18F7F13D007F6F7B /* KICamera.png in Resources */,
 				50A5208F18F81034007F6F7B /* CellAddressLocation.xib in Resources */,
+				508A4880190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg in Resources */,
 				50D2763819094E37007A0193 /* d619-vector-vector-camera-lens-app-icon-with-blends-and-transparent-all-layers-well-organized-and-easy-to-edit-154360043.png in Resources */,
 				5095895D1905418C00E70193 /* JMFHeader.xib in Resources */,
 				50382F2618F0243D0061B90C /* InfoPlist.strings in Resources */,
@@ -569,6 +596,7 @@
 				503E383E18F2F96F00A9FBDF /* polaroid1_border@2x.png in Resources */,
 				50A5207C18F7F13D007F6F7B /* KICamera@2x.png in Resources */,
 				503E384018F2F96F00A9FBDF /* pushpin@2x.png in Resources */,
+				50644166191124D000B18D70 /* iconFaceDetection.png in Resources */,
 				50A5208A18F7F13D007F6F7B /* btn_post@2x.png in Resources */,
 				50A5207E18F7F13D007F6F7B /* icon_user@2x.png in Resources */,
 				502AC635190ABB4000EFB9B3 /* image.png in Resources */,
