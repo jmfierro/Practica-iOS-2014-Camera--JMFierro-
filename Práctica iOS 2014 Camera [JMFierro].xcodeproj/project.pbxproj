@@ -23,7 +23,7 @@
 		50382F3F18F0243D0061B90C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50382F3D18F0243D0061B90C /* InfoPlist.strings */; };
 		50382F4118F0243D0061B90C /* Pra_ctica_iOS_2014_Camera__JMFierro_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50382F4018F0243D0061B90C /* Pra_ctica_iOS_2014_Camera__JMFierro_Tests.m */; };
 		50382F5218F024DC0061B90C /* JMFCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50382F5018F024DC0061B90C /* JMFCollectionView.m */; };
-		50382F5318F024DC0061B90C /* JMFCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50382F5118F024DC0061B90C /* JMFCollectionView.xib */; };
+		50382F5318F024DC0061B90C /* JMFCollectionView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50382F5118F024DC0061B90C /* JMFCollectionView_iPad.xib */; };
 		503E383118F2F96F00A9FBDF /* bg_cork.png in Resources */ = {isa = PBXBuildFile; fileRef = 503E381D18F2F96F00A9FBDF /* bg_cork.png */; };
 		503E383218F2F96F00A9FBDF /* bg_cork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 503E381E18F2F96F00A9FBDF /* bg_cork@2x.png */; };
 		503E383718F2F96F00A9FBDF /* divider_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 503E382318F2F96F00A9FBDF /* divider_bar.png */; };
@@ -44,6 +44,7 @@
 		50722FBF1907BC4F009E079D /* JMFHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50722FBE1907BC4F009E079D /* JMFHeaderView.m */; };
 		50722FC31907CC9D009E079D /* Cinta carrocero.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FC21907CC9D009E079D /* Cinta carrocero.png */; };
 		50722FC51907CCCD009E079D /* papel-rasgado-54166.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FC41907CCCD009E079D /* papel-rasgado-54166.png */; };
+		507C8E1C1917801200238C30 /* FaceDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 507C8E1B1917801200238C30 /* FaceDetection.m */; };
 		507E1122190915680038ECB7 /* JMFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 507E1121190915680038ECB7 /* JMFImages.m */; };
 		508A487E190FAD0300FFEBAA /* gente_750x469--647x300.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */; };
 		508A4880190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */; };
@@ -125,7 +126,7 @@
 		50382F4018F0243D0061B90C /* Pra_ctica_iOS_2014_Camera__JMFierro_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pra_ctica_iOS_2014_Camera__JMFierro_Tests.m; sourceTree = "<group>"; };
 		50382F4F18F024DC0061B90C /* JMFCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFCollectionView.h; sourceTree = "<group>"; };
 		50382F5018F024DC0061B90C /* JMFCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFCollectionView.m; sourceTree = "<group>"; };
-		50382F5118F024DC0061B90C /* JMFCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMFCollectionView.xib; sourceTree = "<group>"; };
+		50382F5118F024DC0061B90C /* JMFCollectionView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMFCollectionView_iPad.xib; sourceTree = "<group>"; };
 		503E381D18F2F96F00A9FBDF /* bg_cork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_cork.png; sourceTree = "<group>"; };
 		503E381E18F2F96F00A9FBDF /* bg_cork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_cork@2x.png"; sourceTree = "<group>"; };
 		503E382318F2F96F00A9FBDF /* divider_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = divider_bar.png; sourceTree = "<group>"; };
@@ -149,6 +150,8 @@
 		50722FBE1907BC4F009E079D /* JMFHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFHeaderView.m; sourceTree = "<group>"; };
 		50722FC21907CC9D009E079D /* Cinta carrocero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cinta carrocero.png"; sourceTree = "<group>"; };
 		50722FC41907CCCD009E079D /* papel-rasgado-54166.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "papel-rasgado-54166.png"; sourceTree = "<group>"; };
+		507C8E1A1917801200238C30 /* FaceDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceDetection.h; sourceTree = "<group>"; };
+		507C8E1B1917801200238C30 /* FaceDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceDetection.m; sourceTree = "<group>"; };
 		507E1120190915680038ECB7 /* JMFImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFImages.h; sourceTree = "<group>"; };
 		507E1121190915680038ECB7 /* JMFImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFImages.m; sourceTree = "<group>"; };
 		508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "gente_750x469--647x300.jpg"; sourceTree = "<group>"; };
@@ -278,6 +281,7 @@
 				50382F2B18F0243D0061B90C /* AppDelegate.m */,
 				50B8594B18F2ED4D00E91D44 /* Collection */,
 				50C1F72918F44ACD004A1296 /* TableView */,
+				507C8E1D1917803600238C30 /* FaceDetection */,
 				50D8085A18FC236600172322 /* Location */,
 				503E384518F2FC4D00A9FBDF /* Flickr Interface */,
 				50382F2D18F0243D0061B90C /* Images.xcassets */,
@@ -358,6 +362,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		507C8E1D1917803600238C30 /* FaceDetection */ = {
+			isa = PBXGroup;
+			children = (
+				507C8E1A1917801200238C30 /* FaceDetection.h */,
+				507C8E1B1917801200238C30 /* FaceDetection.m */,
+			);
+			name = FaceDetection;
+			sourceTree = "<group>";
+		};
 		507E1123190915710038ECB7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,7 +439,7 @@
 				503E381C18F2F96F00A9FBDF /* Assets */,
 				50382F4F18F024DC0061B90C /* JMFCollectionView.h */,
 				50382F5018F024DC0061B90C /* JMFCollectionView.m */,
-				50382F5118F024DC0061B90C /* JMFCollectionView.xib */,
+				50382F5118F024DC0061B90C /* JMFCollectionView_iPad.xib */,
 				50C1F71E18F435C9004A1296 /* JMFHeader.h */,
 				50C1F71F18F435C9004A1296 /* JMFHeader.m */,
 				5095895C1905418C00E70193 /* JMFHeader.xib */,
@@ -442,13 +455,13 @@
 		50C1F72918F44ACD004A1296 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
+				50C1F72118F44341004A1296 /* JMFPhotoTableViewController.h */,
+				50C1F72218F44341004A1296 /* JMFPhotoTableViewController.m */,
 				502AC630190AA43F00EFB9B3 /* CurledViewBase.h */,
 				502AC631190AA43F00EFB9B3 /* CurledViewBase.m */,
 				502AC62D190AA3F200EFB9B3 /* UIImageView+Curled.h */,
 				502AC62E190AA3F200EFB9B3 /* UIImageView+Curled.m */,
 				50A5206918F7F125007F6F7B /* Images */,
-				50C1F72118F44341004A1296 /* JMFPhotoTableViewController.h */,
-				50C1F72218F44341004A1296 /* JMFPhotoTableViewController.m */,
 				50A5205418F7F0F3007F6F7B /* Cells */,
 			);
 			name = TableView;
@@ -566,7 +579,7 @@
 				50722FBB1907ABEE009E079D /* Slice 1.png in Resources */,
 				50644168191124D900B18D70 /* iconFaceDetectionTransparent.png in Resources */,
 				50A5208218F7F13D007F6F7B /* icon_phone@2x.png in Resources */,
-				50382F5318F024DC0061B90C /* JMFCollectionView.xib in Resources */,
+				50382F5318F024DC0061B90C /* JMFCollectionView_iPad.xib in Resources */,
 				503E383918F2F96F00A9FBDF /* header_bg.png in Resources */,
 				50A5207D18F7F13D007F6F7B /* icon_user.png in Resources */,
 				50A5208418F7F13D007F6F7B /* icon_map@2x.png in Resources */,
@@ -626,6 +639,7 @@
 				50D8086818FC23BB00172322 /* JMFLocationViewController.m in Sources */,
 				50A5206518F7F105007F6F7B /* CellUser.m in Sources */,
 				50382F2C18F0243D0061B90C /* AppDelegate.m in Sources */,
+				507C8E1C1917801200238C30 /* FaceDetection.m in Sources */,
 				50BB8AC318F6CC7D008EC1F3 /* CellImage.m in Sources */,
 				50B8594A18F2EBAB00E91D44 /* JMFPushpinCell.m in Sources */,
 				50A5206118F7F105007F6F7B /* CellDetailLocation.m in Sources */,

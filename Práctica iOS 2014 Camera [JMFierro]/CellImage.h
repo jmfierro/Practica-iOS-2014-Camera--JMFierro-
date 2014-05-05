@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreImage/CoreImage.h>
 
 #define kCellImage @"CellImage"
 
