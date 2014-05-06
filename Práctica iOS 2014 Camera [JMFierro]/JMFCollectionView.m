@@ -7,13 +7,15 @@
 //
 
 #import "JMFCollectionView.h"
+#import "JMFHeaderView.h"
 #import "JMFPushpinCell.h"
-#import "Flickr.h"
-#import "FlickrPhoto.h"
 
 #import "JMFPhotoTableViewController.h"
 #import "JMFLocationViewController.h"
-#import "JMFHeaderView.h"
+#import "PruebaViewController.h"
+
+#import "Flickr.h"
+#import "FlickrPhoto.h"
 
 
 
@@ -461,6 +463,21 @@
 
 
 
+/*..........................
+ *
+ ** delegado de la camara **
+ *
+ ...........................*/
+#pragma mark - CameraViuewController Delegate
+
+-(void)getImagePickerCamera:(UIImage *)image {
+
+    [self.model.photosCamera addObject:image];
+    [collectionViewPhotos reloadData];
+    
+}
+
+
 /***********************
  ** Delegado  camara **
  ***********************/
@@ -508,14 +525,19 @@
 
 - (IBAction)btnTakePhoto:(id)sender {
     
-//    SimpleCam * simpleCam = [SimpleCam new];
-//    simpleCam.delegate= self;
-//    [self presentViewController:simpleCam animated:YES completion:nil];
 
     
 //    [self.photosCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
     [self.model.photosCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
     [collectionViewPhotos reloadData];
+    
+    
+//    CameraViewController *cameraVC = [[CameraViewController alloc] init];
+//    cameraVC.delegate = self;
+//    [self.navigationController pushViewController:cameraVC animated:NO];
+////    [self.model.photosCamera addObject:cameraVC.imageView.image];
+    
+    
 }
 
 - (IBAction)btnLocation:(id)sender {
@@ -549,7 +571,10 @@
     return size;
 }
 
-
+//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+//{
+//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+//}
 
 
 @end

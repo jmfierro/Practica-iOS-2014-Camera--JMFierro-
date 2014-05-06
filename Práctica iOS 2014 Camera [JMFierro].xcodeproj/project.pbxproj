@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		502AC62F190AA3F200EFB9B3 /* UIImageView+Curled.m in Sources */ = {isa = PBXBuildFile; fileRef = 502AC62E190AA3F200EFB9B3 /* UIImageView+Curled.m */; };
 		502AC632190AA43F00EFB9B3 /* CurledViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 502AC631190AA43F00EFB9B3 /* CurledViewBase.m */; };
-		502AC635190ABB4000EFB9B3 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 502AC634190ABB4000EFB9B3 /* image.png */; };
 		50382F1C18F0243D0061B90C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50382F1B18F0243D0061B90C /* Foundation.framework */; };
 		50382F1E18F0243D0061B90C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50382F1D18F0243D0061B90C /* CoreGraphics.framework */; };
 		50382F2018F0243D0061B90C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50382F1F18F0243D0061B90C /* UIKit.framework */; };
@@ -36,8 +35,6 @@
 		503E384018F2F96F00A9FBDF /* pushpin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 503E382C18F2F96F00A9FBDF /* pushpin@2x.png */; };
 		503E384A18F2FC4D00A9FBDF /* Flickr.m in Sources */ = {isa = PBXBuildFile; fileRef = 503E384718F2FC4D00A9FBDF /* Flickr.m */; };
 		503E384B18F2FC4D00A9FBDF /* FlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 503E384918F2FC4D00A9FBDF /* FlickrPhoto.m */; };
-		506441641911232A00B18D70 /* Face-Detection-Icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 506441631911232A00B18D70 /* Face-Detection-Icon1.png */; };
-		50644166191124D000B18D70 /* iconFaceDetection.png in Resources */ = {isa = PBXBuildFile; fileRef = 50644165191124D000B18D70 /* iconFaceDetection.png */; };
 		50644168191124D900B18D70 /* iconFaceDetectionTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 50644167191124D900B18D70 /* iconFaceDetectionTransparent.png */; };
 		50722FBB1907ABEE009E079D /* Slice 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FB91907ABEE009E079D /* Slice 1.png */; };
 		50722FBC1907ABEE009E079D /* Slice 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FBA1907ABEE009E079D /* Slice 1@2x.png */; };
@@ -45,7 +42,13 @@
 		50722FC31907CC9D009E079D /* Cinta carrocero.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FC21907CC9D009E079D /* Cinta carrocero.png */; };
 		50722FC51907CCCD009E079D /* papel-rasgado-54166.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FC41907CCCD009E079D /* papel-rasgado-54166.png */; };
 		507C8E1C1917801200238C30 /* FaceDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 507C8E1B1917801200238C30 /* FaceDetection.m */; };
+		507C8E201917985A00238C30 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507C8E1F1917985A00238C30 /* MobileCoreServices.framework */; };
+		507C8E29191798E700238C30 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507C8E27191798E700238C30 /* CameraViewController.m */; };
+		507C8E2A191798E700238C30 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 507C8E28191798E700238C30 /* CameraViewController.xib */; };
+		507C8E381917A5CA00238C30 /* PruebaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507C8E361917A5CA00238C30 /* PruebaViewController.m */; };
+		507C8E391917A5CA00238C30 /* PruebaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 507C8E371917A5CA00238C30 /* PruebaViewController.xib */; };
 		507E1122190915680038ECB7 /* JMFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 507E1121190915680038ECB7 /* JMFImages.m */; };
+		508224361917E438000BB05B /* Filters.m in Sources */ = {isa = PBXBuildFile; fileRef = 508224351917E438000BB05B /* Filters.m */; };
 		508A487E190FAD0300FFEBAA /* gente_750x469--647x300.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */; };
 		508A4880190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */; };
 		5095895D1905418C00E70193 /* JMFHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5095895C1905418C00E70193 /* JMFHeader.xib */; };
@@ -77,6 +80,7 @@
 		50BB8AC218F6CC7D008EC1F3 /* CellImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50BB8ABF18F6CC7D008EC1F3 /* CellImage.xib */; };
 		50BB8AC318F6CC7D008EC1F3 /* CellImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB8AC118F6CC7D008EC1F3 /* CellImage.m */; };
 		50BB8AC818F6E1FC008EC1F3 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 50BB8AC718F6E1FC008EC1F3 /* bg.png */; };
+		50BD7B071919261D0058156D /* iconCheck-300px.png in Resources */ = {isa = PBXBuildFile; fileRef = 50BD7B061919261D0058156D /* iconCheck-300px.png */; };
 		50C1F72018F435C9004A1296 /* JMFHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C1F71F18F435C9004A1296 /* JMFHeader.m */; };
 		50C1F72318F44341004A1296 /* JMFPhotoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C1F72218F44341004A1296 /* JMFPhotoTableViewController.m */; };
 		50C1F72818F44A2C004A1296 /* famous-face-dementia-617x416.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50C1F72718F44A2C004A1296 /* famous-face-dementia-617x416.jpg */; };
@@ -107,7 +111,6 @@
 		502AC62E190AA3F200EFB9B3 /* UIImageView+Curled.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Curled.m"; sourceTree = "<group>"; };
 		502AC630190AA43F00EFB9B3 /* CurledViewBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurledViewBase.h; sourceTree = "<group>"; };
 		502AC631190AA43F00EFB9B3 /* CurledViewBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurledViewBase.m; sourceTree = "<group>"; };
-		502AC634190ABB4000EFB9B3 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		50382F1818F0243D0061B90C /* Práctica iOS 2014 Camera [JMFierro].app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Práctica iOS 2014 Camera [JMFierro].app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50382F1B18F0243D0061B90C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		50382F1D18F0243D0061B90C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -141,8 +144,6 @@
 		503E384718F2FC4D00A9FBDF /* Flickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Flickr.m; sourceTree = "<group>"; };
 		503E384818F2FC4D00A9FBDF /* FlickrPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhoto.h; sourceTree = "<group>"; };
 		503E384918F2FC4D00A9FBDF /* FlickrPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhoto.m; sourceTree = "<group>"; };
-		506441631911232A00B18D70 /* Face-Detection-Icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Face-Detection-Icon1.png"; sourceTree = "<group>"; };
-		50644165191124D000B18D70 /* iconFaceDetection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconFaceDetection.png; sourceTree = "<group>"; };
 		50644167191124D900B18D70 /* iconFaceDetectionTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconFaceDetectionTransparent.png; sourceTree = "<group>"; };
 		50722FB91907ABEE009E079D /* Slice 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slice 1.png"; sourceTree = "<group>"; };
 		50722FBA1907ABEE009E079D /* Slice 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slice 1@2x.png"; sourceTree = "<group>"; };
@@ -152,11 +153,19 @@
 		50722FC41907CCCD009E079D /* papel-rasgado-54166.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "papel-rasgado-54166.png"; sourceTree = "<group>"; };
 		507C8E1A1917801200238C30 /* FaceDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceDetection.h; sourceTree = "<group>"; };
 		507C8E1B1917801200238C30 /* FaceDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceDetection.m; sourceTree = "<group>"; };
+		507C8E1F1917985A00238C30 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		507C8E26191798E700238C30 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		507C8E27191798E700238C30 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		507C8E28191798E700238C30 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		507C8E351917A5CA00238C30 /* PruebaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PruebaViewController.h; sourceTree = "<group>"; };
+		507C8E361917A5CA00238C30 /* PruebaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PruebaViewController.m; sourceTree = "<group>"; };
+		507C8E371917A5CA00238C30 /* PruebaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PruebaViewController.xib; sourceTree = "<group>"; };
 		507E1120190915680038ECB7 /* JMFImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFImages.h; sourceTree = "<group>"; };
 		507E1121190915680038ECB7 /* JMFImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFImages.m; sourceTree = "<group>"; };
+		508224341917E438000BB05B /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
+		508224351917E438000BB05B /* Filters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filters.m; sourceTree = "<group>"; };
 		508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "gente_750x469--647x300.jpg"; sourceTree = "<group>"; };
 		508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg"; sourceTree = "<group>"; };
-		508A4881190FCCCF00FFEBAA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5095895C1905418C00E70193 /* JMFHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMFHeader.xib; sourceTree = "<group>"; };
 		50A5205518F7F105007F6F7B /* CellDetailLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellDetailLocation.h; sourceTree = "<group>"; };
 		50A5205618F7F105007F6F7B /* CellDetailLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellDetailLocation.m; sourceTree = "<group>"; };
@@ -193,6 +202,7 @@
 		50BB8AC018F6CC7D008EC1F3 /* CellImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellImage.h; sourceTree = "<group>"; };
 		50BB8AC118F6CC7D008EC1F3 /* CellImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellImage.m; sourceTree = "<group>"; };
 		50BB8AC718F6E1FC008EC1F3 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		50BD7B061919261D0058156D /* iconCheck-300px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconCheck-300px.png"; sourceTree = "<group>"; };
 		50C1F71E18F435C9004A1296 /* JMFHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFHeader.h; sourceTree = "<group>"; };
 		50C1F71F18F435C9004A1296 /* JMFHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFHeader.m; sourceTree = "<group>"; };
 		50C1F72118F44341004A1296 /* JMFPhotoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFPhotoTableViewController.h; sourceTree = "<group>"; };
@@ -216,6 +226,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				507C8E201917985A00238C30 /* MobileCoreServices.framework in Frameworks */,
 				50C8849718FD769B00283DDB /* MapKit.framework in Frameworks */,
 				50D8086D18FC291E00172322 /* CoreLocation.framework in Frameworks */,
 				50382F1E18F0243D0061B90C /* CoreGraphics.framework in Frameworks */,
@@ -259,7 +270,7 @@
 		50382F1A18F0243D0061B90C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				508A4881190FCCCF00FFEBAA /* QuartzCore.framework */,
+				507C8E1F1917985A00238C30 /* MobileCoreServices.framework */,
 				502AC62B190A900300EFB9B3 /* CoreImage.framework */,
 				50D8086C18FC291E00172322 /* CoreLocation.framework */,
 				50D8086A18FC28B300172322 /* MapKit.framework */,
@@ -275,11 +286,16 @@
 		50382F2118F0243D0061B90C /* Práctica iOS 2014 Camera [JMFierro] */ = {
 			isa = PBXGroup;
 			children = (
-				50C29A01190E89AB00879269 /* FaceDetection */,
+				508224341917E438000BB05B /* Filters.h */,
+				508224351917E438000BB05B /* Filters.m */,
+				508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */,
+				508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */,
+				50C29A02190E997F00879269 /* marilyn.png */,
 				50C1F72718F44A2C004A1296 /* famous-face-dementia-617x416.jpg */,
 				50382F2A18F0243D0061B90C /* AppDelegate.h */,
 				50382F2B18F0243D0061B90C /* AppDelegate.m */,
 				50B8594B18F2ED4D00E91D44 /* Collection */,
+				507C8E1E1917980B00238C30 /* Camera */,
 				50C1F72918F44ACD004A1296 /* TableView */,
 				507C8E1D1917803600238C30 /* FaceDetection */,
 				50D8085A18FC236600172322 /* Location */,
@@ -371,6 +387,19 @@
 			name = FaceDetection;
 			sourceTree = "<group>";
 		};
+		507C8E1E1917980B00238C30 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				507C8E26191798E700238C30 /* CameraViewController.h */,
+				507C8E27191798E700238C30 /* CameraViewController.m */,
+				507C8E28191798E700238C30 /* CameraViewController.xib */,
+				507C8E351917A5CA00238C30 /* PruebaViewController.h */,
+				507C8E361917A5CA00238C30 /* PruebaViewController.m */,
+				507C8E371917A5CA00238C30 /* PruebaViewController.xib */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
 		507E1123190915710038ECB7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,10 +437,8 @@
 		50A5206918F7F125007F6F7B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				50BD7B061919261D0058156D /* iconCheck-300px.png */,
 				50644167191124D900B18D70 /* iconFaceDetectionTransparent.png */,
-				50644165191124D000B18D70 /* iconFaceDetection.png */,
-				506441631911232A00B18D70 /* Face-Detection-Icon1.png */,
-				502AC634190ABB4000EFB9B3 /* image.png */,
 				50A5206A18F7F13D007F6F7B /* KICamera.png */,
 				50A5206B18F7F13D007F6F7B /* KICamera@2x.png */,
 				50A5206C18F7F13D007F6F7B /* icon_user.png */,
@@ -465,16 +492,6 @@
 				50A5205418F7F0F3007F6F7B /* Cells */,
 			);
 			name = TableView;
-			sourceTree = "<group>";
-		};
-		50C29A01190E89AB00879269 /* FaceDetection */ = {
-			isa = PBXGroup;
-			children = (
-				508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */,
-				508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */,
-				50C29A02190E997F00879269 /* marilyn.png */,
-			);
-			name = FaceDetection;
 			sourceTree = "<group>";
 		};
 		50D8085A18FC236600172322 /* Location */ = {
@@ -562,10 +579,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				50A5208818F7F13D007F6F7B /* btn_back@2x.png in Resources */,
-				506441641911232A00B18D70 /* Face-Detection-Icon1.png in Resources */,
 				50722FC31907CC9D009E079D /* Cinta carrocero.png in Resources */,
 				50A5207F18F7F13D007F6F7B /* pin_map_blue.png in Resources */,
 				50C29A03190E997F00879269 /* marilyn.png in Resources */,
+				50BD7B071919261D0058156D /* iconCheck-300px.png in Resources */,
 				50A5208918F7F13D007F6F7B /* btn_post.png in Resources */,
 				50A5208018F7F13D007F6F7B /* pin_map_blue@2x.png in Resources */,
 				50722FC51907CCCD009E079D /* papel-rasgado-54166.png in Resources */,
@@ -576,6 +593,7 @@
 				50A5206818F7F105007F6F7B /* CellTip.xib in Resources */,
 				50722FBC1907ABEE009E079D /* Slice 1@2x.png in Resources */,
 				50A5208618F7F13D007F6F7B /* btn_round_next.png in Resources */,
+				507C8E391917A5CA00238C30 /* PruebaViewController.xib in Resources */,
 				50722FBB1907ABEE009E079D /* Slice 1.png in Resources */,
 				50644168191124D900B18D70 /* iconFaceDetectionTransparent.png in Resources */,
 				50A5208218F7F13D007F6F7B /* icon_phone@2x.png in Resources */,
@@ -595,6 +613,7 @@
 				503E383218F2F96F00A9FBDF /* bg_cork@2x.png in Resources */,
 				50A5206218F7F105007F6F7B /* CellDetailLocation.xib in Resources */,
 				50C299FA190E514900879269 /* CellFilters.xib in Resources */,
+				507C8E2A191798E700238C30 /* CameraViewController.xib in Resources */,
 				50BB8AC218F6CC7D008EC1F3 /* CellImage.xib in Resources */,
 				503E383818F2F96F00A9FBDF /* divider_bar@2x.png in Resources */,
 				50A5208718F7F13D007F6F7B /* btn_round_next@2x.png in Resources */,
@@ -609,10 +628,8 @@
 				503E383E18F2F96F00A9FBDF /* polaroid1_border@2x.png in Resources */,
 				50A5207C18F7F13D007F6F7B /* KICamera@2x.png in Resources */,
 				503E384018F2F96F00A9FBDF /* pushpin@2x.png in Resources */,
-				50644166191124D000B18D70 /* iconFaceDetection.png in Resources */,
 				50A5208A18F7F13D007F6F7B /* btn_post@2x.png in Resources */,
 				50A5207E18F7F13D007F6F7B /* icon_user@2x.png in Resources */,
-				502AC635190ABB4000EFB9B3 /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,11 +655,14 @@
 				503E384A18F2FC4D00A9FBDF /* Flickr.m in Sources */,
 				50D8086818FC23BB00172322 /* JMFLocationViewController.m in Sources */,
 				50A5206518F7F105007F6F7B /* CellUser.m in Sources */,
+				507C8E381917A5CA00238C30 /* PruebaViewController.m in Sources */,
+				508224361917E438000BB05B /* Filters.m in Sources */,
 				50382F2C18F0243D0061B90C /* AppDelegate.m in Sources */,
 				507C8E1C1917801200238C30 /* FaceDetection.m in Sources */,
 				50BB8AC318F6CC7D008EC1F3 /* CellImage.m in Sources */,
 				50B8594A18F2EBAB00E91D44 /* JMFPushpinCell.m in Sources */,
 				50A5206118F7F105007F6F7B /* CellDetailLocation.m in Sources */,
+				507C8E29191798E700238C30 /* CameraViewController.m in Sources */,
 				503E384B18F2FC4D00A9FBDF /* FlickrPhoto.m in Sources */,
 				50382F5218F024DC0061B90C /* JMFCollectionView.m in Sources */,
 				50A5206318F7F105007F6F7B /* CellAddressLocation.m in Sources */,

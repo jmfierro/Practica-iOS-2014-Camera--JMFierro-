@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreImage/CoreImage.h>
+#import "CellFilters.h"
 
 #define kCellImage @"CellImage"
 

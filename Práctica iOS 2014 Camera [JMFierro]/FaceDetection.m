@@ -20,9 +20,7 @@
  *          - NSInteger numFaces : número de caras detectadas.
  *
  ..............................................................................................*/
--(id) initWithImagenView:(UIImageView *) aImageView numFaces:(NSNumber *)aNumFaces {
-//    -(UIView *) initWithImagenView:(UIImageView *) aImageView numFaces:(NSNumber *)aNumFaces {
-//    -(UIView *) initWithImagenView:(UIImageView *) aImageView getNumFaces:(UILabel *)lblNumFaces {
+-(id) initWithImagenView:(UIImageView *) aImageView {
     
     UIImageView *imageView = aImageView;
     
@@ -74,9 +72,8 @@
     
     // Crea un array con las caras detectadas.
     NSArray *facesArray=[detectorFaces featuresInImage:imageCI];
-//    lblNumFaces.text = [NSString stringWithFormat:@"%lu",(unsigned long)[facesArray count]];
-    aNumFaces = [[NSNumber alloc] initWithUnsignedLong:(unsigned long)[facesArray count]];
-    self.numFaces = [facesArray count];
+
+      self.numFaces = [facesArray count];
     NSLog(@"%d",[facesArray count]);
     
 //    NSLog(@"image width:%f",self.photoView.image.size.width);

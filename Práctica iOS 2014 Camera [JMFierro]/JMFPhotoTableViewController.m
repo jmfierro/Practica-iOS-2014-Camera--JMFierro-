@@ -29,6 +29,7 @@
     
 
     UITableView *tableViewPhotoSelectMetaData;
+    CellImage *cellImage;
     
     // Localización
     JMFLocationViewController *locationVC;
@@ -42,6 +43,16 @@
     CGFloat height_CellAddress;
     CGFloat height_CellUser;
     
+    // Posicion de las celdas
+    NSInteger row_CellImage;
+    NSInteger row_CellFilters;
+    NSInteger row_CellDetalle;
+    NSInteger row_CellAddress;
+    NSInteger row_CellUser;
+    
+    // Filtros
+    NSMutableDictionary *filtersActive;
+    
 }
 
     @property (nonatomic, strong) UITableViewCell *prototypeCell;
@@ -51,55 +62,6 @@
 
 @implementation JMFPhotoTableViewController
 
--(UIImage *) filter:(UIImage *)image {
-    //    // Create a CIFilter using the image and one of Apple's document filters
-    //    CIFilter *invertColour = [CIFilter filterWithName:@"CIColorInvert" keysAndValues:@"inputImage", image, nil];
-    //
-    //    // Create a pointer to the image output by the filter
-    //    CIImage *filteredImage = [invertColour 	outputImage];
-    //
-    //    return [UIImage imageWithCIImage:filteredImage];
-    
-    
-    //    CIContext *context = [CIContext contextWithOptions:nil];
-    //    CIFilter *filters = [CIFilter filterWithName:@"CIColorInvert" keysAndValues:@"inputImage", image, nil];
-    //
-    //    CIImage *myImageOut =[filters valueForKey:@"inputImage"];
-    //    CGImageRef imgReference = [context createCGImage:myImageOut fromRect:[myImageOut extent]];
-    //
-    //    return [UIImage imageWithCGImage:imgReference];
-    //
-    ////    [ImageViewer setImage:invertedImage];
-    
-    
-    //    CIContext *context = [CIContext contextWithOptions:nil];               // 1
-    ////    CIImage *image = [CIImage imageWithContentsOfURL:myURL];               // 2
-    //    CIFilter *filter = [CIFilter filterWithName:@"CISepiaTone"];           // 3
-    //    [filter setValue:image forKey:kCIInputImageKey];
-    //    [filter setValue:@0.8f forKey:kCIInputIntensityKey];
-    //    CIImage *result = [filter valueForKey:kCIOutputImageKey];              // 4
-    //    CGRect extent = [result extent];
-    //    CGImageRef cgImage = [context createCGImage:result fromRect:extent];
-    //
-    //    return [UIImage imageWithCGImage:cgImage];
-    
-    
-    
-//        image = [UIImage imageNamed:@"image.png"] ;
-//    
-//        // 3
-//        CIFilter *filter = [CIFilter filterWithName:@"CISepiaTone"
-//                                      keysAndValues: kCIInputImageKey, image,
-//                            @"inputIntensity", @0.8, nil];
-//       CIImage *outputImage = [filter outputImage];
-//    
-//        // 4
-//        UIImage *newImage = [UIImage imageWithCIImage:outputImage];
-    
-    
-    return image;
-    
-}
 #pragma mark - View lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -110,6 +72,7 @@
     }
     return self;
 }
+
 
 
 
@@ -146,11 +109,11 @@
                 if(!error)
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        /*-------------------------------------------------------------------
+                        /*-----------------------------------------------------------------------
                          *
-                         * Cuando la imagen es descargada se actualiza datos de la TableView
+                         * Cuando la imagen es descargada se actualiza los datos de la TableView
                          *
-                         --------------------------------------------------------------------*/
+                         ------------------------------------------------------------------------*/
                         _image = self.flickrPhoto.largeImage;
                         [tableViewPhotoSelectMetaData reloadData];
                     });
@@ -184,6 +147,8 @@
     [super viewDidLoad];
     
     
+    filtersActive = [[NSMutableDictionary alloc] init];
+    
     /*
      * Localizacion
      */
@@ -191,9 +156,11 @@
     locationVC.delegate = self;
     
     
-    /*
+    /*----------------------------
+     *
      * Creación de la Tableview.
-     */
+     *
+     -----------------------------*/
     tableViewPhotoSelectMetaData = [[UITableView alloc] initWithFrame:CGRectMake(0,
                                                                    0,
                                                                    self.view.frame.size.width,
@@ -222,6 +189,14 @@
     // Añade la tabla a la vista del controlador
     [self.view addSubview:tableViewPhotoSelectMetaData];
     
+    // Establece orden de las celdas
+    NSInteger numCell = 0;
+    row_CellImage = numCell++;
+    row_CellFilters = numCell++;
+    row_CellDetalle =numCell++;
+    row_CellAddress = numCell++;
+    row_CellUser = numCell++;
+    
     // Guarda altura de las celdas personalizadas
     UITableViewCell *cell = [UITableViewCell new];
     cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellImage];
@@ -240,7 +215,26 @@
 //    [cell.imageView setContentMode:UIViewContentModeScaleToFill];
 //    [cell.imageView setImage:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"] borderWidth:5.0 shadowDepth:10.0 controlPointXOffset:30.0 controlPointYOffset:70.0];
    
+    // Activa escucha de notificaciones
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(onFilters:) name:kCellFilters object:nil];
+    
+//    // Scroll horizontal
+//    CGRect frame = tableViewPhotoSelectMetaData.frame;
+//    tableViewPhotoSelectMetaData.transform = CGAffineTransformRotate(tableViewPhotoSelectMetaData.transform, M_PI / 2);
+//    tableViewPhotoSelectMetaData.frame = frame;
+    
+//    // Listado de filtros
+//    NSArray *properties = [CIFilter filterNamesInCategory:
+//                           kCICategoryBuiltIn];
+//    NSLog(@"%@", properties);
+//    for (NSString *filterName in properties) {
+//        CIFilter *fltr = [CIFilter filterWithName:filterName];
+//        NSLog(@"%@", [fltr attributes]);
+//    }
+    
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -269,13 +263,12 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSInteger numCell = 0;
     
     /*
      * Para cada celda muestra una información diferente.
      */
     
-    if (indexPath.row == numCell++) {
+    if (indexPath.row == row_CellImage) {
         
         /** ------------------------------------------------------------------
          *
@@ -286,7 +279,7 @@
          ---------------------------------------------------------------------*/
         return [self cellImage:tableView cellForRowAtIndexPath:indexPath];
         
-    } else if (indexPath.row == numCell++) {
+    } else if (indexPath.row == row_CellFilters) {
         
         /** ------------------------------------------------------------------
          *
@@ -298,7 +291,7 @@
         return [self cellFilters:tableView cellForRowAtIndexPath:indexPath];
         
         
-    } else if (indexPath.row == numCell++) {
+    } else if (indexPath.row == row_CellDetalle) {
         /** ------------------------------------------------------------------
          *
          *  CELDA:
@@ -311,7 +304,7 @@
         
         
         
-    } else if (indexPath.row == numCell++) {
+    } else if (indexPath.row == row_CellAddress) {
         
         /** ------------------------------------------------------------------
          *
@@ -324,7 +317,7 @@
          ---------------------------------------------------------------------*/
         return [self cellAddressLocation:tableView cellForRowAtIndexPath:indexPath];
         
-    } else if (indexPath.row == numCell++) {
+    } else if (indexPath.row == row_CellUser) {
         
         CellUser * cell = (CellUser *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellUser];
         
@@ -366,15 +359,15 @@
     
     NSInteger numCell = 0;
     
-    if (indexPath.row == numCell++)
+    if (indexPath.row == row_CellImage)
         return height_CellImage;   // 600;
-    else if (indexPath.row == numCell++)
+    else if (indexPath.row == row_CellFilters)
         return height_CellFilters;
-    else if (indexPath.row == numCell++)
+    else if (indexPath.row == row_CellDetalle)
         return height_CellDetalle;  // 249.f;
-    else if (indexPath.row == numCell++)
+    else if (indexPath.row == row_CellAddress)
         return height_CellAddress;    // 400.f;
-    else if (indexPath.row == numCell++)
+    else if (indexPath.row == row_CellUser)
         return height_CellUser;   // 234.f;
     else
         return 0;
@@ -537,7 +530,8 @@
      *      - Imagen
      *
      ---------------------------------------------------------------------*/
-    CellImage *cell = (CellImage *) [tableView dequeueReusableCellWithIdentifier:kCellImage];
+//    CellImage *cell = (CellImage *) [tableView dequeueReusableCellWithIdentifier:kCellImage];
+    cellImage = (CellImage *) [tableView dequeueReusableCellWithIdentifier:kCellImage];
     
     UIActivityIndicatorView *indicatorLoadImagen = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
@@ -548,7 +542,8 @@
     if (self.image == nil) {
         // Centrar spinner.
         [indicatorLoadImagen setFrame:CGRectMake(768/2, 261, 0, 0)];
-        [[cell contentView] addSubview:indicatorLoadImagen];
+//        [[cell contentView] addSubview:indicatorLoadImagen];
+        [[cellImage contentView] addSubview:indicatorLoadImagen];
         
         [indicatorLoadImagen startAnimating];
         [indicatorLoadImagen setHidesWhenStopped:YES];
@@ -585,7 +580,13 @@
     }
     
     
-    cell.photoView.image = self.image;
+//    cell.photoView.image = self.image;
+    if (self.imageAplyFilters) {
+        cellImage.photoView.image = self.imageAplyFilters;
+    } else {
+        cellImage.photoView.image = self.image;
+    }
+    
     
 
 //    /*
@@ -634,7 +635,82 @@
 //    }
 //    
     
-    return cell;
+//    return cell;
+    return cellImage;
+    
+}
+
+
+-(UIImage *) filterOverImage:(UIImage *)aImage nameFilter:(NSString *)nameFilter {
+    
+    UIImage *image = aImage;
+    CIImage *ciImage = [[CIImage alloc] initWithImage:image];
+    
+//    CIFilter *ciFilter = [CIFilter filterWithName:nameFilter
+//                                  keysAndValues: kCIInputImageKey, ciImage,
+//                        @"inputIntensity", @0.8, nil];
+//    CIFilter *ciFilter = [CIFilter filterWithName:nameFilter];
+//    [ciFilter setDefaults];
+
+    
+    // 3
+    CIFilter *ciFilter = [CIFilter filterWithName:nameFilter];
+    [ciFilter setValue:ciImage forKey:kCIInputImageKey];
+//    [ciFilter setValue:@(1) forKey:@"inputIntensity"];
+    
+     [ciFilter setDefaults];
+    
+    CIImage *outputCiImage = [ciFilter outputImage];
+
+    
+    
+ /*
+    // 1
+    CIFilter *sepia = [CIFilter filterWithName:@"CISepiaTone"];
+    [sepia setValue:ciImage forKey:kCIInputImageKey];
+    [sepia setValue:@(0) forKey:@"inputIntensity"];
+    
+    // 2
+    CIFilter *random = [CIFilter filterWithName:@"CIRandomGenerator"];
+    
+    // 3
+    CIFilter *lighten = [CIFilter filterWithName:@"CIColorControls"];
+    [lighten setValue:random.outputImage forKey:kCIInputImageKey];
+    [lighten setValue:@(1 - 0.8) forKey:@"inputBrightness"];
+    [lighten setValue:@0.0 forKey:@"inputSaturation"];
+    
+    // 4
+    CIImage *beginImage;
+    CIImage *croppedImage = [lighten.outputImage imageByCroppingToRect:[beginImage extent]];
+    
+    // 5
+    CIFilter *composite = [CIFilter filterWithName:@"CIHardLightBlendMode"];
+    [composite setValue:sepia.outputImage forKey:kCIInputImageKey];
+    [composite setValue:croppedImage forKey:kCIInputBackgroundImageKey];
+    
+    // 6
+    CIFilter *vignette = [CIFilter filterWithName:@"CIVignette"];
+    [vignette setValue:composite.outputImage forKey:kCIInputImageKey];
+    [vignette setValue:@(0.8 * 2) forKey:@"inputIntensity"];
+    [vignette setValue:@(0.8 * 30) forKey:@"inputRadius"];
+    
+    CIImage *outputCiImage = [vignette outputImage];
+  */
+    
+    /* ------------------------------------------------------------------------------------------
+     *
+     * Utiliza CIContext para aumentar el rendimiento:
+     *
+     *    El uso del método 'UIImage' con 'imageWithCIImage' crea un nuevo CIContext cada vez,
+     * y si se usa un 'slider' para actualizar los valores del filtro lo haría demasiado lento.
+     *
+     -------------------------------------------------------------------------------------------*/
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef cgImage =
+    [context createCGImage:outputCiImage fromRect:[outputCiImage extent]];
+    
+    UIImage *newImage = [UIImage imageWithCGImage:cgImage];
+    return newImage;
     
 }
 
@@ -650,11 +726,13 @@
      ---------------------------------------------------------------------*/
     CellFilters *cell = (CellFilters *) [tableView dequeueReusableCellWithIdentifier:kCellFilters];
     
-    cell.imgFilter1.image = self.image;
-    cell.imgFilter2.image = self.image;
-    cell.imgFilter3.image = self.image;
-    cell.imgFilter4.image = self.image;
-    cell.imgFilter5.image = self.image;
+    cell.imgFilter1.image = [self filterOverImage:self.image nameFilter:@"CISepiaTone"];
+//    cell.imgFilter1.image = [self filterOverImage:self.image nameFilter:@"CITorusLensDistortion"];
+    cell.imgFilter2.image = [self filterOverImage:self.image nameFilter:@"CIPhotoEffectProcess"];
+    cell.imgFilter3.image = [self filterOverImage:self.image nameFilter:@"CIPixellate"];
+    cell.imgFilter4.image = [self filterOverImage:self.image nameFilter:@"CIPinchDistortion"];
+    cell.imgFilter5.image = [self filterOverImage:self.image nameFilter:@"CIPerspectiveTransform"];
+    //    cell.imgFilter5.image = [self filterOverImage:self.image nameFilter:@"CISharpenLuminance"];
     
     return cell;
 }
@@ -854,6 +932,35 @@
 
 -(void) setInfoGeocoder:(CLPlacemark *)aInfo {
     infoGeocoder = aInfo;
+}
+
+
+
+#pragma mark - Notificacions
+
+
+/*...........................................
+ *
+ *  NOTIFICACION DE: CellFilters.m
+ *
+ *  Aplica todos los filtros activos.
+ *
+ ...........................................*/
+-(void)onFilters: (NSNotification *) note {
+    
+    // Actulización de todos los filtros.
+    if ([filtersActive objectForKey:note.object])
+        [filtersActive removeObjectForKey:note.object];
+    else
+        [filtersActive setObject:@YES forKey:note.object];
+
+    // Recorrido y aplicaicción de todos los filtros
+    self.imageAplyFilters = self.image;
+    NSArray *keys = [filtersActive allKeys];
+    for (id key in keys)
+        self.imageAplyFilters = [self filterOverImage:self.imageAplyFilters nameFilter:key];
+    
+    [tableViewPhotoSelectMetaData reloadData];
 }
 
 

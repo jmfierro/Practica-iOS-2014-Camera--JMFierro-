@@ -13,10 +13,10 @@
 @interface JMFPhotoTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) FlickrPhoto *flickrPhoto;
-@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) UIImage *image, *imageAplyFilters;
 
 
 -(id) initWithFlickrPhoto:(FlickrPhoto *)flickrPhoto;
--(id) initWithImage:(UIImage *) image;
+-(id) initWithImage:(UIImage *) aImage;
 
 @end
