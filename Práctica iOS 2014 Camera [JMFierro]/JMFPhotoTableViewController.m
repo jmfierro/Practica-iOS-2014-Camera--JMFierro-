@@ -35,6 +35,7 @@
     JMFLocationViewController *locationVC;
     CLLocation *location;
     CLPlacemark *infoGeocoder;
+    BOOL isNewLocalization;
     
     // Altura de las celdas
     CGFloat height_CellFilters;
@@ -154,6 +155,7 @@
      */
     locationVC = [[JMFLocationViewController alloc] init];
     locationVC.delegate = self;
+    isNewLocalization = YES;
     
     
     /*----------------------------
@@ -753,33 +755,34 @@
     cell.lblTitle.text = self.flickrPhoto.title;
     cell.lblDescription.text = self.flickrPhoto.description;
     
-    //        CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)self.flickrPhoto.largeImage, NULL);
-    //        CFDictionaryRef imageMetaData = CGImageSourceCopyPropertiesAtIndex(source, 0, NULL);
-    //        NSDictionary *objectCollection = (__bridge NSDictionary*)imageMetaData;
-    //
+    /*
+            CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)self.flickrPhoto.largeImage, NULL);
+    CFDictionaryRef imageMetaData = CGImageSourceCopyPropertiesAtIndex(source, 0, NULL);
+            NSDictionary *objectCollection = (__bridge NSDictionary*)imageMetaData;
     
     
-    //        NSData* pngData =  UIImagePNGRepresentation(self.flickrPhoto.largeImage);
-    //
-    //        NSURL *imageFileURL = [NSURL fileURLWithPath:...];
-    //        CGImageSourceRef imageSource = CGImageSourceCreateWithURL((CFURLRef)imageFileURL, NULL);
-    //
-    //        if (imageSource == NULL) { // Error loading image ... return;
-    //        		}
-    //
-    //        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:NO], (NSString *)kCGImageSourceShouldCache, nil];
-    //
-    //        CFDictionaryRef imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, (CFDictionaryRef)options);
-    //
-    //        if (imageProperties) { NSNumber *width = (NSNumber *)CFDictionaryGetValue(imageProperties, kCGImagePropertyPixelWidth); NSNumber *height = (NSNumber *)CFDictionaryGetValue(imageProperties, kCGImagePropertyPixelHeight);
-    //
-    //            NSLog(@"Image dimensions: %@ x %@ px", width, height); CFRelease(imageProperties); }
-    //
-    //
-    //        CGImageSourceRef source = CGImageSourceCreateWithData((CFDataRef)CFBridgingRetain(pngData), NULL);
-    //        NSDictionary *metadata = (NSDictionary *) CFBridgingRelease(CGImageSourceCopyPropertiesAtIndex(source, 0, NULL));
-    //
     
+            NSData* pngData =  UIImagePNGRepresentation(self.flickrPhoto.largeImage);
+    
+            NSURL *imageFileURL = [NSURL fileURLWithPath:...];
+          CGImageSourceRef imageSource = CGImageSourceCreateWithURL((CFURLRef)imageFileURL, NULL);
+    
+            if (imageSource == NULL) { // Error loading image ... return;
+            		}
+    
+            NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:NO], (NSString *)kCGImageSourceShouldCache, nil];
+    
+            CFDictionaryRef imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, (CFDictionaryRef)options);
+    
+            if (imageProperties) { NSNumber *width = (NSNumber *)CFDictionaryGetValue(imageProperties, kCGImagePropertyPixelWidth); NSNumber *height = (NSNumber *)CFDictionaryGetValue(imageProperties, kCGImagePropertyPixelHeight);
+    
+                NSLog(@"Image dimensions: %@ x %@ px", width, height); CFRelease(imageProperties); }
+    
+    
+            CGImageSourceRef source = CGImageSourceCreateWithData((CFDataRef)CFBridgingRetain(pngData), NULL);
+            NSDictionary *metadata = (NSDictionary *) CFBridgingRelease(CGImageSourceCopyPropertiesAtIndex(source, 0, NULL));
+    
+    */
     
     
     
@@ -836,68 +839,76 @@
     //        JMFLocationViewController *lVC = [[JMFLocationViewController alloc] initWithMapView:cell.mapkit];
     //        lVC.delegate = self;
     
-    
-    CLGeocoder *geocoder = [[CLGeocoder alloc]init];
-    CLLocation *userCLLocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
-    //    [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks. NSError )];
-    
-    //    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    //    CLLocation *userCLLocation = [[CLLocation alloc] itWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-    //        __block JMFLocationViewController *weakSelf = self;
-    [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        if (placemarks.count > 0) {
+    if (isNewLocalization) {
+        isNewLocalization = NO;
+        
+        //    dispatch_async(dispatch_queue_t queue, ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            CLGeocoder *geocoder = [[CLGeocoder alloc]init];
+            CLLocation *userCLLocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+            //    [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks. NSError )];
             
-            //            dispatch_sync(dispatch_get_main_queue(), ^{
-            //                CLPlacemark *info = [placemarks lastObject];
-            //                [self.delegate setInfoGeocoder:info];
-            //            });
+            //    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+            //    CLLocation *userCLLocation = [[CLLocation alloc] itWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
+            //        __block JMFLocationViewController *weakSelf = self;
+            [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+                if (placemarks.count > 0) {
+                    
+                    //            dispatch_sync(dispatch_get_main_queue(), ^{
+                    //                CLPlacemark *info = [placemarks lastObject];
+                    //                [self.delegate setInfoGeocoder:info];
+                    //            });
+                    
+                    infoGeocoder = [placemarks lastObject];
+                    NSLog(@"%@/n%@, %@/n%@",
+                          [[infoGeocoder addressDictionary] objectForKey:@"Street"],
+                          [[infoGeocoder addressDictionary] objectForKey:@"City"],
+                          [[infoGeocoder addressDictionary] objectForKey:@"ZIP"],
+                          [[infoGeocoder addressDictionary] objectForKey:@"Country"]);
+                    /*
+                     NSLog(@"FormattedAddressLines: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"FormattedAddressLines"]);
+                     NSLog(@"Street: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Street"]);
+                     NSLog(@"SubAdministrativeArea: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Thoroughfare"]);
+                     NSLog(@"Thoroughfare: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"]);
+                     NSLog(@"ZIP: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"ZIP"]);
+                     NSLog(@"Name: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Name"]);
+                     NSLog(@"City: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"City"]);
+                     NSLog(@"Country: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"]);
+                     NSLog(@"State: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"]);
+                     NSLog(@"SubThoroughfare: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"SubThoroughfare"]);
+                     NSLog(@"CountryCode: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"CountryCode"]);
+                     */
+                    
+                    [cell.mapkit setMapType:MKMapTypeHybrid];
+                    cell.mapkit.rotateEnabled = YES;
+                    cell.mapkit.zoomEnabled = YES;
+                    cell.mapkit.pitchEnabled = YES;
+                    cell.mapkit.showsBuildings = YES;
+                    cell.mapkit.showsUserLocation = YES;
+                    cell.mapkit.delegate = self;
+                    
+                    double delayInSeconds = 2.0;
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
+                        chincheta.coordinate = CLLocationCoordinate2DMake(40.0f, -3.0f);
+                        chincheta.title = @"Chincheta";
+                        chincheta.subtitle = @"texto ejemplo";
+                        
+                        [cell.mapkit addAnnotation:chincheta];
+                    });
+                    
+                    
+                    
+                    
+                    [tableView reloadData];
+                }
+            }];  // ** Fin Geocoding **
             
-            infoGeocoder = [placemarks lastObject];
-            NSLog(@"%@/n%@, %@/n%@",
-                  [[infoGeocoder addressDictionary] objectForKey:@"Street"],
-                  [[infoGeocoder addressDictionary] objectForKey:@"City"],
-                  [[infoGeocoder addressDictionary] objectForKey:@"ZIP"],
-                  [[infoGeocoder addressDictionary] objectForKey:@"Country"]);
-            
-            NSLog(@"FormattedAddressLines: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"FormattedAddressLines"]);
-            NSLog(@"Street: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Street"]);
-            NSLog(@"SubAdministrativeArea: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Thoroughfare"]);
-            NSLog(@"Thoroughfare: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"]);
-            NSLog(@"ZIP: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"ZIP"]);
-            NSLog(@"Name: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Name"]);
-            NSLog(@"City: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"City"]);
-            NSLog(@"Country: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"]);
-            NSLog(@"State: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"]);
-            NSLog(@"SubThoroughfare: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"SubThoroughfare"]);
-            NSLog(@"CountryCode: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"CountryCode"]);
-            
-            
-            [cell.mapkit setMapType:MKMapTypeHybrid];
-            cell.mapkit.rotateEnabled = YES;
-            cell.mapkit.zoomEnabled = YES;
-            cell.mapkit.pitchEnabled = YES;
-            cell.mapkit.showsBuildings = YES;
-            cell.mapkit.showsUserLocation = YES;
-            cell.mapkit.delegate = self;
-            
-            double delayInSeconds = 2.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
-                chincheta.coordinate = CLLocationCoordinate2DMake(40.0f, -3.0f);
-                chincheta.title = @"Chincheta";
-                chincheta.subtitle = @"texto ejemplo";
-                
-                [cell.mapkit addAnnotation:chincheta];
-            });
-            
-            
-            
-            
-            [tableView reloadData];
-        }
-    }];
-    
+        }); // ** Fin dispach **
+        
+    }
+
     
     
     
@@ -917,6 +928,10 @@
     return cell;
     
 }
+
+
+
+
 
 /*..................
  *
