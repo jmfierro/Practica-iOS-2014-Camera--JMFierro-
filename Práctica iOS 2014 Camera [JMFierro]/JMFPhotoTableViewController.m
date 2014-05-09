@@ -20,7 +20,7 @@
 // Celdas
 #import "CellFilters.h"
 #import "CellImage.h"
-#import "CellDetailLocation.h"
+#import "CellDetail.h"
 #import "CellAddressLocation.h"
 #import "CellUser.h"
 
@@ -188,7 +188,7 @@
      --------------------------------------------------------------------------------*/
     [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellImage bundle:nil] forCellReuseIdentifier:kCellImage];
     [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellFilters bundle:nil] forCellReuseIdentifier:kCellFilters];
-    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellDetalle bundle:nil] forCellReuseIdentifier:kCellDetalle];
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellDetail bundle:nil] forCellReuseIdentifier:kCellDetail];
     [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellAddress bundle:nil] forCellReuseIdentifier:kCellAddress];
     [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellUser bundle:nil] forCellReuseIdentifier:kCellUser];
     
@@ -210,7 +210,7 @@
     height_CellImage = cell.frame.size.height;
     cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellFilters];
     height_CellFilters = cell.frame.size.height;
-    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetalle];
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetail];
     height_CellDetalle = cell.frame.size.height;
     cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
     height_CellAddress = cell.frame.size.height;
@@ -754,7 +754,7 @@
      *       - Descripción
      *
      ---------------------------------------------------------------------*/
-    CellDetailLocation * cell = (CellDetailLocation *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetalle];
+    CellDetail * cell = (CellDetail *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetail];
     
     //        self.flickrPhoto.description;
     

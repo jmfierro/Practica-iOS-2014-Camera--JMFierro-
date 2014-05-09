@@ -1,5 +1,5 @@
 //
-//  DetailLocationCell.m
+//  CellDetail.m
 //  TGFoursquareLocationDetail-Demo
 //
 //  Created by Thibault Guégan on 17/12/2013.
@@ -10,13 +10,13 @@
 //  Copyright (c) 2013 Thibault Guégan. All rights reserved.
 //
 
-#import "CellDetailLocation.h"
+#import "CellDetail.h"
 
-@implementation CellDetailLocation
+@implementation CellDetail
 
-+ (CellDetailLocation*) detailLocationCell
++ (CellDetail*) detailLocationCell
 {
-    CellDetailLocation * cell = [[[NSBundle mainBundle] loadNibNamed:kCellDetalle owner:self options:nil] objectAtIndex:0];
+    CellDetail * cell = [[[NSBundle mainBundle] loadNibNamed:kCellDetail owner:self options:nil] objectAtIndex:0];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

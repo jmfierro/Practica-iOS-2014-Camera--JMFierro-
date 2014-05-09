@@ -1,5 +1,5 @@
 //
-//  DetailLocationCell.h
+//  CellDetail.h
 //  TGFoursquareLocationDetail-Demo
 //
 //  Created by Thibault Guégan on 17/12/2013.
@@ -13,12 +13,12 @@
 #import <UIKit/UIKit.h>
 
 
-#define kCellDetalle @"CellDetailLocation"
+#define kCellDetail @"CellDetail"
 
 
-@interface CellDetailLocation : UITableViewCell
+@interface CellDetail : UITableViewCell
 
-+ (CellDetailLocation*) detailLocationCell;
++ (CellDetail*) detailLocationCell;
 
 
 @property (weak, nonatomic) IBOutlet UIView *viewRate;

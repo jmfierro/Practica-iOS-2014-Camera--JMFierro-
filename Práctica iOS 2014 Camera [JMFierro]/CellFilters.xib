@@ -14,23 +14,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1Mc-pz-eVW">
-                        <rect key="frame" x="65" y="20" width="125" height="108"/>
+                        <rect key="frame" x="65" y="25" width="125" height="108"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="bob-8E-k32">
-                        <rect key="frame" x="207" y="20" width="125" height="108"/>
+                        <rect key="frame" x="207" y="25" width="125" height="108"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="acv-Xp-au9">
-                        <rect key="frame" x="349" y="20" width="125" height="108"/>
+                        <rect key="frame" x="349" y="25" width="125" height="108"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0wL-AP-3jH">
-                        <rect key="frame" x="491" y="20" width="125" height="108"/>
+                        <rect key="frame" x="491" y="25" width="125" height="108"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="RRq-Vn-pf0">
-                        <rect key="frame" x="632" y="20" width="125" height="108"/>
+                        <rect key="frame" x="632" y="25" width="125" height="108"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uE7-rs-CLd" userLabel="ButtonFilter1">

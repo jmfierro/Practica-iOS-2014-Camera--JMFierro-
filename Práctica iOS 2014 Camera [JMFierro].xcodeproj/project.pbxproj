@@ -55,8 +55,8 @@
 		508A487E190FAD0300FFEBAA /* gente_750x469--647x300.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */; };
 		508A4880190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */; };
 		5095895D1905418C00E70193 /* JMFHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5095895C1905418C00E70193 /* JMFHeader.xib */; };
-		50A5206118F7F105007F6F7B /* CellDetailLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5205618F7F105007F6F7B /* CellDetailLocation.m */; };
-		50A5206218F7F105007F6F7B /* CellDetailLocation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A5205718F7F105007F6F7B /* CellDetailLocation.xib */; };
+		50A5206118F7F105007F6F7B /* CellDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5205618F7F105007F6F7B /* CellDetail.m */; };
+		50A5206218F7F105007F6F7B /* CellDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A5205718F7F105007F6F7B /* CellDetail.xib */; };
 		50A5206318F7F105007F6F7B /* CellAddressLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5205918F7F105007F6F7B /* CellAddressLocation.m */; };
 		50A5206518F7F105007F6F7B /* CellUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A5205C18F7F105007F6F7B /* CellUser.m */; };
 		50A5206618F7F105007F6F7B /* CellUser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A5205D18F7F105007F6F7B /* CellUser.xib */; };
@@ -183,9 +183,9 @@
 		508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "gente_750x469--647x300.jpg"; sourceTree = "<group>"; };
 		508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg"; sourceTree = "<group>"; };
 		5095895C1905418C00E70193 /* JMFHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMFHeader.xib; sourceTree = "<group>"; };
-		50A5205518F7F105007F6F7B /* CellDetailLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellDetailLocation.h; sourceTree = "<group>"; };
-		50A5205618F7F105007F6F7B /* CellDetailLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellDetailLocation.m; sourceTree = "<group>"; };
-		50A5205718F7F105007F6F7B /* CellDetailLocation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellDetailLocation.xib; sourceTree = "<group>"; };
+		50A5205518F7F105007F6F7B /* CellDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellDetail.h; sourceTree = "<group>"; };
+		50A5205618F7F105007F6F7B /* CellDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellDetail.m; sourceTree = "<group>"; };
+		50A5205718F7F105007F6F7B /* CellDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellDetail.xib; sourceTree = "<group>"; };
 		50A5205818F7F105007F6F7B /* CellAddressLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellAddressLocation.h; sourceTree = "<group>"; };
 		50A5205918F7F105007F6F7B /* CellAddressLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellAddressLocation.m; sourceTree = "<group>"; };
 		50A5205B18F7F105007F6F7B /* CellUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellUser.h; sourceTree = "<group>"; };
@@ -478,9 +478,9 @@
 				50C299F6190E509C00879269 /* CellFilters.h */,
 				50C299F7190E509C00879269 /* CellFilters.m */,
 				50C299F9190E514900879269 /* CellFilters.xib */,
-				50A5205518F7F105007F6F7B /* CellDetailLocation.h */,
-				50A5205618F7F105007F6F7B /* CellDetailLocation.m */,
-				50A5205718F7F105007F6F7B /* CellDetailLocation.xib */,
+				50A5205518F7F105007F6F7B /* CellDetail.h */,
+				50A5205618F7F105007F6F7B /* CellDetail.m */,
+				50A5205718F7F105007F6F7B /* CellDetail.xib */,
 				50A5205818F7F105007F6F7B /* CellAddressLocation.h */,
 				50A5205918F7F105007F6F7B /* CellAddressLocation.m */,
 				50A5208E18F81034007F6F7B /* CellAddressLocation.xib */,
@@ -686,7 +686,7 @@
 				5095895D1905418C00E70193 /* JMFHeader.xib in Resources */,
 				50382F2618F0243D0061B90C /* InfoPlist.strings in Resources */,
 				503E383218F2F96F00A9FBDF /* bg_cork@2x.png in Resources */,
-				50A5206218F7F105007F6F7B /* CellDetailLocation.xib in Resources */,
+				50A5206218F7F105007F6F7B /* CellDetail.xib in Resources */,
 				50C299FA190E514900879269 /* CellFilters.xib in Resources */,
 				507C8E2A191798E700238C30 /* CameraViewController.xib in Resources */,
 				50BB8AC218F6CC7D008EC1F3 /* CellImage.xib in Resources */,
@@ -741,7 +741,7 @@
 				507C8E1C1917801200238C30 /* FaceDetection.m in Sources */,
 				50BB8AC318F6CC7D008EC1F3 /* CellImage.m in Sources */,
 				50B8594A18F2EBAB00E91D44 /* JMFPushpinCell.m in Sources */,
-				50A5206118F7F105007F6F7B /* CellDetailLocation.m in Sources */,
+				50A5206118F7F105007F6F7B /* CellDetail.m in Sources */,
 				507C8E29191798E700238C30 /* CameraViewController.m in Sources */,
 				503E384B18F2FC4D00A9FBDF /* FlickrPhotoModel.m in Sources */,
 				50B2525B191BA272005D7C86 /* JPSThumbnailAnnotation.m in Sources */,

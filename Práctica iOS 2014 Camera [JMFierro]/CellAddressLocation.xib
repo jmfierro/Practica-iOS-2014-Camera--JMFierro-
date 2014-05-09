@@ -65,7 +65,7 @@
                     <view contentMode="scaleToFill" id="EdT-YA-8Hv">
                         <rect key="frame" x="54" y="387" width="671" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.086274512110000007" green="0.61568629740000003" blue="0.09803922474" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="8E3-aU-q5n">
                         <rect key="frame" x="471" y="0.0" width="297" height="379"/>
