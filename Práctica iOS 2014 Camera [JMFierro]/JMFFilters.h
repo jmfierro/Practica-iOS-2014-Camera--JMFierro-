@@ -1,5 +1,5 @@
 //
-//  Filters.h
+//  JMFFilters.h
 //  Práctica iOS 2014 Camera [JMFierro]
 //
 //  Created by José Manuel Fierro Conchouso on 05/05/14.
@@ -14,7 +14,7 @@
 
 @end
 
-@interface Filters : NSObject{
+@interface JMFFilters : NSObject{
     id delegate;
 }
 

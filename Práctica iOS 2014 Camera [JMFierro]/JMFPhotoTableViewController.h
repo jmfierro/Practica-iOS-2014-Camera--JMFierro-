@@ -7,16 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FlickrPhoto.h"
+#import "FlickrPhotoModel.h"
+#import "JMFMetaDataModel.h"
 
 
 @interface JMFPhotoTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) FlickrPhoto *flickrPhoto;
+
+@property (nonatomic, strong) JMFMetaDataModel *metaDataModel;
+@property (nonatomic, strong) FlickrPhotoModel *flickrPhotoModel;
 @property (nonatomic, strong) UIImage *image, *imageAplyFilters;
 
 
--(id) initWithFlickrPhoto:(FlickrPhoto *)flickrPhoto;
+-(id) initWithFlickrPhoto:(FlickrPhotoModel *)flickrPhoto;
 -(id) initWithImage:(UIImage *) aImage;
 
 @end

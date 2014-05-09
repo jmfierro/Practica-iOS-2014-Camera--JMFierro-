@@ -1,9 +1,8 @@
 //
 //  JMFLocationViewController.h
 //  Práctica iOS 2014 Camera [JMFierro]
-
 //
-//  Created by José Manuel Fierro Conchouso on 21/02/14.
+//  Created by José Manuel Fierro Conchouso on 08/05/14.
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
@@ -36,5 +35,6 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapkit;
 
 -(id) initWithMapView:(MKMapView *) mapView;
+
 
 @end

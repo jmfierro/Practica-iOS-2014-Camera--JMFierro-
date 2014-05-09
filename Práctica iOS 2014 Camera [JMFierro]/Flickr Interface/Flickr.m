@@ -14,7 +14,7 @@
  */
 
 #import "Flickr.h"
-#import "FlickrPhoto.h"
+#import "FlickrPhotoModel.h"
 
 //#define kFlickrAPIKey @"d02c877c0a4220890f14fc95f8b16983"
 #define kFlickrAPIKey @"a5dc780c8fd28cfef0b50cefd39c9d8d"
@@ -28,7 +28,7 @@
     return [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&text=%@&per_page=20&format=json&nojsoncallback=1",kFlickrAPIKey,searchTerm];
 }
 
-+ (NSString *)flickrPhotoURLForFlickrPhoto:(FlickrPhoto *) flickrPhoto size:(NSString *) size
++ (NSString *)flickrPhotoURLForFlickrPhoto:(FlickrPhotoModel *) flickrPhoto size:(NSString *) size
 {
     if(!size)
     {
@@ -77,26 +77,26 @@
                          * Obtención de datos de las imagenes flickr.
                          */
                         
-                        FlickrPhoto *photo = [[FlickrPhoto alloc] init];
-                        photo.farm = [objPhoto[@"farm"] intValue];
-                        photo.server = [objPhoto[@"server"] intValue];
-                        photo.secret = objPhoto[@"secret"];
-                        photo.photoID = [objPhoto[@"id"] longLongValue];
+                        FlickrPhotoModel *modelPhoto = [[FlickrPhotoModel alloc] init];
+                        modelPhoto.farm = [objPhoto[@"farm"] intValue];
+                        modelPhoto.server = [objPhoto[@"server"] intValue];
+                        modelPhoto.secret = objPhoto[@"secret"];
+                        modelPhoto.photoID = [objPhoto[@"id"] longLongValue];
                         
-                        photo.isfamily = [objPhoto[@"isfamily"] intValue] == 0 ? @"No familia" : @"Familia";
-                        photo.isfriend = [objPhoto[@"isfriend"] intValue] == 0 ? @"Desconocido" : @"Amigos";
-                        photo.ispublic = [objPhoto[@"ispublic"] intValue] == 0 ? @"Privada" : @"Pública";
-                        photo.owner = objPhoto[@"owner"];
-                        photo.title = objPhoto[@"title"];
+                        modelPhoto.isfamily = [objPhoto[@"isfamily"] intValue] == 0 ? @"No familia" : @"Familia";
+                        modelPhoto.isfriend = [objPhoto[@"isfriend"] intValue] == 0 ? @"Desconocido" : @"Amigos";
+                        modelPhoto.ispublic = [objPhoto[@"ispublic"] intValue] == 0 ? @"Privada" : @"Pública";
+                        modelPhoto.owner = objPhoto[@"owner"];
+                        modelPhoto.title = objPhoto[@"title"];
                         
-                        NSString *searchURL = [Flickr flickrPhotoURLForFlickrPhoto:photo size:@"m"];
+                        NSString *searchURL = [Flickr flickrPhotoURLForFlickrPhoto:modelPhoto size:@"m"];
                         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:searchURL]
                                                                   options:0
                                                                     error:&error];
                         UIImage *image = [UIImage imageWithData:imageData];
-                        photo.thumbnail = image;
+                        modelPhoto.thumbnail = image;
                         
-                        [flickrPhotos addObject:photo];
+                        [flickrPhotos addObject:modelPhoto];
                     }
                     
                     completionBlock(term,flickrPhotos,nil);
@@ -106,7 +106,7 @@
     });
 }
 
-+ (void)loadImageForPhoto:(FlickrPhoto *)flickrPhoto thumbnail:(BOOL)thumbnail completionBlock:(FlickrPhotoCompletionBlock) completionBlock
++ (void)loadImageForPhoto:(FlickrPhotoModel *)flickrPhoto thumbnail:(BOOL)thumbnail completionBlock:(FlickrPhotoCompletionBlock) completionBlock
 {
     
     NSString *size = thumbnail ? @"m" : @"b";

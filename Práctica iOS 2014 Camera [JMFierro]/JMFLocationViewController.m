@@ -1,12 +1,10 @@
 //
 //  JMFLocationViewController.m
 //  Práctica iOS 2014 Camera [JMFierro]
-
 //
-//  Created by José Manuel Fierro Conchouso on 21/02/14.
+//  Created by José Manuel Fierro Conchouso on 08/05/14.
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
-
 
 #import "JMFLocationViewController.h"
 
@@ -36,6 +34,21 @@
     return self;
 }
 
+
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    NSLog(@"Cambio de localizacion");
+    
+    CLLocation *lastLocation = [locations lastObject];
+    self.latitud.text = [NSString stringWithFormat:@"%.4f", lastLocation.coordinate.latitude];
+    self.Longitud.text = [NSString stringWithFormat:@"%.4f", lastLocation.coordinate.longitude];
+    self.Altitud.text = [NSString stringWithFormat:@"%.4f", lastLocation.altitude];
+    
+    [self.manager stopUpdatingLocation];
+}
+
+
 -(id) initWithMapView:(MKMapView *)mapView {
     if (self = [super initWithNibName:nil bundle:nil]) {
         
@@ -49,21 +62,21 @@
             self.manager.desiredAccuracy = kCLLocationAccuracyBest;
             self.manager.delegate = self;
             
-//            [self.manager startUpdatingLocation];
-
+            //            [self.manager startUpdatingLocation];
+            
             
             [self.manager setDistanceFilter:kCLDistanceFilterNone];
-      
-
+            
+            
         }
-
+        
         
         /*--------------------------------------------------------
          *
          *  Mapa
          *
          ---------------------------------------------------------*/
-        self.mapkit = mapView;
+//        self.mapkit = mapView;
         
         [self.mapkit setMapType:MKMapTypeHybrid];
         self.mapkit.rotateEnabled = YES;
@@ -72,35 +85,35 @@
         self.mapkit.showsBuildings = YES;
         self.mapkit.showsUserLocation = YES;
         self.mapkit.delegate = self;
-  
         
-        double delayInSeconds = 2.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
-            chincheta.coordinate = CLLocationCoordinate2DMake(40.4133967f, -3.694118f);
-            chincheta.title = @"Chincheta";
-            chincheta.subtitle = @"texto ejemplo";
-            
-            [self.mapkit addAnnotation:chincheta];
-        });
         
-
+//        double delayInSeconds = 2.0;
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//            MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
+//            chincheta.coordinate = CLLocationCoordinate2DMake(40.4133967f, -3.694118f);
+//            chincheta.title = @"Chincheta";
+//            chincheta.subtitle = @"texto ejemplo";
+//            
+//            [self.mapkit addAnnotation:chincheta];
+//        });
+        
+        
         
     }
-                
+    
     return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    if ([CLLocationManager locationServicesEnabled]) {
-//        self.manager = [[CLLocationManager alloc] init];
-//        self.manager.desiredAccuracy = kCLLocationAccuracyBest;
-//        self.manager.delegate = self;
-//     
-//        [self.manager startUpdatingLocation];
-//    }
+    //    if ([CLLocationManager locationServicesEnabled]) {
+    //        self.manager = [[CLLocationManager alloc] init];
+    //        self.manager.desiredAccuracy = kCLLocationAccuracyBest;
+    //        self.manager.delegate = self;
+    //
+    //        [self.manager startUpdatingLocation];
+    //    }
 }
 
 
@@ -120,16 +133,16 @@
     self.mapkit.showsUserLocation = YES;
     self.mapkit.delegate = self;
     
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
-        chincheta.coordinate = CLLocationCoordinate2DMake(45.0f, -3.0f);
-        chincheta.title = @"Chincheta";
-        chincheta.subtitle = @"texto ejemplo";
-        
-        [self.mapkit addAnnotation:chincheta];
-    });
+//    double delayInSeconds = 2.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
+//        chincheta.coordinate = CLLocationCoordinate2DMake(45.0f, -3.0f);
+//        chincheta.title = @"Chincheta";
+//        chincheta.subtitle = @"texto ejemplo";
+//        
+//        [self.mapkit addAnnotation:chincheta];
+//    });
     
     [self.manager stopUpdatingLocation];
 }
@@ -144,36 +157,36 @@
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     [mapView setCenterCoordinate:userLocation.coordinate animated:YES];
-//    [mapView setRegion:MKCoordinateRegionMake(<#CLLocationCoordinate2D centerCoordinate#>, <#MKCoordinateSpan span#>)]
+    //    [mapView setRegion:MKCoordinateRegionMake(<#CLLocationCoordinate2D centerCoordinate#>, <#MKCoordinateSpan span#>)]
     
     
-//    CLGeocoder *geocoder2 = [[CLGeocoder alloc] init];
-//    CLLocation *location = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-//    [geocoder2 reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-//        NSLog(@"Finding address");
-//        if (error) {
-//            NSLog(@"Error %@", error.description);
-//        } else {
-//            CLPlacemark *placemark = [placemarks lastObject];
-//            self.myAddress.text = [NSString stringWithFormat:@"%@", ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO)];
-//        }
-//    }];
+    //    CLGeocoder *geocoder2 = [[CLGeocoder alloc] init];
+    //    CLLocation *location = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
+    //    [geocoder2 reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+    //        NSLog(@"Finding address");
+    //        if (error) {
+    //            NSLog(@"Error %@", error.description);
+    //        } else {
+    //            CLPlacemark *placemark = [placemarks lastObject];
+    //            self.myAddress.text = [NSString stringWithFormat:@"%@", ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO)];
+    //        }
+    //    }];
     
     CLGeocoder *geocoder = [[CLGeocoder alloc]init];
     CLLocation *userCLLocation = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-//    [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks. NSError )];
+    //    [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks. NSError )];
     
-//    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-//    CLLocation *userCLLocation = [[CLLocation alloc] itWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
+    //    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    //    CLLocation *userCLLocation = [[CLLocation alloc] itWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
     __block JMFLocationViewController *weakSelf = self;
     [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         if (placemarks.count > 0) {
             
-//            dispatch_sync(dispatch_get_main_queue(), ^{
-//                CLPlacemark *info = [placemarks lastObject];
-//                [self.delegate setInfoGeocoder:info];
-//            });
-
+            //            dispatch_sync(dispatch_get_main_queue(), ^{
+            //                CLPlacemark *info = [placemarks lastObject];
+            //                [self.delegate setInfoGeocoder:info];
+            //            });
+            
             CLPlacemark *info = [placemarks lastObject];
             self.infoGeocoder = [placemarks lastObject];
             [self.delegate setInfoGeocoder:info];
@@ -208,10 +221,10 @@
              *
              -----------------------------------------------------------------------*/
             
-//            NSLog(@"Calle: %@", [[info addressDictionary] objectForKey:(NSString*)kABPersonAddressStreetKey]);
-//            NSLog(@"Código postal: %@", [[info addressDictionary] objectForKey:(NSString*)kABPersonAddressZIPKey]);
-//            NSLog(@"País: %@", [[info addressDictionary] objectForKey:(NSString*)kABPersonAddressCountryKey]);
- 
+            //            NSLog(@"Calle: %@", [[info addressDictionary] objectForKey:(NSString*)kABPersonAddressStreetKey]);
+            //            NSLog(@"Código postal: %@", [[info addressDictionary] objectForKey:(NSString*)kABPersonAddressZIPKey]);
+            //            NSLog(@"País: %@", [[info addressDictionary] objectForKey:(NSString*)kABPersonAddressCountryKey]);
+            
             NSLog(@"FormattedAddressLines: %@", [[info addressDictionary] objectForKey:(NSString*)@"FormattedAddressLines"]);
             NSLog(@"Street: %@", [[info addressDictionary] objectForKey:(NSString*)@"Street"]);
             NSLog(@"SubAdministrativeArea: %@", [[info addressDictionary] objectForKey:(NSString*)@"Thoroughfare"]);
@@ -224,8 +237,8 @@
             NSLog(@"SubThoroughfare: %@", [[info addressDictionary] objectForKey:(NSString*)@"SubThoroughfare"]);
             NSLog(@"CountryCode: %@", [[info addressDictionary] objectForKey:(NSString*)@"CountryCode"]);
             
-
-//            weakSelf.reverseGeocoding.text = [[info addressDictionary] objectForKey:(NSString*)@"kABPersonAddressCountryKey"];
+            
+            //            weakSelf.reverseGeocoding.text = [[info addressDictionary] objectForKey:(NSString*)@"kABPersonAddressCountryKey"];
         }
     }];
 }

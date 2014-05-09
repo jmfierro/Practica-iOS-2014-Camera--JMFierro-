@@ -7,7 +7,7 @@
 //
 
 #import "CellFilters.h"
-#import "Filters.h"
+#import "JMFFilters.h"
 
 
 @implementation CellFilters

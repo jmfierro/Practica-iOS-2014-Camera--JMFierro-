@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FlickrPhoto.h"
+#import "FlickrPhotoModel.h"
 #import "JMFImages.h"
 #import "CameraViewController.h"
 
@@ -25,5 +25,6 @@
 - (IBAction)btnFilters:(id)sender;
 
 - (IBAction)clickBackground:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *viewMap;
 
 @end

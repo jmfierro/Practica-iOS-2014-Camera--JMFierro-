@@ -11,8 +11,11 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 #import "JMFPhotoTableViewController.h"
+
 #import "JMFLocationViewController.h"
 #import "Flickr.h"
+
+#import "JMFMetaData.h"
 
 // Celdas
 #import "CellFilters.h"
@@ -82,19 +85,19 @@
  *  ** Imagen bajada de Flickr.  **
  *
  ...................................*/
--(id) initWithFlickrPhoto:(FlickrPhoto *)flickrPhoto {
+-(id) initWithFlickrPhoto:(FlickrPhotoModel *)flickrPhoto {
     
     if (self = [super initWithNibName:nil bundle:nil]) {
-        _flickrPhoto = flickrPhoto;
+        _flickrPhotoModel = flickrPhoto;
         
         /*
          *  Imagen de Flickr.
          */
-        if(self.flickrPhoto.largeImage)
+        if(self.flickrPhotoModel.largeImage)
         {
             //            [spinner stopAnimating];
             //                [spinner setHidden:YES];
-            _image = self.flickrPhoto.largeImage;
+            _image = self.flickrPhotoModel.largeImage;
             //                [tableViewPhotoSelectMetaData reloadData];
             
             //            cell.imagePhotoFlickr.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
@@ -102,7 +105,7 @@
         else
         {
             //        cell.photo.image = self.flickrPhoto.thumbnail;
-            [Flickr loadImageForPhoto:self.flickrPhoto thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
+            [Flickr loadImageForPhoto:self.flickrPhotoModel thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
                 
                 //                [spinner stopAnimating];
                 //                    [spinner setHidden:YES];
@@ -115,13 +118,15 @@
                          * Cuando la imagen es descargada se actualiza los datos de la TableView
                          *
                          ------------------------------------------------------------------------*/
-                        _image = self.flickrPhoto.largeImage;
+                        _image = self.flickrPhotoModel.largeImage;
+                        [self initWithImage:_image];
                         [tableViewPhotoSelectMetaData reloadData];
                     });
                 }
                 
             }];
         }
+        
     }
     
     return self;
@@ -137,7 +142,7 @@
     
     if (self = [super initWithNibName:nil bundle:nil]) {
         _image = image;
-        
+        _metaDataModel = [[JMFMetaDataModel alloc] initWithImage:image];
     }
     
     return self;
@@ -752,8 +757,8 @@
     CellDetailLocation * cell = (CellDetailLocation *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetalle];
     
     //        self.flickrPhoto.description;
-    cell.lblTitle.text = self.flickrPhoto.title;
-    cell.lblDescription.text = self.flickrPhoto.description;
+    cell.lblTitle.text = self.flickrPhotoModel.title;
+    cell.lblDescription.text = self.flickrPhotoModel.description;
     
     /*
             CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)self.flickrPhoto.largeImage, NULL);
@@ -835,11 +840,11 @@
      *
      ---------------------------------------------------------------------*/
     CellAddressLocation * cell = (CellAddressLocation *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
-    //
-    //        JMFLocationViewController *lVC = [[JMFLocationViewController alloc] initWithMapView:cell.mapkit];
+    
+//            JMFLocationViewController *lVC = [[JMFLocationViewController alloc] initWithMapView:cell.mapkit];
     //        lVC.delegate = self;
     
-    if (isNewLocalization) {
+    if (NO) {
         isNewLocalization = NO;
         
         //    dispatch_async(dispatch_queue_t queue, ^{
@@ -859,13 +864,14 @@
                     //                [self.delegate setInfoGeocoder:info];
                     //            });
                     
+                    /*
                     infoGeocoder = [placemarks lastObject];
                     NSLog(@"%@/n%@, %@/n%@",
                           [[infoGeocoder addressDictionary] objectForKey:@"Street"],
                           [[infoGeocoder addressDictionary] objectForKey:@"City"],
                           [[infoGeocoder addressDictionary] objectForKey:@"ZIP"],
                           [[infoGeocoder addressDictionary] objectForKey:@"Country"]);
-                    /*
+                    
                      NSLog(@"FormattedAddressLines: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"FormattedAddressLines"]);
                      NSLog(@"Street: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Street"]);
                      NSLog(@"SubAdministrativeArea: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Thoroughfare"]);
@@ -879,7 +885,7 @@
                      NSLog(@"CountryCode: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"CountryCode"]);
                      */
                     
-                    [cell.mapkit setMapType:MKMapTypeHybrid];
+//                    [cell.mapkit setMapType:MKMapTypeHybrid];
                     cell.mapkit.rotateEnabled = YES;
                     cell.mapkit.zoomEnabled = YES;
                     cell.mapkit.pitchEnabled = YES;
@@ -891,7 +897,8 @@
                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                         MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
-                        chincheta.coordinate = CLLocationCoordinate2DMake(40.0f, -3.0f);
+//                        chincheta.coordinate = CLLocationCoordinate2DMake(40.0f, -3.0f);
+                        chincheta.coordinate = location.coordinate;
                         chincheta.title = @"Chincheta";
                         chincheta.subtitle = @"texto ejemplo";
                         
@@ -920,9 +927,9 @@
     
     cell.lblGeolocalizacion.text = direccion;
     
-    cell.lblOwer.text = self.flickrPhoto.owner;
+    cell.lblOwer.text = self.flickrPhotoModel.owner;
     
-    cell.lblSecret.Text = [[NSString alloc] initWithFormat:@"%@ %@", self.flickrPhoto.secret, @"secret"];
+    cell.lblSecret.Text = [[NSString alloc] initWithFormat:@"%@ %@", self.flickrPhotoModel.secret, @"secret"];
     
     
     return cell;

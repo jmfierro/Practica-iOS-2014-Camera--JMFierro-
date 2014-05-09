@@ -12,10 +12,12 @@
 
 #import "JMFPhotoTableViewController.h"
 #import "JMFLocationViewController.h"
+#import "JMFCoreViewController.h"
+#import "LocationViewController.h"
 #import "PruebaViewController.h"
 
 #import "Flickr.h"
-#import "FlickrPhoto.h"
+#import "FlickrPhotoModel.h"
 
 
 
@@ -112,6 +114,11 @@
     
 
     [self.view addSubview:collectionViewPhotos];
+    
+//    LocationViewController *locationVC = [[LocationViewController alloc] initWithViewMap:self.viewMap];
+//    
+//    
+//    [locationVC viewDidLoad];
 
 }
 
@@ -224,7 +231,7 @@
             //        flickrPhoto = self.searchResults[searchTerm][indexPath.row];
             
             NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
-            FlickrPhoto *flickrPhoto = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
+            FlickrPhotoModel *flickrPhoto = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
             
             //    tableFlickrPhotoVC.delegate = self;
             
@@ -290,7 +297,7 @@
 //        FlickrPhoto *photo = self.searchResults[searchTerm][indexPath.row];
         
         NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //  - [self.photosCamera count]>0 ? 1:0];
-        FlickrPhoto *photo = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
+        FlickrPhotoModel *photo = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
 
         // Escala thumbnail.
         CGSize frame = [self scaleFactor:photo.largeImage widthNewFrame:200];
@@ -517,11 +524,11 @@
 
 /*.......................
  *
- ** Metodos privados **
+ ** Metodos 'Actions' **
  *
 .........................*/
 
-#pragma mark - Privates Methods
+#pragma mark - Action Methods
 
 - (IBAction)btnTakePhoto:(id)sender {
     
@@ -541,8 +548,14 @@
 }
 
 - (IBAction)btnLocation:(id)sender {
-    JMFLocationViewController *locationVC = [[JMFLocationViewController alloc] init];
     
+//    LocationViewController *locationVC = [[LocationViewController alloc] initWithViewMap:self.viewMap];
+    
+    
+//    [locationVC viewDidLoad];
+
+    
+    JMFCoreViewController *locationVC = [[JMFCoreViewController alloc] init];
     [self.navigationController pushViewController:locationVC animated:NO];
     
 }
@@ -557,6 +570,14 @@
 - (IBAction)clickBackground:(id)sender {
     [self.view endEditing:YES];
 }
+
+
+/*.......................
+ *
+ ** Metodos privados **
+ *
+ .........................*/
+#pragma mark - Privates Methods
 
 -(CGSize) scaleFactor:(UIImage *)image widthNewFrame:(CGFloat)width {
     /*
