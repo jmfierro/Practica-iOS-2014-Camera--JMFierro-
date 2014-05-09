@@ -83,8 +83,8 @@
                         modelPhoto.secret = objPhoto[@"secret"];
                         modelPhoto.photoID = [objPhoto[@"id"] longLongValue];
                         
-                        modelPhoto.isfamily = [objPhoto[@"isfamily"] intValue] == 0 ? @"No familia" : @"Familia";
-                        modelPhoto.isfriend = [objPhoto[@"isfriend"] intValue] == 0 ? @"Desconocido" : @"Amigos";
+                        modelPhoto.isfamily = [objPhoto[@"isfamily"] intValue] == 0 ? @"No" : @"Familia";
+                        modelPhoto.isfriend = [objPhoto[@"isfriend"] intValue] == 0 ? @"No" : @"Si";
                         modelPhoto.ispublic = [objPhoto[@"ispublic"] intValue] == 0 ? @"Privada" : @"Pública";
                         modelPhoto.owner = objPhoto[@"owner"];
                         modelPhoto.title = objPhoto[@"title"];

@@ -29,4 +29,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSave;
 @property (weak, nonatomic) IBOutlet UIButton *btnCheckin;
 @property (weak, nonatomic) IBOutlet UIButton *btnMore;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblID;
+@property (weak, nonatomic) IBOutlet UILabel *lblFarm;
+@property (weak, nonatomic) IBOutlet UILabel *lblServer;
+@property (weak, nonatomic) IBOutlet UILabel *lblSecret;
+@property (weak, nonatomic) IBOutlet UILabel *lblFamily;
+@property (weak, nonatomic) IBOutlet UILabel *lblFriend;
+@property (weak, nonatomic) IBOutlet UILabel *lblPublic;
+@property (weak, nonatomic) IBOutlet UILabel *lblOwer;
+
+
 @end

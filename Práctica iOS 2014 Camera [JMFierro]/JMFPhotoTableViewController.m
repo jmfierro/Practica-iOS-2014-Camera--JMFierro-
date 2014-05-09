@@ -757,8 +757,36 @@
     CellDetailLocation * cell = (CellDetailLocation *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetalle];
     
     //        self.flickrPhoto.description;
-    cell.lblTitle.text = self.flickrPhotoModel.title;
-    cell.lblDescription.text = self.flickrPhotoModel.description;
+    
+    if (self.flickrPhotoModel.title)
+        cell.lblTitle.text = self.flickrPhotoModel.title;
+    if (self.flickrPhotoModel.description)
+        cell.lblDescription.text = self.flickrPhotoModel.description;
+    
+    if (self.flickrPhotoModel.photoID)
+        cell.lblID.text = [[NSString alloc] initWithFormat:@"%lld", self.flickrPhotoModel.photoID];
+    
+    if (self.flickrPhotoModel.farm)
+        cell.lblFarm.text = [[NSString alloc] initWithFormat:@"%d", self.flickrPhotoModel.farm];
+    
+    if (self.flickrPhotoModel.server)
+        cell.lblServer.text = [[NSString alloc] initWithFormat:@"%d", self.flickrPhotoModel.server];
+    
+    if (self.flickrPhotoModel.secret)
+        cell.lblSecret.text = self.flickrPhotoModel.secret;
+    
+    if (self.flickrPhotoModel.isfamily)
+        cell.lblFamily.text = self.flickrPhotoModel.isfamily;
+    
+    if (self.flickrPhotoModel.isfriend)
+        cell.lblFriend.text = self.flickrPhotoModel.isfriend;
+    
+    if (self.flickrPhotoModel.ispublic)
+        cell.lblPublic.text = self.flickrPhotoModel.ispublic;
+    
+    if (self.flickrPhotoModel.owner)
+        cell.lblOwer.text = self.flickrPhotoModel.owner;
+    
     
     /*
             CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)self.flickrPhoto.largeImage, NULL);
