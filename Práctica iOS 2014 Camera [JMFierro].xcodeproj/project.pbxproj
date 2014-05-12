@@ -48,8 +48,6 @@
 		50722FC51907CCCD009E079D /* papel-rasgado-54166.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FC41907CCCD009E079D /* papel-rasgado-54166.png */; };
 		507C8E1C1917801200238C30 /* FaceDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 507C8E1B1917801200238C30 /* FaceDetection.m */; };
 		507C8E201917985A00238C30 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507C8E1F1917985A00238C30 /* MobileCoreServices.framework */; };
-		507C8E29191798E700238C30 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507C8E27191798E700238C30 /* CameraViewController.m */; };
-		507C8E2A191798E700238C30 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 507C8E28191798E700238C30 /* CameraViewController.xib */; };
 		507E1122190915680038ECB7 /* JMFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 507E1121190915680038ECB7 /* JMFImages.m */; };
 		508224361917E438000BB05B /* JMFFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 508224351917E438000BB05B /* JMFFilters.m */; };
 		508A487E190FAD0300FFEBAA /* gente_750x469--647x300.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */; };
@@ -174,9 +172,6 @@
 		507C8E1A1917801200238C30 /* FaceDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceDetection.h; sourceTree = "<group>"; };
 		507C8E1B1917801200238C30 /* FaceDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceDetection.m; sourceTree = "<group>"; };
 		507C8E1F1917985A00238C30 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		507C8E26191798E700238C30 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
-		507C8E27191798E700238C30 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
-		507C8E28191798E700238C30 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
 		507E1120190915680038ECB7 /* JMFImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFImages.h; sourceTree = "<group>"; };
 		507E1121190915680038ECB7 /* JMFImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFImages.m; sourceTree = "<group>"; };
 		508224341917E438000BB05B /* JMFFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFFilters.h; sourceTree = "<group>"; };
@@ -456,9 +451,6 @@
 		507C8E1E1917980B00238C30 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				507C8E26191798E700238C30 /* CameraViewController.h */,
-				507C8E27191798E700238C30 /* CameraViewController.m */,
-				507C8E28191798E700238C30 /* CameraViewController.xib */,
 				50CAD12B191D2630001C17CE /* JMFCameraViewController.h */,
 				50CAD12C191D2630001C17CE /* JMFCameraViewController.m */,
 			);
@@ -553,8 +545,8 @@
 				502AC631190AA43F00EFB9B3 /* CurledViewBase.m */,
 				502AC62D190AA3F200EFB9B3 /* UIImageView+Curled.h */,
 				502AC62E190AA3F200EFB9B3 /* UIImageView+Curled.m */,
-				50A5206918F7F125007F6F7B /* Images */,
 				50A5205418F7F0F3007F6F7B /* Cells */,
+				50A5206918F7F125007F6F7B /* Images */,
 			);
 			name = TableView;
 			sourceTree = "<group>";
@@ -692,7 +684,6 @@
 				503E383218F2F96F00A9FBDF /* bg_cork@2x.png in Resources */,
 				50A5206218F7F105007F6F7B /* CellDetail.xib in Resources */,
 				50C299FA190E514900879269 /* CellFilters.xib in Resources */,
-				507C8E2A191798E700238C30 /* CameraViewController.xib in Resources */,
 				50BB8AC218F6CC7D008EC1F3 /* CellImage.xib in Resources */,
 				503E383818F2F96F00A9FBDF /* divider_bar@2x.png in Resources */,
 				50A5208718F7F13D007F6F7B /* btn_round_next@2x.png in Resources */,
@@ -747,7 +738,6 @@
 				50BB8AC318F6CC7D008EC1F3 /* CellImage.m in Sources */,
 				50B8594A18F2EBAB00E91D44 /* JMFPushpinCell.m in Sources */,
 				50A5206118F7F105007F6F7B /* CellDetail.m in Sources */,
-				507C8E29191798E700238C30 /* CameraViewController.m in Sources */,
 				503E384B18F2FC4D00A9FBDF /* FlickrPhotoModel.m in Sources */,
 				50B2525B191BA272005D7C86 /* JPSThumbnailAnnotation.m in Sources */,
 				50B252AE191BD944005D7C86 /* JMFCoreViewController.m in Sources */,

@@ -162,20 +162,6 @@
             
             _image = [Utils imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_height)];
             
-//            CGFloat scaleFactor = image.size.width/image.size.height;
-//            
-//            /*                  **
-//             *  Imagen Portrait.
-//             *                  **/
-//            if (image.size.height > image.size.width)
-////                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_ImageViewHeight/scaleFactor, cellImage_ImageViewHeight)];
-//                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_height*scaleFactor, cellImage_height)];
-//            
-//            /*                  **
-//             * Imagen Ladscape.
-//             *                  **/
-//            else
-//                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_width/scaleFactor)];
 
             /*-------------------------------------------------
              *
@@ -186,10 +172,8 @@
             _image = image;
         }
         
-        
-//        _image = [self imageToThumbnail:image Size:CGSizeMake(500, 500)];  // image;
+
         _imageThumbnail = [Utils imageToThumbnail:image Size:CGSizeMake(100, 100)];
-//        _imageThumbnail = [self imageToThumbnail:image Size:CGSizeMake(100, 100)];
         _metaDataModel = [[JMFMetaDataModel alloc] initWithImage:image];
     }
     
@@ -1084,62 +1068,6 @@
 
 #pragma mark - Metodos privados
 
-
-///*..........................................................................
-// *
-// * Devuelve un thumbnail de la imagen, adaptando al tamaño de un contenedor.
-// *
-// ............................................................................*/
-//-(UIImage *) imageToThumbnail:(UIImage *)image Size:(CGSize )aDestinationSize {
-//    
-//    CGSize destinationSize = [self imageAdapterSize:image containerSize:aDestinationSize];
-//    
-//    UIImage *originalImage = image;
-//    UIGraphicsBeginImageContext(destinationSize);
-//    [originalImage drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
-//    UIImage *thumbanail = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    
-//    return thumbanail;
-//}
-//
-//-(CGSize) scaleFactor:(UIImage *)image widthNewFrame:(CGFloat)width {
-//    /*
-//     * Escala thumbail.
-//     */
-//    float scaleFactor = image.size.height / image.size.width;
-//    
-//    CGSize size;
-//    size.width = width;
-//    size.height = width * scaleFactor;
-//    
-//    return size;
-//}
-//
-///*......................................................................
-// *
-// * Devuelve el tamaño de la imagen adaptada al tamaño de un contenedor.
-// *
-// .......................................................................*/
-//-(CGSize) imageAdapterSize:(UIImage *)image containerSize:(CGSize)contentSize {
-//    
-//    CGFloat scaleFactor = image.size.width/image.size.height;
-//    
-//    /*                  **
-//     *  Imagen Portrait.
-//     *                  **/
-//    if (image.size.height > image.size.width)
-//        //                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_ImageViewHeight/scaleFactor, cellImage_ImageViewHeight)];
-//        return CGSizeMake(contentSize.height*scaleFactor, contentSize.height);
-//    
-//    /*                  **
-//     * Imagen Ladscape.
-//     *                  **/
-//    else
-//        return CGSizeMake(contentSize.width, contentSize.width/scaleFactor);
-//    
-//    
-//}
 
 -(void) registers {
     

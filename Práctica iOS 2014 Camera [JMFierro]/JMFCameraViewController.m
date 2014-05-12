@@ -124,6 +124,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
         [self.delegate getImagePickerCamera:image];
         
+        // Guarda imagen.
         if (_newMedia)
             UIImageWriteToSavedPhotosAlbum(image,
                                            self,

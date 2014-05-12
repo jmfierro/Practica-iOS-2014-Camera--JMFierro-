@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "FlickrPhotoModel.h"
 #import "JMFImages.h"
-#import "CameraViewController.h"
 
 
 
-@interface JMFCollectionView : UIViewController <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, CameraViewControllerDelegate>
+
+@interface JMFCollectionView : UIViewController <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 
 @property (nonatomic, strong) JMFImages *model;
 
