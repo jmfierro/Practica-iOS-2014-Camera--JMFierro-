@@ -11,6 +11,7 @@
 #define kCellFilters @"CellFilters"
 
 
+
 @interface CellFilters : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgFilter1;

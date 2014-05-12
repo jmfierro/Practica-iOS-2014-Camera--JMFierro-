@@ -19,6 +19,7 @@
 
 #import "Flickr.h"
 #import "FlickrPhotoModel.h"
+#import "Utils.h"
 
 
 
@@ -285,7 +286,7 @@
             image = [UIImage imageNamed:@"can-stock-photo_csp12611066.png"];
  
         // Escala thumbail.
-        retval = [self scaleFactor:image widthNewFrame:150];
+        retval = [Utils scaleFactor:image widthNewFrame:150];
 
         
     } else {
@@ -301,7 +302,7 @@
         FlickrPhotoModel *photo = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
 
         // Escala thumbnail.
-        CGSize frame = [self scaleFactor:photo.largeImage widthNewFrame:200];
+        CGSize frame = [Utils scaleFactor:photo.largeImage widthNewFrame:200];
         retval = photo.thumbnail.size.width > 0 ? photo.thumbnail.size : frame; // CGSizeMake(200, 200);
 
     }
@@ -538,17 +539,17 @@
     /*
      * Pruebas sin camara. Simula haber tomado una foto.
      */
-//    [self.photosCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
-    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
-    [collectionViewPhotos reloadData];
+////    [self.photosCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
+//    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
+//    [collectionViewPhotos reloadData];
     
     /*
      * LLamada a la camara.
-//     */
-//    JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] init];
-//    cameraVC.delegate = self;
-//    [self.navigationController pushViewController:cameraVC animated:NO];
-////    [self.model.photosCamera addObject:cameraVC.imageView.image];
+     */
+    JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] init];
+    cameraVC.delegate = self;
+    [self.navigationController pushViewController:cameraVC animated:NO];
+//    [self.model.photosCamera addObject:cameraVC.imageView.image];
     
     
 }
@@ -585,18 +586,7 @@
  .........................*/
 #pragma mark - Privates Methods
 
--(CGSize) scaleFactor:(UIImage *)image widthNewFrame:(CGFloat)width {
-    /*
-     * Escala thumbail.
-     */
-    float scaleFactor = image.size.height / image.size.width;
-    
-    CGSize size;
-    size.width = width;
-    size.height = width * scaleFactor;
-    
-    return size;
-}
+
 
 //- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 //{

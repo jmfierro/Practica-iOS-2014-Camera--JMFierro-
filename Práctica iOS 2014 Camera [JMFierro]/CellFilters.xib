@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -19,17 +19,17 @@
                         <color key="backgroundColor" red="0.086274512110000007" green="0.61568629740000003" blue="0.09803922474" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kG5-CC-VNM">
-                        <rect key="frame" x="48" y="10" width="671" height="1"/>
+                        <rect key="frame" x="48" y="6" width="671" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.086274512110000007" green="0.61568629740000003" blue="0.09803922474" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FRc-1d-ODd">
-                        <rect key="frame" x="48" y="39" width="671" height="1"/>
+                        <rect key="frame" x="48" y="33" width="671" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.086274512110000007" green="0.61568629740000003" blue="0.09803922474" alpha="1" colorSpace="deviceRGB"/>
                     </view>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Perspective" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgw-vs-t67">
-                        <rect key="frame" x="599" y="12" width="125" height="26"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Perspective" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgw-vs-t67" userLabel="Label - 5">
+                        <rect key="frame" x="599" y="8" width="125" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -46,7 +46,7 @@
                         </connections>
                     </button>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iconCheck-300px.png" translatesAutoresizingMaskIntoConstraints="NO" id="gef-fz-1tM" userLabel="imgCheckFilter1">
-                        <rect key="frame" x="132" y="25" width="41" height="40"/>
+                        <rect key="frame" x="133" y="8" width="41" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcx-As-Ngh" userLabel="ButtonFilter1">
@@ -59,27 +59,27 @@
                             <action selector="btnFilter1:" destination="iHf-Ne-MXx" eventType="touchUpInside" id="5IV-er-jaP"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="cMc-yk-aio">
-                        <rect key="frame" x="316" y="37" width="125" height="108"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="RJ4-cy-iUw">
-                        <rect key="frame" x="32" y="37" width="125" height="108"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dDc-rU-TeV">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dDc-rU-TeV" userLabel="Image View - 5">
                         <rect key="frame" x="599" y="37" width="125" height="108"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pixellate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tn6-39-lFE">
-                        <rect key="frame" x="316" y="12" width="125" height="26"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="cMc-yk-aio" userLabel="Image View - 3">
+                        <rect key="frame" x="316" y="37" width="125" height="108"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="RJ4-cy-iUw" userLabel="Image View - 1">
+                        <rect key="frame" x="32" y="37" width="125" height="108"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pixellate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tn6-39-lFE" userLabel="Label - 3">
+                        <rect key="frame" x="316" y="8" width="125" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PhotoEffect" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDO-Fl-sSm">
-                        <rect key="frame" x="174" y="12" width="125" height="26"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PhotoEffect" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDO-Fl-sSm" userLabel="Label - 2">
+                        <rect key="frame" x="174" y="8" width="125" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -95,23 +95,23 @@
                             <action selector="btnFilter3:" destination="iHf-Ne-MXx" eventType="touchUpInside" id="o3D-oa-C2J"/>
                         </connections>
                     </button>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PinchDistortion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmS-KL-dpN">
-                        <rect key="frame" x="458" y="12" width="125" height="26"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PinchDistortion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmS-KL-dpN" userLabel="Label - 4">
+                        <rect key="frame" x="458" y="8" width="125" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iconCheck-300px.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ho8-RD-46W" userLabel="imgCheckFilter5">
-                        <rect key="frame" x="694" y="25" width="41" height="40"/>
+                        <rect key="frame" x="695" y="8" width="41" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JCq-Xb-4pl">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JCq-Xb-4pl" userLabel="Image View - 4">
                         <rect key="frame" x="458" y="37" width="125" height="108"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iconCheck-300px.png" translatesAutoresizingMaskIntoConstraints="NO" id="RMR-II-CDy" userLabel="imgCheckFilter3">
-                        <rect key="frame" x="417" y="25" width="41" height="40"/>
+                        <rect key="frame" x="418" y="8" width="41" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oam-hl-dp1" userLabel="ButtonFilter2">
@@ -135,19 +135,19 @@
                         </connections>
                     </button>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iconCheck-300px.png" translatesAutoresizingMaskIntoConstraints="NO" id="5tR-GT-D1M" userLabel="imgCheckFilter4">
-                        <rect key="frame" x="557" y="25" width="41" height="40"/>
+                        <rect key="frame" x="558" y="8" width="41" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6iR-Nz-ifs">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="famous-face-dementia-617x416.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6iR-Nz-ifs" userLabel="Image View - 2">
                         <rect key="frame" x="174" y="37" width="125" height="108"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iconCheck-300px.png" translatesAutoresizingMaskIntoConstraints="NO" id="fYd-Ct-1AT" userLabel="imgCheckFilter2">
-                        <rect key="frame" x="275" y="25" width="41" height="40"/>
+                        <rect key="frame" x="276" y="8" width="41" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sepia" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzl-bS-CSk">
-                        <rect key="frame" x="32" y="12" width="125" height="26"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sepia" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzl-bS-CSk" userLabel="Label - 1">
+                        <rect key="frame" x="32" y="8" width="125" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -155,6 +155,23 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="imgCheck1" destination="gef-fz-1tM" id="laJ-Qg-5ai"/>
+                <outlet property="imgCheck2" destination="fYd-Ct-1AT" id="UPf-oW-JHr"/>
+                <outlet property="imgCheck3" destination="RMR-II-CDy" id="ciX-aF-LQl"/>
+                <outlet property="imgCheck4" destination="5tR-GT-D1M" id="O2k-0U-e3w"/>
+                <outlet property="imgCheck5" destination="Ho8-RD-46W" id="Nwe-qm-GtZ"/>
+                <outlet property="imgFilter1" destination="RJ4-cy-iUw" id="evr-5A-qee"/>
+                <outlet property="imgFilter2" destination="6iR-Nz-ifs" id="dZJ-m8-PYw"/>
+                <outlet property="imgFilter3" destination="cMc-yk-aio" id="lNk-rM-Fpy"/>
+                <outlet property="imgFilter4" destination="JCq-Xb-4pl" id="Oyf-MD-Q2a"/>
+                <outlet property="imgFilter5" destination="dDc-rU-TeV" id="WSC-Jt-zV1"/>
+                <outlet property="lblFilter1" destination="Jzl-bS-CSk" id="f21-81-3DA"/>
+                <outlet property="lblFilter2" destination="lDO-Fl-sSm" id="UYN-Rf-pXo"/>
+                <outlet property="lblFilter3" destination="tn6-39-lFE" id="QIq-YH-w8n"/>
+                <outlet property="lblFilter4" destination="OmS-KL-dpN" id="3Za-Da-aRA"/>
+                <outlet property="lblFilter5" destination="Cgw-vs-t67" id="XDT-ud-eIe"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

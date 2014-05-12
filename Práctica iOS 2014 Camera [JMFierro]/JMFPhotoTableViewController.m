@@ -65,8 +65,6 @@
     
 }
 
-    @property (nonatomic, strong) UITableViewCell *prototypeCell;
-
 @end
 
 
