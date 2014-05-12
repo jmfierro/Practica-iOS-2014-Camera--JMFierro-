@@ -22,7 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *lblOwer;
 @property (weak, nonatomic) IBOutlet UILabel *lblSecret;
-@property (weak, nonatomic) IBOutlet MKMapView *mapkit;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 
 + (CellAddressLocation*) addressLocationDetailCell;

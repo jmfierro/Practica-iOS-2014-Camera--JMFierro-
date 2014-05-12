@@ -38,9 +38,11 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    NSLog(@"Cambio de localizacion");
+    NSLog(@"Cambio de localizacion (JMFLocationViewController.m)");
     
     CLLocation *lastLocation = [locations lastObject];
+    [self.delegate onLastLocation:lastLocation];
+    
     self.latitud.text = [NSString stringWithFormat:@"%.4f", lastLocation.coordinate.latitude];
     self.Longitud.text = [NSString stringWithFormat:@"%.4f", lastLocation.coordinate.longitude];
     self.Altitud.text = [NSString stringWithFormat:@"%.4f", lastLocation.altitude];
@@ -189,7 +191,7 @@
             
             CLPlacemark *info = [placemarks lastObject];
             self.infoGeocoder = [placemarks lastObject];
-            [self.delegate setInfoGeocoder:info];
+            [self.delegate onInfoGeocoder:info];
             
             /* -----------------------------------------------------------------------
              *

@@ -36,7 +36,7 @@
     CellImage *cellImage;
     
     // Localización
-    JMFLocationViewController *locationVC;
+//    JMFLocationViewController *location;
     CLLocation *location;
     CLPlacemark *infoGeocoder;
     BOOL isNewLocalization;
@@ -190,8 +190,8 @@
     /*
      * Localizacion.
      */
-    locationVC = [[JMFLocationViewController alloc] init];
-    locationVC.delegate = self;
+//    locationVC = [[JMFLocationViewController alloc] init];
+//    locationVC.delegate = self;
     isNewLocalization = YES;
     
     [self registers];
@@ -834,69 +834,6 @@
         cell.lblOwer.text = self.flickrPhotoModel.owner;
     
     
-    /*
-            CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)self.flickrPhoto.largeImage, NULL);
-    CFDictionaryRef imageMetaData = CGImageSourceCopyPropertiesAtIndex(source, 0, NULL);
-            NSDictionary *objectCollection = (__bridge NSDictionary*)imageMetaData;
-    
-    
-    
-            NSData* pngData =  UIImagePNGRepresentation(self.flickrPhoto.largeImage);
-    
-            NSURL *imageFileURL = [NSURL fileURLWithPath:...];
-          CGImageSourceRef imageSource = CGImageSourceCreateWithURL((CFURLRef)imageFileURL, NULL);
-    
-            if (imageSource == NULL) { // Error loading image ... return;
-            		}
-    
-            NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:NO], (NSString *)kCGImageSourceShouldCache, nil];
-    
-            CFDictionaryRef imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, (CFDictionaryRef)options);
-    
-            if (imageProperties) { NSNumber *width = (NSNumber *)CFDictionaryGetValue(imageProperties, kCGImagePropertyPixelWidth); NSNumber *height = (NSNumber *)CFDictionaryGetValue(imageProperties, kCGImagePropertyPixelHeight);
-    
-                NSLog(@"Image dimensions: %@ x %@ px", width, height); CFRelease(imageProperties); }
-    
-    
-            CGImageSourceRef source = CGImageSourceCreateWithData((CFDataRef)CFBridgingRetain(pngData), NULL);
-            NSDictionary *metadata = (NSDictionary *) CFBridgingRelease(CGImageSourceCopyPropertiesAtIndex(source, 0, NULL));
-    
-    */
-    
-    
-    
-    
-//    // Adjust cell frame width to be equal to tableview frame width
-//    cell.frame = CGRectMake(0, 0, tableView.frame.size.width, cell.frame.size.height);
-//    
-//    
-//    //        UITableViewCell *cell = nil;
-//    // add width of table to the name so that rotations will change the cell dequeue names
-//    NSString *s_cell = [s_cell stringByAppendingString:
-//                        [NSString stringWithFormat:@"%@%d",@"Width",(int)tableView.bounds.size.width]
-//                        ];
-//    
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-//    
-//    NSLog(@"\n--- %f",width);
-    
-    
-       
-    //        cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    
-    //        if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight) {
-    //            CGRect newFrame = customCell.frame;
-    //            newFrame.size.width = newFrame.size.width+160;
-    //            customCell.frame = newFrame;
-    //        }
-    
-    
-    //        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-    //            //Make labels smaller
-    //        }
-    //        else {
-    //            //Make them bigger
-    //        }
     
     return cell;
     
@@ -915,22 +852,32 @@
      ---------------------------------------------------------------------*/
     CellAddressLocation * cell = (CellAddressLocation *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
     
+    CGFloat latitud = 30;
+    CGFloat longitud = 30;
+    
+//    CLLocation *lastLocation = [CLLocation alloc  ini]CLLocationCoordinate2DMake(30.0f, -3.0f);
+//    
+//    [location.coordinate setLatitude:30];
+//    location.coordinate = CLLocationCoordinate2DMake(43.0f, -3.0f);
+    
 //            JMFLocationViewController *lVC = [[JMFLocationViewController alloc] initWithMapView:cell.mapkit];
     //        lVC.delegate = self;
     
-    if (NO) {
+    if (isNewLocalization) {
         isNewLocalization = NO;
         
         //    dispatch_async(dispatch_queue_t queue, ^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             CLGeocoder *geocoder = [[CLGeocoder alloc]init];
-            CLLocation *userCLLocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+//            CLLocation *userCLLocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+        CLLocation *userCLLocation = [[CLLocation alloc] initWithLatitude:latitud longitude:longitud];
             //    [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks. NSError )];
             
             //    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
             //    CLLocation *userCLLocation = [[CLLocation alloc] itWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-            //        __block JMFLocationViewController *weakSelf = self;
-            [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+//             __block JMFLocationViewController *weakSelf = self;
+//        __block CLLocation *weakLocation = location;
+        [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks, NSError *error) {
                 if (placemarks.count > 0) {
                     
                     //            dispatch_sync(dispatch_get_main_queue(), ^{
@@ -938,7 +885,7 @@
                     //                [self.delegate setInfoGeocoder:info];
                     //            });
                     
-                    /*
+                    
                     infoGeocoder = [placemarks lastObject];
                     NSLog(@"%@/n%@, %@/n%@",
                           [[infoGeocoder addressDictionary] objectForKey:@"Street"],
@@ -957,36 +904,35 @@
                      NSLog(@"State: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"]);
                      NSLog(@"SubThoroughfare: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"SubThoroughfare"]);
                      NSLog(@"CountryCode: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"CountryCode"]);
-                     */
                     
-//                    [cell.mapkit setMapType:MKMapTypeHybrid];
-                    cell.mapkit.rotateEnabled = YES;
-                    cell.mapkit.zoomEnabled = YES;
-                    cell.mapkit.pitchEnabled = YES;
-                    cell.mapkit.showsBuildings = YES;
-                    cell.mapkit.showsUserLocation = YES;
-                    cell.mapkit.delegate = self;
+                    
+//                    [cell.mapView setMapType:MKMapTypeHybrid];
+                    cell.mapView.rotateEnabled = YES;
+                    cell.mapView.zoomEnabled = YES;
+                    cell.mapView.pitchEnabled = YES;
+                    cell.mapView.showsBuildings = YES;
+                    cell.mapView.showsUserLocation = NO;
+                    cell.mapView.delegate = self;
+                    cell.mapView.centerCoordinate = CLLocationCoordinate2DMake(latitud, longitud);
                     
                     double delayInSeconds = 2.0;
                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                    
                     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                         MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
-//                        chincheta.coordinate = CLLocationCoordinate2DMake(40.0f, -3.0f);
-                        chincheta.coordinate = location.coordinate;
-                        chincheta.title = @"Chincheta";
-                        chincheta.subtitle = @"texto ejemplo";
+                        chincheta.coordinate = CLLocationCoordinate2DMake(latitud, longitud);
+                        chincheta.title = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"];
+                        chincheta.subtitle = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"];
                         
-                        [cell.mapkit addAnnotation:chincheta];
+                        [cell.mapView addAnnotation:chincheta];
                     });
                     
-                    
-                    
-                    
+                   
                     [tableView reloadData];
                 }
             }];  // ** Fin Geocoding **
             
-        }); // ** Fin dispach **
+//        }); // ** Fin dispach **
         
     }
 
@@ -1022,7 +968,7 @@
 
 #pragma mark - Delegates
 
--(void) setLastLocation:(CLLocation *)aLastLocation {
+-(void) onLastLocation:(CLLocation *)aLastLocation {
     location = aLastLocation;
 }
 

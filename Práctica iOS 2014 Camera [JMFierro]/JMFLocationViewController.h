@@ -13,8 +13,8 @@
 
 @protocol JMFLocationViewControllerDelegate
 
--(void) setInfoGeocoder:(CLPlacemark *)aInfo;
--(void) setLastLocation:(CLLocation *)aLastLocation;
+-(void) onInfoGeocoder:(CLPlacemark *)aInfo;
+-(void) onLastLocation:(CLLocation *)aLastLocation;
 
 @end
 

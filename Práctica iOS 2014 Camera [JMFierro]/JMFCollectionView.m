@@ -539,17 +539,17 @@
     /*
      * Pruebas sin camara. Simula haber tomado una foto.
      */
-////    [self.photosCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
+    [self.model.photosCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
 //    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
-//    [collectionViewPhotos reloadData];
+    [collectionViewPhotos reloadData];
     
     /*
      * LLamada a la camara.
      */
-    JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] init];
-    cameraVC.delegate = self;
-    [self.navigationController pushViewController:cameraVC animated:NO];
-//    [self.model.photosCamera addObject:cameraVC.imageView.image];
+//    JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] init];
+//    cameraVC.delegate = self;
+//    [self.navigationController pushViewController:cameraVC animated:NO];
+////    [self.model.photosCamera addObject:cameraVC.imageView.image];
     
     
 }
