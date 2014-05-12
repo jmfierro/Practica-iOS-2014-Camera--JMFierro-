@@ -84,7 +84,7 @@
  ...........................*/
 #pragma mark - Metodos privados
 
--(UIImage*)ResizeImage:(UIImage*)img
+-(UIImage*)resizeImage:(UIImage*)img
 {
 
    

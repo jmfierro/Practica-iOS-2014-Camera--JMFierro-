@@ -1,21 +1,18 @@
 //
-//  CameraViewController.m
+//  JMFCameraViewController.m
 //  Práctica iOS 2014 Camera [JMFierro]
 //
-//  Created by José Manuel Fierro Conchouso on 05/05/14.
+//  Created by José Manuel Fierro Conchouso on 09/05/14.
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
-#import "CameraViewController.h"
+#import "JMFCameraViewController.h"
 
-
-@interface CameraViewController ()
+@interface JMFCameraViewController ()
 
 @end
 
-@implementation CameraViewController
-
-@synthesize delegate;
+@implementation JMFCameraViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,9 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Do any additional setup after loading the view from its nib.
-    
+    // Do any additional setup after loading the view.
     [self useCamera:nil];
 }
 
@@ -42,15 +37,13 @@
 }
 
 
-
-
 /*......................................................................
  *
  *     TOMA FOTOS DE LA CAMARA
  *
  *  Comprueba que el dispositivo cuenta con una cámara.
  *  Instancia *'UIImagePickerController'*.
- *  Asigna el delegado 
+ *  Asigna el delegado
  *  Y configura (la cámara de fotos, sin video).
  *
  ......................................................................*/
@@ -81,6 +74,7 @@
                            animated:YES completion:nil];
         self.newMedia = YES;  // La imagen es nueva y no una existente desde la 'Camera Roll'.
     }
+    
 }
 
 
@@ -136,10 +130,13 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                                            @selector(image:finishedSavingWithError:contextInfo:),
                                            nil);
     }
+    // En caso de video.
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
     {
-        // Code here to support video if enabled
+        
     }
+    
+     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 -(void)image:(UIImage *)image
@@ -161,7 +158,6 @@ finishedSavingWithError:(NSError *)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 
 @end

@@ -16,7 +16,8 @@
 
 @property (nonatomic, strong) JMFMetaDataModel *metaDataModel;
 @property (nonatomic, strong) FlickrPhotoModel *flickrPhotoModel;
-@property (nonatomic, strong) UIImage *image, *imageAplyFilters;
+@property (nonatomic, strong) UIImage *image, *imageAplyFilters, *imageThumbnail;
+
 
 
 -(id) initWithFlickrPhoto:(FlickrPhotoModel *)flickrPhoto;

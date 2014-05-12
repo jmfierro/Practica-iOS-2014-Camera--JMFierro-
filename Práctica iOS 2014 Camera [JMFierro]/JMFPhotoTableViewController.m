@@ -40,12 +40,13 @@
     CLPlacemark *infoGeocoder;
     BOOL isNewLocalization;
     
-    // Altura de las celdas
-    CGFloat height_CellFilters;
-    CGFloat height_CellImage;
-    CGFloat height_CellDetalle;
-    CGFloat height_CellAddress;
-    CGFloat height_CellUser;
+    // Dimensiones de las celdas
+    CGFloat cellImage_height;
+    CGFloat cellImage_width;
+    CGFloat cellFilters_height;
+    CGFloat cellDetalle_height;
+    CGFloat cellAddress_height;
+    CGFloat cellUser_height;
     
     // Posicion de las celdas
     NSInteger row_CellImage;
@@ -53,6 +54,10 @@
     NSInteger row_CellDetalle;
     NSInteger row_CellAddress;
     NSInteger row_CellUser;
+    
+//    // Dimensiones ImagenView para mostrar la imagen
+//    CGFloat cellImage_ImageViewHeight;
+//    CGFloat cellImage_ImageViewWidth;
     
     // Filtros
     NSMutableDictionary *filtersActive;
@@ -72,6 +77,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
+        [self register];
         
     }
     return self;
@@ -141,12 +148,49 @@
 -(id) initWithImage:(UIImage *) image {
     
     if (self = [super initWithNibName:nil bundle:nil]) {
-        _image = image;
+        
+        [self register];
+        
+        /*-------------------------------------------------
+         *
+         * Redimensiona la imagen al tamaño del imageView
+         *
+         --------------------------------------------------*/
+        if (image.size.height > cellImage_height || image.size.width > cellImage_width) {
+            
+            CGFloat scaleFactor = image.size.width/image.size.height;
+            
+            /*                  **
+             *  Imagen Portrait.
+             *                  **/
+            if (image.size.height > image.size.width)
+//                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_ImageViewHeight/scaleFactor, cellImage_ImageViewHeight)];
+                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_height*scaleFactor, cellImage_height)];
+            
+            /*                  **
+             * Imagen Ladscape.
+             *                  **/
+            else
+                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_width/scaleFactor)];
+
+            /*-------------------------------------------------
+             *
+             * Conserva tamaño original de la Imagen.
+             *
+             --------------------------------------------------*/
+        } else {
+            _image = image;
+        }
+        
+        
+//        _image = [self imageToThumbnail:image Size:CGSizeMake(500, 500)];  // image;
+        _imageThumbnail = [self imageToThumbnail:image Size:CGSizeMake(100, 100)];
         _metaDataModel = [[JMFMetaDataModel alloc] initWithImage:image];
     }
     
     return self;
 }
+
 
 - (void)viewDidLoad
 {
@@ -162,60 +206,64 @@
     locationVC.delegate = self;
     isNewLocalization = YES;
     
+    [self register];
     
-    /*----------------------------
-     *
-     * Creación de la Tableview.
-     *
-     -----------------------------*/
-    tableViewPhotoSelectMetaData = [[UITableView alloc] initWithFrame:CGRectMake(0,
-                                                                   0,
-                                                                   self.view.frame.size.width,
-                                                                   self.view.frame.size.height)
-                                                  style:UITableViewStylePlain];
-    tableViewPhotoSelectMetaData.delegate = self;
-    tableViewPhotoSelectMetaData.dataSource = self;
-    
-    // Quita separador
-    [tableViewPhotoSelectMetaData setSeparatorColor:[UIColor clearColor]];
-    [tableViewPhotoSelectMetaData setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-    
-    /*-------------------------------------------------------------------------------
-     *
-     * Registro celdas
-     *
-     --------------------------------------------------------------------------------*/
-    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellImage bundle:nil] forCellReuseIdentifier:kCellImage];
-    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellFilters bundle:nil] forCellReuseIdentifier:kCellFilters];
-    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellDetail bundle:nil] forCellReuseIdentifier:kCellDetail];
-    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellAddress bundle:nil] forCellReuseIdentifier:kCellAddress];
-    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellUser bundle:nil] forCellReuseIdentifier:kCellUser];
-    
-    
-    // Añade la tabla a la vista del controlador
-    [self.view addSubview:tableViewPhotoSelectMetaData];
-    
-    // Establece orden de las celdas
-    NSInteger numCell = 0;
-    row_CellImage = numCell++;
-    row_CellFilters = numCell++;
-    row_CellDetalle =numCell++;
-    row_CellAddress = numCell++;
-    row_CellUser = numCell++;
-    
-    // Guarda altura de las celdas personalizadas
-    UITableViewCell *cell = [UITableViewCell new];
-    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellImage];
-    height_CellImage = cell.frame.size.height;
-    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellFilters];
-    height_CellFilters = cell.frame.size.height;
-    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetail];
-    height_CellDetalle = cell.frame.size.height;
-    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
-    height_CellAddress = cell.frame.size.height;
-    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellUser];
-    height_CellUser = cell.frame.size.height;
+//    /*----------------------------
+//     *
+//     * Creación de la Tableview.
+//     *
+//     -----------------------------*/
+//    tableViewPhotoSelectMetaData = [[UITableView alloc] initWithFrame:CGRectMake(0,
+//                                                                   0,
+//                                                                   self.view.frame.size.width,
+//                                                                   self.view.frame.size.height)
+//                                                  style:UITableViewStylePlain];
+//    tableViewPhotoSelectMetaData.delegate = self;
+//    tableViewPhotoSelectMetaData.dataSource = self;
+//    
+//    // Quita separador
+//    [tableViewPhotoSelectMetaData setSeparatorColor:[UIColor clearColor]];
+//    [tableViewPhotoSelectMetaData setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+//    
+//    
+//    /*-------------------------------------------------------------------------------
+//     *
+//     * Registro celdas
+//     *
+//     --------------------------------------------------------------------------------*/
+//    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellImage bundle:nil] forCellReuseIdentifier:kCellImage];
+//    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellFilters bundle:nil] forCellReuseIdentifier:kCellFilters];
+//    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellDetail bundle:nil] forCellReuseIdentifier:kCellDetail];
+//    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellAddress bundle:nil] forCellReuseIdentifier:kCellAddress];
+//    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellUser bundle:nil] forCellReuseIdentifier:kCellUser];
+//    
+//    
+//    // Añade la tabla a la vista del controlador
+//    [self.view addSubview:tableViewPhotoSelectMetaData];
+//    
+//    // Establece orden de las celdas
+//    NSInteger numCell = 0;
+//    row_CellImage = numCell++;
+//    row_CellFilters = numCell++;
+//    row_CellDetalle =numCell++;
+//    row_CellAddress = numCell++;
+//    row_CellUser = numCell++;
+//    
+//    // Guarda altura de las celdas personalizadas
+//    UITableViewCell *cell = [UITableViewCell new];
+//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellImage];
+//    cellImage_height = cell.frame.size.height;
+//    cellImage_ImageViewHeight = cell.imageView.frame.size.height;
+//    cellImage_ImageViewWidth = cell.imageView.frame.size.width;
+//    
+//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellFilters];
+//    cellFilters_height = cell.frame.size.height;
+//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetail];
+//    cellDetalle_height = cell.frame.size.height;
+//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
+//    cellAddress_height = cell.frame.size.height;
+//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellUser];
+//    cellUser_height = cell.frame.size.height;
     
 //    // Configuración de bordes
 //    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellImage];
@@ -367,15 +415,15 @@
     NSInteger numCell = 0;
     
     if (indexPath.row == row_CellImage)
-        return height_CellImage;   // 600;
+        return cellImage_height;   // 600;
     else if (indexPath.row == row_CellFilters)
-        return height_CellFilters;
+        return cellFilters_height;
     else if (indexPath.row == row_CellDetalle)
-        return height_CellDetalle;  // 249.f;
+        return cellDetalle_height;  // 249.f;
     else if (indexPath.row == row_CellAddress)
-        return height_CellAddress;    // 400.f;
+        return cellAddress_height;    // 400.f;
     else if (indexPath.row == row_CellUser)
-        return height_CellUser;   // 234.f;
+        return cellUser_height;   // 234.f;
     else
         return 0;
 
@@ -733,12 +781,22 @@
      ---------------------------------------------------------------------*/
     CellFilters *cell = (CellFilters *) [tableView dequeueReusableCellWithIdentifier:kCellFilters];
     
-    cell.imgFilter1.image = [self filterOverImage:self.image nameFilter:@"CISepiaTone"];
-//    cell.imgFilter1.image = [self filterOverImage:self.image nameFilter:@"CITorusLensDistortion"];
-    cell.imgFilter2.image = [self filterOverImage:self.image nameFilter:@"CIPhotoEffectProcess"];
-    cell.imgFilter3.image = [self filterOverImage:self.image nameFilter:@"CIPixellate"];
-    cell.imgFilter4.image = [self filterOverImage:self.image nameFilter:@"CIPinchDistortion"];
-    cell.imgFilter5.image = [self filterOverImage:self.image nameFilter:@"CIPerspectiveTransform"];
+//    cell.imgFilter1.image = [self filterOverImage:self.image nameFilter:@"CISepiaTone"];
+////    cell.imgFilter1.image = [self filterOverImage:self.image nameFilter:@"CITorusLensDistortion"];
+//    cell.imgFilter2.image = [self filterOverImage:self.image nameFilter:@"CIPhotoEffectProcess"];
+//    cell.imgFilter3.image = [self filterOverImage:self.image nameFilter:@"CIPixellate"];
+//    cell.imgFilter4.image = [self filterOverImage:self.image nameFilter:@"CIPinchDistortion"];
+//    cell.imgFilter5.image = [self filterOverImage:self.image nameFilter:@"CIPerspectiveTransform"];
+//    //    cell.imgFilter5.image = [self filterOverImage:self.image nameFilter:@"CISharpenLuminance"];
+
+//    UIImage *img = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
+
+    cell.imgFilter1.image = [self filterOverImage:self.imageThumbnail nameFilter:@"CISepiaTone"];
+    //    cell.imgFilter1.image = [self filterOverImage:self.image nameFilter:@"CITorusLensDistortion"];
+    cell.imgFilter2.image = [self filterOverImage:self.imageThumbnail nameFilter:@"CIPhotoEffectProcess"];
+    cell.imgFilter3.image = [self filterOverImage:self.imageThumbnail nameFilter:@"CIPixellate"];
+    cell.imgFilter4.image = [self filterOverImage:self.imageThumbnail nameFilter:@"CIPinchDistortion"];
+    cell.imgFilter5.image = [self filterOverImage:self.imageThumbnail nameFilter:@"CIPerspectiveTransform"];
     //    cell.imgFilter5.image = [self filterOverImage:self.image nameFilter:@"CISharpenLuminance"];
     
     return cell;
@@ -993,19 +1051,22 @@
  *
  *  NOTIFICACION DE: CellFilters.m
  *
+ *
+ *  Recibe notificaiones de CellFilters.m
  *  Aplica todos los filtros activos.
  *
  ...........................................*/
 -(void)onFilters: (NSNotification *) note {
     
+  
     // Actulización de todos los filtros.
     if ([filtersActive objectForKey:note.object])
         [filtersActive removeObjectForKey:note.object];
     else
         [filtersActive setObject:@YES forKey:note.object];
 
-    // Recorrido y aplicaicción de todos los filtros
-    self.imageAplyFilters = self.image;
+    // Recorrido y aplicación de todos los filtros activos
+    self.imageAplyFilters = self.image;    // self.image;
     NSArray *keys = [filtersActive allKeys];
     for (id key in keys)
         self.imageAplyFilters = [self filterOverImage:self.imageAplyFilters nameFilter:key];
@@ -1013,6 +1074,97 @@
     [tableViewPhotoSelectMetaData reloadData];
 }
 
+
+
+#pragma mark - Metodos privados
+
+-(UIImage *) imageToThumbnail:(UIImage *)image Size:(CGSize )destinationSize {
+    
+    UIImage *originalImage = image;
+//    CGSize destinationSize = CGSizeMake(50, 50);
+    UIGraphicsBeginImageContext(destinationSize);
+    [originalImage drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+    UIImage *thumbanail = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return thumbanail;
+}
+
+-(CGSize) scaleFactor:(UIImage *)image widthNewFrame:(CGFloat)width {
+    /*
+     * Escala thumbail.
+     */
+    float scaleFactor = image.size.height / image.size.width;
+    
+    CGSize size;
+    size.width = width;
+    size.height = width * scaleFactor;
+    
+    return size;
+}
+
+-(void) register {
+    
+    /*----------------------------
+     *
+     * Creación de la Tableview.
+     *
+     -----------------------------*/
+    tableViewPhotoSelectMetaData = [[UITableView alloc] initWithFrame:CGRectMake(0,
+                                                                                 0,
+                                                                                 self.view.frame.size.width,
+                                                                                 self.view.frame.size.height)
+                                                                style:UITableViewStylePlain];
+    tableViewPhotoSelectMetaData.delegate = self;
+    tableViewPhotoSelectMetaData.dataSource = self;
+    
+    // Quita separador
+    [tableViewPhotoSelectMetaData setSeparatorColor:[UIColor clearColor]];
+    [tableViewPhotoSelectMetaData setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    
+    /*-------------------------------------------------------------------------------
+     *
+     * Registro celdas
+     *
+     --------------------------------------------------------------------------------*/
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellImage bundle:nil] forCellReuseIdentifier:kCellImage];
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellFilters bundle:nil] forCellReuseIdentifier:kCellFilters];
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellDetail bundle:nil] forCellReuseIdentifier:kCellDetail];
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellAddress bundle:nil] forCellReuseIdentifier:kCellAddress];
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellUser bundle:nil] forCellReuseIdentifier:kCellUser];
+    
+    
+    // Añade la tabla a la vista del controlador
+    [self.view addSubview:tableViewPhotoSelectMetaData];
+    
+    // Establece orden de las celdas
+    NSInteger numCell = 0;
+    row_CellImage = numCell++;
+    row_CellFilters = numCell++;
+    row_CellDetalle =numCell++;
+    row_CellAddress = numCell++;
+    row_CellUser = numCell++;
+    
+    // Guarda altura de las celdas personalizadas
+    UITableViewCell *cell = [UITableViewCell new];
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellImage];
+    cellImage_height = cell.frame.size.height;
+    cellImage_width = cell.frame.size.width;
+    
+//    cellImage_ImageViewHeight = cell.imageView.frame.size.height;
+//    cellImage_ImageViewWidth = cell.imageView.frame.size.width;
+    
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellFilters];
+    cellFilters_height = cell.frame.size.height;
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetail];
+    cellDetalle_height = cell.frame.size.height;
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
+    cellAddress_height = cell.frame.size.height;
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellUser];
+    cellUser_height = cell.frame.size.height;
+    
+}
 
 
 @end

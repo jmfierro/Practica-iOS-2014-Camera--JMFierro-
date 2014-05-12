@@ -14,7 +14,8 @@
 #import "JMFLocationViewController.h"
 #import "JMFCoreViewController.h"
 #import "LocationViewController.h"
-#import "PruebaViewController.h"
+#import "JMFCameraViewController.h"
+
 
 #import "Flickr.h"
 #import "FlickrPhotoModel.h"
@@ -533,13 +534,18 @@
 - (IBAction)btnTakePhoto:(id)sender {
     
 
-    
+
+    /*
+     * Pruebas sin camara. Simula haber tomado una foto.
+     */
 //    [self.photosCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
-    [self.model.photosCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
+    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
     [collectionViewPhotos reloadData];
     
-    
-//    CameraViewController *cameraVC = [[CameraViewController alloc] init];
+    /*
+     * LLamada a la camara.
+//     */
+//    JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] init];
 //    cameraVC.delegate = self;
 //    [self.navigationController pushViewController:cameraVC animated:NO];
 ////    [self.model.photosCamera addObject:cameraVC.imageView.image];

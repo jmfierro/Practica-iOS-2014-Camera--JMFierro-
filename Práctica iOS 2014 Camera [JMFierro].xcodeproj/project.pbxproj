@@ -38,6 +38,7 @@
 		503E384018F2F96F00A9FBDF /* pushpin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 503E382C18F2F96F00A9FBDF /* pushpin@2x.png */; };
 		503E384A18F2FC4D00A9FBDF /* Flickr.m in Sources */ = {isa = PBXBuildFile; fileRef = 503E384718F2FC4D00A9FBDF /* Flickr.m */; };
 		503E384B18F2FC4D00A9FBDF /* FlickrPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 503E384918F2FC4D00A9FBDF /* FlickrPhotoModel.m */; };
+		505A7BA31920C971005D0B08 /* Washington.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 505A7BA21920C971005D0B08 /* Washington.jpg */; };
 		50644168191124D900B18D70 /* iconFaceDetectionTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 50644167191124D900B18D70 /* iconFaceDetectionTransparent.png */; };
 		50722FBB1907ABEE009E079D /* Slice 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FB91907ABEE009E079D /* Slice 1.png */; };
 		50722FBC1907ABEE009E079D /* Slice 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FBA1907ABEE009E079D /* Slice 1@2x.png */; };
@@ -48,8 +49,6 @@
 		507C8E201917985A00238C30 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507C8E1F1917985A00238C30 /* MobileCoreServices.framework */; };
 		507C8E29191798E700238C30 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507C8E27191798E700238C30 /* CameraViewController.m */; };
 		507C8E2A191798E700238C30 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 507C8E28191798E700238C30 /* CameraViewController.xib */; };
-		507C8E381917A5CA00238C30 /* PruebaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 507C8E361917A5CA00238C30 /* PruebaViewController.m */; };
-		507C8E391917A5CA00238C30 /* PruebaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 507C8E371917A5CA00238C30 /* PruebaViewController.xib */; };
 		507E1122190915680038ECB7 /* JMFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 507E1121190915680038ECB7 /* JMFImages.m */; };
 		508224361917E438000BB05B /* JMFFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 508224351917E438000BB05B /* JMFFilters.m */; };
 		508A487E190FAD0300FFEBAA /* gente_750x469--647x300.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */; };
@@ -100,6 +99,7 @@
 		50C299FA190E514900879269 /* CellFilters.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50C299F9190E514900879269 /* CellFilters.xib */; };
 		50C29A03190E997F00879269 /* marilyn.png in Resources */ = {isa = PBXBuildFile; fileRef = 50C29A02190E997F00879269 /* marilyn.png */; };
 		50C8849718FD769B00283DDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D8086A18FC28B300172322 /* MapKit.framework */; };
+		50CAD12D191D2630001C17CE /* JMFCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CAD12C191D2630001C17CE /* JMFCameraViewController.m */; };
 		50D2763219094AAB007A0193 /* can-stock-photo_csp12611066.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D2763119094AAB007A0193 /* can-stock-photo_csp12611066.png */; };
 		50D2763819094E37007A0193 /* d619-vector-vector-camera-lens-app-icon-with-blends-and-transparent-all-layers-well-organized-and-easy-to-edit-154360043.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D2763719094E37007A0193 /* d619-vector-vector-camera-lens-app-icon-with-blends-and-transparent-all-layers-well-organized-and-easy-to-edit-154360043.png */; };
 		50D8086D18FC291E00172322 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D8086C18FC291E00172322 /* CoreLocation.framework */; };
@@ -160,6 +160,7 @@
 		503E384718F2FC4D00A9FBDF /* Flickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Flickr.m; sourceTree = "<group>"; };
 		503E384818F2FC4D00A9FBDF /* FlickrPhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhotoModel.h; sourceTree = "<group>"; };
 		503E384918F2FC4D00A9FBDF /* FlickrPhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotoModel.m; sourceTree = "<group>"; };
+		505A7BA21920C971005D0B08 /* Washington.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Washington.jpg; sourceTree = "<group>"; };
 		50644167191124D900B18D70 /* iconFaceDetectionTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconFaceDetectionTransparent.png; sourceTree = "<group>"; };
 		50722FB91907ABEE009E079D /* Slice 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slice 1.png"; sourceTree = "<group>"; };
 		50722FBA1907ABEE009E079D /* Slice 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slice 1@2x.png"; sourceTree = "<group>"; };
@@ -173,9 +174,6 @@
 		507C8E26191798E700238C30 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		507C8E27191798E700238C30 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		507C8E28191798E700238C30 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
-		507C8E351917A5CA00238C30 /* PruebaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PruebaViewController.h; sourceTree = "<group>"; };
-		507C8E361917A5CA00238C30 /* PruebaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PruebaViewController.m; sourceTree = "<group>"; };
-		507C8E371917A5CA00238C30 /* PruebaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PruebaViewController.xib; sourceTree = "<group>"; };
 		507E1120190915680038ECB7 /* JMFImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFImages.h; sourceTree = "<group>"; };
 		507E1121190915680038ECB7 /* JMFImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFImages.m; sourceTree = "<group>"; };
 		508224341917E438000BB05B /* JMFFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFFilters.h; sourceTree = "<group>"; };
@@ -244,6 +242,8 @@
 		50C299F7190E509C00879269 /* CellFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellFilters.m; sourceTree = "<group>"; };
 		50C299F9190E514900879269 /* CellFilters.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellFilters.xib; sourceTree = "<group>"; };
 		50C29A02190E997F00879269 /* marilyn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marilyn.png; sourceTree = "<group>"; };
+		50CAD12B191D2630001C17CE /* JMFCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFCameraViewController.h; sourceTree = "<group>"; };
+		50CAD12C191D2630001C17CE /* JMFCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFCameraViewController.m; sourceTree = "<group>"; };
 		50D2763119094AAB007A0193 /* can-stock-photo_csp12611066.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "can-stock-photo_csp12611066.png"; sourceTree = "<group>"; };
 		50D2763719094E37007A0193 /* d619-vector-vector-camera-lens-app-icon-with-blends-and-transparent-all-layers-well-organized-and-easy-to-edit-154360043.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d619-vector-vector-camera-lens-app-icon-with-blends-and-transparent-all-layers-well-organized-and-easy-to-edit-154360043.png"; sourceTree = "<group>"; };
 		50D8086A18FC28B300172322 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -346,6 +346,7 @@
 		50382F2118F0243D0061B90C /* Práctica iOS 2014 Camera [JMFierro] */ = {
 			isa = PBXGroup;
 			children = (
+				505A7BA21920C971005D0B08 /* Washington.jpg */,
 				508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */,
 				508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */,
 				50C29A02190E997F00879269 /* marilyn.png */,
@@ -453,9 +454,8 @@
 				507C8E26191798E700238C30 /* CameraViewController.h */,
 				507C8E27191798E700238C30 /* CameraViewController.m */,
 				507C8E28191798E700238C30 /* CameraViewController.xib */,
-				507C8E351917A5CA00238C30 /* PruebaViewController.h */,
-				507C8E361917A5CA00238C30 /* PruebaViewController.m */,
-				507C8E371917A5CA00238C30 /* PruebaViewController.xib */,
+				50CAD12B191D2630001C17CE /* JMFCameraViewController.h */,
+				50CAD12C191D2630001C17CE /* JMFCameraViewController.m */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -667,7 +667,6 @@
 				50A5206818F7F105007F6F7B /* CellTip.xib in Resources */,
 				50722FBC1907ABEE009E079D /* Slice 1@2x.png in Resources */,
 				50A5208618F7F13D007F6F7B /* btn_round_next.png in Resources */,
-				507C8E391917A5CA00238C30 /* PruebaViewController.xib in Resources */,
 				50722FBB1907ABEE009E079D /* Slice 1.png in Resources */,
 				50644168191124D900B18D70 /* iconFaceDetectionTransparent.png in Resources */,
 				50B2524C191B8FF7005D7C86 /* JMFLocationViewController.xib in Resources */,
@@ -704,6 +703,7 @@
 				50A5207C18F7F13D007F6F7B /* KICamera@2x.png in Resources */,
 				503E384018F2F96F00A9FBDF /* pushpin@2x.png in Resources */,
 				50B252AF191BD944005D7C86 /* JMFCoreViewController.xib in Resources */,
+				505A7BA31920C971005D0B08 /* Washington.jpg in Resources */,
 				50A5208A18F7F13D007F6F7B /* btn_post@2x.png in Resources */,
 				50A5207E18F7F13D007F6F7B /* icon_user@2x.png in Resources */,
 			);
@@ -735,9 +735,9 @@
 				503E384A18F2FC4D00A9FBDF /* Flickr.m in Sources */,
 				50B2525D191BA272005D7C86 /* JPSThumnail.m in Sources */,
 				50A5206518F7F105007F6F7B /* CellUser.m in Sources */,
-				507C8E381917A5CA00238C30 /* PruebaViewController.m in Sources */,
 				508224361917E438000BB05B /* JMFFilters.m in Sources */,
 				50382F2C18F0243D0061B90C /* AppDelegate.m in Sources */,
+				50CAD12D191D2630001C17CE /* JMFCameraViewController.m in Sources */,
 				507C8E1C1917801200238C30 /* FaceDetection.m in Sources */,
 				50BB8AC318F6CC7D008EC1F3 /* CellImage.m in Sources */,
 				50B8594A18F2EBAB00E91D44 /* JMFPushpinCell.m in Sources */,

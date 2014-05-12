@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8082BE4B-AC91-4E34-A6EB-4012668F6A74</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Práctica iOS 2014 Camera [JMFierro]</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>437B66F9-F902-4407-B4E6-A4D263CEBAA4</key>
+		<string>https://bitbucket.org/JMFierro/practica-ios-u-tad.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Práctica iOS 2014 Camera [JMFierro].xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>437B66F9-F902-4407-B4E6-A4D263CEBAA4</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/JMFierro/practica-ios-u-tad.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>437B66F9-F902-4407-B4E6-A4D263CEBAA4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>437B66F9-F902-4407-B4E6-A4D263CEBAA4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Práctica iOS 2014 Camera [JMFierro]</string>
+		</dict>
+	</array>
+</dict>
+</plist>
