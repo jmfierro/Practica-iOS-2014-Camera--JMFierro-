@@ -78,7 +78,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-        [self register];
+        [self registers];
         
     }
     return self;
@@ -149,7 +149,7 @@
     
     if (self = [super initWithNibName:nil bundle:nil]) {
         
-        [self register];
+        [self registers];
         
         /*-------------------------------------------------
          *
@@ -158,20 +158,22 @@
          --------------------------------------------------*/
         if (image.size.height > cellImage_height || image.size.width > cellImage_width) {
             
-            CGFloat scaleFactor = image.size.width/image.size.height;
+            _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_height)];
             
-            /*                  **
-             *  Imagen Portrait.
-             *                  **/
-            if (image.size.height > image.size.width)
-//                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_ImageViewHeight/scaleFactor, cellImage_ImageViewHeight)];
-                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_height*scaleFactor, cellImage_height)];
-            
-            /*                  **
-             * Imagen Ladscape.
-             *                  **/
-            else
-                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_width/scaleFactor)];
+//            CGFloat scaleFactor = image.size.width/image.size.height;
+//            
+//            /*                  **
+//             *  Imagen Portrait.
+//             *                  **/
+//            if (image.size.height > image.size.width)
+////                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_ImageViewHeight/scaleFactor, cellImage_ImageViewHeight)];
+//                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_height*scaleFactor, cellImage_height)];
+//            
+//            /*                  **
+//             * Imagen Ladscape.
+//             *                  **/
+//            else
+//                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_width/scaleFactor)];
 
             /*-------------------------------------------------
              *
@@ -192,6 +194,7 @@
 }
 
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -200,13 +203,13 @@
     filtersActive = [[NSMutableDictionary alloc] init];
     
     /*
-     * Localizacion
+     * Localizacion.
      */
     locationVC = [[JMFLocationViewController alloc] init];
     locationVC.delegate = self;
     isNewLocalization = YES;
     
-    [self register];
+    [self registers];
     
 //    /*----------------------------
 //     *
@@ -1078,10 +1081,17 @@
 
 #pragma mark - Metodos privados
 
--(UIImage *) imageToThumbnail:(UIImage *)image Size:(CGSize )destinationSize {
+
+/*..........................................................................
+ *
+ * Devuelve un thumbnail de la imagen, adaptando al tamaño de un contenedor.
+ *
+ ............................................................................*/
+-(UIImage *) imageToThumbnail:(UIImage *)image Size:(CGSize )aDestinationSize {
+    
+    CGSize destinationSize = [self imageAdapterSize:image containerSize:aDestinationSize];
     
     UIImage *originalImage = image;
-//    CGSize destinationSize = CGSizeMake(50, 50);
     UIGraphicsBeginImageContext(destinationSize);
     [originalImage drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
     UIImage *thumbanail = UIGraphicsGetImageFromCurrentImageContext();
@@ -1103,7 +1113,32 @@
     return size;
 }
 
--(void) register {
+/*......................................................................
+ *
+ * Devuelve el tamaño de la imagen adaptada al tamaño de un contenedor.
+ *
+ .......................................................................*/
+-(CGSize) imageAdapterSize:(UIImage *)image containerSize:(CGSize)contentSize {
+    
+    CGFloat scaleFactor = image.size.width/image.size.height;
+    
+    /*                  **
+     *  Imagen Portrait.
+     *                  **/
+    if (image.size.height > image.size.width)
+        //                _image = [self imageToThumbnail:image Size:CGSizeMake(cellImage_ImageViewHeight/scaleFactor, cellImage_ImageViewHeight)];
+        return CGSizeMake(contentSize.height*scaleFactor, contentSize.height);
+    
+    /*                  **
+     * Imagen Ladscape.
+     *                  **/
+    else
+        return CGSizeMake(contentSize.width, contentSize.width/scaleFactor);
+    
+    
+}
+
+-(void) registers {
     
     /*----------------------------
      *
