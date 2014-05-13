@@ -17,6 +17,9 @@
 
 #define kCellDetailSegmentFlickr 0
 #define kCellDetailSegmentGeneralMetaData 1
+#define kCellDetailSegmentExifMetaData 2
+#define kCellDetailSegmentJFIFMetaData 3
+#define kCellDetailSegmentTIFFMetaData 4
 
 
 @interface CellDetail : UITableViewCell

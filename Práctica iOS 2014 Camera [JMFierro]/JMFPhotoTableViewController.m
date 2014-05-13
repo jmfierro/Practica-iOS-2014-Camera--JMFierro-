@@ -834,11 +834,21 @@
     
     //        self.flickrPhoto.description;
     
-//    if (self.flickrPhotoModel) {
+    //    if (self.flickrPhotoModel) {
     if (segment == kCellDetailSegmentFlickr) {
-      cell = [self writerDatosFlickr:cell];
+        cell = [self writerDatosFlickr:cell];
+        
     } else if (segment == kCellDetailSegmentGeneralMetaData){
         cell = [self writerGeneralMetaDatos:cell];
+        
+    } else if (segment == kCellDetailSegmentExifMetaData){
+        cell = [self writerExifMetaDatos:cell];
+        
+    } else if (segment == kCellDetailSegmentJFIFMetaData){
+        cell = [self writerJFIFMetaDatos:cell];
+        
+    } else if (segment == kCellDetailSegmentTIFFMetaData){
+        cell = [self writerTIFFMetaDatos:cell];
     }
     
     
@@ -848,7 +858,8 @@
 
 -(CellDetail *) writerDatosFlickr:(CellDetail *) cell {
     
-
+    cell = [self writerEraserMetaDatos:cell];
+    
     cell.lbl1.text = @"ID:";
     if (self.modelFlickrPhoto.photoID)
         cell.lbl1content.text = [[NSString alloc] initWithFormat:@"%lld", self.modelFlickrPhoto.photoID];
@@ -887,8 +898,7 @@
 
 -(CellDetail *) writerGeneralMetaDatos:(CellDetail *) cell {
     
-    NSArray *keys = [self.modelMetaData.metaDataAll allKeys];
-    
+    cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"Color";
     cell.lbl1content.text = [self.modelMetaData.metaDataAll objectForKey:@"ColorModel"];
@@ -905,6 +915,78 @@
     cell.lbl6.text = @"Ancho";
     cell.lbl6content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.metaDataAll objectForKey:@"PixelWidth"]];
 
+
+    return cell;
+}
+
+
+-(CellDetail *) writerExifMetaDatos:(CellDetail *) cell {
+    
+    cell = [self writerEraserMetaDatos:cell];
+    
+    cell.lbl1.text = @"Color S.";
+    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.EXIFDictionary objectForKey:@"ColorSpace"]];
+    
+    cell.lbl2.text = @"XDimension";
+    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.EXIFDictionary objectForKey:@"PixelXDimension"]];
+    
+    cell.lbl3.text = @"YDimension";
+    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.EXIFDictionary objectForKey:@"PixelYDimension"]];
+    
+   
+    return cell;
+}
+
+-(CellDetail *) writerJFIFMetaDatos:(CellDetail *) cell {
+    
+    cell = [self writerEraserMetaDatos:cell];
+    
+    cell.lbl1.text = @"Densidad (ud)";
+    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.JFIFDictionary objectForKey:@"DensityUnit"]];
+    
+    cell.lbl2.text = @"JFIF versión";
+    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.JFIFDictionary objectForKey:@"JFIFVersion"]];
+    
+    cell.lbl5.text = @"XDensidad";
+    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.JFIFDictionary objectForKey:@"XDensity"]];
+    
+    cell.lbl6.text = @"YDensidad";
+    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.JFIFDictionary objectForKey:@"YDensity"]];
+    
+
+    return cell;
+}
+
+-(CellDetail *) writerTIFFMetaDatos:(CellDetail *) cell {
+    
+    cell = [self writerEraserMetaDatos:cell];
+    
+    cell.lbl1.text = @"Orientacion";
+    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.TIFFDictionary objectForKey:@"Orientation"]];
+   
+    
+    return cell;
+}
+
+
+
+-(CellDetail *) writerEraserMetaDatos:(CellDetail *) cell {
+    
+    cell.lbl1.text = @"";
+    cell.lbl1content.text = @"";
+    
+    cell.lbl2.text = @"";
+    cell.lbl2content.text = @"";
+    
+    cell.lbl3.text = @"";
+    cell.lbl3content.text = @"";
+    
+    cell.lbl5.text = @"";
+    cell.lbl5content.text = @"";
+    
+    cell.lbl6.text = @"";
+    cell.lbl6content.text = @"";
+    
     cell.lbl4.text = @"";
     cell.lbl4content.text = @"";
     
@@ -913,9 +995,10 @@
     
     cell.lbl8.text = @"";
     cell.lbl8content.text = @"";
-
+    
     return cell;
 }
+
 
 
 

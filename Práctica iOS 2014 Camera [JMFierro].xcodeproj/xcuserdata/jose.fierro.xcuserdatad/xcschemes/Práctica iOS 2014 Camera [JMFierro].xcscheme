@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "50382F1718F0243D0061B90C"
-               BuildableName = "Pra&#769;ctica iOS 2014 Camera [JMFierro].app"
-               BlueprintName = "Pra&#769;ctica iOS 2014 Camera [JMFierro]"
-               ReferencedContainer = "container:Pra&#769;ctica iOS 2014 Camera [JMFierro].xcodeproj">
+               BuildableName = "Pra&#x301;ctica iOS 2014 Camera [JMFierro].app"
+               BlueprintName = "Pra&#x301;ctica iOS 2014 Camera [JMFierro]"
+               ReferencedContainer = "container:Pra&#x301;ctica iOS 2014 Camera [JMFierro].xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "50382F3218F0243D0061B90C"
-               BuildableName = "Pra&#769;ctica iOS 2014 Camera [JMFierro]Tests.xctest"
-               BlueprintName = "Pra&#769;ctica iOS 2014 Camera [JMFierro]Tests"
-               ReferencedContainer = "container:Pra&#769;ctica iOS 2014 Camera [JMFierro].xcodeproj">
+               BuildableName = "Pra&#x301;ctica iOS 2014 Camera [JMFierro]Tests.xctest"
+               BlueprintName = "Pra&#x301;ctica iOS 2014 Camera [JMFierro]Tests"
+               ReferencedContainer = "container:Pra&#x301;ctica iOS 2014 Camera [JMFierro].xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50382F1718F0243D0061B90C"
-            BuildableName = "Pra&#769;ctica iOS 2014 Camera [JMFierro].app"
-            BlueprintName = "Pra&#769;ctica iOS 2014 Camera [JMFierro]"
-            ReferencedContainer = "container:Pra&#769;ctica iOS 2014 Camera [JMFierro].xcodeproj">
+            BuildableName = "Pra&#x301;ctica iOS 2014 Camera [JMFierro].app"
+            BlueprintName = "Pra&#x301;ctica iOS 2014 Camera [JMFierro]"
+            ReferencedContainer = "container:Pra&#x301;ctica iOS 2014 Camera [JMFierro].xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50382F1718F0243D0061B90C"
-            BuildableName = "Pra&#769;ctica iOS 2014 Camera [JMFierro].app"
-            BlueprintName = "Pra&#769;ctica iOS 2014 Camera [JMFierro]"
-            ReferencedContainer = "container:Pra&#769;ctica iOS 2014 Camera [JMFierro].xcodeproj">
+            BuildableName = "Pra&#x301;ctica iOS 2014 Camera [JMFierro].app"
+            BlueprintName = "Pra&#x301;ctica iOS 2014 Camera [JMFierro]"
+            ReferencedContainer = "container:Pra&#x301;ctica iOS 2014 Camera [JMFierro].xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50382F1718F0243D0061B90C"
-            BuildableName = "Pra&#769;ctica iOS 2014 Camera [JMFierro].app"
-            BlueprintName = "Pra&#769;ctica iOS 2014 Camera [JMFierro]"
-            ReferencedContainer = "container:Pra&#769;ctica iOS 2014 Camera [JMFierro].xcodeproj">
+            BuildableName = "Pra&#x301;ctica iOS 2014 Camera [JMFierro].app"
+            BlueprintName = "Pra&#x301;ctica iOS 2014 Camera [JMFierro]"
+            ReferencedContainer = "container:Pra&#x301;ctica iOS 2014 Camera [JMFierro].xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

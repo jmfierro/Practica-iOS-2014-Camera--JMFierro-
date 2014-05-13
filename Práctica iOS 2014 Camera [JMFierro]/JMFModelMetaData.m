@@ -20,6 +20,7 @@
         _metaDataAll = [[NSDictionary alloc] init];
  
         _EXIFDictionary = [[NSDictionary alloc] init];
+        _JFIFDictionary = [[NSDictionary alloc] init];
         _GPSDictionary = [[NSDictionary alloc] init];
         _TIFFDictionary = [[NSDictionary alloc] init];
         _RAWDictionary = [[NSDictionary alloc] init];
@@ -42,6 +43,7 @@
         
  
         self.EXIFDictionary = [self.metaDataAll objectForKey:(NSString *)kCGImagePropertyExifDictionary];
+        self.JFIFDictionary = [self.metaDataAll objectForKey:(NSString *)kCGImagePropertyJFIFDictionary];
         self.GPSDictionary = [self.metaDataAll objectForKey:(NSString *)kCGImagePropertyGPSDictionary];
         self.TIFFDictionary = [self.metaDataAll objectForKey:(NSString *)kCGImagePropertyTIFFDictionary];
         self.RAWDictionary = [self.metaDataAll objectForKey:(NSString *)kCGImagePropertyRawDictionary];

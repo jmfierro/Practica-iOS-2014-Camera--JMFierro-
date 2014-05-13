@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSDictionary *metaDataAll;
 
 @property (nonatomic,strong) NSDictionary *EXIFDictionary;
+@property (nonatomic,strong) NSDictionary *JFIFDictionary;
 @property (nonatomic,strong) NSDictionary *GPSDictionary;
 @property (nonatomic,strong) NSDictionary *TIFFDictionary;
 @property (nonatomic,strong) NSDictionary *RAWDictionary;
