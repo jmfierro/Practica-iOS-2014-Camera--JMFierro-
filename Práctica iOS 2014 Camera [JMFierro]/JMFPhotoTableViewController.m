@@ -805,6 +805,7 @@
      *
      *       - Titulo
      *       - Descripción
+     *       - Metadatos
      *
      ---------------------------------------------------------------------*/
     CellDetail * cell = (CellDetail *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetail];
@@ -816,35 +817,46 @@
     if (self.flickrPhotoModel.description)
         cell.lblDescription.text = self.flickrPhotoModel.description;
     
+    cell.lbl1.text = @"ID:";
     if (self.flickrPhotoModel.photoID)
-        cell.lblID.text = [[NSString alloc] initWithFormat:@"%lld", self.flickrPhotoModel.photoID];
-    
+        cell.lbl1content.text = [[NSString alloc] initWithFormat:@"%lld", self.flickrPhotoModel.photoID];
+
+    cell.lbl2.text = @"Farm:";
     if (self.flickrPhotoModel.farm)
-        cell.lblFarm.text = [[NSString alloc] initWithFormat:@"%d", self.flickrPhotoModel.farm];
+        cell.lbl2content.text = [[NSString alloc] initWithFormat:@"%d", self.flickrPhotoModel.farm];
     
+    cell.lbl3.text = @"Servidor:";
     if (self.flickrPhotoModel.server)
-        cell.lblServer.text = [[NSString alloc] initWithFormat:@"%d", self.flickrPhotoModel.server];
+        cell.lbl3content.text = [[NSString alloc] initWithFormat:@"%d", self.flickrPhotoModel.server];
     
+    cell.lbl4.text = @"Secreto:";
     if (self.flickrPhotoModel.secret)
-        cell.lblSecret.text = self.flickrPhotoModel.secret;
+        cell.lbl4content.text = self.flickrPhotoModel.secret;
     
+    cell.lbl5.text = @"Familia:";
     if (self.flickrPhotoModel.isfamily)
-        cell.lblFamily.text = self.flickrPhotoModel.isfamily;
-    
+        cell.lbl5content.text = self.flickrPhotoModel.isfamily;
+
+    cell.lbl6.text = @"Amigo:";
     if (self.flickrPhotoModel.isfriend)
-        cell.lblFriend.text = self.flickrPhotoModel.isfriend;
+        cell.lbl6content.text = self.flickrPhotoModel.isfriend;
     
+    cell.lbl7.text = @"Publico:";
     if (self.flickrPhotoModel.ispublic)
-        cell.lblPublic.text = self.flickrPhotoModel.ispublic;
+        cell.lbl7content.text = self.flickrPhotoModel.ispublic;
     
+    cell.lbl8.text = @"Propietario:";
     if (self.flickrPhotoModel.owner)
-        cell.lblOwer.text = self.flickrPhotoModel.owner;
+        cell.lbl8content.text = self.flickrPhotoModel.owner;
     
     
     
     return cell;
     
 }
+
+
+
 
 -(UITableViewCell *) cellAddressLocation:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
