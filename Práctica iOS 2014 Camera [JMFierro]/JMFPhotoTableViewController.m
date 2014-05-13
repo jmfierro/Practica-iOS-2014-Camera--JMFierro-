@@ -12,7 +12,8 @@
 
 #import "JMFPhotoTableViewController.h"
 
-#import "JMFLocationViewController.h"
+//#import "JMFLocationViewController.h"
+#import "JMFLocation.h"
 #import "Flickr.h"
 
 #import "JMFMetaData.h"
@@ -37,7 +38,10 @@
     
     // Localización
 //    JMFLocationViewController *location;
+//    CLLocationManager *manager;
     CLLocation *location;
+    CGFloat latitude;
+    CGFloat longitude;
     CLPlacemark *infoGeocoder;
     BOOL isNewLocalization;
     
@@ -65,6 +69,8 @@
     
 }
 
+@property (nonatomic, strong) CLLocationManager *manager;
+
 @end
 
 
@@ -77,6 +83,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
+        // Registros
         [self registers];
         
     }
@@ -852,8 +859,13 @@
      ---------------------------------------------------------------------*/
     CellAddressLocation * cell = (CellAddressLocation *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
     
-    CGFloat latitud = 30;
-    CGFloat longitud = 30;
+//    JMFLocation *location = [[JMFLocation alloc] init];
+    
+    
+    if (!latitude & !longitude) {
+        latitude = location.coordinate.latitude;
+        longitude = location.coordinate.longitude;
+    }
     
 //    CLLocation *lastLocation = [CLLocation alloc  ini]CLLocationCoordinate2DMake(30.0f, -3.0f);
 //    
@@ -870,14 +882,14 @@
 //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             CLGeocoder *geocoder = [[CLGeocoder alloc]init];
 //            CLLocation *userCLLocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
-        CLLocation *userCLLocation = [[CLLocation alloc] initWithLatitude:latitud longitude:longitud];
+        CLLocation *clLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
             //    [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks. NSError )];
             
             //    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
             //    CLLocation *userCLLocation = [[CLLocation alloc] itWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
 //             __block JMFLocationViewController *weakSelf = self;
 //        __block CLLocation *weakLocation = location;
-        [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        [geocoder reverseGeocodeLocation:clLocation completionHandler:^(NSArray *placemarks, NSError *error) {
                 if (placemarks.count > 0) {
                     
                     //            dispatch_sync(dispatch_get_main_queue(), ^{
@@ -913,14 +925,22 @@
                     cell.mapView.showsBuildings = YES;
                     cell.mapView.showsUserLocation = NO;
                     cell.mapView.delegate = self;
-                    cell.mapView.centerCoordinate = CLLocationCoordinate2DMake(latitud, longitud);
+                    cell.mapView.centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
                     
                     double delayInSeconds = 2.0;
                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                     
                     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        // Geocoding
+                        cell.lblCountry.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"];
+                        cell.lblState.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"];
+                        cell.lblCity.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"City"];
+                        cell.lblName.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Name"];
+                        cell.lblStreet.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Street"];
+
+                        // Mapa
                         MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
-                        chincheta.coordinate = CLLocationCoordinate2DMake(latitud, longitud);
+                        chincheta.coordinate = CLLocationCoordinate2DMake(latitude, longitude);
                         chincheta.title = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"];
                         chincheta.subtitle = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"];
                         
@@ -940,16 +960,16 @@
     
     
     // Localizacion
-    cell.lblLatitud.text = [[NSString alloc] initWithFormat:@"%.6f %@",location.coordinate.latitude, @"lat"];
-    cell.lblLongitud.text = [[NSString alloc] initWithFormat:@"%.6f %@", location.coordinate.longitude, @"long"];
+    cell.lblLatitud.text = [[NSString alloc] initWithFormat:@"%.6f %@",latitude, @"lat"];
+    cell.lblLongitud.text = [[NSString alloc] initWithFormat:@"%.6f %@", longitude, @"long"];
     
     NSString *direccion = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Street"];
     
-    cell.lblGeolocalizacion.text = direccion;
+//    cell.lblGeolocalizacion.text = direccion;
     
-    cell.lblOwer.text = self.flickrPhotoModel.owner;
+//    cell.lblOwer.text = self.flickrPhotoModel.owner;
     
-    cell.lblSecret.Text = [[NSString alloc] initWithFormat:@"%@ %@", self.flickrPhotoModel.secret, @"secret"];
+//    cell.lblSecret.Text = [[NSString alloc] initWithFormat:@"%@ %@", self.flickrPhotoModel.secret, @"secret"];
     
     
     return cell;
@@ -967,10 +987,20 @@
  ..................*/
 
 #pragma mark - Delegates
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    // Localización
+    location = [locations lastObject];
+    [manager stopUpdatingLocation];
+    
+    // Actualiza tabla.
+    [tableViewPhotoSelectMetaData reloadData];
+}
+
 
 -(void) onLastLocation:(CLLocation *)aLastLocation {
     location = aLastLocation;
 }
+
 
 -(void) setInfoGeocoder:(CLPlacemark *)aInfo {
     infoGeocoder = aInfo;
@@ -1012,8 +1042,39 @@
 
 #pragma mark - Metodos privados
 
+-(void) startLocation {
+    /*----------------------------
+     *
+     * Localización.
+     *
+     -----------------------------*/
+    
+    //    JMFLocation *loc = [[JMFLocation alloc] init];
+    //    JMFLocationViewController *loc2 = [[JMFLocationViewController alloc] init];
+    
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.manager = [[CLLocationManager alloc] init];
+        self.manager.pausesLocationUpdatesAutomatically=YES;
+        
+        self.manager.desiredAccuracy = kCLLocationAccuracyBest;
+        self.manager.delegate = self;
+        
+        [self.manager startUpdatingLocation];
+    }
+    
+}
 
 -(void) registers {
+    
+  
+    /*----------------------------
+     *
+     * Localización.
+     *
+     -----------------------------*/
+    [self startLocation];
+    
+    
     
     /*----------------------------
      *

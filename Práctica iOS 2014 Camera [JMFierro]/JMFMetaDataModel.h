@@ -53,6 +53,33 @@
  
 */
 
+/*
+Printing description of metadata:
+{
+    ColorModel = RGB;
+    Depth = 8;
+    Orientation = 6;
+    PixelHeight = 1936;
+    PixelWidth = 2592;
+    "{Exif}" =     {
+        ColorSpace = 1;
+        PixelXDimension = 2592;
+        PixelYDimension = 1936;
+    };
+    "{JFIF}" =     {
+        DensityUnit = 0;
+        JFIFVersion =         (
+                               1,
+                               1
+                               );
+        XDensity = 1;
+        YDensity = 1;
+    };
+    "{TIFF}" =     {
+        Orientation = 6;
+    };
+}
+ */
 
 -(id) init;
 -(id) initWithImage:(UIImage *)image;

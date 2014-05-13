@@ -264,7 +264,7 @@
 #pragma mark – UICollectionViewDelegateFlowLayout Delegates
 
 /********************************************
- ** Metodos para APARIENCIA de las cedas. **
+ ** Métodos para APARIENCIA de las cedas. **
  ********************************************/
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

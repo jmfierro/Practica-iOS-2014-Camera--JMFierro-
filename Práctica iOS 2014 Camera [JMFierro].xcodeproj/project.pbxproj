@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5005944219220A1B00564EFD /* JMFLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5005944119220A1B00564EFD /* JMFLocation.m */; };
+		50059446192229CA00564EFD /* iconCoordenates.png in Resources */ = {isa = PBXBuildFile; fileRef = 50059445192229CA00564EFD /* iconCoordenates.png */; };
 		502AC62F190AA3F200EFB9B3 /* UIImageView+Curled.m in Sources */ = {isa = PBXBuildFile; fileRef = 502AC62E190AA3F200EFB9B3 /* UIImageView+Curled.m */; };
 		502AC632190AA43F00EFB9B3 /* CurledViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 502AC631190AA43F00EFB9B3 /* CurledViewBase.m */; };
 		50375315191CDB8100338280 /* JMFMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = 50375314191CDB8100338280 /* JMFMetaData.m */; };
@@ -101,6 +103,7 @@
 		50CAD12D191D2630001C17CE /* JMFCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CAD12C191D2630001C17CE /* JMFCameraViewController.m */; };
 		50D2763219094AAB007A0193 /* can-stock-photo_csp12611066.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D2763119094AAB007A0193 /* can-stock-photo_csp12611066.png */; };
 		50D2763819094E37007A0193 /* d619-vector-vector-camera-lens-app-icon-with-blends-and-transparent-all-layers-well-organized-and-easy-to-edit-154360043.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D2763719094E37007A0193 /* d619-vector-vector-camera-lens-app-icon-with-blends-and-transparent-all-layers-well-organized-and-easy-to-edit-154360043.png */; };
+		50D7BF01192147AC005E489C /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50375316191CDC6200338280 /* AssetsLibrary.framework */; };
 		50D8086D18FC291E00172322 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D8086C18FC291E00172322 /* CoreLocation.framework */; };
 		50E94C2318F4145600589BDA /* JMFPushpinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E94C2218F4145600589BDA /* JMFPushpinCell.xib */; };
 /* End PBXBuildFile section */
@@ -116,6 +119,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5005944019220A1B00564EFD /* JMFLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFLocation.h; sourceTree = "<group>"; };
+		5005944119220A1B00564EFD /* JMFLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFLocation.m; sourceTree = "<group>"; };
+		50059445192229CA00564EFD /* iconCoordenates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconCoordenates.png; sourceTree = "<group>"; };
 		502AC62B190A900300EFB9B3 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		502AC62D190AA3F200EFB9B3 /* UIImageView+Curled.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Curled.h"; sourceTree = "<group>"; };
 		502AC62E190AA3F200EFB9B3 /* UIImageView+Curled.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Curled.m"; sourceTree = "<group>"; };
@@ -254,6 +260,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50D7BF01192147AC005E489C /* AssetsLibrary.framework in Frameworks */,
 				50375318191CDD3300338280 /* ImageIO.framework in Frameworks */,
 				507C8E201917985A00238C30 /* MobileCoreServices.framework in Frameworks */,
 				50C8849718FD769B00283DDB /* MapKit.framework in Frameworks */,
@@ -494,6 +501,7 @@
 		50A5206918F7F125007F6F7B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				50059445192229CA00564EFD /* iconCoordenates.png */,
 				50BD7B061919261D0058156D /* iconCheck-300px.png */,
 				50644167191124D900B18D70 /* iconFaceDetectionTransparent.png */,
 				50A5206A18F7F13D007F6F7B /* KICamera.png */,
@@ -570,6 +578,8 @@
 				50B25248191B8FF7005D7C86 /* JMFLocationViewController.h */,
 				50B25249191B8FF7005D7C86 /* JMFLocationViewController.m */,
 				50B2524A191B8FF7005D7C86 /* JMFLocationViewController.xib */,
+				5005944019220A1B00564EFD /* JMFLocation.h */,
+				5005944119220A1B00564EFD /* JMFLocation.m */,
 			);
 			name = Location;
 			sourceTree = "<group>";
@@ -687,6 +697,7 @@
 				50BB8AC218F6CC7D008EC1F3 /* CellImage.xib in Resources */,
 				503E383818F2F96F00A9FBDF /* divider_bar@2x.png in Resources */,
 				50A5208718F7F13D007F6F7B /* btn_round_next@2x.png in Resources */,
+				50059446192229CA00564EFD /* iconCoordenates.png in Resources */,
 				50A5208B18F7F13D007F6F7B /* btn_back.png in Resources */,
 				50D2763219094AAB007A0193 /* can-stock-photo_csp12611066.png in Resources */,
 				503E383F18F2F96F00A9FBDF /* pushpin.png in Resources */,
@@ -750,6 +761,7 @@
 				50722FBF1907BC4F009E079D /* JMFHeaderView.m in Sources */,
 				505A7BA61920D39E005D0B08 /* Utils.m in Sources */,
 				50A5206718F7F105007F6F7B /* CellTip.m in Sources */,
+				5005944219220A1B00564EFD /* JMFLocation.m in Sources */,
 				50B25254191BA262005D7C86 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

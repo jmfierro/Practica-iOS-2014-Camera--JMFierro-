@@ -16,12 +16,16 @@
 
 @interface CellAddressLocation : UITableViewCell
 
+
+@property (weak, nonatomic) IBOutlet UILabel *lblCountry;
+@property (weak, nonatomic) IBOutlet UILabel *lblState;
+@property (weak, nonatomic) IBOutlet UILabel *lblCity;
+@property (weak, nonatomic) IBOutlet UILabel *lblName;
+@property (weak, nonatomic) IBOutlet UILabel *lblStreet;
+
 @property (weak, nonatomic) IBOutlet UILabel *lblLatitud;
 @property (weak, nonatomic) IBOutlet UILabel *lblLongitud;
-@property (weak, nonatomic) IBOutlet UILabel *lblGeolocalizacion;
 
-@property (weak, nonatomic) IBOutlet UILabel *lblOwer;
-@property (weak, nonatomic) IBOutlet UILabel *lblSecret;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 

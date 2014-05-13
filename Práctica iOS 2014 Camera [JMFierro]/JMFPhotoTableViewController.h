@@ -6,12 +6,15 @@
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
+@import CoreLocation;
+
 #import <UIKit/UIKit.h>
 #import "FlickrPhotoModel.h"
 #import "JMFMetaDataModel.h"
+//#import 	
 
 
-@interface JMFPhotoTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface JMFPhotoTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 
 
 @property (nonatomic, strong) JMFMetaDataModel *metaDataModel;
