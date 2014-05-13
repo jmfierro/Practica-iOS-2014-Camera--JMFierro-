@@ -67,6 +67,9 @@
     // Filtros
     NSMutableDictionary *filtersActive;
     
+    // Metadatos
+    NSInteger segment;
+    
 }
 
 @property (nonatomic, strong) CLLocationManager *manager;
@@ -98,19 +101,19 @@
  *  ** Imagen bajada de Flickr.  **
  *
  ...................................*/
--(id) initWithFlickrPhoto:(FlickrPhotoModel *)flickrPhoto {
+-(id) initWithFlickrPhoto:(ModelFlickrPhoto *)flickrPhoto {
     
     if (self = [super initWithNibName:nil bundle:nil]) {
-        _flickrPhotoModel = flickrPhoto;
+        _modelFlickrPhoto = flickrPhoto;
         
         /*
          *  Imagen de Flickr.
          */
-        if(self.flickrPhotoModel.largeImage)
+        if(self.modelFlickrPhoto.largeImage)
         {
             //            [spinner stopAnimating];
             //                [spinner setHidden:YES];
-            _image = self.flickrPhotoModel.largeImage;
+            _image = self.modelFlickrPhoto.largeImage;
             //                [tableViewPhotoSelectMetaData reloadData];
             
             //            cell.imagePhotoFlickr.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
@@ -118,7 +121,7 @@
         else
         {
             //        cell.photo.image = self.flickrPhoto.thumbnail;
-            [Flickr loadImageForPhoto:self.flickrPhotoModel thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
+            [Flickr loadImageForPhoto:self.modelFlickrPhoto thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
                 
                 //                [spinner stopAnimating];
                 //                    [spinner setHidden:YES];
@@ -131,7 +134,7 @@
                          * Cuando la imagen es descargada se actualiza los datos de la TableView
                          *
                          ------------------------------------------------------------------------*/
-                        _image = self.flickrPhotoModel.largeImage;
+                        _image = self.modelFlickrPhoto.largeImage;
                         [self initWithImage:_image];
                         [tableViewPhotoSelectMetaData reloadData];
                     });
@@ -177,9 +180,9 @@
             _image = image;
         }
         
-
         _imageThumbnail = [Utils imageToThumbnail:image Size:CGSizeMake(100, 100)];
-        _metaDataModel = [[JMFMetaDataModel alloc] initWithImage:image];
+        _modelMetaData = [[JMFModelMetaData alloc] initWithImage:image];
+
     }
     
     return self;
@@ -265,9 +268,6 @@
 //    [cell.imageView setContentMode:UIViewContentModeScaleToFill];
 //    [cell.imageView setImage:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"] borderWidth:5.0 shadowDepth:10.0 controlPointXOffset:30.0 controlPointYOffset:70.0];
    
-    // Activa escucha de notificaciones
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(onFilters:) name:kCellFilters object:nil];
     
 //    // Scroll horizontal
 //    CGRect frame = tableViewPhotoSelectMetaData.frame;
@@ -285,6 +285,15 @@
     
 }
 
+
+-(void)viewWillDisappear:(BOOL)animated {
+    /*---------------------------
+     *
+     * Baja en Notificaciones.
+     *
+     ---------------------------*/
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -436,13 +445,14 @@
     return NO;
 }
 
+/*
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     // grab the window frame and adjust it for orientation
     UIView *rootView = [[[UIApplication sharedApplication] keyWindow]
                         rootViewController].view;
     CGRect originalFrame = [[UIScreen mainScreen] bounds];
-    CGRect adjustedFrame = [rootView convertRect:originalFrame fromView:nil];
+    CGRect adjustedFrame = [rootView convertRect:originalFrame :nil];
     
     CGFloat width = CGRectGetWidth(self.view.bounds);
     
@@ -458,7 +468,7 @@
     else {
         //Make them bigger
     }
-    
+ 
 //    [tableViewPhotoSelectMetaData frameForAlignmentRect:CGRectMake(0,
 //                                                                   0,
 //                                                                   self.view.frame.size.height,
@@ -466,6 +476,8 @@
     
     
 }
+
+*/
 
 
 //- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -805,56 +817,105 @@
      *
      *       - Titulo
      *       - Descripción
+     *
      *       - Metadatos
      *
      ---------------------------------------------------------------------*/
     CellDetail * cell = (CellDetail *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetail];
     
+
+    // Titulo
+    if (self.modelFlickrPhoto.title)
+        cell.lblTitle.text = self.modelFlickrPhoto.title;
+    if (self.modelFlickrPhoto.description)
+        cell.lblDescription.text = self.modelFlickrPhoto.description;
+    
+
+    
     //        self.flickrPhoto.description;
     
-    if (self.flickrPhotoModel.title)
-        cell.lblTitle.text = self.flickrPhotoModel.title;
-    if (self.flickrPhotoModel.description)
-        cell.lblDescription.text = self.flickrPhotoModel.description;
-    
-    cell.lbl1.text = @"ID:";
-    if (self.flickrPhotoModel.photoID)
-        cell.lbl1content.text = [[NSString alloc] initWithFormat:@"%lld", self.flickrPhotoModel.photoID];
-
-    cell.lbl2.text = @"Farm:";
-    if (self.flickrPhotoModel.farm)
-        cell.lbl2content.text = [[NSString alloc] initWithFormat:@"%d", self.flickrPhotoModel.farm];
-    
-    cell.lbl3.text = @"Servidor:";
-    if (self.flickrPhotoModel.server)
-        cell.lbl3content.text = [[NSString alloc] initWithFormat:@"%d", self.flickrPhotoModel.server];
-    
-    cell.lbl4.text = @"Secreto:";
-    if (self.flickrPhotoModel.secret)
-        cell.lbl4content.text = self.flickrPhotoModel.secret;
-    
-    cell.lbl5.text = @"Familia:";
-    if (self.flickrPhotoModel.isfamily)
-        cell.lbl5content.text = self.flickrPhotoModel.isfamily;
-
-    cell.lbl6.text = @"Amigo:";
-    if (self.flickrPhotoModel.isfriend)
-        cell.lbl6content.text = self.flickrPhotoModel.isfriend;
-    
-    cell.lbl7.text = @"Publico:";
-    if (self.flickrPhotoModel.ispublic)
-        cell.lbl7content.text = self.flickrPhotoModel.ispublic;
-    
-    cell.lbl8.text = @"Propietario:";
-    if (self.flickrPhotoModel.owner)
-        cell.lbl8content.text = self.flickrPhotoModel.owner;
-    
+//    if (self.flickrPhotoModel) {
+    if (segment == kCellDetailSegmentFlickr) {
+      cell = [self writerDatosFlickr:cell];
+    } else if (segment == kCellDetailSegmentGeneralMetaData){
+        cell = [self writerGeneralMetaDatos:cell];
+    }
     
     
     return cell;
     
 }
 
+-(CellDetail *) writerDatosFlickr:(CellDetail *) cell {
+    
+
+    cell.lbl1.text = @"ID:";
+    if (self.modelFlickrPhoto.photoID)
+        cell.lbl1content.text = [[NSString alloc] initWithFormat:@"%lld", self.modelFlickrPhoto.photoID];
+    
+    cell.lbl2.text = @"Farm:";
+    if (self.modelFlickrPhoto.farm)
+        cell.lbl2content.text = [[NSString alloc] initWithFormat:@"%d", self.modelFlickrPhoto.farm];
+    
+    cell.lbl3.text = @"Servidor:";
+    if (self.modelFlickrPhoto.server)
+        cell.lbl3content.text = [[NSString alloc] initWithFormat:@"%d", self.modelFlickrPhoto.server];
+    
+    cell.lbl4.text = @"Secreto:";
+    if (self.modelFlickrPhoto.secret)
+        cell.lbl4content.text = self.modelFlickrPhoto.secret;
+    
+    cell.lbl5.text = @"Familia:";
+    if (self.modelFlickrPhoto.isfamily)
+        cell.lbl5content.text = self.modelFlickrPhoto.isfamily;
+    
+    cell.lbl6.text = @"Amigo:";
+    if (self.modelFlickrPhoto.isfriend)
+        cell.lbl6content.text = self.modelFlickrPhoto.isfriend;
+    
+    cell.lbl7.text = @"Publico:";
+    if (self.modelFlickrPhoto.ispublic)
+        cell.lbl7content.text = self.modelFlickrPhoto.ispublic;
+    
+    cell.lbl8.text = @"Propietario:";
+    if (self.modelFlickrPhoto.owner)
+        cell.lbl8content.text = self.modelFlickrPhoto.owner;
+
+    return cell;
+}
+
+
+-(CellDetail *) writerGeneralMetaDatos:(CellDetail *) cell {
+    
+    NSArray *keys = [self.modelMetaData.metaDataAll allKeys];
+    
+    
+    cell.lbl1.text = @"Color";
+    cell.lbl1content.text = [self.modelMetaData.metaDataAll objectForKey:@"ColorModel"];
+    
+    cell.lbl2.text = @"Profundidad";
+    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.metaDataAll objectForKey:@"Depth"]];
+    
+    cell.lbl3.text = @"Orientacion";
+    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.metaDataAll objectForKey:@"Orientation"]];
+
+    cell.lbl5.text = @"Alto";
+    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.metaDataAll objectForKey:@"PixelHeight"]];
+
+    cell.lbl6.text = @"Ancho";
+    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.metaDataAll objectForKey:@"PixelWidth"]];
+
+    cell.lbl4.text = @"";
+    cell.lbl4content.text = @"";
+    
+    cell.lbl7.text = @"";
+    cell.lbl7content.text = @"";
+    
+    cell.lbl8.text = @"";
+    cell.lbl8content.text = @"";
+
+    return cell;
+}
 
 
 
@@ -1028,7 +1089,7 @@
  *  NOTIFICACION DE: CellFilters.m
  *
  *
- *  Recibe notificaiones de CellFilters.m
+ *  Recibe notificaciones de CellFilters.m
  *  Aplica todos los filtros activos.
  *
  ...........................................*/
@@ -1050,7 +1111,25 @@
     [tableViewPhotoSelectMetaData reloadData];
 }
 
-
+/*...........................................
+ *
+ *  NOTIFICACION DE: CellDetatil.m
+ *
+ *
+ *  Recibe notificaciones de CellFilters.m
+ *  Aplica todos los filtros activos.
+ *
+ ...........................................*/
+-(void)onMetaData: (NSNotification *) note {
+    segment = [note.object integerValue];
+    
+//    if ([note.object integerValue] == kCellDetailSegementFlickr) {
+//
+//    }
+    
+    
+    [tableViewPhotoSelectMetaData reloadData];
+}
 
 #pragma mark - Metodos privados
 
@@ -1146,6 +1225,17 @@
     cellAddress_height = cell.frame.size.height;
     cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellUser];
     cellUser_height = cell.frame.size.height;
+    
+    
+    /*-------------------------------------------------------------------------------
+     *
+     * Notificaciones
+     *
+     --------------------------------------------------------------------------------*/
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(onFilters:) name:kCellFilters object:nil];
+    [center addObserver:self selector:@selector(onMetaData:) name:kCellDetail object:nil];
+
     
 }
 

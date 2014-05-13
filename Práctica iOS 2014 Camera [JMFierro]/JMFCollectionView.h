@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FlickrPhotoModel.h"
+#import "ModelFlickrPhoto.h"
 #import "JMFImages.h"
 
 

@@ -14,8 +14,8 @@
  */
 
 
-#import "FlickrPhotoModel.h"
+#import "ModelFlickrPhoto.h"
 
-@implementation FlickrPhotoModel
+@implementation ModelFlickrPhoto
 
 @end

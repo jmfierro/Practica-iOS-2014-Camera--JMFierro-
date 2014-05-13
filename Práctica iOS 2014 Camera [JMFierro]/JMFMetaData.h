@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <ImageIO/ImageIO.h>
-#import "JMFMetaDataModel.h"
+#import "JMFModelMetaData.h"
 
 @interface JMFMetaData : NSObject
 
-@property(nonatomic,strong) JMFMetaDataModel *modelMetaData;
+@property(nonatomic,strong) JMFModelMetaData *modelMetaData;
 
 -(id) init;
 

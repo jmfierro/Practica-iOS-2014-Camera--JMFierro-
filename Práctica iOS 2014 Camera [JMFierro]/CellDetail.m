@@ -62,4 +62,16 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)segmentMetadatos:(id)sender {
+    
+    UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
+    NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;
+    
+//    NSArray *array;
+//    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kCellDetail object:[array objectAtIndex:segmentedControl.selectedSegmentIndex]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kCellDetail
+                                                        object:[NSNumber numberWithInt:segmentedControl.selectedSegmentIndex]];
+}
+
 @end

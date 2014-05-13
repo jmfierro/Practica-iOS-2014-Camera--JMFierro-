@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JMFMetaDataModel : NSObject
+@interface JMFModelMetaData : NSObject
 
 @property (nonatomic, strong) NSDictionary *metaDataAll;
 

@@ -32,7 +32,7 @@
     /*
      * Modelo
      */
-    JMFMetaDataModel *modelMetadata = [[JMFMetaDataModel alloc] initWithImage:image];
+    JMFModelMetaData *modelMetadata = [[JMFModelMetaData alloc] initWithImage:image];
     
     /*
      * Controlador

@@ -15,6 +15,9 @@
 
 #define kCellDetail @"CellDetail"
 
+#define kCellDetailSegmentFlickr 0
+#define kCellDetailSegmentGeneralMetaData 1
+
 
 @interface CellDetail : UITableViewCell
 
@@ -48,6 +51,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnMore;
 
+- (IBAction)segmentMetadatos:(id)sender;
 
 
 @end

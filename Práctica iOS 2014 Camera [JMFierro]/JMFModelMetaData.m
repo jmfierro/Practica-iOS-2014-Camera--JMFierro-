@@ -8,10 +8,10 @@
 
 #import <ImageIO/ImageIO.h>
 
-#import "JMFMetaDataModel.h"
+#import "JMFModelMetaData.h"
 
 
-@implementation JMFMetaDataModel
+@implementation JMFModelMetaData
 
 -(id) init {
     

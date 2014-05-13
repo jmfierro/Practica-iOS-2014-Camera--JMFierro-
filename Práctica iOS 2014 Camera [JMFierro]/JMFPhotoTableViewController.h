@@ -9,21 +9,21 @@
 @import CoreLocation;
 
 #import <UIKit/UIKit.h>
-#import "FlickrPhotoModel.h"
-#import "JMFMetaDataModel.h"
+#import "ModelFlickrPhoto.h"
+#import "JMFModelMetaData.h"
 //#import 	
 
 
 @interface JMFPhotoTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 
 
-@property (nonatomic, strong) JMFMetaDataModel *metaDataModel;
-@property (nonatomic, strong) FlickrPhotoModel *flickrPhotoModel;
+@property (nonatomic, strong) JMFModelMetaData *modelMetaData;
+@property (nonatomic, strong) ModelFlickrPhoto *modelFlickrPhoto;
 @property (nonatomic, strong) UIImage *image, *imageAplyFilters, *imageThumbnail;
 
 
 
--(id) initWithFlickrPhoto:(FlickrPhotoModel *)flickrPhoto;
+-(id) initWithFlickrPhoto:(ModelFlickrPhoto *)flickrPhoto;
 -(id) initWithImage:(UIImage *) aImage;
 
 @end

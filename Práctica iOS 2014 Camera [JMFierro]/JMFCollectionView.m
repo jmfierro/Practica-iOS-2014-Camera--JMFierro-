@@ -18,7 +18,7 @@
 
 
 #import "Flickr.h"
-#import "FlickrPhotoModel.h"
+#import "ModelFlickrPhoto.h"
 #import "Utils.h"
 
 
@@ -233,7 +233,7 @@
             //        flickrPhoto = self.searchResults[searchTerm][indexPath.row];
             
             NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
-            FlickrPhotoModel *flickrPhoto = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
+            ModelFlickrPhoto *flickrPhoto = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
             
             //    tableFlickrPhotoVC.delegate = self;
             
@@ -299,7 +299,7 @@
 //        FlickrPhoto *photo = self.searchResults[searchTerm][indexPath.row];
         
         NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //  - [self.photosCamera count]>0 ? 1:0];
-        FlickrPhotoModel *photo = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
+        ModelFlickrPhoto *photo = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
 
         // Escala thumbnail.
         CGSize frame = [Utils scaleFactor:photo.largeImage widthNewFrame:200];
