@@ -6,16 +6,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pra&#x301;ctica iOS 2014 Camera [JMFierro]/JMFPhotoTableViewController.m"
-            timestampString = "421696214.155227"
+            filePath = "Pra&#769;ctica iOS 2014 Camera [JMFierro]/JMFPhotoTableViewController.m"
+            timestampString = "421697813.269923"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
-            landmarkName = "-onFilters:"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
+            landmarkName = "-initWithImage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pra&#769;ctica iOS 2014 Camera [JMFierro]/JMFPhotoTableViewController.m"
+            timestampString = "421697670.68691"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "-initWithNibName:bundle:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pra&#769;ctica iOS 2014 Camera [JMFierro]/JMFPhotoTableViewController.m"
+            timestampString = "421697686.902748"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "-initWithImage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pra&#x301;ctica iOS 2014 Camera [JMFierro]/JMFPhotoTableViewController.m"
-            timestampString = "421696297.498044"
+            filePath = "Pra&#769;ctica iOS 2014 Camera [JMFierro]/JMFPhotoTableViewController.m"
+            timestampString = "421748058.946864"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1178"
-            endingLineNumber = "1178"
-            landmarkName = "-filterOverImage:nameFilter:"
+            startingLineNumber = "583"
+            endingLineNumber = "583"
+            landmarkName = "-onFilters:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

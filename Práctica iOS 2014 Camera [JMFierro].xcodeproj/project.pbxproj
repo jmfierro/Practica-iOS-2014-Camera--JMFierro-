@@ -358,6 +358,7 @@
 				50C1F72718F44A2C004A1296 /* famous-face-dementia-617x416.jpg */,
 				50382F2A18F0243D0061B90C /* AppDelegate.h */,
 				50382F2B18F0243D0061B90C /* AppDelegate.m */,
+				5091FE9D19236AC8006E4B11 /* Utils */,
 				50B8594B18F2ED4D00E91D44 /* Collection */,
 				507C8E1E1917980B00238C30 /* Camera */,
 				50C1F72918F44ACD004A1296 /* TableView */,
@@ -368,8 +369,6 @@
 				503E384518F2FC4D00A9FBDF /* Flickr Interface */,
 				50382F2D18F0243D0061B90C /* Images.xcassets */,
 				50382F2218F0243D0061B90C /* Supporting Files */,
-				505A7BA41920D39E005D0B08 /* Utils.h */,
-				505A7BA51920D39E005D0B08 /* Utils.m */,
 			);
 			path = "Práctica iOS 2014 Camera [JMFierro]";
 			sourceTree = "<group>";
@@ -471,6 +470,15 @@
 				507E1121190915680038ECB7 /* JMFImages.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		5091FE9D19236AC8006E4B11 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				505A7BA41920D39E005D0B08 /* Utils.h */,
+				505A7BA51920D39E005D0B08 /* Utils.m */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		50A5205418F7F0F3007F6F7B /* Cells */ = {

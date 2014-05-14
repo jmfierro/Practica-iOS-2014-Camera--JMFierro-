@@ -28,4 +28,17 @@
 +(CGSize) imageAdapterSize:(UIImage *)image containerSize:(CGSize)contentSize;
 
 
+/*...........................................
+ *
+ * Aplica un filtro recibidos en nameFilter.
+ *
+ ............................................*/
++(UIImage *) filterOverImage:(UIImage *)aImage nameFilter:(NSString *)nameFilter;
+
+/*...................................................................
+ *
+ * Aplica una lista de filtros contenidos en el array namesFilter.
+ *
+ ...................................................................*/
++(UIImage *) filterOverImage:(UIImage *)aImage namesFilter:(NSArray *)namesFilter;
 @end

@@ -87,7 +87,7 @@
     if (self) {
         
         // Registros
-        [self registers];
+//        [self registers];
         
     }
     return self;
@@ -182,7 +182,7 @@
         
         _imageThumbnail = [Utils imageToThumbnail:image Size:CGSizeMake(100, 100)];
         _modelMetaData = [[JMFModelMetaData alloc] initWithImage:image];
-
+        
     }
     
     return self;
@@ -204,7 +204,7 @@
 //    locationVC.delegate = self;
     isNewLocalization = YES;
     
-    [self registers];
+//    [self registers];
     
 //    /*----------------------------
 //     *
@@ -579,18 +579,23 @@
 -(void)onFilters: (NSNotification *) note {
     
   
-    // Actulización de todos los filtros.
+    // Actualiza filtros.
     if ([filtersActive objectForKey:note.object])
         [filtersActive removeObjectForKey:note.object];
     else
         [filtersActive setObject:@YES forKey:note.object];
 
     // Recorrido y aplicación de todos los filtros activos
-    self.imageAplyFilters = self.image;    // self.image;
+    self.imageAplyFilters = self.image;
     NSArray *keys = [filtersActive allKeys];
     for (id key in keys)
-        self.imageAplyFilters = [self filterOverImage:self.imageAplyFilters nameFilter:key];
+        self.imageAplyFilters = [Utils filterOverImage:self.imageAplyFilters nameFilter:key];
     
+    
+    UIImage *img = self.imageAplyFilters;
+    self.imageAplyFilters = [Utils filterOverImage:self.image nameFilter:@"CISepiaTone"];
+    
+//    self.imageAplyFilters = nil;
     [tableViewPhotoSelectMetaData reloadData];
 }
 
@@ -654,91 +659,18 @@
     else {
         [indicatorLoadImagen stopAnimating];
         
-        //        cell.photo.image = self.image;
-        //    self.detectingView.hidden = NO;
-        //	self.scrollView.scrollEnabled = NO;
-        
-        //        __block UIImage *image = self.image;
-        //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        //
-        //            CIImage *ciImage = [[CIImage alloc] initWithImage:self.image];;   // [[CIImage alloc] initWithImage:[FACE_IMAGES objectAtIndex:self.currentIndex]];
-        //
-        //            NSString *accuracy = CIDetectorAccuracyHigh;
-        //            //        NSString *accuracy = CIDetectorAccuracyLow;
-        //            NSDictionary *options = [NSDictionary dictionaryWithObject:accuracy forKey:CIDetectorAccuracy];
-        //            CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:options];
-        //
-        //            NSArray *features = [detector featuresInImage:ciImage];
-        //
-        //            dispatch_async(dispatch_get_main_queue(), ^{
-        //                [self drawImageAnnotatedWithFeatures:features];
-        //                [self ]
-        ////                cell.photo.image = image;
-        //            });
-        //
-        //        });
-        
-        //        [self face:cell];
-        
     }
     
     
-    //    cell.photoView.image = self.image;
-    if (self.imageAplyFilters) {
-        cellImage.photoView.image = self.imageAplyFilters;
-    } else {
-        cellImage.photoView.image = self.image;
-    }
+//    //    cell.photoView.image = self.image;
+//    if (self.imageAplyFilters) {
+//        cellImage.photoView.image = self.imageAplyFilters;
+//    } else {
+//        cellImage.photoView.image = self.image;
+//    }
     
+    cellImage.photoView.image = [Utils filterOverImage:self.image namesFilter:filtersActive];
     
-    
-    //    /*
-    //     *  Imagen de la cámara.
-    //     */
-    //    if (self.image) {
-    //
-    //        [spinner stopAnimating];
-    //
-    //        cell.photo.image = [self filter:self.image];
-    //    }
-    //
-    //    /*
-    //     *  Imagen de Flickr.
-    //     */
-    //    else {
-    //        if(self.flickrPhoto.largeImage)
-    //        {
-    //            [spinner stopAnimating];
-    //            //                [spinner setHidden:YES];
-    //            cell.photo.image = self.flickrPhoto.largeImage;
-    //            //                [tableViewPhotoSelectMetaData reloadData];
-    //
-    //            //            cell.imagePhotoFlickr.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
-    //        }
-    //        else
-    //        {
-    //            //        cell.photo.image = self.flickrPhoto.thumbnail;
-    //            [Flickr loadImageForPhoto:self.flickrPhoto thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
-    //
-    //                [spinner stopAnimating];
-    //                //                    [spinner setHidden:YES];
-    //
-    //                if(!error)
-    //                {
-    //                    dispatch_async(dispatch_get_main_queue(), ^{
-    //                        cell.photo.image = self.flickrPhoto.largeImage;
-    //                        //                        cell.imagePhotoFlickr.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
-    //
-    //                        [tableViewPhotoSelectMetaData reloadData];
-    //                    });
-    //                }
-    //
-    //            }];
-    //        }
-    //    }
-    //
-    
-    //    return cell;
     return cellImage;
     
 }
@@ -767,12 +699,12 @@
     
     //    UIImage *img = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
     
-    cell.imgFilter1.image = [self filterOverImage:self.imageThumbnail nameFilter:@"CISepiaTone"];
+    cell.imgFilter1.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CISepiaTone"];
     //    cell.imgFilter1.image = [self filterOverImage:self.image nameFilter:@"CITorusLensDistortion"];
-    cell.imgFilter2.image = [self filterOverImage:self.imageThumbnail nameFilter:@"CIPhotoEffectProcess"];
-    cell.imgFilter3.image = [self filterOverImage:self.imageThumbnail nameFilter:@"CIPixellate"];
-    cell.imgFilter4.image = [self filterOverImage:self.imageThumbnail nameFilter:@"CIPinchDistortion"];
-    cell.imgFilter5.image = [self filterOverImage:self.imageThumbnail nameFilter:@"CIPerspectiveTransform"];
+    cell.imgFilter2.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPhotoEffectProcess"];
+    cell.imgFilter3.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPixellate"];
+    cell.imgFilter4.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPinchDistortion"];
+    cell.imgFilter5.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPerspectiveTransform"];
     //    cell.imgFilter5.image = [self filterOverImage:self.image nameFilter:@"CISharpenLuminance"];
     
     return cell;
@@ -1106,78 +1038,8 @@
     return cell;
 }
 
--(UIImage *) filterOverImage:(UIImage *)aImage nameFilter:(NSString *)nameFilter {
-    
-    UIImage *image = aImage;
-    CIImage *ciImage = [[CIImage alloc] initWithImage:image];
-    
-    //    CIFilter *ciFilter = [CIFilter filterWithName:nameFilter
-    //                                  keysAndValues: kCIInputImageKey, ciImage,
-    //                        @"inputIntensity", @0.8, nil];
-    //    CIFilter *ciFilter = [CIFilter filterWithName:nameFilter];
-    //    [ciFilter setDefaults];
-    
-    
-    // 3
-    CIFilter *ciFilter = [CIFilter filterWithName:nameFilter];
-    [ciFilter setValue:ciImage forKey:kCIInputImageKey];
-    //    [ciFilter setValue:@(1) forKey:@"inputIntensity"];
-    
-    [ciFilter setDefaults];
-    
-    CIImage *outputCiImage = [ciFilter outputImage];
-    
-    
-    
-    /*
-     // 1
-     CIFilter *sepia = [CIFilter filterWithName:@"CISepiaTone"];
-     [sepia setValue:ciImage forKey:kCIInputImageKey];
-     [sepia setValue:@(0) forKey:@"inputIntensity"];
-     
-     // 2
-     CIFilter *random = [CIFilter filterWithName:@"CIRandomGenerator"];
-     
-     // 3
-     CIFilter *lighten = [CIFilter filterWithName:@"CIColorControls"];
-     [lighten setValue:random.outputImage forKey:kCIInputImageKey];
-     [lighten setValue:@(1 - 0.8) forKey:@"inputBrightness"];
-     [lighten setValue:@0.0 forKey:@"inputSaturation"];
-     
-     // 4
-     CIImage *beginImage;
-     CIImage *croppedImage = [lighten.outputImage imageByCroppingToRect:[beginImage extent]];
-     
-     // 5
-     CIFilter *composite = [CIFilter filterWithName:@"CIHardLightBlendMode"];
-     [composite setValue:sepia.outputImage forKey:kCIInputImageKey];
-     [composite setValue:croppedImage forKey:kCIInputBackgroundImageKey];
-     
-     // 6
-     CIFilter *vignette = [CIFilter filterWithName:@"CIVignette"];
-     [vignette setValue:composite.outputImage forKey:kCIInputImageKey];
-     [vignette setValue:@(0.8 * 2) forKey:@"inputIntensity"];
-     [vignette setValue:@(0.8 * 30) forKey:@"inputRadius"];
-     
-     CIImage *outputCiImage = [vignette outputImage];
-     */
-    
-    /* ------------------------------------------------------------------------------------------
-     *
-     * Utiliza CIContext para aumentar el rendimiento:
-     *
-     *    El uso del método 'UIImage' con 'imageWithCIImage' crea un nuevo CIContext cada vez,
-     * y si se usa un 'slider' para actualizar los valores del filtro lo haría demasiado lento.
-     *
-     -------------------------------------------------------------------------------------------*/
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CGImageRef cgImage =
-    [context createCGImage:outputCiImage fromRect:[outputCiImage extent]];
-    
-    UIImage *newImage = [UIImage imageWithCGImage:cgImage];
-    return newImage;
-    
-}
+
+
 
 
 -(void) startLocation {
