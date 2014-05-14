@@ -188,8 +188,42 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    UIBarButtonItem *share = [[UIBarButtonItem alloc]
+                            initWithBarButtonSystemItem:UIBarButtonSystemItemAction                            target:self
+                            action:@selector(share:)];
+    
+    
+    self.navigationItem.rightBarButtonItem = share;
+}
 
-
+-(void)share:(id)sender {
+    
+    NSArray *postItem = @[@"mensaje", self.image];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
+                                            initWithActivityItems:postItem
+                                            applicationActivities:nil];
+    /*
+    activityVC.excludedActivityTypes = @[UIActivityTypePostToWeibo,
+                                         UIActivityTypeMessage,
+                                         UIActivityTypeMail,
+                                         UIActivityTypePrint,
+                                         UIActivityTypeCopyToPasteboard,
+                                         UIActivityTypeAssignToContact,
+                                         UIActivityTypeSaveToCameraRoll,
+                                         UIActivityTypeAddToReadingList,
+                                         UIActivityTypePostToFlickr,
+                                         UIActivityTypePostToVimeo,
+                                         UIActivityTypePostToTencentWeibo,
+                                         UIActivityTypeAirDrop];
+     */
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -205,83 +239,6 @@
     isNewLocalization = YES;
     
 //    [self registers];
-    
-//    /*----------------------------
-//     *
-//     * Creación de la Tableview.
-//     *
-//     -----------------------------*/
-//    tableViewPhotoSelectMetaData = [[UITableView alloc] initWithFrame:CGRectMake(0,
-//                                                                   0,
-//                                                                   self.view.frame.size.width,
-//                                                                   self.view.frame.size.height)
-//                                                  style:UITableViewStylePlain];
-//    tableViewPhotoSelectMetaData.delegate = self;
-//    tableViewPhotoSelectMetaData.dataSource = self;
-//    
-//    // Quita separador
-//    [tableViewPhotoSelectMetaData setSeparatorColor:[UIColor clearColor]];
-//    [tableViewPhotoSelectMetaData setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-//    
-//    
-//    /*-------------------------------------------------------------------------------
-//     *
-//     * Registro celdas
-//     *
-//     --------------------------------------------------------------------------------*/
-//    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellImage bundle:nil] forCellReuseIdentifier:kCellImage];
-//    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellFilters bundle:nil] forCellReuseIdentifier:kCellFilters];
-//    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellDetail bundle:nil] forCellReuseIdentifier:kCellDetail];
-//    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellAddress bundle:nil] forCellReuseIdentifier:kCellAddress];
-//    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellUser bundle:nil] forCellReuseIdentifier:kCellUser];
-//    
-//    
-//    // Añade la tabla a la vista del controlador
-//    [self.view addSubview:tableViewPhotoSelectMetaData];
-//    
-//    // Establece orden de las celdas
-//    NSInteger numCell = 0;
-//    row_CellImage = numCell++;
-//    row_CellFilters = numCell++;
-//    row_CellDetalle =numCell++;
-//    row_CellAddress = numCell++;
-//    row_CellUser = numCell++;
-//    
-//    // Guarda altura de las celdas personalizadas
-//    UITableViewCell *cell = [UITableViewCell new];
-//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellImage];
-//    cellImage_height = cell.frame.size.height;
-//    cellImage_ImageViewHeight = cell.imageView.frame.size.height;
-//    cellImage_ImageViewWidth = cell.imageView.frame.size.width;
-//    
-//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellFilters];
-//    cellFilters_height = cell.frame.size.height;
-//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellDetail];
-//    cellDetalle_height = cell.frame.size.height;
-//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
-//    cellAddress_height = cell.frame.size.height;
-//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellUser];
-//    cellUser_height = cell.frame.size.height;
-    
-//    // Configuración de bordes
-//    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellImage];
-//    [cell.imageView setContentMode:UIViewContentModeScaleToFill];
-//    [cell.imageView setImage:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"] borderWidth:5.0 shadowDepth:10.0 controlPointXOffset:30.0 controlPointYOffset:70.0];
-   
-    
-//    // Scroll horizontal
-//    CGRect frame = tableViewPhotoSelectMetaData.frame;
-//    tableViewPhotoSelectMetaData.transform = CGAffineTransformRotate(tableViewPhotoSelectMetaData.transform, M_PI / 2);
-//    tableViewPhotoSelectMetaData.frame = frame;
-    
-//    // Listado de filtros
-//    NSArray *properties = [CIFilter filterNamesInCategory:
-//                           kCICategoryBuiltIn];
-//    NSLog(@"%@", properties);
-//    for (NSString *filterName in properties) {
-//        CIFilter *fltr = [CIFilter filterWithName:filterName];
-//        NSLog(@"%@", [fltr attributes]);
-//    }
     
 }
 
