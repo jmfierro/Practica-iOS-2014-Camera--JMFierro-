@@ -983,8 +983,10 @@
     cell.lbl1.text = @"Densidad (ud)";
     cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.JFIFDictionary objectForKey:@"DensityUnit"]];
     
+    NSArray *array  = [self.modelMetaData.JFIFDictionary objectForKey:@"JFIFVersion"];
+//    NSString *string = [[array valueForKey:@"description"] componentsJoinedByString:@""];
     cell.lbl2.text = @"JFIF versión";
-    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.JFIFDictionary objectForKey:@"JFIFVersion"]];
+    cell.lbl2content.text = [NSString stringWithFormat:@"%@.%@",array[0],array[1]];
     
     cell.lbl5.text = @"XDensidad";
     cell.lbl5content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.JFIFDictionary objectForKey:@"XDensity"]];
