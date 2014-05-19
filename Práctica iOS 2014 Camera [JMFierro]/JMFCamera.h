@@ -19,4 +19,6 @@
 @property (nonatomic, strong) NSArray *fecesRect;
 
 
+-(id) initWithImage:(UIImage *)image;
+
 @end

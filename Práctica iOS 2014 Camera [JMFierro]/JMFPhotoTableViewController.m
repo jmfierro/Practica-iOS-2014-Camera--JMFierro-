@@ -14,7 +14,7 @@
 #import "JMFPhotoTableViewController.h"
 
 //#import "JMFLocationViewController.h"
-#import "JMFLocation.h"
+//#import "JMFLocation.h"
 #import "Flickr.h"
 
 //#import "JMFMetaData.h"
@@ -917,7 +917,7 @@
     
     NSString *msg;
     if (locationUser)
-        msg = @"La imagen no contiene información sobre GPS. \n La localizacion es la actual del usuario.";
+        msg = @"La imagen no contiene información sobre GPS. \n La localizacion que se muestra es la actual del usuario.";
     else
         msg = @"Localización proporcionada por la imagen en los 'Metadatos'.";
     

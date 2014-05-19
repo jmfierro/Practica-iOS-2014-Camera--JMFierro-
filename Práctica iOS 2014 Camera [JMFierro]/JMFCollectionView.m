@@ -11,9 +11,9 @@
 #import "JMFPushpinCell.h"
 
 #import "JMFPhotoTableViewController.h"
-#import "JMFLocationViewController.h"
-#import "JMFCoreViewController.h"
-#import "LocationViewController.h"
+//#import "JMFLocationViewController.h"
+//#import "JMFCoreViewController.h"
+//#import "LocationViewController.h"
 #import "JMFCameraViewController.h"
 
 
@@ -488,7 +488,8 @@
 
 -(void)getImagePickerCamera:(UIImage *)image {
 
-    [self.model.imagesCamera addObject:image];
+    JMFCamera *imageCamera = [[JMFCamera alloc] initWithImage:image];
+    [self.model.imagesCamera addObject:imageCamera];
     [collectionViewPhotos reloadData];
     
 }
@@ -507,25 +508,23 @@
 
 - (IBAction)btnTakePhoto:(id)sender {
     
-
-    /*
-     *   |~~/
+    /*          o `´
+     *      oo
+     *   |~~/ o
      *   |~|
      *   |~|  PRUEBAS SIN CAMARA (simulador)
      *   |_|
      */
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * Pruebas sin camara. Simula haber tomado una foto.
-     ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
-//    [self.model.imagesCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
-    JMFCamera *imageCamera = [[JMFCamera alloc] init];
-    imageCamera.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
-    [self.model.imagesCamera addObject:imageCamera];
-
-    
-    
-    //    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
-    [collectionViewPhotos reloadData];
+//     ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
+////    [self.model.imagesCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
+//    JMFCamera *imageCamera = [[JMFCamera alloc] init];
+//    imageCamera.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
+//    [self.model.imagesCamera addObject:imageCamera];
+//    
+//    //    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
+//    [collectionViewPhotos reloadData];
     
     /*
      *    __________
@@ -536,26 +535,26 @@
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * LLamada a la camara.
      ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
-//    JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] init];
-//    cameraVC.delegate = self;
-//    [self.navigationController pushViewController:cameraVC animated:NO];
-////    [self.model.photosCamera addObject:cameraVC.imageView.image];
+    JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] init];
+    cameraVC.delegate = self;
+    [self.navigationController pushViewController:cameraVC animated:NO];
+//    [self.model.photosCamera addObject:cameraVC.imageView.image];
     
     
 }
 
-- (IBAction)btnLocation:(id)sender {
-    
-//    LocationViewController *locationVC = [[LocationViewController alloc] initWithViewMap:self.viewMap];
-    
-    
-//    [locationVC viewDidLoad];
-
-    
-    JMFCoreViewController *locationVC = [[JMFCoreViewController alloc] init];
-    [self.navigationController pushViewController:locationVC animated:NO];
-    
-}
+//- (IBAction)btnLocation:(id)sender {
+//    
+////    LocationViewController *locationVC = [[LocationViewController alloc] initWithViewMap:self.viewMap];
+//    
+//    
+////    [locationVC viewDidLoad];
+//
+//    
+//    JMFCoreViewController *locationVC = [[JMFCoreViewController alloc] init];
+//    [self.navigationController pushViewController:locationVC animated:NO];
+//    
+//}
 
 - (IBAction)btnFilters:(id)sender {
 //    ViewController *vc = [ViewController new];

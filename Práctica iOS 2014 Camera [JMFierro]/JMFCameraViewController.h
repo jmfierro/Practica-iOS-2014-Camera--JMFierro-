@@ -24,7 +24,7 @@ id delegate;
 @property (nonatomic, retain) id<CameraViewControllerDelegate> delegate;
 
 @property BOOL newMedia;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+//@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 
 - (IBAction)useCamera:(id)sender;

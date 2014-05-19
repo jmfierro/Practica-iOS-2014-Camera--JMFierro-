@@ -202,7 +202,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = info[UIImagePickerControllerOriginalImage];
         
-        _imageView.image = image;
+//        _imageView.image = image;
         
         [self.delegate getImagePickerCamera:image];
         
