@@ -9,6 +9,7 @@
 #import <ImageIO/ImageIO.h>
 
 #import "JMFMetaData.h"
+#import <CoreLocation/CoreLocation.h>
 
 
 @implementation JMFMetaData
@@ -167,5 +168,39 @@
 }
 
 
+- (NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location
+{
+    CLLocationDegrees exifLatitude  = location.coordinate.latitude;
+    CLLocationDegrees exifLongitude = location.coordinate.longitude;
+    
+    NSString * latRef;
+    NSString * longRef;
+    if (exifLatitude < 0.0) {
+        exifLatitude = exifLatitude * -1.0f;
+        latRef = @"S";
+    } else {
+        latRef = @"N";
+    }
+    
+    if (exifLongitude < 0.0) {
+        exifLongitude = exifLongitude * -1.0f;
+        longRef = @"W";
+    } else {
+        longRef = @"E";
+    }
+    
+    NSMutableDictionary *locDict = [[NSMutableDictionary alloc] init];
+    
+    [locDict setObject:location.timestamp forKey:(NSString*)kCGImagePropertyGPSTimeStamp];
+    [locDict setObject:latRef forKey:(NSString*)kCGImagePropertyGPSLatitudeRef];
+    [locDict setObject:[NSNumber numberWithFloat:exifLatitude] forKey:(NSString *)kCGImagePropertyGPSLatitude];
+    [locDict setObject:longRef forKey:(NSString*)kCGImagePropertyGPSLongitudeRef];
+    [locDict setObject:[NSNumber numberWithFloat:exifLongitude] forKey:(NSString *)kCGImagePropertyGPSLongitude];
+    [locDict setObject:[NSNumber numberWithFloat:location.horizontalAccuracy] forKey:(NSString*)kCGImagePropertyGPSDOP];
+    [locDict setObject:[NSNumber numberWithFloat:location.altitude] forKey:(NSString*)kCGImagePropertyGPSAltitude];
+    
+    return locDict;
+    
+}
 
 @end

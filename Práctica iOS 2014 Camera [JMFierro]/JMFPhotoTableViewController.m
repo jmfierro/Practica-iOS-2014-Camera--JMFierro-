@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
-//#import <ImageIO/ImageIO.h>
+#import <ImageIO/ImageIO.h>
 
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <CoreLocation/CoreLocation.h>
 
 #import "JMFPhotoTableViewController.h"
 
@@ -43,6 +44,7 @@
     CLLocation *location;
     CGFloat latitude;
     CGFloat longitude;
+    BOOL locationUser;
     CLPlacemark *infoGeocoder;
     BOOL isNewLocalization;
     
@@ -120,14 +122,15 @@
     
     if (self = [super initWithNibName:nil bundle:nil]) {
         
-        UIImage *img = imageCamera.image;
-        
+        // Imagen.
         [self loadImage:imageCamera.image];
         
+        // Metadatos.
         if (imageCamera.metaData)
             _metaData = imageCamera.metaData;
         else
             _metaData = [[JMFMetaData alloc] initWithImage:imageCamera.image];
+        
     }
     
     return self;
@@ -150,20 +153,12 @@
          */
         if(_imageFlickr.largeImage)
         {
-            //            [spinner stopAnimating];
-            //                [spinner setHidden:YES];
             _image = _imageFlickr.largeImage;
-            //                [tableViewPhotoSelectMetaData reloadData];
-            
-            //            cell.imagePhotoFlickr.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
         }
         else
         {
             //        cell.photo.image = self.flickrPhoto.thumbnail;
             [Flickr loadImageForPhoto:self.imageFlickr thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
-                
-                //                [spinner stopAnimating];
-                //                    [spinner setHidden:YES];
                 
                 if(!error)
                 {
@@ -174,8 +169,6 @@
                          *
                          ------------------------------------------------------------------------*/
                         _image = _imageFlickr.largeImage;
-//                        [self initWithImage:_image];
-//                        [self initWithModel:model andImage:_image];
                         [self loadImage:_image];
                         _metaData = [[JMFMetaData alloc] initWithImage:_imageFlickr.largeImage];
                         [tableViewPhotoSelectMetaData reloadData];
@@ -655,23 +648,13 @@
      ---------------------------------------------------------------------*/
     CellFilters *cell = (CellFilters *) [tableView dequeueReusableCellWithIdentifier:kCellFilters];
     
-    //    cell.imgFilter1.image = [self filterOverImage:self.image nameFilter:@"CISepiaTone"];
-    ////    cell.imgFilter1.image = [self filterOverImage:self.image nameFilter:@"CITorusLensDistortion"];
-    //    cell.imgFilter2.image = [self filterOverImage:self.image nameFilter:@"CIPhotoEffectProcess"];
-    //    cell.imgFilter3.image = [self filterOverImage:self.image nameFilter:@"CIPixellate"];
-    //    cell.imgFilter4.image = [self filterOverImage:self.image nameFilter:@"CIPinchDistortion"];
-    //    cell.imgFilter5.image = [self filterOverImage:self.image nameFilter:@"CIPerspectiveTransform"];
-    //    //    cell.imgFilter5.image = [self filterOverImage:self.image nameFilter:@"CISharpenLuminance"];
-    
-    //    UIImage *img = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
+  
     
     cell.imgFilter1.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CISepiaTone"];
-    //    cell.imgFilter1.image = [self filterOverImage:self.image nameFilter:@"CITorusLensDistortion"];
     cell.imgFilter2.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPhotoEffectProcess"];
     cell.imgFilter3.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPixellate"];
     cell.imgFilter4.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPinchDistortion"];
     cell.imgFilter5.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPerspectiveTransform"];
-    //    cell.imgFilter5.image = [self filterOverImage:self.image nameFilter:@"CISharpenLuminance"];
     
     return cell;
 }
@@ -747,6 +730,11 @@
         longitude = location.coordinate.longitude;
     }
     
+//    if (locationUser) {
+//        cell.lblLoacationOrigin.text = @"Localización del usuario";
+//    } else
+//        cell.lblLoacationOrigin.text = @"Localización de la imagen";
+    
     //    CLLocation *lastLocation = [CLLocation alloc  ini]CLLocationCoordinate2DMake(30.0f, -3.0f);
     //
     //    [location.coordinate setLatitude:30];
@@ -818,13 +806,31 @@
                     cell.lblName.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Name"];
                     cell.lblStreet.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Street"];
                     
-                    // Mapa
+                    // Anotacion con la información
                     MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
                     chincheta.coordinate = CLLocationCoordinate2DMake(latitude, longitude);
                     chincheta.title = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"];
-                    chincheta.subtitle = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"];
+                    NSString *msg;
                     
+                    /*------------------------------------------------------------
+                     *
+                     * Muestra informacion sobre el origen de la localización:
+                     *      - de la imagen.
+                     *      - del usuario.
+                     *
+                     -------------------------------------------------------------*/
+                    if (locationUser) {
+                        msg = [NSString stringWithFormat:@"%@ (¡%@!)",[[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"],@"Usuario"];
+                    } else {
+                        msg = [NSString stringWithFormat:@"%@ (%@)",[[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"],@"Imagen"];
+                    }
+                    
+                    chincheta.subtitle = msg;
+                  
                     [cell.mapView addAnnotation:chincheta];
+                    
+                    // Despliega la anotación
+                    [cell.mapView selectAnnotation:chincheta animated:YES];
                 });
                 
                 
@@ -836,7 +842,7 @@
         
     }
     
-    
+
     
     
     // Localizacion
@@ -857,6 +863,67 @@
 }
 
 
+/*.....................................
+ *
+ * Añadiendo imagen a la localizacion.
+ *
+ ......................................*/
+- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
+{
+//    if ([[annotation title] isEqualToString:@"Current Location"]) {
+//        return nil;
+//    }
+    
+    MKAnnotationView *annView = [[MKAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
+    /*
+    if ([[annotation title] isEqualToString:@"McDonald's"])
+        annView.image = [ UIImage imageNamed:@"mcdonalds.png" ];
+    else if ([[annotation title] isEqualToString:@"Apple store"])
+        annView.image = [ UIImage imageNamed:@"applestore.png" ];
+    else
+        annView.image = [ UIImage imageNamed:@"marker.png" ];
+     */
+    
+    /*
+     * Añade imagen al mapa.
+     */
+    /*
+    UIImage *img = [ UIImage imageNamed:@"PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg" ];
+    annView.image = [Utils imageToThumbnail:img Size:CGSizeMake(70, 70)];
+     //    annView.calloutOffset = CGPointMake(0, 32);
+    */
+    
+    /*
+     * Añade imagen dentro de la anotación.
+     */
+//    UIImage *img = [ UIImage imageNamed:@"PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg" ];
+//    img = [Utils imageToThumbnail:img Size:CGSizeMake(70, 70)];
+    UIImageView *iconView = [[UIImageView alloc] initWithImage:[Utils imageToThumbnail:self.image Size:CGSizeMake(70, 70)]];
+    annView.leftCalloutAccessoryView = iconView;
+    
+    /*
+     * Añade boton dentro de  anotación.
+     */
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    [infoButton addTarget:self action:@selector(showDetailsView)
+         forControlEvents:UIControlEventTouchUpInside];
+    annView.rightCalloutAccessoryView = infoButton;
+    annView.canShowCallout = YES;
+    
+    return annView;
+}
+
+-(void)showDetailsView {
+    
+    NSString *msg;
+    if (locationUser)
+        msg = @"La imagen no contiene información sobre GPS. \n La localizacion es la actual del usuario.";
+    else
+        msg = @"Localización proporcionada por la imagen en los 'Metadatos'.";
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Localización" message:msg delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil];
+    [alert show];
+}
 
 #pragma mark - Metodos privados
 
@@ -1071,7 +1138,26 @@
      * Localización.
      *
      -----------------------------*/
-    [self startLocation];
+    /*
+     *  La imagen contiene información de GPS.
+     */
+    NSDictionary *gps = [self.metaData GPSDictionary];
+    if ([gps objectForKey:kCGImagePropertyGPSLatitude] &&
+        [gps objectForKey:kCGImagePropertyGPSLongitude]) {
+        
+        latitude = [[gps objectForKey:kCGImagePropertyGPSLatitude] floatValue];
+        longitude = [[gps objectForKey:kCGImagePropertyGPSLongitude] floatValue];
+        locationUser = NO;
+        
+        
+        /*
+         *  La imagen no contiene información de GPS. 
+         *  Se obtiene la localización del usuario.
+         */
+    } else {
+        [self startLocation];
+        locationUser = YES;
+    }
     
     
     

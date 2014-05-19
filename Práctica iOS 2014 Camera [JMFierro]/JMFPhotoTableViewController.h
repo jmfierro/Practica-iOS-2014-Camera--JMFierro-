@@ -9,6 +9,7 @@
 @import CoreLocation;
 
 #import <UIKit/UIKit.h>
+
 #import "FlickrPhoto.h"
 #import "JMFModel.h"
 //#import "JMFMetaData.h"

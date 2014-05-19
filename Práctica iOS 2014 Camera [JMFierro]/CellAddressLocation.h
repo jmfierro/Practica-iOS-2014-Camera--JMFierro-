@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 
+
 + (CellAddressLocation*) addressLocationDetailCell;
 
 
