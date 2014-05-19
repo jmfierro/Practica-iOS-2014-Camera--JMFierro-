@@ -42,13 +42,6 @@
                         <color key="textColor" red="0.3333333432674408" green="0.76470595598220825" blue="0.82745105028152466" alpha="1" colorSpace="deviceRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kvN-LZ-uXX">
-                        <rect key="frame" x="681" y="70" width="68" height="70"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="btn_round_next.png">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
                     <view contentMode="scaleToFill" id="E6G-Nu-IRQ">
                         <rect key="frame" x="58" y="358" width="671" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -184,7 +177,6 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="btnMore" destination="kvN-LZ-uXX" id="vya-BG-BPP"/>
                 <outlet property="lbl1" destination="LO6-S2-s4a" id="fDp-8T-4MR"/>
                 <outlet property="lbl1content" destination="NRD-dh-fpc" id="bfj-Vl-N8I"/>
                 <outlet property="lbl2" destination="RGM-YM-llW" id="sBz-A9-i45"/>
@@ -208,7 +200,4 @@
             </connections>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="btn_round_next.png" width="34" height="35"/>
-    </resources>
 </document>

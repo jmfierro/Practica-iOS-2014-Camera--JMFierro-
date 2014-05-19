@@ -52,8 +52,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbl8content;
 
 
-@property (weak, nonatomic) IBOutlet UIButton *btnMore;
-
 - (IBAction)segmentMetadatos:(id)sender;
 
 

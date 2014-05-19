@@ -16,7 +16,7 @@
 #import "JMFLocation.h"
 #import "Flickr.h"
 
-#import "JMFMetaData.h"
+//#import "JMFMetaData.h"
 
 // Celdas
 #import "CellFilters.h"
@@ -32,7 +32,8 @@
 
 @interface JMFPhotoTableViewController () {
     
-
+    
+    
     UITableView *tableViewPhotoSelectMetaData;
     CellImage *cellImage;
     
@@ -95,14 +96,31 @@
 
 
 
+/*...........................
+ *
+ *  ** Imagen a mostrar.  **
+ *
+ ...........................*/
+-(id) initWithImage:(UIImage *) image {
+    //-(id) initWithModel:(JMFModel *)model andImage:(UIImage *) image {
+    
+    if (self = [super initWithNibName:nil bundle:nil]) {
+        
+        [self loadImage:image];
+    }
+    
+    return self;
+}
+
 
 /*..................................
  *
  *  ** Imagen bajada de Flickr.  **
  *
  ...................................*/
--(id) initWithFlickrPhoto:(ModelFlickrPhoto *)flickrPhoto {
-    
+-(id) initWithFlickrPhoto:(FlickrPhoto *)flickrPhoto {
+//-(id) initWithModel:(JMFModel *)model andFlickr:(FlickrPhoto *)flickrPhoto {
+
     if (self = [super initWithNibName:nil bundle:nil]) {
         _modelFlickrPhoto = flickrPhoto;
         
@@ -135,7 +153,9 @@
                          *
                          ------------------------------------------------------------------------*/
                         _image = self.modelFlickrPhoto.largeImage;
-                        [self initWithImage:_image];
+//                        [self initWithImage:_image];
+//                        [self initWithModel:model andImage:_image];
+                        [self loadImage:_image];
                         [tableViewPhotoSelectMetaData reloadData];
                     });
                 }
@@ -149,44 +169,37 @@
 }
 
 
-/*...........................
- *
- *  ** Imagen a mostrar.  **
- *
- ...........................*/
--(id) initWithImage:(UIImage *) image {
+
+
+-(void) loadImage:(UIImage *)image {
     
-    if (self = [super initWithNibName:nil bundle:nil]) {
+    // Inicializa locations, tableView, celdas.
+    [self registers];
+    
+    /*-------------------------------------------------
+     *
+     * Redimensiona la imagen al tamaño del imageView
+     *
+     --------------------------------------------------*/
+    if (image.size.height > cellImage_height || image.size.width > cellImage_width) {
         
-        [self registers];
+        
+        _image = [Utils imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_height)];
+        
         
         /*-------------------------------------------------
          *
-         * Redimensiona la imagen al tamaño del imageView
+         * Conserva tamaño original de la Imagen.
          *
          --------------------------------------------------*/
-        if (image.size.height > cellImage_height || image.size.width > cellImage_width) {
-            
-            
-            _image = [Utils imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_height)];
-            
-
-            /*-------------------------------------------------
-             *
-             * Conserva tamaño original de la Imagen.
-             *
-             --------------------------------------------------*/
-        } else {
-            _image = image;
-        }
-        
-        _imageThumbnail = [Utils imageToThumbnail:image Size:CGSizeMake(100, 100)];
-        _modelMetaData = [[JMFModelMetaData alloc] initWithImage:image];
-        
+    } else {
+        _image = image;
     }
     
-    return self;
+    _imageThumbnail = [Utils imageToThumbnail:image Size:CGSizeMake(100, 100)];
+    _modelMetaData = [[JMFMetaData alloc] initWithImage:image];
 }
+
 
 -(void)viewWillAppear:(BOOL)animated {
     
@@ -208,7 +221,9 @@
                                             initWithActivityItems:postItem
                                             applicationActivities:nil];
     /*
-    activityVC.excludedActivityTypes = @[UIActivityTypePostToWeibo,
+     // Actividades a excluir
+    activityVC.excludedActivityTypes = @[
+                                         UIActivityTypePostToWeibo,
                                          UIActivityTypeMessage,
                                          UIActivityTypeMail,
                                          UIActivityTypePrint,
@@ -541,7 +556,7 @@
         [filtersActive removeObjectForKey:note.object];
     else
         [filtersActive setObject:@YES forKey:note.object];
-
+/*
     // Recorrido y aplicación de todos los filtros activos
     self.imageAplyFilters = self.image;
     NSArray *keys = [filtersActive allKeys];
@@ -553,6 +568,7 @@
     self.imageAplyFilters = [Utils filterOverImage:self.image nameFilter:@"CISepiaTone"];
     
 //    self.imageAplyFilters = nil;
+ */
     [tableViewPhotoSelectMetaData reloadData];
 }
 
@@ -897,19 +913,19 @@
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"Color";
-    cell.lbl1content.text = [self.modelMetaData.metaDataAll objectForKey:@"ColorModel"];
+    cell.lbl1content.text = [self.modelMetaData.allMetaData objectForKey:@"ColorModel"];
     
     cell.lbl2.text = @"Profundidad";
-    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.metaDataAll objectForKey:@"Depth"]];
+    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.allMetaData objectForKey:@"Depth"]];
     
     cell.lbl3.text = @"Orientacion";
-    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.metaDataAll objectForKey:@"Orientation"]];
+    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.allMetaData objectForKey:@"Orientation"]];
     
     cell.lbl5.text = @"Alto";
-    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.metaDataAll objectForKey:@"PixelHeight"]];
+    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.allMetaData objectForKey:@"PixelHeight"]];
     
     cell.lbl6.text = @"Ancho";
-    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.metaDataAll objectForKey:@"PixelWidth"]];
+    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.allMetaData objectForKey:@"PixelWidth"]];
     
     
     return cell;

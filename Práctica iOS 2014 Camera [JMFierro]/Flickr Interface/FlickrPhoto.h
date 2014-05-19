@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ModelFlickrPhoto : NSObject
+@interface FlickrPhoto : NSObject
 @property(nonatomic,strong) UIImage *thumbnail;
 @property(nonatomic,strong) UIImage *largeImage;
 

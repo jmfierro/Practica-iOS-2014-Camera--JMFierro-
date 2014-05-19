@@ -11,9 +11,8 @@
 		50059446192229CA00564EFD /* iconCoordenates.png in Resources */ = {isa = PBXBuildFile; fileRef = 50059445192229CA00564EFD /* iconCoordenates.png */; };
 		502AC62F190AA3F200EFB9B3 /* UIImageView+Curled.m in Sources */ = {isa = PBXBuildFile; fileRef = 502AC62E190AA3F200EFB9B3 /* UIImageView+Curled.m */; };
 		502AC632190AA43F00EFB9B3 /* CurledViewBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 502AC631190AA43F00EFB9B3 /* CurledViewBase.m */; };
-		50375315191CDB8100338280 /* JMFMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = 50375314191CDB8100338280 /* JMFMetaData.m */; };
 		50375318191CDD3300338280 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50A5209018F83030007F6F7B /* ImageIO.framework */; };
-		5037531D191CE35800338280 /* JMFModelMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5037531C191CE35800338280 /* JMFModelMetaData.m */; };
+		5037531D191CE35800338280 /* JMFMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5037531C191CE35800338280 /* JMFMetaData.m */; };
 		50382F1C18F0243D0061B90C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50382F1B18F0243D0061B90C /* Foundation.framework */; };
 		50382F1E18F0243D0061B90C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50382F1D18F0243D0061B90C /* CoreGraphics.framework */; };
 		50382F2018F0243D0061B90C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50382F1F18F0243D0061B90C /* UIKit.framework */; };
@@ -39,7 +38,7 @@
 		503E383F18F2F96F00A9FBDF /* pushpin.png in Resources */ = {isa = PBXBuildFile; fileRef = 503E382B18F2F96F00A9FBDF /* pushpin.png */; };
 		503E384018F2F96F00A9FBDF /* pushpin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 503E382C18F2F96F00A9FBDF /* pushpin@2x.png */; };
 		503E384A18F2FC4D00A9FBDF /* Flickr.m in Sources */ = {isa = PBXBuildFile; fileRef = 503E384718F2FC4D00A9FBDF /* Flickr.m */; };
-		503E384B18F2FC4D00A9FBDF /* ModelFlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 503E384918F2FC4D00A9FBDF /* ModelFlickrPhoto.m */; };
+		503E384B18F2FC4D00A9FBDF /* FlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 503E384918F2FC4D00A9FBDF /* FlickrPhoto.m */; };
 		505A7BA31920C971005D0B08 /* Washington.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 505A7BA21920C971005D0B08 /* Washington.jpg */; };
 		505A7BA61920D39E005D0B08 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 505A7BA51920D39E005D0B08 /* Utils.m */; };
 		50644168191124D900B18D70 /* iconFaceDetectionTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 50644167191124D900B18D70 /* iconFaceDetectionTransparent.png */; };
@@ -50,7 +49,7 @@
 		50722FC51907CCCD009E079D /* papel-rasgado-54166.png in Resources */ = {isa = PBXBuildFile; fileRef = 50722FC41907CCCD009E079D /* papel-rasgado-54166.png */; };
 		507C8E1C1917801200238C30 /* FaceDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 507C8E1B1917801200238C30 /* FaceDetection.m */; };
 		507C8E201917985A00238C30 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507C8E1F1917985A00238C30 /* MobileCoreServices.framework */; };
-		507E1122190915680038ECB7 /* JMFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 507E1121190915680038ECB7 /* JMFImages.m */; };
+		507E1122190915680038ECB7 /* JMFModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 507E1121190915680038ECB7 /* JMFModel.m */; };
 		508224361917E438000BB05B /* JMFFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 508224351917E438000BB05B /* JMFFilters.m */; };
 		508A487E190FAD0300FFEBAA /* gente_750x469--647x300.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */; };
 		508A4880190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */; };
@@ -93,6 +92,7 @@
 		50BB8AC318F6CC7D008EC1F3 /* CellImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB8AC118F6CC7D008EC1F3 /* CellImage.m */; };
 		50BB8AC818F6E1FC008EC1F3 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 50BB8AC718F6E1FC008EC1F3 /* bg.png */; };
 		50BD7B071919261D0058156D /* iconCheck-300px.png in Resources */ = {isa = PBXBuildFile; fileRef = 50BD7B061919261D0058156D /* iconCheck-300px.png */; };
+		50BF31E11929F1FA002B33FA /* JMFCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BF31E01929F1FA002B33FA /* JMFCamera.m */; };
 		50C1F72018F435C9004A1296 /* JMFHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C1F71F18F435C9004A1296 /* JMFHeader.m */; };
 		50C1F72318F44341004A1296 /* JMFPhotoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C1F72218F44341004A1296 /* JMFPhotoTableViewController.m */; };
 		50C1F72818F44A2C004A1296 /* famous-face-dementia-617x416.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50C1F72718F44A2C004A1296 /* famous-face-dementia-617x416.jpg */; };
@@ -127,11 +127,9 @@
 		502AC62E190AA3F200EFB9B3 /* UIImageView+Curled.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Curled.m"; sourceTree = "<group>"; };
 		502AC630190AA43F00EFB9B3 /* CurledViewBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurledViewBase.h; sourceTree = "<group>"; };
 		502AC631190AA43F00EFB9B3 /* CurledViewBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurledViewBase.m; sourceTree = "<group>"; };
-		50375313191CDB8100338280 /* JMFMetaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFMetaData.h; sourceTree = "<group>"; };
-		50375314191CDB8100338280 /* JMFMetaData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFMetaData.m; sourceTree = "<group>"; };
 		50375316191CDC6200338280 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		5037531B191CE35800338280 /* JMFModelMetaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFModelMetaData.h; sourceTree = "<group>"; };
-		5037531C191CE35800338280 /* JMFModelMetaData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFModelMetaData.m; sourceTree = "<group>"; };
+		5037531B191CE35800338280 /* JMFMetaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFMetaData.h; sourceTree = "<group>"; };
+		5037531C191CE35800338280 /* JMFMetaData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFMetaData.m; sourceTree = "<group>"; };
 		50382F1818F0243D0061B90C /* Práctica iOS 2014 Camera [JMFierro].app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Práctica iOS 2014 Camera [JMFierro].app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50382F1B18F0243D0061B90C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		50382F1D18F0243D0061B90C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -163,8 +161,8 @@
 		503E382C18F2F96F00A9FBDF /* pushpin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pushpin@2x.png"; sourceTree = "<group>"; };
 		503E384618F2FC4D00A9FBDF /* Flickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flickr.h; sourceTree = "<group>"; };
 		503E384718F2FC4D00A9FBDF /* Flickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Flickr.m; sourceTree = "<group>"; };
-		503E384818F2FC4D00A9FBDF /* ModelFlickrPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelFlickrPhoto.h; sourceTree = "<group>"; };
-		503E384918F2FC4D00A9FBDF /* ModelFlickrPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelFlickrPhoto.m; sourceTree = "<group>"; };
+		503E384818F2FC4D00A9FBDF /* FlickrPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhoto.h; sourceTree = "<group>"; };
+		503E384918F2FC4D00A9FBDF /* FlickrPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhoto.m; sourceTree = "<group>"; };
 		505A7BA21920C971005D0B08 /* Washington.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Washington.jpg; sourceTree = "<group>"; };
 		505A7BA41920D39E005D0B08 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		505A7BA51920D39E005D0B08 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
@@ -178,8 +176,8 @@
 		507C8E1A1917801200238C30 /* FaceDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceDetection.h; sourceTree = "<group>"; };
 		507C8E1B1917801200238C30 /* FaceDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceDetection.m; sourceTree = "<group>"; };
 		507C8E1F1917985A00238C30 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		507E1120190915680038ECB7 /* JMFImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFImages.h; sourceTree = "<group>"; };
-		507E1121190915680038ECB7 /* JMFImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFImages.m; sourceTree = "<group>"; };
+		507E1120190915680038ECB7 /* JMFModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFModel.h; sourceTree = "<group>"; };
+		507E1121190915680038ECB7 /* JMFModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFModel.m; sourceTree = "<group>"; };
 		508224341917E438000BB05B /* JMFFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFFilters.h; sourceTree = "<group>"; };
 		508224351917E438000BB05B /* JMFFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFFilters.m; sourceTree = "<group>"; };
 		508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "gente_750x469--647x300.jpg"; sourceTree = "<group>"; };
@@ -237,6 +235,8 @@
 		50BB8AC118F6CC7D008EC1F3 /* CellImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellImage.m; sourceTree = "<group>"; };
 		50BB8AC718F6E1FC008EC1F3 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		50BD7B061919261D0058156D /* iconCheck-300px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconCheck-300px.png"; sourceTree = "<group>"; };
+		50BF31DF1929F1FA002B33FA /* JMFCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFCamera.h; sourceTree = "<group>"; };
+		50BF31E01929F1FA002B33FA /* JMFCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFCamera.m; sourceTree = "<group>"; };
 		50C1F71E18F435C9004A1296 /* JMFHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFHeader.h; sourceTree = "<group>"; };
 		50C1F71F18F435C9004A1296 /* JMFHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFHeader.m; sourceTree = "<group>"; };
 		50C1F72118F44341004A1296 /* JMFPhotoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFPhotoTableViewController.h; sourceTree = "<group>"; };
@@ -296,20 +296,10 @@
 		5037531A191CE30700338280 /* MetaData */ = {
 			isa = PBXGroup;
 			children = (
-				5037531E191CE35F00338280 /* Model */,
-				50375313191CDB8100338280 /* JMFMetaData.h */,
-				50375314191CDB8100338280 /* JMFMetaData.m */,
+				5037531B191CE35800338280 /* JMFMetaData.h */,
+				5037531C191CE35800338280 /* JMFMetaData.m */,
 			);
 			name = MetaData;
-			sourceTree = "<group>";
-		};
-		5037531E191CE35F00338280 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				5037531B191CE35800338280 /* JMFModelMetaData.h */,
-				5037531C191CE35800338280 /* JMFModelMetaData.m */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		50382F0F18F0243D0061B90C = {
@@ -366,7 +356,7 @@
 				5037531A191CE30700338280 /* MetaData */,
 				50375319191CE2FA00338280 /* Filters */,
 				50D8085A18FC236600172322 /* Location */,
-				503E384518F2FC4D00A9FBDF /* Flickr Interface */,
+				503E384518F2FC4D00A9FBDF /* Flickr */,
 				50382F2D18F0243D0061B90C /* Images.xcassets */,
 				50382F2218F0243D0061B90C /* Supporting Files */,
 			);
@@ -426,21 +416,22 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		503E384518F2FC4D00A9FBDF /* Flickr Interface */ = {
+		503E384518F2FC4D00A9FBDF /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
-				506202E4190E433400F4628C /* Model */,
 				503E384618F2FC4D00A9FBDF /* Flickr.h */,
 				503E384718F2FC4D00A9FBDF /* Flickr.m */,
+				506202E4190E433400F4628C /* Model */,
 			);
+			name = Flickr;
 			path = "Flickr Interface";
 			sourceTree = "<group>";
 		};
 		506202E4190E433400F4628C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				503E384818F2FC4D00A9FBDF /* ModelFlickrPhoto.h */,
-				503E384918F2FC4D00A9FBDF /* ModelFlickrPhoto.m */,
+				503E384818F2FC4D00A9FBDF /* FlickrPhoto.h */,
+				503E384918F2FC4D00A9FBDF /* FlickrPhoto.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -459,17 +450,18 @@
 			children = (
 				50CAD12B191D2630001C17CE /* JMFCameraViewController.h */,
 				50CAD12C191D2630001C17CE /* JMFCameraViewController.m */,
+				50BF31E21929F209002B33FA /* Model */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
 		};
-		507E1123190915710038ECB7 /* Models */ = {
+		507E1123190915710038ECB7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				507E1120190915680038ECB7 /* JMFImages.h */,
-				507E1121190915680038ECB7 /* JMFImages.m */,
+				507E1120190915680038ECB7 /* JMFModel.h */,
+				507E1121190915680038ECB7 /* JMFModel.m */,
 			);
-			name = Models;
+			name = Model;
 			sourceTree = "<group>";
 		};
 		5091FE9D19236AC8006E4B11 /* Utils */ = {
@@ -535,8 +527,6 @@
 		50B8594B18F2ED4D00E91D44 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
-				507E1123190915710038ECB7 /* Models */,
-				503E381C18F2F96F00A9FBDF /* Assets */,
 				50382F4F18F024DC0061B90C /* JMFCollectionView.h */,
 				50382F5018F024DC0061B90C /* JMFCollectionView.m */,
 				50382F5118F024DC0061B90C /* JMFCollectionView.xib */,
@@ -548,8 +538,19 @@
 				50B8594718F2EBAB00E91D44 /* JMFPushpinCell.h */,
 				50B8594818F2EBAB00E91D44 /* JMFPushpinCell.m */,
 				50E94C2218F4145600589BDA /* JMFPushpinCell.xib */,
+				503E381C18F2F96F00A9FBDF /* Assets */,
+				507E1123190915710038ECB7 /* Model */,
 			);
 			name = Collection;
+			sourceTree = "<group>";
+		};
+		50BF31E21929F209002B33FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				50BF31DF1929F1FA002B33FA /* JMFCamera.h */,
+				50BF31E01929F1FA002B33FA /* JMFCamera.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		50C1F72918F44ACD004A1296 /* TableView */ = {
@@ -740,30 +741,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				50B2524B191B8FF7005D7C86 /* JMFLocationViewController.m in Sources */,
-				5037531D191CE35800338280 /* JMFModelMetaData.m in Sources */,
+				5037531D191CE35800338280 /* JMFMetaData.m in Sources */,
 				50B25260191BA448005D7C86 /* LocationViewController.m in Sources */,
 				502AC632190AA43F00EFB9B3 /* CurledViewBase.m in Sources */,
 				50C299F8190E509C00879269 /* CellFilters.m in Sources */,
 				50C1F72018F435C9004A1296 /* JMFHeader.m in Sources */,
-				507E1122190915680038ECB7 /* JMFImages.m in Sources */,
+				507E1122190915680038ECB7 /* JMFModel.m in Sources */,
 				50B2525C191BA272005D7C86 /* JPSThumbnailAnnotationView.m in Sources */,
 				503E384A18F2FC4D00A9FBDF /* Flickr.m in Sources */,
 				50B2525D191BA272005D7C86 /* JPSThumnail.m in Sources */,
 				50A5206518F7F105007F6F7B /* CellUser.m in Sources */,
 				508224361917E438000BB05B /* JMFFilters.m in Sources */,
+				50BF31E11929F1FA002B33FA /* JMFCamera.m in Sources */,
 				50382F2C18F0243D0061B90C /* AppDelegate.m in Sources */,
 				50CAD12D191D2630001C17CE /* JMFCameraViewController.m in Sources */,
 				507C8E1C1917801200238C30 /* FaceDetection.m in Sources */,
 				50BB8AC318F6CC7D008EC1F3 /* CellImage.m in Sources */,
 				50B8594A18F2EBAB00E91D44 /* JMFPushpinCell.m in Sources */,
 				50A5206118F7F105007F6F7B /* CellDetail.m in Sources */,
-				503E384B18F2FC4D00A9FBDF /* ModelFlickrPhoto.m in Sources */,
+				503E384B18F2FC4D00A9FBDF /* FlickrPhoto.m in Sources */,
 				50B2525B191BA272005D7C86 /* JPSThumbnailAnnotation.m in Sources */,
 				50B252AE191BD944005D7C86 /* JMFCoreViewController.m in Sources */,
 				50382F5218F024DC0061B90C /* JMFCollectionView.m in Sources */,
 				50A5206318F7F105007F6F7B /* CellAddressLocation.m in Sources */,
 				50C1F72318F44341004A1296 /* JMFPhotoTableViewController.m in Sources */,
-				50375315191CDB8100338280 /* JMFMetaData.m in Sources */,
 				50382F2818F0243D0061B90C /* main.m in Sources */,
 				502AC62F190AA3F200EFB9B3 /* UIImageView+Curled.m in Sources */,
 				50722FBF1907BC4F009E079D /* JMFHeaderView.m in Sources */,

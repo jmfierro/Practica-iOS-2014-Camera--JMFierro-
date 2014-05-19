@@ -18,12 +18,14 @@
 
 
 #import "Flickr.h"
-#import "ModelFlickrPhoto.h"
+#import "FlickrPhoto.h"
 #import "Utils.h"
 
 
 
 @interface JMFCollectionView () {
+    
+    NSMutableDictionary *modelDictionay;
     
     // Accesible en toda la clase
 //    @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
@@ -50,8 +52,14 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-//        self.photosCamera = [[NSMutableArray alloc] init];
-        self.model = [[JMFImages alloc] initWith];
+
+        /*------------------
+         *
+         * **   MODELO   **
+         *
+         -------------------*/
+        modelDictionay = [[NSMutableDictionary alloc] init];
+        self.model = [[JMFModel alloc] initWith];
     }
     return self;
 }
@@ -213,12 +221,16 @@
              * SELECCION para fotos tomadas con la camara.
              *
              ------------------------------------------------------------------------------*/
-            //        tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImage:[self.photosCamera objectAtIndex:indexPath.row]];
-            
-            // Evita que la imagen inicial de "void" , que índica que no hay fotos tomadas por la cámara, se seleccione. 
+   
+            // Evita que la imagen inicial de "void" en la seccion de 'Camara' se seleccione.
+            // (Esta ima gen 'void' índica que no hay fotos tomadas por la cámara desde la app)
             if ([self.model countOfPhotosCamera]) {
 
-                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImage:[self.model.photosCamera objectAtIndex:indexPath.row]];
+//                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithModel:self.model andImage:[self.model.photosCamera objectAtIndex:indexPath.row]];
+                
+                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImage:[self.model.imagesCamera objectAtIndex:indexPath.row]];
+                
+                
                 [self.navigationController pushViewController:tablePhotoVC animated:YES];
             }
             
@@ -229,11 +241,23 @@
              * SELECCION para imagenes descargadas de Flickr.
              *
              ------------------------------------------------------------------------------*/
+          
+//            NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
+//            FlickrPhoto *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPath.row];
+//            tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithFlickrPhoto:flickrPhoto];
+////            tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithModel:self.model andFlickr:flickrPhoto];
+//            
+//            //    ProfileScrollViewController *tableFlickrPhotoVC = [ProfileScrollViewController new];
+//            
+//            //    [self.delegate setFlickrPhoto:flickrPhoto];
+//            [self.navigationController pushViewController:tablePhotoVC animated:YES];
+            
             //        NSString *searchTerm = self.searches[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
             //        flickrPhoto = self.searchResults[searchTerm][indexPath.row];
             
-            NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
-            ModelFlickrPhoto *flickrPhoto = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
+            NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1];
+            //[self.photosCamera count]>0 ? 1:0];
+            FlickrPhoto *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPath.row];
             
             //    tableFlickrPhotoVC.delegate = self;
             
@@ -244,7 +268,7 @@
             //    [self.delegate setFlickrPhoto:flickrPhoto];
             [self.navigationController pushViewController:tablePhotoVC animated:YES];
         }
-        
+    
 }
 
 
@@ -263,9 +287,9 @@
 
 #pragma mark – UICollectionViewDelegateFlowLayout Delegates
 
-/********************************************
- ** Métodos para APARIENCIA de las cedas. **
- ********************************************/
+/************************************************
+ ** Métodos para la APARIENCIA de las celdas. **
+ ************************************************/
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -274,14 +298,14 @@
 //    // ...anulado
     CGSize retval;
     if (indexPath.section == 0) {  // & [self.photosCamera count]>0) {
-        /*-----------------------------------------------------------------------------
+        /*-----------------------------------------------------------------
          *
          * TAMAÑO para los THUMBNAILS de las fotos tomadas con la camara.
          *
-         ------------------------------------------------------------------------------*/
+         -----------------------------------------------------------------*/
         UIImage *image;
         if ([self.model countOfPhotosCamera] > 0)
-            image = [self.model.photosCamera objectAtIndex:indexPath.row];
+            image = [self.model.imagesCamera objectAtIndex:indexPath.row];
         else
             image = [UIImage imageNamed:@"can-stock-photo_csp12611066.png"];
  
@@ -299,7 +323,7 @@
 //        FlickrPhoto *photo = self.searchResults[searchTerm][indexPath.row];
         
         NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //  - [self.photosCamera count]>0 ? 1:0];
-        ModelFlickrPhoto *photo = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
+        FlickrPhoto *photo = self.model.imagesFlickr[searchTerm][indexPath.row];
 
         // Escala thumbnail.
         CGSize frame = [Utils scaleFactor:photo.largeImage widthNewFrame:200];
@@ -390,7 +414,7 @@
          ------------------------------------------------------------------------------*/
 
         if ([self.model countOfPhotosCamera] > 0 )
-            cell.imagePhoto.image = [self.model.photosCamera objectAtIndex:indexPath.row];
+            cell.imagePhoto.image = [self.model.imagesCamera objectAtIndex:indexPath.row];
         else
             cell.imagePhoto.image = [UIImage imageNamed:@"can-stock-photo_csp12611066.png"];
         
@@ -402,15 +426,38 @@
          * Sección para imagenes descargadas de Flickr.
          *
          ------------------------------------------------------------------------------*/
-//        NSString *searchTerm = self.searches[indexPath.section -1]; //- [self.photosCamera count]>0 ? 1:0];
-//        cell.photo = self.searchResults[searchTerm][indexPath.row];
+        /*
+        NSArray *keys = [modelDictionay allKeys];
         
-        NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //- [self.photosCamera count]>0 ? 1:0];
-        cell.photo = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
+        NSArray *array = [modelDictionay objectForKey:[array objectAtIndex:0]];
+        cell.photo = [array objectAtIndex:indexPath.row];
+        
+        
+//        JMFModel *mdl = (JMFModel *)[array objectAtIndex:0];
+//        mdl.flickrPhoto.
+//        NSString *s1 = [array objectAtIndex:0];
+//        NSString *s2 = [array objectAtIndex:1];
+//        NSInteger i = indexPath.section;
+
+//        NSString *s3 = [array objectAtIndex:indexPath.section];
+//        NSArray *dic = [modelDictionay objectForKey:[array objectAtIndex:indexPath.section]];
+//        cell.photo = [dic objectAtIndex:indexPath.row];
+        
+//        NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //- [self.photosCamera count]>0 ? 1:0];
+//        cell.photo = self.model.photosSearchResultsFlickr[searchTerm][indexPath.row];
+         */
+        
+        //        NSString *searchTerm = self.searches[indexPath.section -1]; //- [self.photosCamera count]>0 ? 1:0];
+        //        cell.photo = self.searchResults[searchTerm][indexPath.row];
+        
+        NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1];
+        //- [self.photosCamera count]>0 ? 1:0];
+        cell.photo = self.model.imagesFlickr[searchTerm][indexPath.row];
+
 
     }
     
-//    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photo-frame.png"]];
+
     return cell;
 }
 
@@ -421,7 +468,7 @@
 
 /*.......................................................
  *
- ** Protocolo de TextField de las busquedas en Flickr **
+ ** Protocolo de TextField para las busquedas en Flickr **
  *
  .......................................................*/
 #pragma mark - UITextFieldDelegate Delegates
@@ -444,18 +491,62 @@
     [self.activiyIndicator startAnimating];
     
 //    [self.flickr searchFlickrForTerm:textField.text completionBlock:^(NSString *searchTerm, NSArray *results, NSError *error) {
-    
     Flickr *flickr = [Flickr new];
     [flickr searchFlickrForTerm:textField.text completionBlock:^(NSString *searchTerm, NSArray *results, NSError *error) {
         
-        //        if(results &amp;&amp; [results count] &gt; 0) {
         if(results && [results count] > 0) {
             
+            /* -----------------------------------------------------------------
+             *
+             *  Si no exite el término de busqueda la inserta en la posición 0.
+             *
+             ------------------------------------------------------------------*/
+            /*
+            if(![self.model.termsSearchesFlickr containsObject:searchTerm]) {
+           
+//                NSMutableArray *array = [[NSMutableArray alloc] init];
+//                for (id result in results) {
+//                    JMFModel *imagenData = [[JMFModel alloc] init];
+//                    imagenData.flickrPhoto = result;
+//                    [array addObject:[[JMFModel alloc]initWithFlickr:result]];
+////                    [model addObject:[JMFModel;
+//                }
+//                [modelDictionay setObject:searchTerm
+//                                   forKey:[JMFModel modelResultsFromFlickr:results]];
+
+                
+                JMFModel *image = [[JMFModel alloc] initWithFlickr:results];
+                image.flfiickrPhoto =
+                [modelDictionay setObject:searchTerm forKey:results];
+                
+                [self.model.termsSearchesFlickr insertObject:searchTerm atIndex:0];                   self.model.imagesFlickr[searchTerm] = results;
+            }
+       */
+             
+            /* -------------------------------------------------
+             *
+             *  Actualiza la interfaz de usuario.
+             *
+             ---------------------------------------------------*/
+     /*
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.activiyIndicator setHidden:YES];
+                [collectionViewPhotos reloadData];
+            });
+        } else {
+            NSLog(@"Error searching Flickr: %@", error.localizedDescription);
+        } }];
+    
+    [textField resignFirstResponder];
+    return YES;
+    
+    */
+            
             //  Si no exite la busqueda la inserta en la seccón 0
-            if(![self.model.termsSearchesFlickr containsObject:searchTerm]) {   // if(![self.searches containsObject:searchTerm]) {
-                //                NSLog(@"Found %d photos matching %@", [results count],searchTerm);
-                [self.model.termsSearchesFlickr insertObject:searchTerm atIndex:0];   // [self.searches insertObject:searchTerm atIndex:0];
-                self.model.photosSearchResultsFlickr[searchTerm] = results; }  //self.searchResults[searchTerm] = results; }
+            if(![self.model.termsSearchesFlickr containsObject:searchTerm]) {
+                [self.model.termsSearchesFlickr insertObject:searchTerm atIndex:0];
+                self.model.imagesFlickr[searchTerm] = results;
+            }
             
             //  Nuevos datos: actualiza la interfaz de usuario.
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -481,7 +572,7 @@
 
 -(void)getImagePickerCamera:(UIImage *)image {
 
-    [self.model.photosCamera addObject:image];
+    [self.model.imagesCamera addObject:image];
     [collectionViewPhotos reloadData];
     
 }
@@ -539,7 +630,7 @@
     /*
      * Pruebas sin camara. Simula haber tomado una foto.
      */
-    [self.model.photosCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
+    [self.model.imagesCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
 //    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
     [collectionViewPhotos reloadData];
     

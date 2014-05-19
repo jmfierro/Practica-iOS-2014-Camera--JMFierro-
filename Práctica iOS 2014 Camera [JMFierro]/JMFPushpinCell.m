@@ -7,7 +7,7 @@
 //
 
 #import "JMFPushpinCell.h"
-#import "ModelFlickrPhoto.h"
+#import "FlickrPhoto.h"
 #import "Flickr.h"
 
 @implementation JMFPushpinCell
@@ -27,7 +27,7 @@
     return self;
 }
 
-- (void) setPhoto:(ModelFlickrPhoto *)photo
+- (void) setPhoto:(FlickrPhoto *)photo
 {
     if(_photo != photo)
     {

@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ModelFlickrPhoto.h"
-#import "JMFImages.h"
+#import "FlickrPhoto.h"
+#import "JMFModel.h"
 
 
 
 
 @interface JMFCollectionView : UIViewController <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 
-@property (nonatomic, strong) JMFImages *model;
+@property (nonatomic, strong) JMFModel *model;
 
 @property (nonatomic, weak) IBOutlet UITextField *searchTextField;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activiyIndicator;
