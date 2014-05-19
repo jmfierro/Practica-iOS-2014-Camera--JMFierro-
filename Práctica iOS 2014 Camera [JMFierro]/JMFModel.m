@@ -15,11 +15,10 @@
     if (self = [self init]) {
         
         // Flickr
-        self.imagesFlickr = [[NSMutableDictionary alloc] init]; //[@{} mutableCopy];
-        self.termsSearchesFlickr = [[NSMutableArray alloc] init];  //[@[] mutableCopy];
+        self.imagesFlickr = [[NSMutableDictionary alloc] init];
+        self.termsSearchesFlickr = [[NSMutableArray alloc] init];
         
         // Camara
-//        self.photosCamera = [[NSMutableArray alloc] init];
         self.imagesCamera = [[NSMutableArray alloc] init];
     }
     
@@ -27,18 +26,6 @@
     return self;
 }
 
-//+(id)modelResultsFromFlickr:(NSArray *)results {
-//    
-//    NSMutableArray *array = [[NSMutableArray alloc] init];
-//    for (id result in results) {
-//        JMFModel *imagenData = [[JMFModel alloc] init];
-//        imagenData.flickrPhoto = result;
-//        [array addObject:[[JMFModel alloc]initWithFlickr:result]];
-//        //                    [model addObject:[JMFModel;
-//    }
-//    
-//    return array;
-//}
 
 
 -(id)initWithImage:(JMFCamera *) imageCamera {
@@ -46,7 +33,7 @@
     if (self = [self init]) {
         
         //        _flickrPhoto = flickr;
-        _imagesCamera = imageCamera;
+        _imagesCamera = (id)imageCamera;
     }
     
     
@@ -59,8 +46,7 @@
     
     if (self = [self init]) {
         
-//        _flickrPhoto = flickr;
-         _imagesFlickr = imageFlickr;
+         _imagesFlickr = (id)imageFlickr;
     }
     
     
@@ -78,7 +64,6 @@
         numImagesFlickr += [[self.imagesFlickr objectForKey:termSearch] count];
     }
     
-//    return [self.photosCamera count] + numImagesFlickr;
     return [self.imagesCamera count] + numImagesFlickr;
 
 }
@@ -86,11 +71,12 @@
 
 -(NSInteger) countSections{
     
-//    NSInteger i = [self.photosCamera count]>0 ? 1:0;
-    
+   
     return [self.termsSearchesFlickr count] + 1;
 
 }
+
+
 
 /*...........................................
  *
@@ -99,7 +85,6 @@
  ............................................*/
 -(NSInteger) countOfPhotosCamera {
     
-//    return [self.photosCamera count];
     return [self.imagesCamera count];
 }
 

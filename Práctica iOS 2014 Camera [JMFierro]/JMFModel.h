@@ -16,12 +16,12 @@
 
 // Camara
 @property (nonatomic, strong) NSMutableArray *imagesCamera;
-//@property (nonatomic, strong) NSMutableArray *photosCamera;
+
 
 // Flick
-@property(nonatomic, strong) NSMutableDictionary *imagesFlickr; //*photosSearchResultsFlickr;
+@property(nonatomic, strong) NSMutableDictionary *imagesFlickr;
 @property(nonatomic, strong) NSMutableArray *termsSearchesFlickr;
-//@property (nonatomic, strong) FlickrPhoto *modelFlickrPhoto;
+
 
 
 
@@ -29,8 +29,6 @@
 -(id)initWithImage:(JMFCamera *) imageCamera;
 -(id)initWithFlickr:(FlickrPhoto *) imageFlickr;
 
-
-//+(id)modelResultsFromFlickr:(NSArray *)results;
 
 -(NSInteger) countTotal;
 -(NSInteger) countSections;

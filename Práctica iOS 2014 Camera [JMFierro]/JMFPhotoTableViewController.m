@@ -87,9 +87,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-        // Registros
-//        [self registers];
-        
     }
     return self;
 }
@@ -107,6 +104,30 @@
     if (self = [super initWithNibName:nil bundle:nil]) {
         
         [self loadImage:image];
+        _metaData = [[JMFMetaData alloc] initWithImage:image];
+    }
+    
+    return self;
+}
+
+
+/*..................................................
+ *
+ *  ** Imagen tomada por la camara desde la App.  **
+ *
+ ...................................................*/
+-(id) initWithImageCamera:(JMFCamera *) imageCamera {
+    
+    if (self = [super initWithNibName:nil bundle:nil]) {
+        
+        UIImage *img = imageCamera.image;
+        
+        [self loadImage:imageCamera.image];
+        
+        if (imageCamera.metaData)
+            _metaData = imageCamera.metaData;
+        else
+            _metaData = [[JMFMetaData alloc] initWithImage:imageCamera.image];
     }
     
     return self;
@@ -119,19 +140,19 @@
  *
  ...................................*/
 -(id) initWithFlickrPhoto:(FlickrPhoto *)flickrPhoto {
-//-(id) initWithModel:(JMFModel *)model andFlickr:(FlickrPhoto *)flickrPhoto {
+
 
     if (self = [super initWithNibName:nil bundle:nil]) {
-        _modelFlickrPhoto = flickrPhoto;
+        _imageFlickr = flickrPhoto;
         
         /*
          *  Imagen de Flickr.
          */
-        if(self.modelFlickrPhoto.largeImage)
+        if(_imageFlickr.largeImage)
         {
             //            [spinner stopAnimating];
             //                [spinner setHidden:YES];
-            _image = self.modelFlickrPhoto.largeImage;
+            _image = _imageFlickr.largeImage;
             //                [tableViewPhotoSelectMetaData reloadData];
             
             //            cell.imagePhotoFlickr.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
@@ -139,7 +160,7 @@
         else
         {
             //        cell.photo.image = self.flickrPhoto.thumbnail;
-            [Flickr loadImageForPhoto:self.modelFlickrPhoto thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
+            [Flickr loadImageForPhoto:self.imageFlickr thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
                 
                 //                [spinner stopAnimating];
                 //                    [spinner setHidden:YES];
@@ -152,10 +173,11 @@
                          * Cuando la imagen es descargada se actualiza los datos de la TableView
                          *
                          ------------------------------------------------------------------------*/
-                        _image = self.modelFlickrPhoto.largeImage;
+                        _image = _imageFlickr.largeImage;
 //                        [self initWithImage:_image];
 //                        [self initWithModel:model andImage:_image];
                         [self loadImage:_image];
+                        _metaData = [[JMFMetaData alloc] initWithImage:_imageFlickr.largeImage];
                         [tableViewPhotoSelectMetaData reloadData];
                     });
                 }
@@ -170,35 +192,6 @@
 
 
 
-
--(void) loadImage:(UIImage *)image {
-    
-    // Inicializa locations, tableView, celdas.
-    [self registers];
-    
-    /*-------------------------------------------------
-     *
-     * Redimensiona la imagen al tamaño del imageView
-     *
-     --------------------------------------------------*/
-    if (image.size.height > cellImage_height || image.size.width > cellImage_width) {
-        
-        
-        _image = [Utils imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_height)];
-        
-        
-        /*-------------------------------------------------
-         *
-         * Conserva tamaño original de la Imagen.
-         *
-         --------------------------------------------------*/
-    } else {
-        _image = image;
-    }
-    
-    _imageThumbnail = [Utils imageToThumbnail:image Size:CGSizeMake(100, 100)];
-    _modelMetaData = [[JMFMetaData alloc] initWithImage:image];
-}
 
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -699,10 +692,10 @@
     
     
     // Titulo
-    if (self.modelFlickrPhoto.title)
-        cell.lblTitle.text = self.modelFlickrPhoto.title;
-    if (self.modelFlickrPhoto.description)
-        cell.lblDescription.text = self.modelFlickrPhoto.description;
+    if (self.imageFlickr.title)
+        cell.lblTitle.text = self.imageFlickr.title;
+    if (self.imageFlickr.description)
+        cell.lblDescription.text = self.imageFlickr.description;
     
     
     
@@ -867,42 +860,73 @@
 
 #pragma mark - Metodos privados
 
+-(void) loadImage:(UIImage *)aImage {
+    
+    
+    // Inicializa locations, tableView, celdas.
+    [self registers];
+    
+    /*-------------------------------------------------
+     *
+     * Redimensiona la imagen al tamaño del imageView
+     *
+     --------------------------------------------------*/
+    if (aImage.size.height > cellImage_height || aImage.size.width > cellImage_width) {
+        
+        
+        _image = [Utils imageToThumbnail:aImage Size:CGSizeMake(cellImage_width, cellImage_height)];
+        
+        
+        /*-------------------------------------------------
+         *
+         * Conserva tamaño original de la Imagen.
+         *
+         --------------------------------------------------*/
+    } else {
+        _image = aImage;
+    }
+    
+    _imageThumbnail = [Utils imageToThumbnail:aImage Size:CGSizeMake(100, 100)];
+//    _metaData = [[JMFMetaData alloc] initWithImage:aImage];
+
+}
+
 
 -(CellDetail *) writerDatosFlickr:(CellDetail *) cell {
     
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"ID:";
-    if (self.modelFlickrPhoto.photoID)
-        cell.lbl1content.text = [[NSString alloc] initWithFormat:@"%lld", self.modelFlickrPhoto.photoID];
+    if (self.imageFlickr.photoID)
+        cell.lbl1content.text = [[NSString alloc] initWithFormat:@"%lld", self.imageFlickr.photoID];
     
     cell.lbl2.text = @"Farm:";
-    if (self.modelFlickrPhoto.farm)
-        cell.lbl2content.text = [[NSString alloc] initWithFormat:@"%d", self.modelFlickrPhoto.farm];
+    if (self.imageFlickr.farm)
+        cell.lbl2content.text = [[NSString alloc] initWithFormat:@"%d", self.imageFlickr.farm];
     
     cell.lbl3.text = @"Servidor:";
-    if (self.modelFlickrPhoto.server)
-        cell.lbl3content.text = [[NSString alloc] initWithFormat:@"%d", self.modelFlickrPhoto.server];
+    if (self.imageFlickr.server)
+        cell.lbl3content.text = [[NSString alloc] initWithFormat:@"%d", self.imageFlickr.server];
     
     cell.lbl4.text = @"Secreto:";
-    if (self.modelFlickrPhoto.secret)
-        cell.lbl4content.text = self.modelFlickrPhoto.secret;
+    if (self.imageFlickr.secret)
+        cell.lbl4content.text = self.imageFlickr.secret;
     
     cell.lbl5.text = @"Familia:";
-    if (self.modelFlickrPhoto.isfamily)
-        cell.lbl5content.text = self.modelFlickrPhoto.isfamily;
+    if (self.imageFlickr.isfamily)
+        cell.lbl5content.text = self.imageFlickr.isfamily;
     
     cell.lbl6.text = @"Amigo:";
-    if (self.modelFlickrPhoto.isfriend)
-        cell.lbl6content.text = self.modelFlickrPhoto.isfriend;
+    if (self.imageFlickr.isfriend)
+        cell.lbl6content.text = self.imageFlickr.isfriend;
     
     cell.lbl7.text = @"Publico:";
-    if (self.modelFlickrPhoto.ispublic)
-        cell.lbl7content.text = self.modelFlickrPhoto.ispublic;
+    if (self.imageFlickr.ispublic)
+        cell.lbl7content.text = self.imageFlickr.ispublic;
     
     cell.lbl8.text = @"Propietario:";
-    if (self.modelFlickrPhoto.owner)
-        cell.lbl8content.text = self.modelFlickrPhoto.owner;
+    if (self.imageFlickr.owner)
+        cell.lbl8content.text = self.imageFlickr.owner;
     
     return cell;
 }
@@ -913,19 +937,19 @@
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"Color";
-    cell.lbl1content.text = [self.modelMetaData.allMetaData objectForKey:@"ColorModel"];
+    cell.lbl1content.text = [self.metaData.allMetaData objectForKey:@"ColorModel"];
     
     cell.lbl2.text = @"Profundidad";
-    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.allMetaData objectForKey:@"Depth"]];
+    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.metaData.allMetaData objectForKey:@"Depth"]];
     
     cell.lbl3.text = @"Orientacion";
-    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.allMetaData objectForKey:@"Orientation"]];
+    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[self.metaData.allMetaData objectForKey:@"Orientation"]];
     
     cell.lbl5.text = @"Alto";
-    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.allMetaData objectForKey:@"PixelHeight"]];
+    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[self.metaData.allMetaData objectForKey:@"PixelHeight"]];
     
     cell.lbl6.text = @"Ancho";
-    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.allMetaData objectForKey:@"PixelWidth"]];
+    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[self.metaData.allMetaData objectForKey:@"PixelWidth"]];
     
     
     return cell;
@@ -937,13 +961,13 @@
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"Color S.";
-    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.EXIFDictionary objectForKey:@"ColorSpace"]];
+    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.metaData.EXIFDictionary objectForKey:@"ColorSpace"]];
     
     cell.lbl2.text = @"XDimension";
-    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.EXIFDictionary objectForKey:@"PixelXDimension"]];
+    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.metaData.EXIFDictionary objectForKey:@"PixelXDimension"]];
     
     cell.lbl3.text = @"YDimension";
-    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.EXIFDictionary objectForKey:@"PixelYDimension"]];
+    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[self.metaData.EXIFDictionary objectForKey:@"PixelYDimension"]];
     
     
     return cell;
@@ -954,18 +978,18 @@
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"Densidad (ud)";
-    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.JFIFDictionary objectForKey:@"DensityUnit"]];
+    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.metaData.JFIFDictionary objectForKey:@"DensityUnit"]];
     
-    NSArray *array  = [self.modelMetaData.JFIFDictionary objectForKey:@"JFIFVersion"];
+    NSArray *array  = [self.metaData.JFIFDictionary objectForKey:@"JFIFVersion"];
 //    NSString *string = [[array valueForKey:@"description"] componentsJoinedByString:@""];
     cell.lbl2.text = @"JFIF versión";
     cell.lbl2content.text = [NSString stringWithFormat:@"%@.%@",array[0],array[1]];
     
     cell.lbl5.text = @"XDensidad";
-    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.JFIFDictionary objectForKey:@"XDensity"]];
+    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[self.metaData.JFIFDictionary objectForKey:@"XDensity"]];
     
     cell.lbl6.text = @"YDensidad";
-    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.JFIFDictionary objectForKey:@"YDensity"]];
+    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[self.metaData.JFIFDictionary objectForKey:@"YDensity"]];
     
     
     return cell;
@@ -976,7 +1000,7 @@
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"Orientacion";
-    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.modelMetaData.TIFFDictionary objectForKey:@"Orientation"]];
+    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.metaData.TIFFDictionary objectForKey:@"Orientation"]];
     
     
     return cell;

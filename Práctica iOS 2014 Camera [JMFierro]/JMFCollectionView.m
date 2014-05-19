@@ -58,7 +58,7 @@
          * **   MODELO   **
          *
          -------------------*/
-        modelDictionay = [[NSMutableDictionary alloc] init];
+//        modelDictionay = [[NSMutableDictionary alloc] init];
         self.model = [[JMFModel alloc] initWith];
     }
     return self;
@@ -78,8 +78,6 @@
     NSLog(@"Actual Pixel Resolution: width :% f,height :%f",rectMain.size.width * scale,rectMain.size.height * scale);
     NSLog(@" Actual Size width :% f,height :%f",rectMain.size.width ,rectMain.size.height );
     
-    
-//    [self loadModel];
     
     [self.activiyIndicator setHidden:YES];
     
@@ -125,11 +123,6 @@
 
     [self.view addSubview:collectionViewPhotos];
     
-//    LocationViewController *locationVC = [[LocationViewController alloc] initWithViewMap:self.viewMap];
-//    
-//    
-//    [locationVC viewDidLoad];
-
 }
 
 
@@ -191,7 +184,6 @@
              * CABECERA para imagenes descargadas dde Flickr.
              *
              ------------------------------------------------------------------------------*/
-//            NSString *searchTerm = self.searches[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
             NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
             ((JMFHeaderView *)titleView).label.text = searchTerm;
 
@@ -222,13 +214,18 @@
              *
              ------------------------------------------------------------------------------*/
    
-            // Evita que la imagen inicial de "void" en la seccion de 'Camara' se seleccione.
-            // (Esta ima gen 'void' índica que no hay fotos tomadas por la cámara desde la app)
+            /*
+             * Evita que la imagen inicial de "void" en la seccion de 'Camara' se seleccione.
+             * (Esta imagen 'void' índica que no hay fotos tomadas por la cámara desde la app)
+             *
+             */
             if ([self.model countOfPhotosCamera]) {
 
-//                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithModel:self.model andImage:[self.model.photosCamera objectAtIndex:indexPath.row]];
+                //                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImage:[self.model.imagesCamera objectAtIndex:indexPath.row]];
+                JMFCamera *camera = [[JMFCamera alloc] init];
+                camera = [self.model.imagesCamera objectAtIndex:indexPath.row];
                 
-                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImage:[self.model.imagesCamera objectAtIndex:indexPath.row]];
+                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImageCamera:camera];
                 
                 
                 [self.navigationController pushViewController:tablePhotoVC animated:YES];
@@ -242,30 +239,12 @@
              *
              ------------------------------------------------------------------------------*/
           
-//            NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
-//            FlickrPhoto *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPath.row];
-//            tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithFlickrPhoto:flickrPhoto];
-////            tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithModel:self.model andFlickr:flickrPhoto];
-//            
-//            //    ProfileScrollViewController *tableFlickrPhotoVC = [ProfileScrollViewController new];
-//            
-//            //    [self.delegate setFlickrPhoto:flickrPhoto];
-//            [self.navigationController pushViewController:tablePhotoVC animated:YES];
-            
-            //        NSString *searchTerm = self.searches[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
-            //        flickrPhoto = self.searchResults[searchTerm][indexPath.row];
             
             NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1];
-            //[self.photosCamera count]>0 ? 1:0];
             FlickrPhoto *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPath.row];
             
-            //    tableFlickrPhotoVC.delegate = self;
-            
             tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithFlickrPhoto:flickrPhoto];
-            
-            //    ProfileScrollViewController *tableFlickrPhotoVC = [ProfileScrollViewController new];
-            
-            //    [self.delegate setFlickrPhoto:flickrPhoto];
+
             [self.navigationController pushViewController:tablePhotoVC animated:YES];
         }
     
@@ -304,8 +283,11 @@
          *
          -----------------------------------------------------------------*/
         UIImage *image;
-        if ([self.model countOfPhotosCamera] > 0)
-            image = [self.model.imagesCamera objectAtIndex:indexPath.row];
+        if ([self.model countOfPhotosCamera] > 0) {
+            JMFCamera *imgCamera = [[JMFCamera alloc] init];
+            imgCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
+            image = imgCamera.image;
+        }
         else
             image = [UIImage imageNamed:@"can-stock-photo_csp12611066.png"];
  
@@ -413,10 +395,16 @@
          *
          ------------------------------------------------------------------------------*/
 
-        if ([self.model countOfPhotosCamera] > 0 )
-            cell.imagePhoto.image = [self.model.imagesCamera objectAtIndex:indexPath.row];
-        else
+        if ([self.model countOfPhotosCamera] > 0 ) {
+            //            cell.imagePhoto.image = [self.model.imagesCamera objectAtIndex:indexPath.row];
+            JMFCamera *imageCamera = [[JMFCamera alloc] init];
+            imageCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
+            cell.imagePhoto.image = imageCamera.image;
+        }
+
+        else {
             cell.imagePhoto.image = [UIImage imageNamed:@"can-stock-photo_csp12611066.png"];
+        }
         
 
     } else {
@@ -630,8 +618,14 @@
     /*
      * Pruebas sin camara. Simula haber tomado una foto.
      */
-    [self.model.imagesCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
-//    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
+//    [self.model.imagesCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
+    JMFCamera *imageCamera = [[JMFCamera alloc] init];
+    imageCamera.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
+    [self.model.imagesCamera addObject:imageCamera];
+
+    
+    
+    //    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
     [collectionViewPhotos reloadData];
     
     /*

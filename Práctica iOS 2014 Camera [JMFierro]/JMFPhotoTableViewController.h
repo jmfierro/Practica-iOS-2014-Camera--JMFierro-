@@ -18,12 +18,14 @@
 @interface JMFPhotoTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 
 
-@property (nonatomic, strong) JMFMetaData *modelMetaData;
-@property (nonatomic, strong) FlickrPhoto *modelFlickrPhoto;
+@property (nonatomic, strong) JMFMetaData *metaData;
+@property (nonatomic,strong) JMFCamera *imageCamera;
+@property (nonatomic, strong) FlickrPhoto *imageFlickr;
 @property (nonatomic, strong) UIImage *image, *imageThumbnail;
 
 
 -(id) initWithImage:(UIImage *) image;
+-(id) initWithImageCamera:(JMFCamera *) imageCamera;
 -(id) initWithFlickrPhoto:(FlickrPhoto *)flickrPhoto;
 //-(id) initWithModel:(JMFModel *)model andFlickr:(FlickrPhoto *)flickrPhoto;
 //-(id) initWithModel:(JMFModel *)model andImage:(UIImage *) aImage;
