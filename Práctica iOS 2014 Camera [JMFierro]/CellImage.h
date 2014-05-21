@@ -12,10 +12,13 @@
 
 #define kCellImage @"CellImage"
 
+
 @interface CellImage : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
+
 - (IBAction)btnDetectFacialFeatures:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIView *viewNumFaces;
 @property (weak, nonatomic) IBOutlet UILabel *lblNumFaces;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorFaceDetection;

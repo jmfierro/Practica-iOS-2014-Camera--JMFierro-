@@ -12,7 +12,9 @@
 @interface FaceDetection : UIView
 
 @property (nonatomic, strong) UIView *imageView;
-@property (nonatomic) NSInteger numFaces;
+@property (nonatomic) NSInteger facesNum;
+
+@property (nonatomic,strong) NSMutableArray *facesRects;
 
 -(id) initWithImagenView:(UIImageView *) aImageView;
 

@@ -73,7 +73,7 @@
     // Crea un array con las caras detectadas.
     NSArray *facesArray=[detectorFaces featuresInImage:imageCI];
 
-      self.numFaces = [facesArray count];
+      self.facesNum = [facesArray count];
     NSLog(@"%d",[facesArray count]);
     
 //    NSLog(@"image width:%f",self.photoView.image.size.width);
@@ -91,10 +91,13 @@
      *    Anchura para toda la cara, y las coordenadas de cada ojo.
      *    Boca si es detectada.
      */
+    self.facesRects = [[NSMutableArray alloc] init];
     for (CIFaceFeature * face in facesArray) {
         
-        UIView *frameViewFace=[[UIView alloc]initWithFrame:CGRectMake((face.bounds.origin.x * scaleWidth) + margenX, (face.bounds.origin.y * scaleHeight) + margenY, face.bounds.size.width * scaleWidth , face.bounds.size.height * scaleHeight)];
+        CGRect faceRect = CGRectMake((face.bounds.origin.x * scaleWidth) + margenX, (face.bounds.origin.y * scaleHeight) + margenY, face.bounds.size.width * scaleWidth , face.bounds.size.height * scaleHeight);
+        [self.facesRects addObject:NSStringFromCGRect(faceRect)];
         
+        UIView *frameViewFace=[[UIView alloc]initWithFrame:faceRect];
         
         // Marco para la/s cara/s.
         frameViewFace.layer.borderWidth=2;

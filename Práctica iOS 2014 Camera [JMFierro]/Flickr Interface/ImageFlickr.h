@@ -27,5 +27,7 @@
 @property(nonatomic,strong) NSString *owner;
 @property(nonatomic,strong) NSString *title;
 
+@property(nonatomic, strong) NSString *facesRects;
+
 
 @end

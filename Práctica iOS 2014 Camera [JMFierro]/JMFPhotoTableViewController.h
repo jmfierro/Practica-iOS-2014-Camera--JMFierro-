@@ -14,7 +14,7 @@
 #import "JMFImageCamera.h"
 #import "ImageFlickr.h"
 
-
+#define kJMFTablePhotoViewControlle @"facesRects"
 
 
 @interface JMFPhotoTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>

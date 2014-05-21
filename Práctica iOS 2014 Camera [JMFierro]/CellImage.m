@@ -64,8 +64,11 @@
     
     // Añade marcos de la/s cara/s al 'view'.
     FaceDetection *faceDetection = [[FaceDetection alloc] initWithImagenView:self.photoView];
+    
     [self.photoView addSubview:faceDetection.imageView];
-    self.lblNumFaces.text = [NSString stringWithFormat:@"%d",faceDetection.numFaces];
+    self.lblNumFaces.text = [NSString stringWithFormat:@"%d",faceDetection.facesNum];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kCellImage object:faceDetection.facesRects];
     
     [self.indicatorFaceDetection stopAnimating];
 }

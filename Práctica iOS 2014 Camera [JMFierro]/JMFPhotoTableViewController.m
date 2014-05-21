@@ -199,40 +199,21 @@
     
     [super viewWillAppear:animated];
     
+    /* ---------------------    ^
+     *                         _|_
+     * Boton para compartir   | | |
+     *                        |___|
+     -----------------------*/
+    
     UIBarButtonItem *share = [[UIBarButtonItem alloc]
                             initWithBarButtonSystemItem:UIBarButtonSystemItemAction                            target:self
-                            action:@selector(share:)];
+                            action:@selector(btnShare:)];
     
     
     self.navigationItem.rightBarButtonItem = share;
 }
 
--(void)share:(id)sender {
-    
-    NSArray *postItem = @[@"mensaje", self.image];
-    
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
-                                            initWithActivityItems:postItem
-                                            applicationActivities:nil];
-    /*
-     // Actividades a excluir
-    activityVC.excludedActivityTypes = @[
-                                         UIActivityTypePostToWeibo,
-                                         UIActivityTypeMessage,
-                                         UIActivityTypeMail,
-                                         UIActivityTypePrint,
-                                         UIActivityTypeCopyToPasteboard,
-                                         UIActivityTypeAssignToContact,
-                                         UIActivityTypeSaveToCameraRoll,
-                                         UIActivityTypeAddToReadingList,
-                                         UIActivityTypePostToFlickr,
-                                         UIActivityTypePostToVimeo,
-                                         UIActivityTypePostToTencentWeibo,
-                                         UIActivityTypeAirDrop];
-     */
-    
-    [self presentViewController:activityVC animated:YES completion:nil];
-}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -530,7 +511,25 @@
 
 
 
-#pragma mark - Notificacions
+#pragma mark - Notificaciones
+
+
+/*...........................................
+ *
+ *  NOTIFICACION DE: CellImage.m
+ *
+ *
+ *  Recibe notificaciones de CellImage.m
+ *  Recibe los 'CGRect' de las caras detectadas.
+ *
+ ...........................................*/
+-(void)onFacesRects: (NSNotification *) note {
+    
+    
+    NSLog(@"%@",note.object);
+  
+    [[NSNotificationCenter defaultCenter] postNotificationName:kJMFTablePhotoViewControlle object:note.object];
+}
 
 
 /*...........................................
@@ -580,6 +579,42 @@
     segment = [note.object integerValue];
     
     [tableViewPhotoSelectMetaData reloadData];
+}
+
+
+
+
+#pragma mark - Métodos 'Actions'
+-(void)btnShare:(id)sender {
+    
+//    NSArray *postItem = @[@"mensaje", self.image];
+    NSArray *postItem = @[@"mensaje", [Utils filterOverImage:self.image namesFilter:filtersActive]];
+
+//    CellImage *cell = (CellImage *) [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellImage];
+//    
+//        NSArray *postItem = @[@"mensaje", cell.photoView.image];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
+                                            initWithActivityItems:postItem
+                                            applicationActivities:nil];
+    /*
+     // Actividades a excluir
+     activityVC.excludedActivityTypes = @[
+     UIActivityTypePostToWeibo,
+     UIActivityTypeMessage,
+     UIActivityTypeMail,
+     UIActivityTypePrint,
+     UIActivityTypeCopyToPasteboard,
+     UIActivityTypeAssignToContact,
+     UIActivityTypeSaveToCameraRoll,
+     UIActivityTypeAddToReadingList,
+     UIActivityTypePostToFlickr,
+     UIActivityTypePostToVimeo,
+     UIActivityTypePostToTencentWeibo,
+     UIActivityTypeAirDrop];
+     */
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
 }
 
 
@@ -1222,6 +1257,7 @@
      *
      --------------------------------------------------------------------------------*/
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(onFacesRects:) name:kCellImage object:nil];
     [center addObserver:self selector:@selector(onFilters:) name:kCellFilters object:nil];
     [center addObserver:self selector:@selector(onMetaData:) name:kCellDetail object:nil];
 

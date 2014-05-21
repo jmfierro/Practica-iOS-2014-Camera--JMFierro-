@@ -27,11 +27,10 @@
     
     NSMutableDictionary *modelDictionay;
     
-    // Accesible en toda la clase
-//    @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
     UICollectionView *collectionViewPhotos;
-//    FlickrPhoto *flickrPhoto;
     NSInteger sectionCamera;
+    
+    NSIndexPath *indexPatchSelect;
 }
 
 //// Nueva version para Collection
@@ -113,14 +112,16 @@
 
     
     
-    /*--------------------
+    /*-------------------------------------
      *
-     * Establece delegados
+     * Establece delegados y notificaiones
      *
-     ----------------------*/
+     --------------------------------------*/
     collectionViewPhotos.delegate = self;
     collectionViewPhotos.dataSource = self;
     self.searchTextField.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFacesRects:) name:kJMFTablePhotoViewControlle object:nil];
     
 
     [self.view addSubview:collectionViewPhotos];
@@ -206,51 +207,53 @@
 
 
 /***************************************************************
-   ** Metodos para la SELECCION de un item de la colección. **
+ ** Metodos para la SELECCION de un item de la colección. **
  ***************************************************************/
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-        JMFPhotoTableViewController *tablePhotoVC = [[JMFPhotoTableViewController alloc] init];
+    
+    JMFPhotoTableViewController *tablePhotoVC = [[JMFPhotoTableViewController alloc] init];
+    
+    indexPatchSelect = indexPath;
+    
+    if (indexPath.section == 0) {  // & [self.photosCamera count]>0) {
+        /*---------------------------------------------- __________ -
+         *                                              |    _   |_|
+         * Sección para fotos tomadas con la camara.    |   |_|    |
+         *                                              |__________|
+         ------------------------------------------------- CAMARA --*/
         
-        if (indexPath.section == 0) {  // & [self.photosCamera count]>0) {
-            /*---------------------------------------------- __________ -
-             *                                              |    _   |_|
-             * Sección para fotos tomadas con la camara.    |   |_|    |
-             *                                              |__________|
-             ------------------------------------------------- CAMARA --*/
-   
-            /*
-             * Evita que la imagen inicial de "void" en la seccion de 'Camara' se seleccione.
-             * (Esta imagen 'void' índica que no hay fotos tomadas por la cámara desde la app)
-             *
-             */
-            if ([self.model countOfPhotosCamera]) {
-
-                JMFImageCamera *imageCamera = [[JMFImageCamera alloc] init];
-                imageCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
-                
-                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImageCamera:imageCamera];
-                
-                 [self.navigationController pushViewController:tablePhotoVC animated:YES];
-            }
+        /*
+         * Evita que la imagen inicial de "void" en la seccion de 'Camara' se seleccione.
+         * (Esta imagen 'void' índica que no hay fotos tomadas por la cámara desde la app)
+         *
+         */
+        if ([self.model countOfPhotosCamera]) {
             
+            JMFImageCamera *imageCamera = [[JMFImageCamera alloc] init];
+            imageCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
             
-        } else {
-            /*--------------------------------------------------
-             *
-             * SELECCION para imagenes descargadas de Flickr.
-             *
-             ---------------------------------------------------*/
-          
-            NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1];
-            ImageFlickr *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPath.row];
+            tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImageCamera:imageCamera];
             
-            tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithFlickrPhoto:flickrPhoto];
-
             [self.navigationController pushViewController:tablePhotoVC animated:YES];
         }
+        
+        
+    } else {
+        /*--------------------------------------------------
+         *
+         * SELECCION para imagenes descargadas de Flickr.
+         *
+         ---------------------------------------------------*/
+        
+        NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1];
+        ImageFlickr *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPath.row];
+        
+        tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithFlickrPhoto:flickrPhoto];
+        
+        [self.navigationController pushViewController:tablePhotoVC animated:YES];
+    }
     
 }
 
@@ -410,11 +413,11 @@
 
     } else {
         
-        /*-----------------------------------------------------------------------------
+        /*----------------------------------------------
          *
          * Sección para imagenes descargadas de Flickr.
          *
-         ------------------------------------------------------------------------------*/
+         -----------------------------------------------*/
         NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1];
         //- [self.photosCamera count]>0 ? 1:0];
         cell.photo = self.model.imagesFlickr[searchTerm][indexPath.row];
@@ -469,11 +472,11 @@
                 self.model.imagesFlickr[searchTerm] = results;
             }
             
-            /* -------------------------------------------------
+            /* ------------------------------------
              *
              *  Actualiza la interfaz de usuario.
              *
-             ---------------------------------------------------*/
+             --------------------------------------*/
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.activiyIndicator setHidden:YES];
                 [collectionViewPhotos reloadData];
@@ -504,6 +507,48 @@
     
 }
 
+
+#pragma mark - Notificaciones
+/*...........................................
+*
+*  NOTIFICACION DE: JMFPhotoTableViewController.m
+*
+*
+*  Recibe notificaciones de JMFPhotoTableViewController.m
+*  Recibe los 'CGRect' de las caras detectadas.
+*
+...........................................*/
+-(void)onFacesRects: (NSNotification *) note {
+    
+    NSLog(@"%@",note.object);
+    NSLog(@"%@",@"* Sección para fotos tomadas con la camara.    |   |_|    |");
+    
+    /*---------------------------------------------- __________ -
+     *                                              |    _   |_|
+     * Sección para fotos tomadas con la camara.    |   |_|    |
+     *                                              |__________|
+     ------------------------------------------------- CAMARA --*/
+    if (indexPatchSelect.section == 0) {
+        NSLog(@"%@",[[self.model.imagesCamera objectAtIndex:indexPatchSelect.row] facesRect]);
+        [[self.model.imagesCamera objectAtIndex:indexPatchSelect.row] setFacesRect:note.object];
+        NSLog(@"%@",[[self.model.imagesCamera objectAtIndex:indexPatchSelect.row] facesRect]);
+        
+    } else {
+        /*----------------------------------------------
+         *
+         * Sección para imagenes descargadas de Flickr.
+         *
+         -----------------------------------------------*/
+        NSString *searchTerm = self.model.termsSearchesFlickr[indexPatchSelect.section -1];
+        ImageFlickr *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPatchSelect.row];
+        NSLog(@"%@", flickrPhoto.facesRects);
+
+        [self.model.imagesFlickr[searchTerm][indexPatchSelect.row] setFacesRects:note.object];
+        
+        NSLog(@"%@", [self.model.imagesFlickr[searchTerm][indexPatchSelect.row] facesRects]);
+    }
+    
+}
 
 
 
@@ -564,6 +609,8 @@
     [collectionViewPhotos reloadData];
     
 }
+
+
 
 - (IBAction)clickBackground:(id)sender {
     [self.view endEditing:YES];

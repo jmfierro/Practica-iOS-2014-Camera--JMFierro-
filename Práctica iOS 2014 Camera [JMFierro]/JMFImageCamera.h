@@ -16,6 +16,6 @@
 @property (nonatomic, strong) JMFMetaData *metaData;
 @property (nonatomic) CGFloat latitude;
 @property (nonatomic) CGFloat longitude;
-@property (nonatomic, strong) NSArray *fecesRect;
+@property (nonatomic, strong) NSArray *facesRect;
 
 @end
