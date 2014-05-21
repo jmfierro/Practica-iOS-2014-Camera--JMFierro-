@@ -72,8 +72,8 @@
     
     // Crea un array con las caras detectadas.
     NSArray *facesArray=[detectorFaces featuresInImage:imageCI];
-
-      self.facesNum = [facesArray count];
+    
+    self.facesNum = [facesArray count];
     NSLog(@"%d",[facesArray count]);
     
 //    NSLog(@"image width:%f",self.photoView.image.size.width);

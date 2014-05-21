@@ -158,7 +158,8 @@
          */
         if(_imageFlickr.largeImage)
         {
-            _image = _imageFlickr.largeImage;
+//            _image = _imageFlickr.largeImage;
+            [self loadImage:_imageFlickr.largeImage];
         }
         else
         {
@@ -525,9 +526,6 @@
  ...........................................*/
 -(void)onFacesRects: (NSNotification *) note {
     
-    
-    NSLog(@"%@",note.object);
-  
     [[NSNotificationCenter defaultCenter] postNotificationName:kJMFTablePhotoViewControlle object:note.object];
 }
 

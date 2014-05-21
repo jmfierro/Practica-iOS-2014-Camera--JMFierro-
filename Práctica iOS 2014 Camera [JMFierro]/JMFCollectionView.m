@@ -520,8 +520,6 @@
 ...........................................*/
 -(void)onFacesRects: (NSNotification *) note {
     
-    NSLog(@"%@",note.object);
-    NSLog(@"%@",@"* Sección para fotos tomadas con la camara.    |   |_|    |");
     
     /*---------------------------------------------- __________ -
      *                                              |    _   |_|
@@ -529,9 +527,9 @@
      *                                              |__________|
      ------------------------------------------------- CAMARA --*/
     if (indexPatchSelect.section == 0) {
-        NSLog(@"%@",[[self.model.imagesCamera objectAtIndex:indexPatchSelect.row] facesRect]);
+        NSLog(@"Antes: %@",[[self.model.imagesCamera objectAtIndex:indexPatchSelect.row] facesRect]);
         [[self.model.imagesCamera objectAtIndex:indexPatchSelect.row] setFacesRect:note.object];
-        NSLog(@"%@",[[self.model.imagesCamera objectAtIndex:indexPatchSelect.row] facesRect]);
+        NSLog(@"Despues: %@",[[self.model.imagesCamera objectAtIndex:indexPatchSelect.row] facesRect]);
         
     } else {
         /*----------------------------------------------
@@ -541,11 +539,11 @@
          -----------------------------------------------*/
         NSString *searchTerm = self.model.termsSearchesFlickr[indexPatchSelect.section -1];
         ImageFlickr *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPatchSelect.row];
-        NSLog(@"%@", flickrPhoto.facesRects);
+        NSLog(@"Antes: %@", flickrPhoto.facesRects);
 
         [self.model.imagesFlickr[searchTerm][indexPatchSelect.row] setFacesRects:note.object];
         
-        NSLog(@"%@", [self.model.imagesFlickr[searchTerm][indexPatchSelect.row] facesRects]);
+        NSLog(@"Despues: %@", [self.model.imagesFlickr[searchTerm][indexPatchSelect.row] facesRects]);
     }
     
 }
