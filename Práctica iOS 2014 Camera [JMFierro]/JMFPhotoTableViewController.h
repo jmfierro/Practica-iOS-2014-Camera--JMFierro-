@@ -10,25 +10,25 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FlickrPhoto.h"
 #import "JMFModel.h"
-//#import "JMFMetaData.h"
-//#import
+#import "JMFImageCamera.h"
+#import "ImageFlickr.h"
+
+
 
 
 @interface JMFPhotoTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 
 
 @property (nonatomic, strong) JMFMetaData *metaData;
-@property (nonatomic,strong) JMFCamera *imageCamera;
-@property (nonatomic, strong) FlickrPhoto *imageFlickr;
+@property (nonatomic,strong) JMFImageCamera *imageCamera;
+@property (nonatomic, strong) ImageFlickr *imageFlickr;
 @property (nonatomic, strong) UIImage *image, *imageThumbnail;
 
 
--(id) initWithImage:(UIImage *) image;
--(id) initWithImageCamera:(JMFCamera *) imageCamera;
--(id) initWithFlickrPhoto:(FlickrPhoto *)flickrPhoto;
-//-(id) initWithModel:(JMFModel *)model andFlickr:(FlickrPhoto *)flickrPhoto;
-//-(id) initWithModel:(JMFModel *)model andImage:(UIImage *) aImage;
+-(id) initWithImage:(JMFImageCamera *) image;
+-(id) initWithImageCamera:(JMFImageCamera *) imageCamera;
+-(id) initWithFlickrPhoto:(ImageFlickr *)flickrPhoto;
+
 
 @end

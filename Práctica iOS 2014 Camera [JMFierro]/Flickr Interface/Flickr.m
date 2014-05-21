@@ -14,7 +14,7 @@
  */
 
 #import "Flickr.h"
-#import "FlickrPhoto.h"
+#import "ImageFlickr.h"
 
 //#define kFlickrAPIKey @"d02c877c0a4220890f14fc95f8b16983"
 #define kFlickrAPIKey @"a5dc780c8fd28cfef0b50cefd39c9d8d"
@@ -28,7 +28,7 @@
     return [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&text=%@&per_page=20&format=json&nojsoncallback=1",kFlickrAPIKey,searchTerm];
 }
 
-+ (NSString *)flickrPhotoURLForFlickrPhoto:(FlickrPhoto *) flickrPhoto size:(NSString *) size
++ (NSString *)flickrPhotoURLForFlickrPhoto:(ImageFlickr *) flickrPhoto size:(NSString *) size
 {
     if(!size)
     {
@@ -77,7 +77,7 @@
                          * Obtención de datos de las imagenes flickr.
                          */
                         
-                        FlickrPhoto *modelPhoto = [[FlickrPhoto alloc] init];
+                        ImageFlickr *modelPhoto = [[ImageFlickr alloc] init];
                         modelPhoto.farm = [objPhoto[@"farm"] intValue];
                         modelPhoto.server = [objPhoto[@"server"] intValue];
                         modelPhoto.secret = objPhoto[@"secret"];
@@ -106,7 +106,7 @@
     });
 }
 
-+ (void)loadImageForPhoto:(FlickrPhoto *)flickrPhoto thumbnail:(BOOL)thumbnail completionBlock:(FlickrPhotoCompletionBlock) completionBlock
++ (void)loadImageForPhoto:(ImageFlickr *)flickrPhoto thumbnail:(BOOL)thumbnail completionBlock:(FlickrPhotoCompletionBlock) completionBlock
 {
     
     NSString *size = thumbnail ? @"m" : @"b";

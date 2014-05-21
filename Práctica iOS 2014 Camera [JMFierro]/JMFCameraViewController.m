@@ -6,9 +6,21 @@
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
+
+
 #import "JMFCameraViewController.h"
 
-@interface JMFCameraViewController ()
+
+
+@interface JMFCameraViewController () {
+    
+    CLLocationManager *managerLocation;
+    CLLocation *lastLocation;
+    
+    JMFImageCamera *imageCamera;
+    
+    BOOL newMedia;
+}
 
 @end
 
@@ -51,6 +63,25 @@
 
 - (IBAction)useCamera:(id)sender {
     
+    /* -----------------------
+     *
+     * Localización.
+     *
+     -------------------------*/
+    if ([CLLocationManager locationServicesEnabled]) {
+        managerLocation = [[CLLocationManager alloc] init];
+        managerLocation.desiredAccuracy = kCLLocationAccuracyBest;
+        managerLocation.delegate = self;
+        
+        [managerLocation startUpdatingLocation];
+    }
+
+    
+    /* -----------------
+     *
+     * Camara de fotos.
+     *
+     -------------------*/
     UIImagePickerController *imagePicker =
     [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
@@ -72,7 +103,7 @@
         imagePicker.allowsEditing = NO;
         [self presentViewController:imagePicker
                            animated:YES completion:nil];
-        self.newMedia = YES;  // La imagen es nueva y no una existente desde la 'Camera Roll'.
+        newMedia = YES;  // La imagen es nueva y no una existente desde la 'Camera Roll'.
     }
     
 }
@@ -103,12 +134,12 @@
         imagePicker.allowsEditing = NO;
         [self presentViewController:imagePicker
                            animated:YES completion:nil];
-        self.newMedia = NO;
+        newMedia = NO;
     }
 }
 
 
-#pragma mark UIImagePickerControllerDelegate
+#pragma mark UIImagePickerController Delegate
 
 /*
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)dictionary
@@ -188,10 +219,7 @@
  
  
 -(void)imagePickerController:(UIImagePickerController *)picker
-didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    
-    
+didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     NSDictionary *metadata = [info valueForKey:UIImagePickerControllerMediaMetadata];
     
@@ -199,21 +227,43 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
+    /* ----------------------
+     *
+     * En caso de fotografia.
+     *
+     ------------------------*/
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        UIImage *image = info[UIImagePickerControllerOriginalImage];
+        imageCamera.image = info[UIImagePickerControllerOriginalImage];
         
-//        _imageView.image = image;
+        /* ---------------------
+         *
+         * Llamada al delegado.
+         *
+         -----------------------*/
+        [self.delegate getImagePickerCamera:imageCamera];
         
-        [self.delegate getImagePickerCamera:image];
         
-        // Guarda imagen.
-//        if (_newMedia)
-//            UIImageWriteToSavedPhotosAlbum(image,
-//                                           self,
-//                                           @selector(image:finishedSavingWithError:contextInfo:),
-//                                           nil);
+        
+        /* ---------------
+         *
+         * Guarda imagen.
+         *
+         -----------------*/
+        /*
+        if (_newMedia)
+            UIImageWriteToSavedPhotosAlbum(image,
+                                           self,
+                                           @selector(image:finishedSavingWithError:contextInfo:),
+                                           nil);
+         */
     }
-    // En caso de video.
+    
+
+    /* -------------------
+     *
+     * En caso de video.
+     *
+     ---------------------*/
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
     {
         
@@ -222,9 +272,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
      [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
+
 /*
-- (NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location
-{
+- (NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location {
     CLLocationDegrees exifLatitude  = location.coordinate.latitude;
     CLLocationDegrees exifLongitude = location.coordinate.longitude;
     
@@ -254,15 +304,14 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     [locDict setObject:[NSNumber numberWithFloat:location.horizontalAccuracy] forKey:(NSString*)kCGImagePropertyGPSDOP];
     [locDict setObject:[NSNumber numberWithFloat:location.altitude] forKey:(NSString*)kCGImagePropertyGPSAltitude];
     
-    return [locDict autorelease];
+    return locDict;
  }
 */
 
 
 -(void)image:(UIImage *)image
 finishedSavingWithError:(NSError *)error
- contextInfo:(void *)contextInfo
-{
+ contextInfo:(void *)contextInfo {
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Error"
@@ -274,9 +323,24 @@ finishedSavingWithError:(NSError *)error
     }
 }
 
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - Loaction Delegate
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    NSLog(@"Cambio de localizacion (JMFCamera.m)");
+    
+    //    CLLocation *lastLocation = [locations lastObject];
+    lastLocation = [locations lastObject];
+    imageCamera.latitude = lastLocation.coordinate.latitude;
+    imageCamera.longitude = lastLocation.coordinate.longitude;
+    
+    [managerLocation stopUpdatingLocation];
+    
+    
 }
 
 

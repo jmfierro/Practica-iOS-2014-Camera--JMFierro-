@@ -1,5 +1,5 @@
 //
-//  FlickrPhotoModel.h
+//  ImageFlickr.h
 //  Práctica iOS 2014 Camera [JMFierro]
 //
 // ************************************************
@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FlickrPhoto : NSObject
+@interface ImageFlickr : NSObject
 @property(nonatomic,strong) UIImage *thumbnail;
 @property(nonatomic,strong) UIImage *largeImage;
 

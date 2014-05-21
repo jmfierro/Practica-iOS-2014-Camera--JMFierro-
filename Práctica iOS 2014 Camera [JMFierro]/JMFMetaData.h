@@ -5,6 +5,7 @@
 //  Created by José Manuel Fierro Conchouso on 09/05/14.
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
+@import CoreLocation;
 
 #import <Foundation/Foundation.h>
 
@@ -22,6 +23,7 @@
 
 -(id) init;
 -(id) initWithImage:(UIImage *)image;
+-(id) initWithImage:(UIImage *)image andLocation:(CLLocation *)location;
 
 /*..................................................
  *
@@ -30,6 +32,7 @@
  ...................................................*/
 -(NSDictionary *) metaDataImage:(UIImage *) image;
 -(UIImage *)addMetaData:(UIImage *)aImage;
+-(NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location;
 
 
 /* ** SALIDA DE METADATOS **

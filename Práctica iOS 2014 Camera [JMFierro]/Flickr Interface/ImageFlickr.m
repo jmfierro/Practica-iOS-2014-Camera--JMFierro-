@@ -1,5 +1,5 @@
 //
-//  FlickrPhotoModel.m
+//  ImageFlickr.m
 //  Práctica iOS 2014 Camera [JMFierro]
 //
 // ************************************************
@@ -14,8 +14,8 @@
  */
 
 
-#import "FlickrPhoto.h"
+#import "ImageFlickr.h"
 
-@implementation FlickrPhoto
+@implementation ImageFlickr
 
 @end

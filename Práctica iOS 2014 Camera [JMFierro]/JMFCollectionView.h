@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FlickrPhoto.h"
+#import "ImageFlickr.h"
 #import "JMFModel.h"
 
 
@@ -21,10 +21,9 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activiyIndicator;
 
 - (IBAction)btnTakePhoto:(id)sender;
-- (IBAction)btnLocation:(id)sender;
-- (IBAction)btnFilters:(id)sender;
+
 
 - (IBAction)clickBackground:(id)sender;
-@property (weak, nonatomic) IBOutlet UIView *viewMap;
+//@property (weak, nonatomic) IBOutlet UIView *viewMap;
 
 @end

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JMFCamera.h"
 #import "JMFMetaData.h"
-#import "FlickrPhoto.h"
+#import "JMFImageCamera.h"
+#import "ImageFlickr.h"
 
 @interface JMFModel : NSObject
 
@@ -26,13 +26,15 @@
 
 
 -(id)initWith;
--(id)initWithImage:(JMFCamera *) imageCamera;
--(id)initWithFlickr:(FlickrPhoto *) imageFlickr;
+//-(id)initWithImage:(JMFImageCamera *) imageCamera;
+//-(id)initWithFlickr:(FlickrPhoto *) imageFlickr;
 
 
 -(NSInteger) countTotal;
 -(NSInteger) countSections;
 -(NSInteger) countOfPhotosCamera;
 -(NSInteger) countOfPhotosFlickrSearchResults:(NSString *)termSearchFlickr;
+
+-(UIImage *) imageCamera:(NSInteger *) item;
 
 @end

@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ImageIO/ImageIO.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+
+@import CoreLocation;
+
+#import "JMFImageCamera.h"
+#import "JMFMetaData.h"
 
 @protocol CameraViewControllerDelegate
 
--(void) getImagePickerCamera:(UIImage *) image;
+-(void) getImagePickerCamera:(JMFImageCamera *) imageCamera;
 
 @end
 
@@ -23,12 +29,6 @@ id delegate;
 
 @property (nonatomic, retain) id<CameraViewControllerDelegate> delegate;
 
-@property BOOL newMedia;
-//@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-
-
-- (IBAction)useCamera:(id)sender;
-- (IBAction)useCameraRoll:(id)sender;
 
 
 

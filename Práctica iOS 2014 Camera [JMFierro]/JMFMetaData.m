@@ -9,7 +9,7 @@
 #import <ImageIO/ImageIO.h>
 
 #import "JMFMetaData.h"
-#import <CoreLocation/CoreLocation.h>
+//#import <CoreLocation/CoreLocation.h>
 
 
 @implementation JMFMetaData
@@ -33,9 +33,12 @@
     return self;
 }
 
-
-
 -(id) initWithImage:(UIImage *)image {
+    return [self initWithImage:image andLocation:nil];
+}
+
+
+-(id) initWithImage:(UIImage *)image andLocation:(CLLocation *)location {
     
     if (self = [super init]) {
         
@@ -50,7 +53,14 @@
         self.RAWDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyRawDictionary];
         self.JPEGDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyJFIFDictionary];
         self.GIFDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyGIFDictionary];
-
+        
+        /* ------------------
+         *  Añadir datos GPS
+         --------------------*/
+        if(!self.GPSDictionary && location) {
+            NSDictionary *d = [self gpsDictionaryForLocation:location];
+//            self.GPSDictionary = [NSDictionary dictionary];
+        }
 /*
         // Añade los items que faltan
  
@@ -121,6 +131,7 @@
     return metadata;
 }
 
+
 -(UIImage *)addMetaData:(UIImage *)aImage {
     
     UIImage *image = aImage;
@@ -129,7 +140,9 @@
     /*
      * Modelo
      */
-    JMFMetaData *modelMetadata = [[JMFMetaData alloc] initWithImage:image];
+//    JMFMetaData *modelMetadata = [[JMFMetaData alloc] initWithImage:image];
+    JMFMetaData *modelMetadata = [[JMFMetaData alloc] initWithImage:image andLocation:nil];
+
     
     /*
      * Controlador
@@ -168,8 +181,8 @@
 }
 
 
-- (NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location
-{
+
+- (NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location {
     CLLocationDegrees exifLatitude  = location.coordinate.latitude;
     CLLocationDegrees exifLongitude = location.coordinate.longitude;
     

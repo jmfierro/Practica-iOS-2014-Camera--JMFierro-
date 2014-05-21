@@ -18,7 +18,7 @@
 
 
 #import "Flickr.h"
-#import "FlickrPhoto.h"
+#import "ImageFlickr.h"
 #import "Utils.h"
 
 
@@ -64,9 +64,7 @@
     return self;
 }
 
--(BOOL)shouldAutorotate {
-    return NO;
-}
+
 
 - (void)viewDidLoad
 {
@@ -106,16 +104,20 @@
     
     
     
-    /*
+    /* -----------------------------
+     *
      * Fondo para la coleccion.
-     */
+     *
+     --------------------------------*/
     collectionViewPhotos.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_cork.png"]];
 
     
     
-    /*
+    /*--------------------
+     *
      * Establece delegados
-     */
+     *
+     ----------------------*/
     collectionViewPhotos.delegate = self;
     collectionViewPhotos.dataSource = self;
     self.searchTextField.delegate = self;
@@ -136,6 +138,9 @@
 }
 
 
+-(BOOL)shouldAutorotate {
+    return NO;
+}
 
 
 /*....................................
@@ -181,11 +186,11 @@
             
             
         } else {
-            /*-----------------------------------------------------------------------------
+            /*----------------------------------------------------
              *
              * CABECERA para imagenes descargadas dde Flickr.
              *
-             ------------------------------------------------------------------------------*/
+             -----------------------------------------------------*/
             NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //[self.photosCamera count]>0 ? 1:0];
             ((JMFHeaderView *)titleView).label.text = searchTerm;
 
@@ -223,27 +228,24 @@
              */
             if ([self.model countOfPhotosCamera]) {
 
-                //                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImage:[self.model.imagesCamera objectAtIndex:indexPath.row]];
-                JMFCamera *camera = [[JMFCamera alloc] init];
-                camera = [self.model.imagesCamera objectAtIndex:indexPath.row];
+                JMFImageCamera *imageCamera = [[JMFImageCamera alloc] init];
+                imageCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
                 
-                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImageCamera:camera];
+                tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImageCamera:imageCamera];
                 
-                
-                [self.navigationController pushViewController:tablePhotoVC animated:YES];
+                 [self.navigationController pushViewController:tablePhotoVC animated:YES];
             }
             
             
         } else {
-            /*-----------------------------------------------------------------------------
+            /*--------------------------------------------------
              *
              * SELECCION para imagenes descargadas de Flickr.
              *
-             ------------------------------------------------------------------------------*/
+             ---------------------------------------------------*/
           
-            
             NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1];
-            FlickrPhoto *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPath.row];
+            ImageFlickr *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPath.row];
             
             tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithFlickrPhoto:flickrPhoto];
 
@@ -266,11 +268,7 @@
  *
  ....................................................*/
 
-#pragma mark – UICollectionViewDelegateFlowLayout Delegates
-
-/************************************************
- ** Métodos para la APARIENCIA de las celdas. **
- ************************************************/
+#pragma mark - UICollectionViewDelegateFlowLayout Delegates
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -286,10 +284,16 @@
          -------------------------------------------------------------------   CAMARA -*/
         UIImage *image;
         if ([self.model countOfPhotosCamera] > 0) {
-            JMFCamera *imgCamera = [[JMFCamera alloc] init];
-            imgCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
-            image = imgCamera.image;
+//            JMFCamera *imgCamera = [[JMFCamera alloc] init];
+//            imgCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
+//            image = imgCamera.image;
+
+//            image = [self.model.imagesCamera objectAtIndex:indexPath.row];
+            image = [self.model imageCamera:indexPath.row];
+            
         }
+        
+        // Imagen para indicar que no hay fotos.
         else
             image = [UIImage imageNamed:@"can-stock-photo_csp12611066.png"];
  
@@ -298,16 +302,16 @@
 
         
     } else {
-        /*-----------------------------------------------------------------------------
+        /*----------------------------------------------------------------------
          *
          * TAMAÑO para los THUMBNAILS de las imagenes descargadas desde Flickr.
          *
-         ------------------------------------------------------------------------------*/
+         -----------------------------------------------------------------------*/
 //        NSString *searchTerm = self.searches[indexPath.section -1]; //  - [self.photosCamera count]>0 ? 1:0];
 //        FlickrPhoto *photo = self.searchResults[searchTerm][indexPath.row];
         
         NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1]; //  - [self.photosCamera count]>0 ? 1:0];
-        FlickrPhoto *photo = self.model.imagesFlickr[searchTerm][indexPath.row];
+        ImageFlickr *photo = self.model.imagesFlickr[searchTerm][indexPath.row];
 
         // Escala thumbnail.
         CGSize frame = [Utils scaleFactor:photo.largeImage widthNewFrame:200];
@@ -389,11 +393,16 @@
 
         if ([self.model countOfPhotosCamera] > 0 ) {
             //            cell.imagePhoto.image = [self.model.imagesCamera objectAtIndex:indexPath.row];
-            JMFCamera *imageCamera = [[JMFCamera alloc] init];
-            imageCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
-            cell.imagePhoto.image = imageCamera.image;
+//            JMFCamera *imageCamera = [[JMFCamera alloc] init];
+//            imageCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
+//            cell.imagePhoto.image = imageCamera.image;
+
+
+//            cell.imagePhoto.image = [self.model.imagesCamera objectAtIndex:indexPath.row];
+            cell.imagePhoto.image = [self.model imageCamera:indexPath.row];
         }
 
+        // Imagen que indica que no hay fotos tomadas con la cámara.
         else {
             cell.imagePhoto.image = [UIImage imageNamed:@"can-stock-photo_csp12611066.png"];
         }
@@ -486,10 +495,11 @@
  ...........................*/
 #pragma mark - CameraViuewController Delegate
 
--(void)getImagePickerCamera:(UIImage *)image {
+-(void)getImagePickerCamera:(JMFImageCamera *)imageCamera {
 
-    JMFCamera *imageCamera = [[JMFCamera alloc] initWithImage:image];
+//    JMFImageCamera *imageCamera = [[JMFImageCamera alloc] initWithImage:image];
     [self.model.imagesCamera addObject:imageCamera];
+    
     [collectionViewPhotos reloadData];
     
 }
@@ -508,72 +518,56 @@
 
 - (IBAction)btnTakePhoto:(id)sender {
     
-    /*          o `´
-     *      oo
-     *   |~~/ o
-     *   |~|
-     *   |~|  PRUEBAS SIN CAMARA (simulador)
-     *   |_|
-     */
-    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     * Pruebas sin camara. Simula haber tomado una foto.
-//     ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
-////    [self.model.imagesCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
-//    JMFCamera *imageCamera = [[JMFCamera alloc] init];
-//    imageCamera.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
-//    [self.model.imagesCamera addObject:imageCamera];
-//    
-//    //    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
-//    [collectionViewPhotos reloadData];
+    BOOL isCamera = NO;
     
-    /*
-     *    __________
-     *   |    _   |_|
-     *   |   |_|    | CAMARA
-     *   |__________|
-     */
-    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     * LLamada a la camara.
-     ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
-    JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] init];
-    cameraVC.delegate = self;
-    [self.navigationController pushViewController:cameraVC animated:NO];
-//    [self.model.photosCamera addObject:cameraVC.imageView.image];
+    if (!isCamera) {
+        
+        
+        /*          o `´
+         *      oo
+         *   |~~/ o
+         *   |~|
+         *   |~|  PRUEBAS SIN CAMARA (simulador)
+         *   |_|
+         */
+        /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         * Pruebas sin camara. Simula haber tomado una foto.
+         ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
+        //    [self.model.imagesCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
+        JMFImageCamera *imageCamera = [[JMFImageCamera alloc] init];
+        imageCamera.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
+        [self.model.imagesCamera addObject:imageCamera];
+        
+        //    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
     
+        
+        
+    } else {
+ 
+        /*
+         *    __________
+         *   |    _   |_|
+         *   |   |_|    | CAMARA
+         *   |__________|
+         */
+        /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         * LLamada a la camara.
+         ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
+        JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] init];
+        cameraVC.delegate = self;
+        [self.navigationController pushViewController:cameraVC animated:NO];
+        //    [self.model.photosCamera addObject:cameraVC.imageView.image];
+        
+        
+    }
     
-}
-
-//- (IBAction)btnLocation:(id)sender {
-//    
-////    LocationViewController *locationVC = [[LocationViewController alloc] initWithViewMap:self.viewMap];
-//    
-//    
-////    [locationVC viewDidLoad];
-//
-//    
-//    JMFCoreViewController *locationVC = [[JMFCoreViewController alloc] init];
-//    [self.navigationController pushViewController:locationVC animated:NO];
-//    
-//}
-
-- (IBAction)btnFilters:(id)sender {
-//    ViewController *vc = [ViewController new];
-//    [self.navigationController pushViewController:vc animated:NO];
-    
+    [collectionViewPhotos reloadData];
     
 }
 
 - (IBAction)clickBackground:(id)sender {
     [self.view endEditing:YES];
 }
-
-
-/*.......................
- *
- ** Metodos privados **
- *
- .........................*/
-#pragma mark - Privates Methods
 
 
 

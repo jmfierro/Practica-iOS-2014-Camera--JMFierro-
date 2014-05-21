@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class FlickrPhoto;
+@class ImageFlickr;
 
 #define kJMFPushpinCell @"JMFPushpinCell"
 
@@ -17,6 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imagePhoto;
 @property (weak, nonatomic) IBOutlet UILabel *labelPhoto;
 
-@property(nonatomic, strong) FlickrPhoto *photo;
+@property(nonatomic, strong) ImageFlickr *photo;
 
 @end

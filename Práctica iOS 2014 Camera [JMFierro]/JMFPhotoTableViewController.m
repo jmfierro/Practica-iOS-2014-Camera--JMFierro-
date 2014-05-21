@@ -7,17 +7,13 @@
 //
 
 #import <ImageIO/ImageIO.h>
-
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <CoreLocation/CoreLocation.h>
 
 #import "JMFPhotoTableViewController.h"
 
-//#import "JMFLocationViewController.h"
-//#import "JMFLocation.h"
 #import "Flickr.h"
 
-//#import "JMFMetaData.h"
 
 // Celdas
 #import "CellFilters.h"
@@ -26,14 +22,12 @@
 #import "CellAddressLocation.h"
 #import "CellUser.h"
 
-#import "UIImageView+Curled.h"
 #import "Utils.h"
+#import "JMFMetaData.h"
 
 
 
 @interface JMFPhotoTableViewController () {
-    
-    
     
     UITableView *tableViewPhotoSelectMetaData;
     CellImage *cellImage;
@@ -118,7 +112,7 @@
  *  ** Imagen tomada por la camara desde la App.  **
  *
  ...................................................*/
--(id) initWithImageCamera:(JMFCamera *) imageCamera {
+-(id) initWithImageCamera:(JMFImageCamera *) imageCamera {
     
     if (self = [super initWithNibName:nil bundle:nil]) {
         
@@ -128,8 +122,19 @@
         // Metadatos.
         if (imageCamera.metaData)
             _metaData = imageCamera.metaData;
+        
+        /* ----------------------------------------------
+         *
+         *  En caso de 'imageCamera' no tenga metadatos,
+         * estos se sacan de los que porte la  imagen.
+         *
+          ----------------------------------------------*/
         else
             _metaData = [[JMFMetaData alloc] initWithImage:imageCamera.image];
+
+//        if (!imageCamera.metaData)
+//            imageCamera.metaData = [[JMFMetaData alloc] initWithImage:imageCamera.image];
+
         
     }
     
@@ -142,7 +147,7 @@
  *  ** Imagen bajada de Flickr.  **
  *
  ...................................*/
--(id) initWithFlickrPhoto:(FlickrPhoto *)flickrPhoto {
+-(id) initWithFlickrPhoto:(ImageFlickr *)flickrPhoto {
 
 
     if (self = [super initWithNibName:nil bundle:nil]) {
@@ -163,14 +168,17 @@
                 if(!error)
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        /*-----------------------------------------------------------------------
+                        /*------------------------------------------------------
                          *
-                         * Cuando la imagen es descargada se actualiza los datos de la TableView
+                         * Cuando la imagen es descargada se actualiza los 
+                         * datos de la TableView
                          *
-                         ------------------------------------------------------------------------*/
-                        _image = _imageFlickr.largeImage;
-                        [self loadImage:_image];
+                         ------------------------------------------------------*/
+//                        _image = _imageFlickr.largeImage;
+                        [self loadImage:_imageFlickr.largeImage];
                         _metaData = [[JMFMetaData alloc] initWithImage:_imageFlickr.largeImage];
+                      
+
                         [tableViewPhotoSelectMetaData reloadData];
                     });
                 }
@@ -558,22 +566,18 @@
     [tableViewPhotoSelectMetaData reloadData];
 }
 
-/*...........................................
+/*...............................................................
  *
  *  NOTIFICACION DE: CellDetatil.m
  *
  *
- *  Recibe notificaciones de CellFilters.m
- *  Aplica todos los filtros activos.
+ *  Recibe notificaciones de CellDetail.m
+ *  Indica que opción del 'segment' ha seleccionado el usuario.
  *
- ...........................................*/
+ ................................................................*/
 -(void)onMetaData: (NSNotification *) note {
+
     segment = [note.object integerValue];
-    
-//    if ([note.object integerValue] == kCellDetailSegementFlickr) {
-//
-//    }
-    
     
     [tableViewPhotoSelectMetaData reloadData];
 }
@@ -820,7 +824,7 @@
                      *
                      -------------------------------------------------------------*/
                     if (locationUser) {
-                        msg = [NSString stringWithFormat:@"%@ (¡%@!)",[[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"],@"Usuario"];
+                        msg = [NSString stringWithFormat:@"%@ (%@)",[[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"],@"Usuario"];
                     } else {
                         msg = [NSString stringWithFormat:@"%@ (%@)",[[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"],@"Imagen"];
                     }
@@ -851,13 +855,6 @@
     
     NSString *direccion = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Street"];
     
-    //    cell.lblGeolocalizacion.text = direccion;
-    
-    //    cell.lblOwer.text = self.flickrPhotoModel.owner;
-    
-    //    cell.lblSecret.Text = [[NSString alloc] initWithFormat:@"%@ %@", self.flickrPhotoModel.secret, @"secret"];
-    
-    
     return cell;
     
 }
@@ -868,8 +865,7 @@
  * Añadiendo imagen a la localizacion.
  *
  ......................................*/
-- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
-{
+- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
 //    if ([[annotation title] isEqualToString:@"Current Location"]) {
 //        return nil;
 //    }
@@ -927,7 +923,7 @@
 
 #pragma mark - Metodos privados
 
--(void) loadImage:(UIImage *)aImage {
+-(void) loadImage:(UIImage *) image {
     
     
     // Inicializa locations, tableView, celdas.
@@ -938,10 +934,10 @@
      * Redimensiona la imagen al tamaño del imageView
      *
      --------------------------------------------------*/
-    if (aImage.size.height > cellImage_height || aImage.size.width > cellImage_width) {
+    if (image.size.height > cellImage_height || image.size.width > cellImage_width) {
         
         
-        _image = [Utils imageToThumbnail:aImage Size:CGSizeMake(cellImage_width, cellImage_height)];
+        _image = [Utils imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_height)];
         
         
         /*-------------------------------------------------
@@ -950,11 +946,10 @@
          *
          --------------------------------------------------*/
     } else {
-        _image = aImage;
+        _image = image;
     }
     
-    _imageThumbnail = [Utils imageToThumbnail:aImage Size:CGSizeMake(100, 100)];
-//    _metaData = [[JMFMetaData alloc] initWithImage:aImage];
+    _imageThumbnail = [Utils imageToThumbnail:image Size:CGSizeMake(100, 100)];
 
 }
 

@@ -15,11 +15,11 @@
     if (self = [self init]) {
         
         // Flickr
-        self.imagesFlickr = [[NSMutableDictionary alloc] init];
-        self.termsSearchesFlickr = [[NSMutableArray alloc] init];
+        _imagesFlickr = [[NSMutableDictionary alloc] init];
+        _termsSearchesFlickr = [[NSMutableArray alloc] init];
         
         // Camara
-        self.imagesCamera = [[NSMutableArray alloc] init];
+        _imagesCamera = [[NSMutableArray alloc] init];
     }
     
     
@@ -27,12 +27,11 @@
 }
 
 
-
--(id)initWithImage:(JMFCamera *) imageCamera {
+/*
+-(id)initWithImage:(JMFImageCamera *) imageCamera {
     
     if (self = [self init]) {
         
-        //        _flickrPhoto = flickr;
         _imagesCamera = (id)imageCamera;
     }
     
@@ -40,8 +39,9 @@
     return self;
     
 }
+*/
 
-
+/*
 -(id)initWithFlickr:(FlickrPhoto *)imageFlickr {
     
     if (self = [self init]) {
@@ -53,7 +53,7 @@
     return self;
     
 }
-
+*/
 
 
 
@@ -99,4 +99,15 @@
     return [self.imagesFlickr[termSearchFlickr] count];
 }
 
+
+
+-(UIImage *) imageCamera:(NSInteger *) item {
+    
+    JMFImageCamera *imageCamera = [self.imagesCamera objectAtIndex:(int)item];
+    
+    return imageCamera.image;
+}
+
 @end
+
+
