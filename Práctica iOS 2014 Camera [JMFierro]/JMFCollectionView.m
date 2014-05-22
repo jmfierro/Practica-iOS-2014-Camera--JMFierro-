@@ -551,8 +551,8 @@
 
 - (IBAction)btnTakePhoto:(id)sender {
     
-    BOOL isCamera = NO;
-    
+    BOOL isCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+        
     if (!isCamera) {
         
         

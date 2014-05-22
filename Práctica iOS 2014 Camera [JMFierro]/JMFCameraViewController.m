@@ -30,7 +30,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        imageCamera = [[JMFImageCamera alloc] init];
     }
     return self;
 }

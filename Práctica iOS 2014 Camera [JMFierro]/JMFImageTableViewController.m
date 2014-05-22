@@ -37,8 +37,8 @@
     CLLocation *location;
     CGFloat latitude;
     CGFloat longitude;
-    BOOL locationUser;
-    BOOL isDidLocalization;
+    BOOL isLocationData;
+    BOOL isDidStartLocalization;
     CLPlacemark *infoGeocoder;
     
     // Dimensiones de las celdas
@@ -130,6 +130,22 @@
           ----------------------------------------------*/
         else
             _metaData = [[JMFMetaData alloc] initWithImage:imageCamera.image];
+        
+        
+        /* ---------------------------
+         *
+         * Datos de localizacion.
+         *
+         -----------------------------*/
+        if (imageCamera.latitude ||imageCamera.longitude) {
+            isLocationData = YES;
+
+            latitude = imageCamera.latitude;
+            longitude = imageCamera.longitude;
+        
+        } else {
+            isLocationData = NO;
+        }
 
     }
     
@@ -774,11 +790,6 @@
     //    JMFLocation *location = [[JMFLocation alloc] init];
     
     
-    if (!latitude & !longitude) {
-        latitude = location.coordinate.latitude;
-        longitude = location.coordinate.longitude;
-    }
-    
 //    if (locationUser) {
 //        cell.lblLoacationOrigin.text = @"Localización del usuario";
 //    } else
@@ -792,8 +803,13 @@
     //            JMFLocationViewController *lVC = [[JMFLocationViewController alloc] initWithMapView:cell.mapkit];
     //        lVC.delegate = self;
     
-    if (!isDidLocalization) {
-        isDidLocalization = YES;
+    if (!isDidStartLocalization) {
+        isDidStartLocalization = YES;
+        
+        if (!isLocationData) {
+            latitude = location.coordinate.latitude;
+            longitude = location.coordinate.longitude;
+        }
         
         //    dispatch_async(dispatch_queue_t queue, ^{
         //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -868,7 +884,7 @@
                      *      - del usuario.
                      *
                      -------------------------------------------------------------*/
-                    if (locationUser) {
+                    if (!isLocationData) {
                         msg = [NSString stringWithFormat:@"%@ (%@)",[[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"],@"Usuario"];
                     } else {
                         msg = [NSString stringWithFormat:@"%@ (%@)",[[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"],@"Imagen"];
@@ -957,10 +973,10 @@
 -(void)showDetailsView {
     
     NSString *msg;
-    if (locationUser)
-        msg = @"La imagen no contiene información sobre GPS. \n La localizacion que se muestra es la actual del usuario.";
+    if (!isLocationData)
+        msg = @"Ni el \"Modelo\" ni los \"Metadatos\" de la imagen proporcionan información sobre localización. Muestra la situación actual del usuario.";
     else
-        msg = @"Localización proporcionada por la imagen en los 'Metadatos'.";
+        msg = @"Localización proporcionada por el \"Modelo\" o los \"Metadatos\" de la imagen.";
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Localización" message:msg delegate:nil cancelButtonTitle:@"Aceptar" otherButtonTitles:nil];
     [alert show];
@@ -1193,7 +1209,7 @@
         
         latitude = [[gps objectForKey:kCGImagePropertyGPSLatitude] floatValue];
         longitude = [[gps objectForKey:kCGImagePropertyGPSLongitude] floatValue];
-        locationUser = NO;
+        isLocationData = YES;
         
         
         /*
@@ -1202,7 +1218,7 @@
          */
     } else {
         [self startLocation];
-        locationUser = YES;
+        isLocationData = NO;
     }
     
     
