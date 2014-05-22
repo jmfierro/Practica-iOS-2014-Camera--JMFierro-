@@ -47,7 +47,6 @@
          * **   MODELO   **
          *
          -------------------*/
-//        modelDictionay = [[NSMutableDictionary alloc] init];
         self.model = [[JMFModel alloc] initWith];
     }
     return self;

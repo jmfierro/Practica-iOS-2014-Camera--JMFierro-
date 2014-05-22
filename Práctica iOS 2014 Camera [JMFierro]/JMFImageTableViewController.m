@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
+
 #import <ImageIO/ImageIO.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <CoreLocation/CoreLocation.h>
@@ -33,14 +34,12 @@
     CellImage *cellImage;
     
     // Localización
-//    JMFLocationViewController *location;
-//    CLLocationManager *manager;
     CLLocation *location;
     CGFloat latitude;
     CGFloat longitude;
     BOOL locationUser;
+    BOOL isDidLocalization;
     CLPlacemark *infoGeocoder;
-    BOOL isNewLocalization;
     
     // Dimensiones de las celdas
     CGFloat cellImage_height;
@@ -82,7 +81,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+
     }
     return self;
 }
@@ -132,10 +131,6 @@
         else
             _metaData = [[JMFMetaData alloc] initWithImage:imageCamera.image];
 
-//        if (!imageCamera.metaData)
-//            imageCamera.metaData = [[JMFMetaData alloc] initWithImage:imageCamera.image];
-
-        
     }
     
     return self;
@@ -158,7 +153,6 @@
          */
         if(_imageFlickr.imageLarge)
         {
-//            _image = _imageFlickr.largeImage;
             [self loadImage:_imageFlickr.imageLarge];
         }
         else
@@ -172,28 +166,31 @@
                         /*------------------------------------------------------
                          *
                          * Cuando la imagen es descargada se actualiza los 
-                         * datos de la TableView
+                         * datos de la TableView en el hilo principal.ƒ
                          *
                          ------------------------------------------------------*/
-//                        _image = _imageFlickr.largeImage;
                         [self loadImage:_imageFlickr.imageLarge];
                         _metaData = [[JMFMetaData alloc] initWithImage:_imageFlickr.imageLarge];
                       
-
                         [tableViewPhotoSelectMetaData reloadData];
                     });
                 }
                 
             }];
         }
-        
     }
     
     return self;
 }
 
 
+-(void)viewDidLayoutSubviews {
+    
+    [super viewDidLayoutSubviews];
+    
+//    [self registers];
 
+    }
 
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -219,25 +216,14 @@
 {
     [super viewDidLoad];
     
-    
     filtersActive = [[NSMutableDictionary alloc] init];
-    
-    /*
-     * Localizacion.
-     */
-//    locationVC = [[JMFLocationViewController alloc] init];
-//    locationVC.delegate = self;
-    isNewLocalization = YES;
-    
-//    [self registers];
-    
 }
 
 
 -(void)viewWillDisappear:(BOOL)animated {
-    /*---------------------------
-     *
-     * Baja en Notificaciones.
+    /*---------------------------    ______
+     *                              | \  / |
+     * Baja en Notificaciones.      |__\/__|
      *
      ---------------------------*/
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -389,9 +375,35 @@
  * ** Cambios de orientacion **
  *
  ...............................*/
+// No es llamada por usar el Navigator
 -(BOOL)shouldAutorotate {
     return NO;
 }
+
+/*
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    NSLog(@"willRotateToInterfaceOrientation") ;
+}
+
+
+
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+
+
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    NSLog(@"didRotateFromInterfaceOrientation");
+    [self registers];
+}
+
+*/
 
 /*
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -490,7 +502,7 @@
  *
  ..................*/
 
-#pragma mark - Delegates
+#pragma mark - Locations Delegates
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     // Localización
     location = [locations lastObject];
@@ -645,7 +657,7 @@
      */
     if (self.image == nil) {
         // Centrar spinner.
-        [indicatorLoadImagen setFrame:CGRectMake(768/2, 261, 0, 0)];
+        [indicatorLoadImagen setFrame:CGRectMake(self.view.frame.size.width/2, 261, 0, 0)];
         //        [[cell contentView] addSubview:indicatorLoadImagen];
         [[cellImage contentView] addSubview:indicatorLoadImagen];
         
@@ -780,8 +792,8 @@
     //            JMFLocationViewController *lVC = [[JMFLocationViewController alloc] initWithMapView:cell.mapkit];
     //        lVC.delegate = self;
     
-    if (isNewLocalization) {
-        isNewLocalization = NO;
+    if (!isDidLocalization) {
+        isDidLocalization = YES;
         
         //    dispatch_async(dispatch_queue_t queue, ^{
         //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -956,35 +968,6 @@
 
 #pragma mark - Metodos privados
 
--(void) loadImage:(UIImage *) image {
-    
-    
-    // Inicializa locations, tableView, celdas.
-    [self registers];
-    
-    /*-------------------------------------------------
-     *
-     * Redimensiona la imagen al tamaño del imageView
-     *
-     --------------------------------------------------*/
-    if (image.size.height > cellImage_height || image.size.width > cellImage_width) {
-        
-        
-        _image = [Utils imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_height)];
-        
-        
-        /*-------------------------------------------------
-         *
-         * Conserva tamaño original de la Imagen.
-         *
-         --------------------------------------------------*/
-    } else {
-        _image = image;
-    }
-    
-    _imageThumbnail = [Utils imageToThumbnail:image Size:CGSizeMake(100, 100)];
-
-}
 
 
 -(CellDetail *) writerDatosFlickr:(CellDetail *) cell {
@@ -1158,6 +1141,41 @@
     
 }
 
+
+-(void) loadImage:(UIImage *) image {
+    
+    
+    // Inicializa locations, tableView, celdas.
+    [self registers];
+    
+    /*-------------------------------------------------
+     *
+     * Redimensiona la imagen al tamaño del imageView
+     *
+     --------------------------------------------------*/
+    if (image.size.height > cellImage_height || image.size.width > cellImage_width) {
+        
+        
+        _image = [Utils imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_height)];
+        
+        
+        /*-------------------------------------------------
+         *
+         * Conserva tamaño original de la Imagen.
+         *
+         --------------------------------------------------*/
+    } else {
+        _image = image;
+    }
+    
+    _imageThumbnail = [Utils imageToThumbnail:image Size:CGSizeMake(100, 100)];
+    
+}
+
+
+
+
+
 -(void) registers {
     
   
@@ -1259,7 +1277,6 @@
     [center addObserver:self selector:@selector(onFilters:) name:kCellFilters object:nil];
     [center addObserver:self selector:@selector(onMetaData:) name:kCellDetail object:nil];
 
-    
 }
 
 
