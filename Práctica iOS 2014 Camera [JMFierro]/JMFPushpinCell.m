@@ -34,7 +34,7 @@
         _photo = photo;
     }
     
-    self.imagePhoto.image = _photo.thumbnail;
+    self.imagePhoto.image = _photo.imageThumbnail;
 }
 
 

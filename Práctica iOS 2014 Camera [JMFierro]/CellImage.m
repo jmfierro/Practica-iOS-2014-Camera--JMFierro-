@@ -57,20 +57,42 @@
  *
  ....................................*/
 - (IBAction)btnDetectFacialFeatures:(id)sender {
-  
+
     [self.indicatorFaceDetection hidesWhenStopped];
     [self.indicatorFaceDetection startAnimating];
+  
+    /* -------------------------------------
+     *
+     * Busqueda de caras en segundo plano.
+     *
+     ---------------------------------------*/
+    dispatch_queue_t queue =
+    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        // Añade marcos de la/s cara/s al 'view'.
+        FaceDetection *faceDetection = [[FaceDetection alloc] initWithImagenView:self.photoView];
+        
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCellImage object:faceDetection.facesRects];
+   
+        
+        /* --------------------
+         *
+         * Actualización de UI.
+         *
+         ----------------------*/
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.photoView addSubview:faceDetection.imageView];
+            self.lblNumFaces.text = [NSString stringWithFormat:@"%d",faceDetection.facesNum];
+            
+            [self.indicatorFaceDetection stopAnimating];
+  
+        });
+    });
     
     
-    // Añade marcos de la/s cara/s al 'view'.
-    FaceDetection *faceDetection = [[FaceDetection alloc] initWithImagenView:self.photoView];
     
-    [self.photoView addSubview:faceDetection.imageView];
-    self.lblNumFaces.text = [NSString stringWithFormat:@"%d",faceDetection.facesNum];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kCellImage object:faceDetection.facesRects];
-    
-    [self.indicatorFaceDetection stopAnimating];
 }
 
 

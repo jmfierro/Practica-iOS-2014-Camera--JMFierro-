@@ -84,7 +84,7 @@
 		50BB8AC818F6E1FC008EC1F3 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 50BB8AC718F6E1FC008EC1F3 /* bg.png */; };
 		50BD7B071919261D0058156D /* iconCheck-300px.png in Resources */ = {isa = PBXBuildFile; fileRef = 50BD7B061919261D0058156D /* iconCheck-300px.png */; };
 		50C1F72018F435C9004A1296 /* JMFHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C1F71F18F435C9004A1296 /* JMFHeader.m */; };
-		50C1F72318F44341004A1296 /* JMFPhotoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C1F72218F44341004A1296 /* JMFPhotoTableViewController.m */; };
+		50C1F72318F44341004A1296 /* JMFImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C1F72218F44341004A1296 /* JMFImageTableViewController.m */; };
 		50C1F72818F44A2C004A1296 /* famous-face-dementia-617x416.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50C1F72718F44A2C004A1296 /* famous-face-dementia-617x416.jpg */; };
 		50C299F8190E509C00879269 /* CellFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C299F7190E509C00879269 /* CellFilters.m */; };
 		50C299FA190E514900879269 /* CellFilters.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50C299F9190E514900879269 /* CellFilters.xib */; };
@@ -211,8 +211,8 @@
 		50BD7B061919261D0058156D /* iconCheck-300px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconCheck-300px.png"; sourceTree = "<group>"; };
 		50C1F71E18F435C9004A1296 /* JMFHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFHeader.h; sourceTree = "<group>"; };
 		50C1F71F18F435C9004A1296 /* JMFHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFHeader.m; sourceTree = "<group>"; };
-		50C1F72118F44341004A1296 /* JMFPhotoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFPhotoTableViewController.h; sourceTree = "<group>"; };
-		50C1F72218F44341004A1296 /* JMFPhotoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFPhotoTableViewController.m; sourceTree = "<group>"; };
+		50C1F72118F44341004A1296 /* JMFImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFImageTableViewController.h; sourceTree = "<group>"; };
+		50C1F72218F44341004A1296 /* JMFImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFImageTableViewController.m; sourceTree = "<group>"; };
 		50C1F72718F44A2C004A1296 /* famous-face-dementia-617x416.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "famous-face-dementia-617x416.jpg"; sourceTree = "<group>"; };
 		50C299F6190E509C00879269 /* CellFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellFilters.h; sourceTree = "<group>"; };
 		50C299F7190E509C00879269 /* CellFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellFilters.m; sourceTree = "<group>"; };
@@ -527,8 +527,8 @@
 		50C1F72918F44ACD004A1296 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				50C1F72118F44341004A1296 /* JMFPhotoTableViewController.h */,
-				50C1F72218F44341004A1296 /* JMFPhotoTableViewController.m */,
+				50C1F72118F44341004A1296 /* JMFImageTableViewController.h */,
+				50C1F72218F44341004A1296 /* JMFImageTableViewController.m */,
 				502AC630190AA43F00EFB9B3 /* CurledViewBase.h */,
 				502AC631190AA43F00EFB9B3 /* CurledViewBase.m */,
 				502AC62D190AA3F200EFB9B3 /* UIImageView+Curled.h */,
@@ -702,7 +702,7 @@
 				503E384B18F2FC4D00A9FBDF /* ImageFlickr.m in Sources */,
 				50382F5218F024DC0061B90C /* JMFCollectionView.m in Sources */,
 				50A5206318F7F105007F6F7B /* CellAddressLocation.m in Sources */,
-				50C1F72318F44341004A1296 /* JMFPhotoTableViewController.m in Sources */,
+				50C1F72318F44341004A1296 /* JMFImageTableViewController.m in Sources */,
 				50382F2818F0243D0061B90C /* main.m in Sources */,
 				502AC62F190AA3F200EFB9B3 /* UIImageView+Curled.m in Sources */,
 				50722FBF1907BC4F009E079D /* JMFHeaderView.m in Sources */,

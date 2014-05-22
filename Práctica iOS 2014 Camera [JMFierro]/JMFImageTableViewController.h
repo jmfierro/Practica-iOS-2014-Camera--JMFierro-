@@ -17,7 +17,7 @@
 #define kJMFTablePhotoViewControlle @"facesRects"
 
 
-@interface JMFPhotoTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
+@interface JMFImageTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 
 
 @property (nonatomic, strong) JMFMetaData *metaData;

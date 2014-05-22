@@ -34,7 +34,7 @@
     {
         size = @"m";
     }
-    return [NSString stringWithFormat:@"http://farm%d.staticflickr.com/%d/%lld_%@_%@.jpg",flickrPhoto.farm,flickrPhoto.server,flickrPhoto.photoID,flickrPhoto.secret,size];
+    return [NSString stringWithFormat:@"http://farm%d.staticflickr.com/%d/%lld_%@_%@.jpg",flickrPhoto.farm,flickrPhoto.server,flickrPhoto.ID,flickrPhoto.secret,size];
 }
 
 - (void)searchFlickrForTerm:(NSString *) term completionBlock:(FlickrSearchCompletionBlock) completionBlock
@@ -81,7 +81,7 @@
                         modelPhoto.farm = [objPhoto[@"farm"] intValue];
                         modelPhoto.server = [objPhoto[@"server"] intValue];
                         modelPhoto.secret = objPhoto[@"secret"];
-                        modelPhoto.photoID = [objPhoto[@"id"] longLongValue];
+                        modelPhoto.ID = [objPhoto[@"id"] longLongValue];
                         
                         modelPhoto.isfamily = [objPhoto[@"isfamily"] intValue] == 0 ? @"No" : @"Familia";
                         modelPhoto.isfriend = [objPhoto[@"isfriend"] intValue] == 0 ? @"No" : @"Si";
@@ -94,7 +94,7 @@
                                                                   options:0
                                                                     error:&error];
                         UIImage *image = [UIImage imageWithData:imageData];
-                        modelPhoto.thumbnail = image;
+                        modelPhoto.imageThumbnail = image;
                         
                         [flickrPhotos addObject:modelPhoto];
                     }
@@ -132,11 +132,11 @@
             UIImage *image = [UIImage imageWithData:imageData];
             if([size isEqualToString:@"m"])
             {
-                flickrPhoto.thumbnail = image;
+                flickrPhoto.imageThumbnail = image;
             }
             else
             {
-                flickrPhoto.largeImage = image;
+                flickrPhoto.imageLarge = image;
             }
             completionBlock(image,nil);
         }

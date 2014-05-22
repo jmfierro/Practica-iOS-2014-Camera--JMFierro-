@@ -12,11 +12,11 @@
 #import <Foundation/Foundation.h>
 
 @interface ImageFlickr : NSObject
-@property(nonatomic,strong) UIImage *thumbnail;
-@property(nonatomic,strong) UIImage *largeImage;
+@property(nonatomic,strong) UIImage *imageThumbnail;
+@property(nonatomic,strong) UIImage *imageLarge;
 
 // Lookup info
-@property(nonatomic) long long photoID;
+@property(nonatomic) long long ID;
 @property(nonatomic) NSInteger farm;
 @property(nonatomic) NSInteger server;
 @property(nonatomic,strong) NSString *secret;

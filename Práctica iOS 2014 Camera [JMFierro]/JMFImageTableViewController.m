@@ -10,7 +10,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <CoreLocation/CoreLocation.h>
 
-#import "JMFPhotoTableViewController.h"
+#import "JMFImageTableViewController.h"
 
 #import "Flickr.h"
 
@@ -27,7 +27,7 @@
 
 
 
-@interface JMFPhotoTableViewController () {
+@interface JMFImageTableViewController () {
     
     UITableView *tableViewPhotoSelectMetaData;
     CellImage *cellImage;
@@ -74,7 +74,7 @@
 @end
 
 
-@implementation JMFPhotoTableViewController
+@implementation JMFImageTableViewController
 
 #pragma mark - View lifecycle
 
@@ -156,10 +156,10 @@
         /*
          *  Imagen de Flickr.
          */
-        if(_imageFlickr.largeImage)
+        if(_imageFlickr.imageLarge)
         {
 //            _image = _imageFlickr.largeImage;
-            [self loadImage:_imageFlickr.largeImage];
+            [self loadImage:_imageFlickr.imageLarge];
         }
         else
         {
@@ -176,8 +176,8 @@
                          *
                          ------------------------------------------------------*/
 //                        _image = _imageFlickr.largeImage;
-                        [self loadImage:_imageFlickr.largeImage];
-                        _metaData = [[JMFMetaData alloc] initWithImage:_imageFlickr.largeImage];
+                        [self loadImage:_imageFlickr.imageLarge];
+                        _metaData = [[JMFMetaData alloc] initWithImage:_imageFlickr.imageLarge];
                       
 
                         [tableViewPhotoSelectMetaData reloadData];
@@ -992,8 +992,8 @@
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"ID:";
-    if (self.imageFlickr.photoID)
-        cell.lbl1content.text = [[NSString alloc] initWithFormat:@"%lld", self.imageFlickr.photoID];
+    if (self.imageFlickr.ID)
+        cell.lbl1content.text = [[NSString alloc] initWithFormat:@"%lld", self.imageFlickr.ID];
     
     cell.lbl2.text = @"Farm:";
     if (self.imageFlickr.farm)

@@ -83,7 +83,7 @@
  * Número de imagenes tomadas con la cacara.
  *
  ............................................*/
--(NSInteger) countOfPhotosCamera {
+-(NSInteger) countOfImagesCamera {
     
     return [self.imagesCamera count];
 }
@@ -94,13 +94,17 @@
  * Número de imagenes bajadas de Flickr.
  *
  ............................................*/
--(NSInteger) countOfPhotosFlickrSearchResults:(NSString *)termSearchFlickr {
+-(NSInteger) countOfTermSearchFlickr:(NSString *)termSearchFlickr {
  
     return [self.imagesFlickr[termSearchFlickr] count];
 }
 
 
-
+/*...................................................
+ *
+ * Devuelve la imagen correspondiente a una posicion.
+ *
+ .....................................................*/
 -(UIImage *) imageCamera:(NSInteger *) item {
     
     JMFImageCamera *imageCamera = [self.imagesCamera objectAtIndex:(int)item];

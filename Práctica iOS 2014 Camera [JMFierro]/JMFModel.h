@@ -26,15 +26,13 @@
 
 
 -(id)initWith;
-//-(id)initWithImage:(JMFImageCamera *) imageCamera;
-//-(id)initWithFlickr:(FlickrPhoto *) imageFlickr;
-
 
 -(NSInteger) countTotal;
 -(NSInteger) countSections;
--(NSInteger) countOfPhotosCamera;
--(NSInteger) countOfPhotosFlickrSearchResults:(NSString *)termSearchFlickr;
+-(NSInteger) countOfImagesCamera;
+-(NSInteger) countOfTermSearchFlickr:(NSString *)termSearchFlickr;
 
+// Devuelve la imagen correspondiente a una posicion.
 -(UIImage *) imageCamera:(NSInteger *) item;
 
 @end

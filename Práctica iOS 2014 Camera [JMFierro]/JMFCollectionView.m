@@ -10,12 +10,8 @@
 #import "JMFHeaderView.h"
 #import "JMFPushpinCell.h"
 
-#import "JMFPhotoTableViewController.h"
-//#import "JMFLocationViewController.h"
-//#import "JMFCoreViewController.h"
-//#import "LocationViewController.h"
+#import "JMFImageTableViewController.h"
 #import "JMFCameraViewController.h"
-
 
 #import "Flickr.h"
 #import "ImageFlickr.h"
@@ -27,18 +23,12 @@
     
     NSMutableDictionary *modelDictionay;
     
-    UICollectionView *collectionViewPhotos;
+    UICollectionView *collectionView;
     NSInteger sectionCamera;
     
     NSIndexPath *indexPatchSelect;
 }
 
-//// Nueva version para Collection
-//@property(nonatomic, weak) IBOutlet UIToolbar *toolbar;
-//@property(nonatomic, weak) IBOutlet UIBarButtonItem *shareButton;
-@property(nonatomic, weak) IBOutlet UITextField *textField;
-
-//- (IBAction)shareButtonTapped:(id)sender;
 
 @end
 
@@ -65,69 +55,29 @@
 
 
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    CGRect rectMain=[[UIScreen mainScreen] bounds];
-    CGFloat scale=[[UIScreen mainScreen] scale];
-    
-    NSLog(@"Actual Pixel Resolution: width :% f,height :%f",rectMain.size.width * scale,rectMain.size.height * scale);
-    NSLog(@" Actual Size width :% f,height :%f",rectMain.size.width ,rectMain.size.height );
-    
-    
-    [self.activiyIndicator setHidden:YES];
-    
-    
-    /*----------------------------------------------------------------------
-     *
-     * Creación, registro y configuración para la "Collections".
-     *
-    ------------------------------------------------------------------------*/
-    
-    // Configuración 'collection'
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    flowLayout.minimumInteritemSpacing = 4.f;
-    flowLayout.minimumLineSpacing = 4;
-    flowLayout.sectionInset = UIEdgeInsetsMake(20, 0, 100, 0); // ** Margenes para cabeceras y pies. **
-    
-    // Creación 'collection'
-    CGRect rect = CGRectMake(0, 200, self.view.frame.size.width, self.view.frame.size.height);
-    collectionViewPhotos = [[UICollectionView alloc] initWithFrame:rect collectionViewLayout:flowLayout];
-    
-    // Registro Celdas
-    [collectionViewPhotos registerNib:[UINib nibWithNibName:kJMFPushpinCell bundle:nil] forCellWithReuseIdentifier:kJMFPushpinCell];
-    
-    // Registro Cabecera
-    [collectionViewPhotos registerClass:[JMFHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kJMFHeaderView];
-    
-    
-    
-    /* -----------------------------
-     *
-     * Fondo para la coleccion.
-     *
-     --------------------------------*/
-    collectionViewPhotos.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_cork.png"]];
-
-    
-    
-    /*-------------------------------------
-     *
-     * Establece delegados y notificaiones
-     *
-     --------------------------------------*/
-    collectionViewPhotos.delegate = self;
-    collectionViewPhotos.dataSource = self;
-    self.searchTextField.delegate = self;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFacesRects:) name:kJMFTablePhotoViewControlle object:nil];
-    
-
-    [self.view addSubview:collectionViewPhotos];
-    
+    //    [self createCollectionView];
 }
 
+
+
+/*....................................
+ *
+ * Detectando cambio de orientación.
+ *
+ .....................................*/
+-(void)viewWillLayoutSubviews {
+    
+    [super viewWillLayoutSubviews];
+    
+    NSLog(@"viewWillLayoutSubviews");
+    
+    [self createCollectionView];
+}
 
 
 
@@ -139,9 +89,55 @@
 }
 
 
--(BOOL)shouldAutorotate {
-    return NO;
-}
+//- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation) {
+//    if (interfaceOrientation == UIInterfaceOrientationPortrait|| interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+//        //Code
+//    }
+//    else if (interfaceOrientation == UIInterfaceOrientationLandscapeRight||interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+//        //Code
+//    }
+//}
+
+
+//if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+//{
+//    // code for landscape orientation
+//}
+
+//if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
+//{
+//    // code for Portrait orientation
+//}
+
+
+//if (UIDeviceOrientationIsPortrait(self.interfaceOrientation)){
+//    //DO Portrait
+//}else{
+//    //DO Landscape
+//}
+
+//typedef enum {
+//    UIDeviceOrientationUnknown,
+//    UIDeviceOrientationPortrait,
+//    UIDeviceOrientationPortraitUpsideDown,
+//    UIDeviceOrientationLandscapeLeft,
+//    UIDeviceOrientationLandscapeRight,
+//    UIDeviceOrientationFaceUp,
+//    UIDeviceOrientationFaceDown
+//} UIDeviceOrientation;
+
+//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+//{
+//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+//}
+
+
+//-(BOOL)shouldAutorotate {
+//    return NO;
+//}
+
+
+
 
 
 /*....................................
@@ -213,7 +209,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    JMFPhotoTableViewController *tablePhotoVC = [[JMFPhotoTableViewController alloc] init];
+    JMFImageTableViewController *tablePhotoVC = [[JMFImageTableViewController alloc] init];
     
     indexPatchSelect = indexPath;
     
@@ -229,12 +225,12 @@
          * (Esta imagen 'void' índica que no hay fotos tomadas por la cámara desde la app)
          *
          */
-        if ([self.model countOfPhotosCamera]) {
+        if ([self.model countOfImagesCamera]) {
             
             JMFImageCamera *imageCamera = [[JMFImageCamera alloc] init];
             imageCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
             
-            tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithImageCamera:imageCamera];
+            tablePhotoVC = [[JMFImageTableViewController alloc] initWithImageCamera:imageCamera];
             
             [self.navigationController pushViewController:tablePhotoVC animated:YES];
         }
@@ -250,7 +246,7 @@
         NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1];
         ImageFlickr *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPath.row];
         
-        tablePhotoVC = [[JMFPhotoTableViewController alloc] initWithFlickrPhoto:flickrPhoto];
+        tablePhotoVC = [[JMFImageTableViewController alloc] initWithFlickrPhoto:flickrPhoto];
         
         [self.navigationController pushViewController:tablePhotoVC animated:YES];
     }
@@ -286,7 +282,7 @@
          *                                                                  |__________|
          -------------------------------------------------------------------   CAMARA -*/
         UIImage *image;
-        if ([self.model countOfPhotosCamera] > 0) {
+        if ([self.model countOfImagesCamera] > 0) {
 //            JMFCamera *imgCamera = [[JMFCamera alloc] init];
 //            imgCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
 //            image = imgCamera.image;
@@ -317,8 +313,8 @@
         ImageFlickr *photo = self.model.imagesFlickr[searchTerm][indexPath.row];
 
         // Escala thumbnail.
-        CGSize frame = [Utils scaleFactor:photo.largeImage widthNewFrame:200];
-        retval = photo.thumbnail.size.width > 0 ? photo.thumbnail.size : frame; // CGSizeMake(200, 200);
+        CGSize frame = [Utils scaleFactor:photo.imageLarge widthNewFrame:200];
+        retval = photo.imageThumbnail.size.width > 0 ? photo.imageThumbnail.size : frame; // CGSizeMake(200, 200);
 
     }
 
@@ -353,7 +349,7 @@
          * NUMERO de fotos tomadas con la cámara.                           |   |_|    |
          *                                                                  |__________|
          -------------------------------------------------------------------   CAMARA -*/
-        return MAX( 1, [self.model countOfPhotosCamera]);
+        return MAX( 1, [self.model countOfImagesCamera]);
 
     
     } else {
@@ -363,7 +359,7 @@
          *
          ------------------------------------------------------------------------------*/
         NSString *searchTerm = self.model.termsSearchesFlickr[section -1];
-        return [self.model countOfPhotosFlickrSearchResults:searchTerm];
+        return [self.model countOfTermSearchFlickr:searchTerm];
 
     }
 }
@@ -382,7 +378,7 @@
      cell.backgroundColor = [UIColor whiteColor];
      */
     
-    JMFPushpinCell *cell = [collectionViewPhotos dequeueReusableCellWithReuseIdentifier:kJMFPushpinCell forIndexPath:indexPath];
+    JMFPushpinCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kJMFPushpinCell forIndexPath:indexPath];
     
 //    UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:100];
 
@@ -394,7 +390,7 @@
          *                                              |__________|
          ------------------------------------------------- CAMARA --*/
 
-        if ([self.model countOfPhotosCamera] > 0 ) {
+        if ([self.model countOfImagesCamera] > 0 ) {
             //            cell.imagePhoto.image = [self.model.imagesCamera objectAtIndex:indexPath.row];
 //            JMFCamera *imageCamera = [[JMFCamera alloc] init];
 //            imageCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
@@ -479,7 +475,7 @@
              --------------------------------------*/
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.activiyIndicator setHidden:YES];
-                [collectionViewPhotos reloadData];
+                [collectionView reloadData];
             });
         } else {
             NSLog(@"Error busqueda Flickr: %@", error.localizedDescription);
@@ -503,7 +499,7 @@
 //    JMFImageCamera *imageCamera = [[JMFImageCamera alloc] initWithImage:image];
     [self.model.imagesCamera addObject:imageCamera];
     
-    [collectionViewPhotos reloadData];
+    [collectionView reloadData];
     
 }
 
@@ -527,9 +523,7 @@
      *                                              |__________|
      ------------------------------------------------- CAMARA --*/
     if (indexPatchSelect.section == 0) {
-        NSLog(@"Antes: %@",[[self.model.imagesCamera objectAtIndex:indexPatchSelect.row] facesRect]);
         [[self.model.imagesCamera objectAtIndex:indexPatchSelect.row] setFacesRect:note.object];
-        NSLog(@"Despues: %@",[[self.model.imagesCamera objectAtIndex:indexPatchSelect.row] facesRect]);
         
     } else {
         /*----------------------------------------------
@@ -539,12 +533,9 @@
          -----------------------------------------------*/
         NSString *searchTerm = self.model.termsSearchesFlickr[indexPatchSelect.section -1];
         ImageFlickr *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPatchSelect.row];
-        NSLog(@"Antes: %@", flickrPhoto.facesRects);
-
+ 
         [self.model.imagesFlickr[searchTerm][indexPatchSelect.row] setFacesRects:note.object];
-        
-        NSLog(@"Despues: %@", [self.model.imagesFlickr[searchTerm][indexPatchSelect.row] facesRects]);
-    }
+     }
     
 }
 
@@ -604,7 +595,7 @@
         
     }
     
-    [collectionViewPhotos reloadData];
+    [collectionView reloadData];
     
 }
 
@@ -616,10 +607,70 @@
 
 
 
-//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-//{
-//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-//}
+#pragma mark - Private Methods
+-(void) createCollectionView {
+    
+    CGRect rectMain=[[UIScreen mainScreen] bounds];
+    CGFloat scale=[[UIScreen mainScreen] scale];
+    
+    NSLog(@"Actual Pixel Resolution: width :% f,height :%f",rectMain.size.width * scale,rectMain.size.height * scale);
+    NSLog(@" Actual Size width :% f,height :%f",rectMain.size.width ,rectMain.size.height );
+    
+    
+    [self.activiyIndicator setHidden:YES];
+    
+    
+    /*----------------------------------------------------------------------
+     *
+     * Creación, registro y configuración para la "Collections".
+     *
+     ------------------------------------------------------------------------*/
+    
+    // Configuración 'collection'
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    flowLayout.minimumInteritemSpacing = 4.f;
+    flowLayout.minimumLineSpacing = 4;
+    flowLayout.sectionInset = UIEdgeInsetsMake(20, 0, 100, 0); // ** Margenes para cabeceras y pies. **
+    
+    // Creación 'collection'
+    CGRect rect = CGRectMake(0, 200, self.view.frame.size.width, self.view.frame.size.height);
+    collectionView = [[UICollectionView alloc] initWithFrame:rect collectionViewLayout:flowLayout];
+    
+    // Registro Celdas
+    [collectionView registerNib:[UINib nibWithNibName:kJMFPushpinCell bundle:nil] forCellWithReuseIdentifier:kJMFPushpinCell];
+    
+    // Registro Cabecera
+    [collectionView registerClass:[JMFHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kJMFHeaderView];
+    
+    
+    
+    /* -----------------------------
+     *
+     * Fondo para la coleccion.
+     *
+     --------------------------------*/
+    collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_cork.png"]];
+    
+    
+    
+    /*-------------------------------------
+     *
+     * Establece delegados y notificaiones
+     *
+     --------------------------------------*/
+    collectionView.delegate = self;
+    collectionView.dataSource = self;
+    self.searchTextField.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFacesRects:) name:kJMFTablePhotoViewControlle object:nil];
+    
+    
+    [self.view addSubview:collectionView];
+}
+
+
+
+
 
 
 @end
