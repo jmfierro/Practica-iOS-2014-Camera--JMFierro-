@@ -22,15 +22,14 @@
 @end
 
 @interface JMFCameraViewController : UIViewController <UIImagePickerControllerDelegate> {
-
-
-id delegate;
+    
+    id delegate;
 }
 
 @property (nonatomic, retain) id<CameraViewControllerDelegate> delegate;
 
-
-
+-(id)initWithCamera;
+-(id)initWithCameraRoll;
 
 @end
 

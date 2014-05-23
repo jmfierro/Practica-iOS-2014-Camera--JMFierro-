@@ -31,8 +31,8 @@
  *
  ...................................................*/
 -(NSDictionary *) metaDataImage:(UIImage *) image;
--(UIImage *)addMetaData:(UIImage *)aImage;
--(NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location;
++(UIImage *)addMetaData:(UIImage *)aImage Location:(CLLocation *) location;
++(NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location;
 
 
 /* ** SALIDA DE METADATOS **

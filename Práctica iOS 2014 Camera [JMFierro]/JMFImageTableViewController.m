@@ -974,7 +974,7 @@
     
     NSString *msg;
     if (!isLocationData)
-        msg = @"Ni el \"Modelo\" ni los \"Metadatos\" de la imagen proporcionan información sobre localización. Muestra la situación actual del usuario.";
+        msg = @"Ni el \"Modelo\" ni los \"Metadatos\" de la imagen proporcionan información sobre la localización. Se muestra la situación actual del usuario.";
     else
         msg = @"Localización proporcionada por el \"Modelo\" o los \"Metadatos\" de la imagen.";
     

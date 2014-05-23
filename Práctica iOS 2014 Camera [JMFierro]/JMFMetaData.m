@@ -58,7 +58,8 @@
          *  Añadir datos GPS
          --------------------*/
         if(!self.GPSDictionary && location) {
-            NSDictionary *d = [self gpsDictionaryForLocation:location];
+//            NSDictionary *d = [JMFMetaData gpsDictionaryForLocation:location];
+            self.GPSDictionary = [JMFMetaData gpsDictionaryForLocation:location];
 //            self.GPSDictionary = [NSDictionary dictionary];
         }
 /*
@@ -121,7 +122,7 @@
  *
  ...................................................*/
 -(NSDictionary *) metaDataImage:(UIImage *) image {
-    
+
     NSData *jpeg = [NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)];
     
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)jpeg, NULL);
@@ -132,7 +133,7 @@
 }
 
 
--(UIImage *)addMetaData:(UIImage *)aImage {
++(UIImage *)addMetaData:(UIImage *)aImage Location:(CLLocation *) location {
     
     UIImage *image = aImage;
     
@@ -141,7 +142,7 @@
      * Modelo
      */
 //    JMFMetaData *modelMetadata = [[JMFMetaData alloc] initWithImage:image];
-    JMFMetaData *modelMetadata = [[JMFMetaData alloc] initWithImage:image andLocation:nil];
+    JMFMetaData *modelMetadata = [[JMFMetaData alloc] initWithImage:image andLocation:location];
 
     
     /*
@@ -177,12 +178,14 @@
     CFRelease(destination);
     CFRelease(source);
     
+    modelMetadata = [[JMFMetaData alloc] initWithImage:image andLocation:location];
+    
     return image;
 }
 
 
 
-- (NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location {
++(NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location {
     CLLocationDegrees exifLatitude  = location.coordinate.latitude;
     CLLocationDegrees exifLongitude = location.coordinate.longitude;
     

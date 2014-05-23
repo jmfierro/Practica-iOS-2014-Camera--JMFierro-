@@ -47,6 +47,8 @@
          * **   MODELO   **
          *
          -------------------*/
+//        UIImage *img = [UIImage imageWithContentsOfFile:(NSString *)path];
+        
         self.model = [[JMFModel alloc] initWith];
     }
     return self;
@@ -169,6 +171,9 @@
     if (kind == UICollectionElementKindSectionHeader) {
         
         titleView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kJMFHeaderView forIndexPath:indexPath];
+
+//        ((JMFHeaderView *)titleView).label.font = [UIFont fontWithName:@"Zapfino" size:40];
+//        ((JMFHeaderView *)titleView).label.textColor = [UIColor whiteColor];
         
         if (indexPath.section == 0) {  // & [self.photosCamera count]>0) {
  
@@ -179,7 +184,7 @@
              ------------------------------------------------- CAMARA --*/
  
             ((JMFHeaderView *)titleView).label.text = @"Camara";
-            
+
             
         } else {
             /*----------------------------------------------------
@@ -553,8 +558,26 @@
     
     BOOL isCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
         
-    if (!isCamera) {
+    if (isCamera) {
         
+        /*
+         *    __________
+         *   |    _   |_|
+         *   |   |_|    | CAMARA
+         *   |__________|
+         */
+        /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         * LLamada a la camara.
+         ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
+        JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] initWithCamera];
+        cameraVC.delegate = self;
+        [self.navigationController pushViewController:cameraVC animated:NO];
+        //    [self.model.photosCamera addObject:cameraVC.imageView.image];
+ 
+        
+        
+    } else {
+ 
         
         /*          o `´
          *      oo
@@ -572,30 +595,30 @@
         [self.model.imagesCamera addObject:imageCamera];
         
         //    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
-    
-        
-        
-    } else {
- 
-        /*
-         *    __________
-         *   |    _   |_|
-         *   |   |_|    | CAMARA
-         *   |__________|
-         */
-        /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         * LLamada a la camara.
-         ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
-        JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] init];
-        cameraVC.delegate = self;
-        [self.navigationController pushViewController:cameraVC animated:NO];
-        //    [self.model.photosCamera addObject:cameraVC.imageView.image];
         
         
     }
     
     [collectionView reloadData];
     
+}
+
+- (IBAction)btnGelery:(id)sender {
+    
+    /*      __________
+     *    _|________  |
+     *   |          |
+     *   |          | GALERIA
+     *   |__________|
+     */
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * LLamada a la camara.
+     ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
+    JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] initWithCameraRoll];
+    cameraVC.delegate = self;
+    [self.navigationController pushViewController:cameraVC animated:NO];
+    //    [self.model.photosCamera addObject:cameraVC.imageView.image];
+
 }
 
 
@@ -648,7 +671,7 @@
      * Fondo para la coleccion.
      *
      --------------------------------*/
-    collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_cork.png"]];
+//    collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_cork.png"]];
     
     
     

@@ -10,7 +10,8 @@
 
 #import "JMFCameraViewController.h"
 
-
+#define kIsCamera @"camera"
+#define kIsCameraRoll @"cameraRoll"
 
 @interface JMFCameraViewController () {
     
@@ -18,7 +19,7 @@
     CLLocation *lastLocation;
     
     JMFImageCamera *imageCamera;
-    
+    NSString *getImage;
     BOOL newMedia;
 }
 
@@ -30,16 +31,40 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        imageCamera = [[JMFImageCamera alloc] init];
+//        imageCamera = [[JMFImageCamera alloc] init];
     }
     return self;
 }
+
+-(id)initWithCamera {
+    
+    if (self = [super initWithNibName:nil bundle:nil]) {
+        getImage = kIsCamera;
+    }
+    return self;
+}
+
+-(id)initWithCameraRoll {
+    if (self = [super initWithNibName:nil bundle:nil]) {
+        getImage = kIsCameraRoll;
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self useCamera:nil];
+    
+    imageCamera = [[JMFImageCamera alloc] init];
+    if (getImage == kIsCamera) {
+        [self useCameraRoll:nil];
+        
+    } else if (getImage == kIsCameraRoll) {
+        [self useCameraRoll:nil];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,8 +150,7 @@
     if ([UIImagePickerController isSourceTypeAvailable:
          UIImagePickerControllerSourceTypeSavedPhotosAlbum])
     {
-        UIImagePickerController *imagePicker =
-        [[UIImagePickerController alloc] init];
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = self;
         imagePicker.sourceType =
         UIImagePickerControllerSourceTypePhotoLibrary;
@@ -233,7 +257,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
      *
      ------------------------*/
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        imageCamera.image = info[UIImagePickerControllerOriginalImage];
+        
+//        UIImage *img = [JMFMetaData addMetaData:info[UIImagePickerControllerOriginalImage] Location:lastLocation];
+        
+        imageCamera.image = [JMFMetaData addMetaData:info[UIImagePickerControllerOriginalImage] Location:lastLocation];
         
         /* ---------------------
          *
@@ -249,13 +276,11 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
          * Guarda imagen.
          *
          -----------------*/
-        /*
-        if (_newMedia)
-            UIImageWriteToSavedPhotosAlbum(image,
-                                           self,
-                                           @selector(image:finishedSavingWithError:contextInfo:),
-                                           nil);
-         */
+        UIImageWriteToSavedPhotosAlbum(imageCamera.image,
+                                       self,
+                                       @selector(image:finishedSavingWithError:contextInfo:),
+                                       nil);
+        
     }
     
 
@@ -273,7 +298,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 }
 
 
-/*
+
 - (NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location {
     CLLocationDegrees exifLatitude  = location.coordinate.latitude;
     CLLocationDegrees exifLongitude = location.coordinate.longitude;
@@ -306,7 +331,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     return locDict;
  }
-*/
+
 
 
 -(void)image:(UIImage *)image
@@ -339,8 +364,6 @@ finishedSavingWithError:(NSError *)error
     imageCamera.longitude = lastLocation.coordinate.longitude;
     
     [managerLocation stopUpdatingLocation];
-    
-    
 }
 
 

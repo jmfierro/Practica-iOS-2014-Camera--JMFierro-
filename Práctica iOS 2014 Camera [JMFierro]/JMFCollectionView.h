@@ -21,6 +21,7 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activiyIndicator;
 
 - (IBAction)btnTakePhoto:(id)sender;
+- (IBAction)btnGelery:(id)sender;
 
 
 - (IBAction)clickBackground:(id)sender;

@@ -14,36 +14,40 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         self.label = [[UILabel alloc] initWithFrame:self.bounds];
         self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth |
         UIViewAutoresizingFlexibleHeight;
-//        self.label.backgroundColor = [UIColor randomColor];
-//        self.label.textAlignment = NSTextAlignmentCenter;
-//        self.label.font = [UIFont boldSystemFontOfSize:13.0f];
-        self.label.textColor = [UIColor blackColor];
 
+        self.label.font = [UIFont fontWithName:@"Zapfino" size:40];
+        self.label.textColor = [UIColor whiteColor];
+        
         UIImageView *labelBackground = [[UIImageView alloc]
                                         initWithImage:[UIImage imageNamed:@"papel-rasgado-54166.png"]];
         [self.label addSubview:labelBackground];
-//        [labelBackground release];
+        
+        /*
+         * Aspect Fill
+         */
+        /*
+        UIImage *img = [UIImage imageNamed:@"papel-rasgado-54166.png"];
+        CGSize imgSize = self.label.frame.size;
+        
+        UIGraphicsBeginImageContext( imgSize );
+        [img drawInRect:CGRectMake(0,0,imgSize.width,imgSize.height)];
+        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        self.label.backgroundColor = [UIColor colorWithPatternImage:newImage];
+        
+        UIImageView *labelBackground = [[UIImageView alloc]
+                                        initWithImage:newImage];
+        [self.label addSubview:labelBackground];
+         */
+
         self.label.backgroundColor = [UIColor clearColor];
         
-//        self.label.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header_bg.png"]];
-        
-//        UIColor *color = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header_bg.png"]];
-//        self.label.backgroundColor = color;
-
-        
         [self addSubview:self.label];
-        
-//        [self.label setBackGround:[UIImage imageNamed:@"header_bg.png"]];
-//        [self.label setText:@"created programatically"];
-////        [self.label release];
-        
-//        UIImageView *labelBackground = [[UIImageView alloc]
-//                                        initWithImage:[UIImage imageNamed:@"header_bg.png"]];
-//        [self.label addSubview:labelBackground];
-//        [self.label setText:@"created programatically"];
     }
     
     return self;
