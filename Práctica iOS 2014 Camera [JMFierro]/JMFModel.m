@@ -17,6 +17,15 @@
 
 #import "JMFModel.h"
 
+@interface JMFModel () {
+    
+    // Puntero a imagen actual
+    id imageActual;
+    
+}
+@end
+
+
 @implementation JMFModel
 
 -(id) initWith {
@@ -114,12 +123,42 @@
  * Devuelve la imagen correspondiente a una posicion.
  *
  .....................................................*/
--(UIImage *) imageCamera:(NSInteger *) item {
+-(UIImage *) imageCameraImage:(NSInteger *) item {
     
-    JMFImageCamera *imageCamera = [self.imagesCamera objectAtIndex:(int)item];
+    JMFImage *imageCamera = [self.imagesCamera objectAtIndex:(int)item];
     
     return imageCamera.image;
 }
+
+-(JMFImage *)imageCamera:(NSIndexPath *)indexPath {
+    
+    return [self.imagesCamera objectAtIndex:indexPath.row];
+    
+}
+
+
+-(ImageFlickr *)imageFlickr:(NSIndexPath *)indexPath {
+    
+    NSString *term = [self.termsSearchesFlickr objectAtIndex:indexPath.section -1];
+    
+    return [[self.imagesFlickr objectForKey:term] objectAtIndex:indexPath.row];
+}
+
+
+
+
+-(void) remove:(NSIndexPath *) indexPath {
+    
+    if (indexPath.section == 0) {
+        [self.imagesCamera removeObjectAtIndex:indexPath.row];
+        
+    } else {
+        NSString *term = [self.termsSearchesFlickr objectAtIndex:indexPath.section -1];
+        [[self.imagesFlickr objectForKey:term] removeObjectAtIndex:indexPath.row];
+    }
+}
+
+
 
 @end
 

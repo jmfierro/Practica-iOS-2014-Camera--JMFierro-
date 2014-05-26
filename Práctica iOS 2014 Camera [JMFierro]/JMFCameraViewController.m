@@ -29,7 +29,7 @@
     CLLocationManager *managerLocation;
     CLLocation *lastLocation;
     
-    JMFImageCamera *imageCamera;
+    JMFImage *imageCamera;
     NSString *getImage;
     BOOL newMedia;
 }
@@ -68,7 +68,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    imageCamera = [[JMFImageCamera alloc] init];
+    imageCamera = [[JMFImage alloc] init];
     if (getImage == kIsCamera) {
         [self useCamera:nil];
         

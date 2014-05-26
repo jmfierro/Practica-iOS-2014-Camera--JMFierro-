@@ -123,6 +123,13 @@
  cell.mapView.showsUserLocation = NO;
  cell.mapView.delegate = self;
  cell.mapView.centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
+ 
+ *******************
+ #### Eliminar foto
+ *******************
+ 
+ Hay un botón habilitado en el **'Navigator'**. Envía  una notificación que escucha la clase **'JMFCollectionView'** en el método **onRemove**. La clase guarda con antelación un objeto **'NSIndexPath'**
+ que apunta a la imagen actual. *El modelo tiene un método de borrado que recibe un objeto **'NSIndexPath'** y elimina el objeto correspondiente.*
 
  */
 
@@ -131,23 +138,24 @@
 #import <UIKit/UIKit.h>
 
 #import "JMFModel.h"
-#import "JMFImageCamera.h"
+#import "JMFImage.h"
 #import "ImageFlickr.h"
 
-#define kJMFTablePhotoViewControlle @"facesRects"
+#define kJMFTableImageViewControlleFacesRects @"kJMFTableImageViewControlleFacesRects"
+#define kJMFTableImageViewControlleRemove @"kJMFTableImageViewControlleRemove"
 
 
 @interface JMFImageTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 
 
 @property (nonatomic, strong) JMFMetaData *metaData;
-@property (nonatomic,strong) JMFImageCamera *imageCamera;
+@property (nonatomic,strong) JMFImage *imageCamera;
 @property (nonatomic, strong) ImageFlickr *imageFlickr;
 @property (nonatomic, strong) UIImage *image, *imageThumbnail;
 
 
--(id) initWithImage:(JMFImageCamera *) image;
--(id) initWithImageCamera:(JMFImageCamera *) imageCamera;
+-(id) initWithImage:(JMFImage *) image;
+-(id) initWithImageCamera:(JMFImage *) imageCamera;
 -(id) initWithFlickrPhoto:(ImageFlickr *)flickrPhoto;
 
 

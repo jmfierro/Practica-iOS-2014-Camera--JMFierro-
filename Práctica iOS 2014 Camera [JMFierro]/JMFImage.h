@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "JMFMetaData.h"
 
-@interface JMFImageCamera : NSObject
+@interface JMFImage : NSObject
 
 @property (nonatomic,strong) UIImage *image;
 //@property (nonatomic,strong) NSString *health;

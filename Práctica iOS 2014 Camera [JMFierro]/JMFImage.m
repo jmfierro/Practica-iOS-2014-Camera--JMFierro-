@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
-#import "JMFImageCamera.h"
+#import "JMFImage.h"
 
-@implementation JMFImageCamera
+@implementation JMFImage
 
 @end

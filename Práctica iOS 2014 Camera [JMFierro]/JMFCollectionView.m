@@ -13,7 +13,36 @@
  
  El **diseño** es sencillo y consta de dos partes, una blanca y otra negra, con una líneas de transición de una parte a la otra. En la parte superior blanca esta la busqueda, selección y cámara. En la parte de abajo negra se muestran las imágenes. *Es de mi creación, no me he inspirado en nada, segui mi intuición.*
  
- Se gestiona por la clase **JMFCollectionView**. Crea una *'CollectionView'*, registra una vista personalizada de las celdas (**'JMFPushpinCell.xib'**) y las cabeceras de las secciones (clase **'JMFHeaderView'**).
+ 
+ **********
+ ## Modelo
+ **********
+ 
+ El modelo esta ubicado en el grupo *'Collection'*. La clase **JMFModel** contiene un *array* (**imagesCamera**) con objetos **JMFImage** para imágenes tomadas con la cámara. Un *diccionario* (**imagesFlickr**) con objetos **imageFlickr**, para imágenes bajadas de Flickr y un *array* (**termsSearchesFlickr**) con objetos , **NSString**, para lo términos de busqueda empleados en la busquedas de Flickr. Estos últimos se usarán como las *'keys'* en el *diccionario* (**imagesFlickr**).
+ 
+ La clase **JMFImage** ubicada en el grupo *Camera* contiene la información relativa a las imágenes de la cámara: *imagen, metadatos, latitud, longitud, rectángulos de las caras.*
+ 
+ La clase **imageFlickr** en el grupo *'Flickr'*, aglutina la información de las imágenes devueltas desde el sitio Flickr: *imageThumbnail, imageLarge y facesRects* junto con un conjunto de datos extra proporcionados por Flickr: *ID, farm, server,secret,isfamily,...* )
+ 
+ Tiene algunos método para *inicializar, conocer el número de elementos almacenados, acceder a una imagen de la cámara*.
+ 
+ -(id)initWith;
+ 
+ -(NSInteger) countTotal;
+ -(NSInteger) countSections;
+ -(NSInteger) countOfImagesCamera;
+ -(NSInteger) countOfTermSearchFlickr:(NSString *)termSearchFlickr;
+ 
+ // Devuelve la imagen correspondiente a una posicion.
+ -(UIImage *) imageCamera:(NSInteger *) item;
+ 
+ 
+ 
+  ***************
+  ** Controlador
+  ***************
+ 
+   Crea una *'CollectionView'*, registra una vista personalizada de las celdas (**'JMFPushpinCell.xib'**) y las cabeceras de las secciones (clase **'JMFHeaderView'**).
  
  Se hace desde **viewWillLayoutSubviews**, para que se redimensione si la orientación cambia, llamando al método de instancia **createCollectionView**.
  
@@ -79,16 +108,26 @@ Implementa el *protocolo* **sizeForItemAtIndexPath** de **UICollectionViewFlowLa
 2. **numberOfSectionsInCollectionView**
 3. collectionView **cellForItemAtIndexPath** - *donde se rellena la celda con los datos*.
 
-
+ 
+ 
+*************
 ##### Flickr
-
-Para la busqueda de imágenes en flickr, se establece la clase **'JMFCollectionView'** como delegado de un  *'TextField'* que recogerá el término para las búsquedas en Flickr.
+**************
+ 
+ Para la busqueda de imágenes en flickr, se establece la clase **'JMFCollectionView'** como delegado de un  *'TextField'* que recogerá el término para las búsquedas en Flickr.
 
 self.searchTextField.delegate = self;
 
 en el método **textFieldShouldReturn** utiliza la *clase	de Flickr* para hacer una busqueda asincrónica en el sitio Flickr.
 
 Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo principal de ejecución** haciendo uso de la *'propiedad privada'  **collectionViewPhotos***
+ 
+ *******************
+ #### Eliminar foto
+ *******************
+ 
+ Hay un botón habilitado en el **'Navigator'**. Envía  una notificación que escucha la clase **'JMFCollectionView'** en el método **onRemove**. La clase guarda con antelación un objeto **'NSIndexPath'**
+ que apunta a la imagen actual. *El modelo tiene un método de borrado que recibe un objeto **'NSIndexPath'** y elimina el objeto correspondiente.*
 
  */
 
@@ -317,7 +356,7 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
          */
         if ([self.model countOfImagesCamera]) {
             
-            JMFImageCamera *imageCamera = [[JMFImageCamera alloc] init];
+            JMFImage *imageCamera = [[JMFImage alloc] init];
             imageCamera = [self.model.imagesCamera objectAtIndex:indexPath.row];
             
             tablePhotoVC = [[JMFImageTableViewController alloc] initWithImageCamera:imageCamera];
@@ -332,11 +371,7 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
          * SELECCION para imagenes descargadas de Flickr.
          *
          ---------------------------------------------------*/
-        
-        NSString *searchTerm = self.model.termsSearchesFlickr[indexPath.section -1];
-        ImageFlickr *flickrPhoto = self.model.imagesFlickr[searchTerm][indexPath.row];
-        
-        tablePhotoVC = [[JMFImageTableViewController alloc] initWithFlickrPhoto:flickrPhoto];
+        tablePhotoVC = [[JMFImageTableViewController alloc] initWithFlickrPhoto:[self.model imageFlickr:indexPath]];
         
         [self.navigationController pushViewController:tablePhotoVC animated:YES];
     }
@@ -378,7 +413,7 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
 //            image = imgCamera.image;
 
 //            image = [self.model.imagesCamera objectAtIndex:indexPath.row];
-            image = [self.model imageCamera:indexPath.row];
+            image = [self.model imageCameraImage:indexPath.row];
             
         }
         
@@ -488,7 +523,7 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
 
 
 //            cell.imagePhoto.image = [self.model.imagesCamera objectAtIndex:indexPath.row];
-            cell.imagePhoto.image = [self.model imageCamera:indexPath.row];
+            cell.imagePhoto.image = [self.model imageCameraImage:indexPath.row];
         }
 
         // Imagen que indica que no hay fotos tomadas con la cámara.
@@ -584,7 +619,7 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
  ...........................*/
 #pragma mark - CameraViuewController Delegate
 
--(void)getImagePickerCamera:(JMFImageCamera *)imageCamera {
+-(void)getImagePickerCamera:(JMFImage *)imageCamera {
 
 //    JMFImageCamera *imageCamera = [[JMFImageCamera alloc] initWithImage:image];
     [self.model.imagesCamera addObject:imageCamera];
@@ -629,6 +664,23 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
     
 }
 
+/*...........................................
+ *
+ *  NOTIFICACION DE: JMFPhotoTableViewController.m
+ *
+ *
+ *  Recibe notificaciones de JMFPhotoTableViewController.m
+ *  El usuarion quiere boorar la imagen actual.
+ *
+ ...........................................*/
+-(void)onRemove: (NSNotification *) note {
+    
+    [self.model remove:indexPatchSelect];
+    
+    [collectionView reloadData];
+    
+}
+
 
 
 
@@ -655,10 +707,11 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
         /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          * LLamada a la camara.
          ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
+ 
         JMFCameraViewController *cameraVC = [[JMFCameraViewController alloc] initWithCamera];
         cameraVC.delegate = self;
         [self.navigationController pushViewController:cameraVC animated:NO];
-        //    [self.model.photosCamera addObject:cameraVC.imageView.image];
+
  
         
         
@@ -675,13 +728,10 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
         /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          * Pruebas sin camara. Simula haber tomado una foto.
          ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~*/
-        //    [self.model.imagesCamera addObject:[UIImage imageNamed:@"famous-face-dementia-617x416.jpg"]];
-        JMFImageCamera *imageCamera = [[JMFImageCamera alloc] init];
+
+        JMFImage *imageCamera = [[JMFImage alloc] init];
         imageCamera.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
         [self.model.imagesCamera addObject:imageCamera];
-        
-        //    [self.model.photosCamera addObject:[UIImage imageNamed:@"Washington.jpg"]];
-        
         
     }
     
@@ -770,7 +820,8 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
     collectionView.dataSource = self;
     self.searchTextField.delegate = self;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFacesRects:) name:kJMFTablePhotoViewControlle object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFacesRects:) name:kJMFTableImageViewControlleFacesRects object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRemove:) name:kJMFTableImageViewControlleRemove object:nil];
     
     
     [self.view addSubview:collectionView];

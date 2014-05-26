@@ -19,7 +19,7 @@
 
 #import <Foundation/Foundation.h>
 #import "JMFMetaData.h"
-#import "JMFImageCamera.h"
+#import "JMFImage.h"
 #import "ImageFlickr.h"
 
 @interface JMFModel : NSObject
@@ -34,8 +34,6 @@
 @property(nonatomic, strong) NSMutableArray *termsSearchesFlickr;
 
 
-
-
 -(id)initWith;
 
 -(NSInteger) countTotal;
@@ -43,7 +41,11 @@
 -(NSInteger) countOfImagesCamera;
 -(NSInteger) countOfTermSearchFlickr:(NSString *)termSearchFlickr;
 
-// Devuelve la imagen correspondiente a una posicion.
--(UIImage *) imageCamera:(NSInteger *) item;
+// Acceso a objetos.
+-(UIImage *) imageCameraImage:(NSInteger *) item;
+-(JMFImage *)imageCamera:(NSIndexPath *)indexPath;
+-(ImageFlickr *)imageFlickr:(NSIndexPath *)indexPath;
+
+-(void) remove:(NSIndexPath *) indexPath;
 
 @end

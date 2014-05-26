@@ -124,6 +124,14 @@
  cell.mapView.delegate = self;
  cell.mapView.centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
  
+ 
+ *******************
+ #### Eliminar foto
+ *******************
+ 
+ Hay un botón habilitado en el **'Navigator'**. Envía  una notificación que escucha la clase **'JMFCollectionView'** en el método **onRemove**. La clase guarda con antelación un objeto **'NSIndexPath'**
+ que apunta a la imagen actual. *El modelo tiene un método de borrado que recibe un objeto **'NSIndexPath'** y elimina el objeto correspondiente.*
+ 
  */
 
 #import <ImageIO/ImageIO.h>
@@ -230,7 +238,7 @@
  *  ** Imagen tomada por la camara desde la App.  **
  *
  ...................................................*/
--(id) initWithImageCamera:(JMFImageCamera *) imageCamera {
+-(id) initWithImageCamera:(JMFImage *) imageCamera {
     
     if (self = [super initWithNibName:nil bundle:nil]) {
         
@@ -249,7 +257,6 @@
           ----------------------------------------------*/
         else
             _metaData = [[JMFMetaData alloc] initWithImage:imageCamera.image];
-        
         
         /* ---------------------------
          *
@@ -331,6 +338,7 @@
 -(void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    NSMutableArray *buttonsArray = [[NSMutableArray alloc] init];
     
     /* ---------------------    ^
      *                         _|_
@@ -342,8 +350,21 @@
                             initWithBarButtonSystemItem:UIBarButtonSystemItemAction                            target:self
                             action:@selector(btnShare:)];
     
+    [buttonsArray addObject:share];
     
-    self.navigationItem.rightBarButtonItem = share;
+    /* ---------------------  _____
+     *                       || | ||
+     * Boton para BORRAR      |   |
+     *                        |___|
+     -----------------------*/
+    
+    UIBarButtonItem *eraser = [[UIBarButtonItem alloc]
+                              initWithBarButtonSystemItem:UIBarButtonSystemItemTrash                           target:self
+                              action:@selector(btnRemove:)];
+    [buttonsArray addObject:eraser];
+    
+    self.navigationItem.rightBarButtonItems = buttonsArray;
+
 }
 
 
@@ -683,7 +704,7 @@
  ...........................................*/
 -(void)onFacesRects: (NSNotification *) note {
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kJMFTablePhotoViewControlle object:note.object];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kJMFTableImageViewControlleRemove object:note.object];
 }
 
 
@@ -772,6 +793,11 @@
     [self presentViewController:activityVC animated:YES completion:nil];
 }
 
+-(void)btnRemove:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kJMFTableImageViewControlleRemove object:nil];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 
 /*...................................................
@@ -1291,7 +1317,7 @@
     
     
     // Inicializa locations, tableView, celdas.
-    [self registers];
+    [self createTableView];
     
     /*-------------------------------------------------
      *
@@ -1321,7 +1347,7 @@
 
 
 
--(void) registers {
+-(void) createTableView {
     
   
     /*----------------------------

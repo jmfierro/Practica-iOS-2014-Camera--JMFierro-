@@ -25,12 +25,12 @@
 
 @import CoreLocation;
 
-#import "JMFImageCamera.h"
+#import "JMFImage.h"
 #import "JMFMetaData.h"
 
 @protocol CameraViewControllerDelegate
 
--(void) getImagePickerCamera:(JMFImageCamera *) imageCamera;
+-(void) getImagePickerCamera:(JMFImage *) imageCamera;
 
 @end
 

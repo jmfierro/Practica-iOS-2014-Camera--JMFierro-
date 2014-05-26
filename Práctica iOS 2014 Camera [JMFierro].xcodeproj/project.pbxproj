@@ -42,7 +42,7 @@
 		508224361917E438000BB05B /* JMFFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 508224351917E438000BB05B /* JMFFilters.m */; };
 		508A487E190FAD0300FFEBAA /* gente_750x469--647x300.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */; };
 		508A4880190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */; };
-		508D1C83192CA94100063A5A /* JMFImageCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 508D1C82192CA94100063A5A /* JMFImageCamera.m */; };
+		508D1C83192CA94100063A5A /* JMFImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 508D1C82192CA94100063A5A /* JMFImage.m */; };
 		50982AC3192F594300FD4607 /* camera-icon-2.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 50982AC2192F594300FD4607 /* camera-icon-2.tiff */; };
 		50982AC5192F5A2F00FD4607 /* camera_th.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 50982AC4192F5A2F00FD4607 /* camera_th.jpeg */; };
 		50982AC7192F5B3300FD4607 /* floral_01_th.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 50982AC6192F5B3300FD4607 /* floral_01_th.jpeg */; };
@@ -149,8 +149,8 @@
 		508224351917E438000BB05B /* JMFFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFFilters.m; sourceTree = "<group>"; };
 		508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "gente_750x469--647x300.jpg"; sourceTree = "<group>"; };
 		508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg"; sourceTree = "<group>"; };
-		508D1C81192CA94100063A5A /* JMFImageCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFImageCamera.h; sourceTree = "<group>"; };
-		508D1C82192CA94100063A5A /* JMFImageCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFImageCamera.m; sourceTree = "<group>"; };
+		508D1C81192CA94100063A5A /* JMFImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMFImage.h; sourceTree = "<group>"; };
+		508D1C82192CA94100063A5A /* JMFImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMFImage.m; sourceTree = "<group>"; };
 		50982AC2192F594300FD4607 /* camera-icon-2.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "camera-icon-2.tiff"; sourceTree = "<group>"; };
 		50982AC4192F5A2F00FD4607 /* camera_th.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = camera_th.jpeg; sourceTree = "<group>"; };
 		50982AC6192F5B3300FD4607 /* floral_01_th.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = floral_01_th.jpeg; sourceTree = "<group>"; };
@@ -412,8 +412,8 @@
 		508D1C84192CA94C00063A5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				508D1C81192CA94100063A5A /* JMFImageCamera.h */,
-				508D1C82192CA94100063A5A /* JMFImageCamera.m */,
+				508D1C81192CA94100063A5A /* JMFImage.h */,
+				508D1C82192CA94100063A5A /* JMFImage.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -655,7 +655,7 @@
 				50CAD12D191D2630001C17CE /* JMFCameraViewController.m in Sources */,
 				507C8E1C1917801200238C30 /* FaceDetection.m in Sources */,
 				50BB8AC318F6CC7D008EC1F3 /* CellImage.m in Sources */,
-				508D1C83192CA94100063A5A /* JMFImageCamera.m in Sources */,
+				508D1C83192CA94100063A5A /* JMFImage.m in Sources */,
 				50B8594A18F2EBAB00E91D44 /* JMFPushpinCell.m in Sources */,
 				50A5206118F7F105007F6F7B /* CellDetail.m in Sources */,
 				503E384B18F2FC4D00A9FBDF /* ImageFlickr.m in Sources */,
