@@ -15,16 +15,18 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.label = [[UILabel alloc] initWithFrame:self.bounds];
+//        self.label = [[UILabel alloc] initWithFrame:self.bounds];
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,self.bounds.size.width, self.bounds.size.height*2)];
         self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth |
         UIViewAutoresizingFlexibleHeight;
 
         self.label.font = [UIFont fontWithName:@"Zapfino" size:40];
+//        [self.label sizeThatFits:CGSizeMake(self.label.frame.size.width, 100)];
         self.label.textColor = [UIColor whiteColor];
         
         UIImageView *labelBackground = [[UIImageView alloc]
                                         initWithImage:[UIImage imageNamed:@"papel-rasgado-54166.png"]];
-        [self.label addSubview:labelBackground];
+
         
         /*
          * Aspect Fill

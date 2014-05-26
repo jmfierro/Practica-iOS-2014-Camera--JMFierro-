@@ -6,6 +6,13 @@
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
+ /*
+ ## UTILS.M
+ 
+ En la clase **Utils** contiene *métodos de clase*. Reuno todos aquellos métodos susceptibles de ser usados en otros proyectos.
+ */
+
+
 #import <Foundation/Foundation.h>
 
 @interface Utils : NSObject

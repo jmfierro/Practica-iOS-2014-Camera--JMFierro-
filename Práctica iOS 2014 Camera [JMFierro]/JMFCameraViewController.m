@@ -6,7 +6,18 @@
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
-
+/*
+ La clase **'JMFCameraViewController'** comprueba que el dispositivo cuenta con una cámara, instancia *'UIImagePickerController'*, asigna el delegado y configura (la cámara de fotos, sin vídeo).
+ 
+ **imagePickerController:(UIImagePickerController *)picker** se encarga de guardar la fotografía tomada.
+ 
+ Si se acepta la fotografía se guarda en el dispositivo:
+ 
+ UIImageWriteToSavedPhotosAlbum(image,
+ self,                     @selector(image:finishedSavingWithError:contextInfo:),
+ nil);
+ 
+ */
 
 #import "JMFCameraViewController.h"
 
@@ -59,7 +70,7 @@
     
     imageCamera = [[JMFImageCamera alloc] init];
     if (getImage == kIsCamera) {
-        [self useCameraRoll:nil];
+        [self useCamera:nil];
         
     } else if (getImage == kIsCameraRoll) {
         [self useCameraRoll:nil];
@@ -245,7 +256,7 @@
 -(void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    NSDictionary *metadata = [info valueForKey:UIImagePickerControllerMediaMetadata];
+//    NSDictionary *metaData = [info valueForKey:UIImagePickerControllerMediaMetadata];
     
     NSString *mediaType = info[UIImagePickerControllerMediaType];
     
@@ -257,10 +268,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
      *
      ------------------------*/
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        
-//        UIImage *img = [JMFMetaData addMetaData:info[UIImagePickerControllerOriginalImage] Location:lastLocation];
-        
-        imageCamera.image = [JMFMetaData addMetaData:info[UIImagePickerControllerOriginalImage] Location:lastLocation];
+
+        imageCamera.image = [JMFMetaData addMetaData:info[UIImagePickerControllerOriginalImage]
+                                            metaData:[info valueForKey:UIImagePickerControllerMediaMetadata]
+                                            location:lastLocation];
         
         /* ---------------------
          *
@@ -276,10 +287,11 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
          * Guarda imagen.
          *
          -----------------*/
-        UIImageWriteToSavedPhotosAlbum(imageCamera.image,
-                                       self,
-                                       @selector(image:finishedSavingWithError:contextInfo:),
-                                       nil);
+        if (newMedia)
+            UIImageWriteToSavedPhotosAlbum(imageCamera.image,
+                                           self,
+                                           @selector(image:finishedSavingWithError:contextInfo:),
+                                           nil);
         
     }
     

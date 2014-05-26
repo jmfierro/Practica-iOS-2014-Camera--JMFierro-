@@ -6,6 +6,19 @@
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
+ /*
+ La clase **'JMFCameraViewController'** comprueba que el dispositivo cuenta con una cámara, instancia *'UIImagePickerController'*, asigna el delegado y configura (la cámara de fotos, sin vídeo).
+ 
+ **imagePickerController:(UIImagePickerController *)picker** se encarga de guardar la fotografía tomada.
+ 
+ Si se acepta la fotografía se guarda en el dispositivo:
+ 
+ UIImageWriteToSavedPhotosAlbum(image,
+ self,                     @selector(image:finishedSavingWithError:contextInfo:),
+ nil);
+ 
+ */
+
 #import <UIKit/UIKit.h>
 #import <ImageIO/ImageIO.h>
 #import <MobileCoreServices/MobileCoreServices.h>

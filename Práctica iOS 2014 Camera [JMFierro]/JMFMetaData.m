@@ -34,34 +34,50 @@
 }
 
 -(id) initWithImage:(UIImage *)image {
-    return [self initWithImage:image andLocation:nil];
+    return [self initWithImage:image metaData:nil location:nil];
 }
 
 
--(id) initWithImage:(UIImage *)image andLocation:(CLLocation *)location {
+-(id) initWithImage:(UIImage *)image metaData:(NSDictionary *)metaData Location:(CLLocation *)location {
     
     if (self = [super init]) {
         
        
-        self.allMetaData = [self metaDataImage:image];
+//        self.allMetaData = [self metaDataImage:image];
+//        
+//        // Actualiza modelo con los metadatos por item.
+//        self.EXIFDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyExifDictionary];
+//        self.JFIFDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyJFIFDictionary];
+//        self.GPSDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyGPSDictionary];
+//        self.TIFFDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyTIFFDictionary];
+//        self.RAWDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyRawDictionary];
+//        self.JPEGDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyJFIFDictionary];
+//        self.GIFDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyGIFDictionary];
+//        
+//        /* ------------------
+//         *  Añade datos GPS
+//         --------------------*/
+//        if(!self.GPSDictionary && location) {
+////            NSDictionary *d = [JMFMetaData gpsDictionaryForLocation:location];
+//            self.GPSDictionary = [JMFMetaData gpsDictionaryForLocation:location];
+//            NSMutableDictionary *md = [self.allMetaData mutableCopy];
+//            [md setObject:self.GPSDictionary forKey:kCGImagePropertyGPSDictionary];
+////            self.GPSDictionary = [NSDictionary dictionary];
+//        }
+//        
+//        
+//        NSMutableDictionary *metaDataDictionary = [[NSMutableDictionary alloc] init];
+//        
+//        [metaDataDictionary setObject:self.EXIFDictionary forKey:kCGImagePropertyExifDictionary];
+//        [metaDataDictionary setObject:self.JFIFDictionary forKey:kCGImagePropertyJFIFDictionary];
+//        [metaDataDictionary setObject:self.GPSDictionary forKey:kCGImagePropertyGPSDictionary];
+//        [metaDataDictionary setObject:self.TIFFDictionary forKey:kCGImagePropertyTIFFDictionary];
+//        [metaDataDictionary setObject:self.RAWDictionary forKey:kCGImagePropertyRawDictionary];
+//        [metaDataDictionary setObject:self.JPEGDictionary forKey:kCGImagePropertyJFIFDictionary];
+//        [metaDataDictionary setObject:self.GIFDictionary forKey:kCGImagePropertyGIFDictionary];
+//
+//
         
-        // Actualiza modelo con los metadatos por item.
-        self.EXIFDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyExifDictionary];
-        self.JFIFDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyJFIFDictionary];
-        self.GPSDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyGPSDictionary];
-        self.TIFFDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyTIFFDictionary];
-        self.RAWDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyRawDictionary];
-        self.JPEGDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyJFIFDictionary];
-        self.GIFDictionary = [self.allMetaData objectForKey:(NSString *)kCGImagePropertyGIFDictionary];
-        
-        /* ------------------
-         *  Añadir datos GPS
-         --------------------*/
-        if(!self.GPSDictionary && location) {
-//            NSDictionary *d = [JMFMetaData gpsDictionaryForLocation:location];
-            self.GPSDictionary = [JMFMetaData gpsDictionaryForLocation:location];
-//            self.GPSDictionary = [NSDictionary dictionary];
-        }
 /*
         // Añade los items que faltan
  
@@ -121,11 +137,11 @@
  * Devuelve los 'MetaDatos' obtenidos de una imagen.
  *
  ...................................................*/
--(NSDictionary *) metaDataImage:(UIImage *) image {
++(NSDictionary *) metaDataImage:(UIImage *) image {
 
-    NSData *jpeg = [NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)];
+    NSData *imgData = [NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)];
     
-    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)jpeg, NULL);
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)imgData, NULL);
     
     NSDictionary* metadata = (NSDictionary *)CFBridgingRelease(CGImageSourceCopyPropertiesAtIndex(source,0,NULL));
     
@@ -133,54 +149,54 @@
 }
 
 
-+(UIImage *)addMetaData:(UIImage *)aImage Location:(CLLocation *) location {
++(UIImage *)addMetaData:(UIImage *)image metaData:(NSDictionary *)metaData location:(CLLocation *) location {
     
-    UIImage *image = aImage;
+
+    NSMutableDictionary *imageMetaDataDestination = [[self metaDataImage:image] mutableCopy];
     
-    
-    /*
-     * Modelo
-     */
-//    JMFMetaData *modelMetadata = [[JMFMetaData alloc] initWithImage:image];
-    JMFMetaData *modelMetadata = [[JMFMetaData alloc] initWithImage:image andLocation:location];
+    for (id key in [metaData allKeys]) {
+        [imageMetaDataDestination setValue:[metaData objectForKey:key] forKey:key];
+    }
 
     
-    /*
-     * Controlador
-     */
+    /* ------------------
+     *  Añade datos GPS
+     --------------------*/
+    if(location) {
+        NSDictionary *GPSDictionary = [JMFMetaData gpsDictionaryForLocation:location];
+        [imageMetaDataDestination setObject:GPSDictionary forKey:kCGImagePropertyGPSDictionary];
+    }
     
+
     // Obtener metadatos.
-    NSDictionary *metadataAsMutable = [modelMetadata.allMetaData mutableCopy];
+    NSMutableDictionary *metadataAsMutable = [imageMetaDataDestination mutableCopy];
     
     // Añadir metadatos.
-    NSData *jpeg = [NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)];
-    
-    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)jpeg, NULL);
-    
+    NSData *imagenData = [NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)];
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)imagenData, NULL);
     CFStringRef UTI = CGImageSourceGetType(source);
-    
     NSMutableData *dest_data = [NSMutableData data];
-    
     CGImageDestinationRef destination = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)dest_data,UTI,1,NULL);
-    
-    //CGImageDestinationRef hello;
-    
     CGImageDestinationAddImageFromSource(destination,source,0, (__bridge CFDictionaryRef) metadataAsMutable);
     
     BOOL success = NO;
     success = CGImageDestinationFinalize(destination);
-    
     if(!success) {
+        NSLog(@"Error: No se puedo crear data desde imagen destino");
     }
     
-    //  dataToUpload_ = dest_data;
+    [dest_data writeToFile:[NSTemporaryDirectory() stringByAppendingPathComponent:@"test.png"]
+           atomically:YES];
+    
+//    [dest_data writeToFile:file atomically:YES];
     
     CFRelease(destination);
     CFRelease(source);
     
-    modelMetadata = [[JMFMetaData alloc] initWithImage:image andLocation:location];
+    UIImage *imgWithNewMetaData = [UIImage imageWithData:dest_data];
     
-    return image;
+    NSDictionary *modelMetadata = [self metaDataImage:imgWithNewMetaData];
+    return imgWithNewMetaData;
 }
 
 

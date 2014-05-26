@@ -23,15 +23,18 @@
 
 -(id) init;
 -(id) initWithImage:(UIImage *)image;
--(id) initWithImage:(UIImage *)image andLocation:(CLLocation *)location;
+-(id) initWithImage:(UIImage *)image metaData:(NSDictionary *)metaData location:(CLLocation *)location;
 
 /*..................................................
  *
  * Devuelve los 'MetaDatos' obtenidos de una imagen.
  *
  ...................................................*/
--(NSDictionary *) metaDataImage:(UIImage *) image;
-+(UIImage *)addMetaData:(UIImage *)aImage Location:(CLLocation *) location;
+
+
+// Métodos de clase.
++(NSDictionary *) metaDataImage:(UIImage *) image;
++(UIImage *)addMetaData:(UIImage *)aImage metaData:(NSDictionary *)metaData location:(CLLocation *)location;
 +(NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location;
 
 

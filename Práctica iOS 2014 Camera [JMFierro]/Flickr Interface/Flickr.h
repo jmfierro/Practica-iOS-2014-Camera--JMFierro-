@@ -9,6 +9,19 @@
 //  Copyright (c) 2012 Brandon Trebitowski. All rights reserved.
 //
 
+/*
+ * Realiza búsquedas y devuelve un arreglo de FlickrPhotos.
+ */
+
+/*
+ Crea una url para la busqueda en Flickr que continene la API personal y el término de busqueda.
+ 
+ De forma 'asincrona' obtinene en formato 'JSON' los datos de las fotos encontradas. Una vez parseado los guarda en un array junto a una 'thumbail' de la imagen, y una url **(flickrPhotoURLForFlickrPhoto)** a la imagen para descargarsela asíncronamente desde el método **loadImageForPhoto**
+ 
+ Hace una busqueda sincrónica en el sitio Flickr. Cuando la búsqueda finaliza, el *bloque de terminación* será llamado con una referencia al término buscado, el resultado es un *conjunto de objetos* de FlickrPhoto, y un error si lo hay.
+
+ */
+
 #import <Foundation/Foundation.h>
 
 @class ImageFlickr;
