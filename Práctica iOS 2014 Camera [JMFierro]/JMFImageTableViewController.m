@@ -549,7 +549,6 @@
 }
 
 
-#pragma mark - ?
 
 /*..............................
  *
@@ -673,7 +672,45 @@
  */
 
 
-
+#pragma mark - MapKit Delegates
+/*.....................................
+ *
+ * Añadiendo imagen a la localizacion.
+ *
+ ......................................*/
+- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
+    
+    
+    MKAnnotationView *annView = [[MKAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
+    
+    /*
+     * Añade imagen al mapa.
+     */
+    /*
+     UIImage *img = [ UIImage imageNamed:@"PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg" ];
+     annView.image = [Utils imageToThumbnail:img Size:CGSizeMake(70, 70)];
+     //    annView.calloutOffset = CGPointMake(0, 32);
+     */
+    
+    /*
+     * Añade imagen dentro de la anotación.
+     */
+    //    UIImage *img = [ UIImage imageNamed:@"PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg" ];
+    //    img = [Utils imageToThumbnail:img Size:CGSizeMake(70, 70)];
+    UIImageView *iconView = [[UIImageView alloc] initWithImage:[Utils imageToThumbnail:image Size:CGSizeMake(50, 50)]];
+    annView.leftCalloutAccessoryView = iconView;
+    
+    /*
+     * Añade boton dentro de  anotación.
+     */
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    [infoButton addTarget:self action:@selector(showDetailsView)
+         forControlEvents:UIControlEventTouchUpInside];
+    annView.rightCalloutAccessoryView = infoButton;
+    annView.canShowCallout = YES;
+    
+    return annView;
+}
 
 
 
@@ -729,6 +766,7 @@
  ...........................................*/
 -(void)onFacesRects: (NSNotification *) note {
     
+    // Envio de caras detectadas (a CollectionView)
     [[NSNotificationCenter defaultCenter] postNotificationName:kJMFTableImageViewControlleRemove object:note.object];
 }
 
@@ -987,6 +1025,9 @@
                       [[infoGeocoder addressDictionary] objectForKey:@"ZIP"],
                       [[infoGeocoder addressDictionary] objectForKey:@"Country"]);
                 
+                /*--------------------
+                 * Configuración mapa
+                 ---------------------*/
                 cell.mapView.rotateEnabled = YES;
                 cell.mapView.zoomEnabled = YES;
                 cell.mapView.pitchEnabled = YES;
@@ -999,19 +1040,19 @@
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                 
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    // Geocoding
+                    
+                    /* ----------
+                     * Geocoding
+                      -----------*/
                     cell.lblCountry.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"];
                     cell.lblState.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"];
                     cell.lblCity.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"City"];
                     cell.lblName.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Name"];
                     cell.lblStreet.text = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Street"];
                     
-                    // Anotacion con la información
-                    MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
-                    chincheta.coordinate = CLLocationCoordinate2DMake(latitude, longitude);
-                    chincheta.title = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"];
-                    NSString *msg;
-                    
+                    /* -----------------------------
+                     * Anotación con la información
+                     -------------------------------*/
                     /*------------------------------------------------------------
                      *
                      * Muestra informacion sobre el origen de la localización:
@@ -1019,6 +1060,12 @@
                      *      - del usuario.
                      *
                      -------------------------------------------------------------*/
+                    MKPointAnnotation *chincheta = [[MKPointAnnotation alloc] init];
+                    chincheta.coordinate = CLLocationCoordinate2DMake(latitude, longitude);
+                    chincheta.title = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"];
+                    NSString *msg;
+                    
+      
                     if (!isLocationData) {
                         msg = [NSString stringWithFormat:@"%@ (%@)",[[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"],@"Usuario"];
                     } else {
@@ -1049,7 +1096,7 @@
     cell.lblLatitud.text = [[NSString alloc] initWithFormat:@"%.6f %@",latitude, @"lat"];
     cell.lblLongitud.text = [[NSString alloc] initWithFormat:@"%.6f %@", longitude, @"long"];
     
-    NSString *direccion = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Street"];
+//    NSString *direccion = [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Street"];
     
     return cell;
     
@@ -1105,52 +1152,6 @@
 }
 
 
-/*.....................................
- *
- * Añadiendo imagen a la localizacion.
- *
- ......................................*/
-- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
-
-    
-    MKAnnotationView *annView = [[MKAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
-    /*
-    if ([[annotation title] isEqualToString:@"McDonald's"])
-        annView.image = [ UIImage imageNamed:@"mcdonalds.png" ];
-    else if ([[annotation title] isEqualToString:@"Apple store"])
-        annView.image = [ UIImage imageNamed:@"applestore.png" ];
-    else
-        annView.image = [ UIImage imageNamed:@"marker.png" ];
-     */
-    
-    /*
-     * Añade imagen al mapa.
-     */
-    /*
-    UIImage *img = [ UIImage imageNamed:@"PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg" ];
-    annView.image = [Utils imageToThumbnail:img Size:CGSizeMake(70, 70)];
-     //    annView.calloutOffset = CGPointMake(0, 32);
-    */
-    
-    /*
-     * Añade imagen dentro de la anotación.
-     */
-//    UIImage *img = [ UIImage imageNamed:@"PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg" ];
-//    img = [Utils imageToThumbnail:img Size:CGSizeMake(70, 70)];
-    UIImageView *iconView = [[UIImageView alloc] initWithImage:[Utils imageToThumbnail:image Size:CGSizeMake(70, 70)]];
-    annView.leftCalloutAccessoryView = iconView;
-    
-    /*
-     * Añade boton dentro de  anotación.
-     */
-    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [infoButton addTarget:self action:@selector(showDetailsView)
-         forControlEvents:UIControlEventTouchUpInside];
-    annView.rightCalloutAccessoryView = infoButton;
-    annView.canShowCallout = YES;
-    
-    return annView;
-}
 
 -(void)showDetailsView {
     

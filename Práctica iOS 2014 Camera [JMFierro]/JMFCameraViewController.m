@@ -272,7 +272,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 //                                            metaData:[info valueForKey:UIImagePickerControllerMediaMetadata]
 //                                            location:lastLocation];
 
-        imageCamera.image = info[UIImagePickerControllerOriginalImage];
+        imageCamera.image = [JMFMetaData addMetaData:info[UIImagePickerControllerOriginalImage]
+                                            metaData:[info valueForKey:UIImagePickerControllerMediaMetadata]
+                                            location:lastLocation];
         imageCamera.info = info;
         
         /* ---------------------
@@ -330,6 +332,7 @@ finishedSavingWithError:(NSError *)error
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 

@@ -148,7 +148,6 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
 #import "Utils.h"
 
 
-
 @interface JMFCollectionView () {
     
     NSMutableDictionary *modelDictionay;
@@ -342,7 +341,7 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+ 
     JMFImageTableViewController *tablePhotoVC = [[JMFImageTableViewController alloc] init];
     
     indexPatchSelect = indexPath;
@@ -717,8 +716,6 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
         cameraVC.delegate = self;
         [self.navigationController pushViewController:cameraVC animated:NO];
 
- 
-        
         
     } else {
  

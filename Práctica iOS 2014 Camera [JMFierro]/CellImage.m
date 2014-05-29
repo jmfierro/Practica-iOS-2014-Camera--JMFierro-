@@ -79,7 +79,7 @@
         // Añade marcos de la/s cara/s al 'view'.
         FaceDetection *faceDetection = [[FaceDetection alloc] initWithImagenView:self.photoView];
         
-        
+        // Envio de caras detectadas (a JMFImageTableViewController)
         [[NSNotificationCenter defaultCenter] postNotificationName:kCellImage object:faceDetection.facesRects];
    
         

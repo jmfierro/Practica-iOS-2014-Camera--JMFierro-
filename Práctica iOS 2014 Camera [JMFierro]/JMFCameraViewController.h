@@ -41,6 +41,7 @@
 
 @property (nonatomic, retain) id<CameraViewControllerDelegate> delegate;
 
+
 -(id)initWithCamera;
 -(id)initWithCameraRoll;
 
