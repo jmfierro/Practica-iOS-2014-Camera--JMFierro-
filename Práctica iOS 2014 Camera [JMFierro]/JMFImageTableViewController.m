@@ -291,6 +291,7 @@
             info = imageCamera.info;
         else
             info = metaData.allMetaData;
+
     }
     
     return self;
@@ -331,7 +332,12 @@
                          ------------------------------------------------------*/
                         [self loadImage:imageFlickr.imageLarge];
                         metaData = [[JMFMetaData alloc] initWithImage:imageFlickr.imageLarge];
-                      
+                        
+                        if (imageCamera.info)
+                            info = imageCamera.info;
+                        else
+                            info = metaData.allMetaData;
+                        
                         [tableViewPhotoSelectMetaData reloadData];
                     });
                 }
@@ -339,6 +345,7 @@
             }];
         }
     }
+    
     
     return self;
 }
