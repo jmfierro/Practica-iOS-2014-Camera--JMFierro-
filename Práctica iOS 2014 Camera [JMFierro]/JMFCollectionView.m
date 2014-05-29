@@ -6,6 +6,11 @@
 //  Copyright (c) 2014 José Manuel Fierro Conchouso. All rights reserved.
 //
 
+/*
+ Este código de collectionView con celdas peronalizadas
+ esta basado en el codigo de Brandon Trebitowski:
+ http://www.raywenderlich.com/22324/beginning-uicollectionview-in-ios-6-part-12
+ */
 
 /*
  
@@ -731,6 +736,7 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
 
         JMFImage *imageCamera = [[JMFImage alloc] init];
         imageCamera.image = [UIImage imageNamed:@"famous-face-dementia-617x416.jpg"];
+        imageCamera.info = [JMFMetaData metaDataImage:imageCamera.image];
         [self.model.imagesCamera addObject:imageCamera];
         
     }

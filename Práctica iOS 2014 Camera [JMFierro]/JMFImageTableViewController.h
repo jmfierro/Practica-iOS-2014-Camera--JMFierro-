@@ -7,6 +7,12 @@
 //
 
 /*
+ Este código de TableView de celdas peronalizadas
+ esta basado en el codigo de Tibolte/TGFoursquareLocationDetail-Demo:
+ https://github.com/Tibolte/TGFoursquareLocationDetail-Demo
+ */
+
+/*
  Muestra la imagen seleccionada con sus metadatos, la localización y el rectángulo de las caras.
  
  Redimensiona la imagen al tamaño de la imagenView, conservando las proporciones. *(Lo hice porque sino acababa dando un **didReceiveMemoryWarning** al aplicar los filtros.)*
@@ -148,10 +154,10 @@
 @interface JMFImageTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 
 
-@property (nonatomic, strong) JMFMetaData *metaData;
-@property (nonatomic,strong) JMFImage *imageCamera;
-@property (nonatomic, strong) ImageFlickr *imageFlickr;
-@property (nonatomic, strong) UIImage *image, *imageThumbnail;
+//@property (nonatomic, strong) JMFMetaData *metaData;
+//@property (nonatomic,strong) JMFImage *imageCamera;
+//@property (nonatomic, strong) ImageFlickr *imageFlickr;
+//@property (nonatomic, strong) UIImage *image, *imageThumbnail;
 
 
 -(id) initWithImage:(JMFImage *) image;

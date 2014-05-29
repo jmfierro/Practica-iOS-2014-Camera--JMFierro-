@@ -54,5 +54,6 @@
 
 - (IBAction)segmentMetadatos:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblTitleMetaData;
 
 @end

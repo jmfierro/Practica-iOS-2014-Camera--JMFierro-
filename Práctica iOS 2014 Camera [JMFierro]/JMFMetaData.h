@@ -37,6 +37,8 @@
 +(UIImage *)addMetaData:(UIImage *)aImage metaData:(NSDictionary *)metaData location:(CLLocation *)location;
 +(NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location;
 
++ (void) saveImage:(UIImage *)imageToSave withInfo:(NSDictionary *)info;
+
 
 /* ** SALIDA DE METADATOS **
 {

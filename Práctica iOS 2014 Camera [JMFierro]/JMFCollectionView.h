@@ -7,6 +7,12 @@
 //
 
 /*
+ Este código de collectionView con celdas peronalizadas
+ esta basado en el codigo de Brandon Trebitowski:
+ http://www.raywenderlich.com/22324/beginning-uicollectionview-in-ios-6-part-12
+ */
+
+/*
  
  En una **collectionView** se muestran las imágenes que se saquen con la cámara, se seleccionen de la galería o se busquen en Flickr.
  

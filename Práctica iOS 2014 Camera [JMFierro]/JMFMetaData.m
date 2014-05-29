@@ -7,6 +7,8 @@
 //
 
 #import <ImageIO/ImageIO.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+
 
 #import "JMFMetaData.h"
 //#import <CoreLocation/CoreLocation.h>
@@ -164,6 +166,7 @@
     // Obtener metadatos.
     NSMutableDictionary *metadataAsMutable = [imageMetaDataDestination mutableCopy];
     
+    
     // Añadir metadatos.
     NSData *imagenData = [NSData dataWithData:UIImageJPEGRepresentation(image, 1.0)];
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)imagenData, NULL);
@@ -178,8 +181,8 @@
         NSLog(@"Error: No se puedo crear data desde imagen destino");
     }
     
-    [dest_data writeToFile:[NSTemporaryDirectory() stringByAppendingPathComponent:@"test.png"]
-           atomically:YES];
+//    [dest_data writeToFile:[NSTemporaryDirectory() stringByAppendingPathComponent:@"test.png"]
+//           atomically:YES];
     
 //    [dest_data writeToFile:file atomically:YES];
     
@@ -190,6 +193,7 @@
     
     NSDictionary *modelMetadata = [self metaDataImage:imgWithNewMetaData];
     return imgWithNewMetaData;
+    
 }
 
 

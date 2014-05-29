@@ -1,5 +1,5 @@
 //
-//  UserCell.m
+//  InfoCell.m
 //  TGFoursquareLocationDetail-Demo
 //
 //  Created by Thibault Guégan on 04/01/2014.
@@ -10,13 +10,13 @@
 //  Copyright (c) 2014 Thibault Guégan. All rights reserved.
 //
 
-#import "CellUser.h"
+#import "CellInfo.h"
 
-@implementation CellUser
+@implementation CellInfo
 
-+ (CellUser*) userCell
++ (CellInfo*) infoCell
 {
-    CellUser *cell = [[[NSBundle mainBundle] loadNibNamed:kCellUser owner:self options:nil] objectAtIndex:0];
+    CellInfo *cell = [[[NSBundle mainBundle] loadNibNamed:kCellInfo owner:self options:nil] objectAtIndex:0];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -25,17 +25,18 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _userImg.layer.cornerRadius = 25.0f;
-        _userImg.image = [UIImage imageNamed:@"icon_user@2x"];
+
     }
     return self;
 }
 
-- (void)awakeFromNib
-{
-    _userImg.layer.cornerRadius = 25.0f;
-    _userImg.image = [UIImage imageNamed:@"icon_user@2x"];
+- (void)awakeFromNib {
+    
+    _txtInfo.backgroundColor = [UIColor clearColor];
 }
+
+
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

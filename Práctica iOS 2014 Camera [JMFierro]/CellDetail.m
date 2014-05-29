@@ -44,6 +44,7 @@
 {
     //Rating
     _viewRate.layer.cornerRadius = 20.0f;
+    _lblTitleMetaData.layer.cornerRadius = 4.0f;
     
     
     //Btn save

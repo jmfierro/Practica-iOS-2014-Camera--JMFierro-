@@ -7,6 +7,12 @@
 //
 
 /*
+ Este código de TableView de celdas peronalizadas
+ esta basado en el codigo de Tibolte/TGFoursquareLocationDetail-Demo:
+ https://github.com/Tibolte/TGFoursquareLocationDetail-Demo
+ */
+
+/*
  Muestra la imagen seleccionada con sus metadatos, la localización y el rectángulo de las caras.
  
  Redimensiona la imagen al tamaño de la imagenView, conservando las proporciones. *(Lo hice porque sino acababa dando un **didReceiveMemoryWarning** al aplicar los filtros.)*
@@ -22,7 +28,7 @@
  NSInteger row_CellFilters;
  NSInteger row_CellDetalle;
  NSInteger row_CellAddress;
- NSInteger row_CellUser;
+ NSInteger row_CellInfo;
  }
  
  ...
@@ -33,7 +39,7 @@
  row_CellFilters = numCell++;
  row_CellDetalle =numCell++;
  row_CellAddress = numCell++;
- row_CellUser = numCell++;
+ row_CellInfo = numCell++;
  
  Para la altura de las celdas utiliza el delegado **heightForRowAtIndexPath**.
  
@@ -48,8 +54,8 @@
  height_CellDetalle = cell.frame.size.height;
  cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kAddressCell];
  height_CellAddress = cell.frame.size.height;
- cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kUserCell];
- height_CellUser = cell.frame.size.height;
+ cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kInfoCell];
+ height_CellInfo = cell.frame.size.height;
  
  *De esta forma cualquier reediseño del fichero 'xib' se recogerá automáticamente.*
  
@@ -148,12 +154,13 @@
 #import "CellImage.h"
 #import "CellDetail.h"
 #import "CellAddressLocation.h"
-#import "CellUser.h"
+#import "CellInfo.h"
 
 #import "Utils.h"
 #import "JMFMetaData.h"
 
-
+// Scroll
+#import "ReadingTimeScrollPanel.h"
 
 @interface JMFImageTableViewController () {
     
@@ -174,14 +181,14 @@
     CGFloat cellFilters_height;
     CGFloat cellDetalle_height;
     CGFloat cellAddress_height;
-    CGFloat cellUser_height;
+    CGFloat cellInfo_height;
     
     // Posicion de las celdas
     NSInteger row_CellImage;
     NSInteger row_CellFilters;
     NSInteger row_CellDetalle;
     NSInteger row_CellAddress;
-    NSInteger row_CellUser;
+    NSInteger row_CellInfo;
     
 //    // Dimensiones ImagenView para mostrar la imagen
 //    CGFloat cellImage_ImageViewHeight;
@@ -192,6 +199,12 @@
     
     // Metadatos
     NSInteger segment;
+    
+    JMFMetaData *metaData;
+    JMFImage *imageCamera;
+    ImageFlickr *imageFlickr;
+    UIImage *image, *imageThumbnail;
+    NSDictionary *info;
     
 }
 
@@ -226,7 +239,7 @@
     if (self = [super initWithNibName:nil bundle:nil]) {
         
         [self loadImage:image];
-        _metaData = [[JMFMetaData alloc] initWithImage:image];
+        metaData = [[JMFMetaData alloc] initWithImage:image];
     }
     
     return self;
@@ -247,7 +260,8 @@
         
         // Metadatos.
         if (imageCamera.metaData)
-            _metaData = imageCamera.metaData;
+            metaData = imageCamera.metaData;
+        
         
         /* ----------------------------------------------
          *
@@ -256,7 +270,7 @@
          *
           ----------------------------------------------*/
         else
-            _metaData = [[JMFMetaData alloc] initWithImage:imageCamera.image];
+            metaData = [[JMFMetaData alloc] initWithImage:imageCamera.image];
         
         /* ---------------------------
          *
@@ -273,6 +287,10 @@
             isLocationData = NO;
         }
 
+        if (imageCamera.info)
+            info = imageCamera.info;
+        else
+            info = metaData.allMetaData;
     }
     
     return self;
@@ -288,19 +306,19 @@
 
 
     if (self = [super initWithNibName:nil bundle:nil]) {
-        _imageFlickr = flickrPhoto;
+        imageFlickr = flickrPhoto;
         
         /*
          *  Imagen de Flickr.
          */
-        if(_imageFlickr.imageLarge)
+        if(imageFlickr.imageLarge)
         {
-            [self loadImage:_imageFlickr.imageLarge];
+            [self loadImage:imageFlickr.imageLarge];
         }
         else
         {
             //        cell.photo.image = self.flickrPhoto.thumbnail;
-            [Flickr loadImageForPhoto:self.imageFlickr thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
+            [Flickr loadImageForPhoto:imageFlickr thumbnail:NO completionBlock:^(UIImage *photoImage, NSError *error) {
                 
                 if(!error)
                 {
@@ -311,8 +329,8 @@
                          * datos de la TableView en el hilo principal.ƒ
                          *
                          ------------------------------------------------------*/
-                        [self loadImage:_imageFlickr.imageLarge];
-                        _metaData = [[JMFMetaData alloc] initWithImage:_imageFlickr.imageLarge];
+                        [self loadImage:imageFlickr.imageLarge];
+                        metaData = [[JMFMetaData alloc] initWithImage:imageFlickr.imageLarge];
                       
                         [tableViewPhotoSelectMetaData reloadData];
                     });
@@ -466,14 +484,21 @@
          ---------------------------------------------------------------------*/
         return [self cellAddressLocation:tableView cellForRowAtIndexPath:indexPath];
         
-    } else if (indexPath.row == row_CellUser) {
+    } else if (indexPath.row == row_CellInfo) {
+        /** ------------------------------------------------------------------
+         *
+         *  CELDA:
+         *
+         *       - Info
+         *       _______
+         *      |       |   ~~~~~~~~~
+         *      |       |   ~~~~~ ~~~~~
+         *      |_______|
+         *       - (imagen de la camara)
+         *
+         ---------------------------------------------------------------------*/
         
-        CellUser * cell = (CellUser *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellUser];
-        
-        return cell;
-        
-        
-        
+        return [self cellInfo:tableView cellForRowAtIndexPath:indexPath];
     }
     
     else {
@@ -516,8 +541,8 @@
         return cellDetalle_height;  // 249.f;
     else if (indexPath.row == row_CellAddress)
         return cellAddress_height;    // 400.f;
-    else if (indexPath.row == row_CellUser)
-        return cellUser_height;   // 234.f;
+    else if (indexPath.row == row_CellInfo)
+        return cellInfo_height;   // 234.f;
     else
         return 0;
 
@@ -764,7 +789,7 @@
 -(void)btnShare:(id)sender {
     
 //    NSArray *postItem = @[@"mensaje", self.image];
-    NSArray *postItem = @[@"mensaje", [Utils filterOverImage:self.image namesFilter:filtersActive]];
+    NSArray *postItem = @[@"mensaje", [Utils filterOverImage:image namesFilter:filtersActive]];
 
 //    CellImage *cell = (CellImage *) [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellImage];
 //    
@@ -826,7 +851,7 @@
     /*
      * Si la imagen todavia no esta descargada, se muestra un spinner.
      */
-    if (self.image == nil) {
+    if (image == nil) {
         // Centrar spinner.
         [indicatorLoadImagen setFrame:CGRectMake(self.view.frame.size.width/2, 261, 0, 0)];
         //        [[cell contentView] addSubview:indicatorLoadImagen];
@@ -848,7 +873,7 @@
 //        cellImage.photoView.image = self.image;
 //    }
     
-    cellImage.photoView.image = [Utils filterOverImage:self.image namesFilter:filtersActive];
+    cellImage.photoView.image = [Utils filterOverImage:image namesFilter:filtersActive];
     
     return cellImage;
     
@@ -870,11 +895,11 @@
     
   
     
-    cell.imgFilter1.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CISepiaTone"];
-    cell.imgFilter2.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPhotoEffectProcess"];
-    cell.imgFilter3.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPixellate"];
-    cell.imgFilter4.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPinchDistortion"];
-    cell.imgFilter5.image = [Utils filterOverImage:self.imageThumbnail nameFilter:@"CIPerspectiveTransform"];
+    cell.imgFilter1.image = [Utils filterOverImage:imageThumbnail nameFilter:@"CISepiaTone"];
+    cell.imgFilter2.image = [Utils filterOverImage:imageThumbnail nameFilter:@"CIPhotoEffectProcess"];
+    cell.imgFilter3.image = [Utils filterOverImage:imageThumbnail nameFilter:@"CIPixellate"];
+    cell.imgFilter4.image = [Utils filterOverImage:imageThumbnail nameFilter:@"CIPinchDistortion"];
+    cell.imgFilter5.image = [Utils filterOverImage:imageThumbnail nameFilter:@"CIPerspectiveTransform"];
     
     return cell;
 }
@@ -895,10 +920,10 @@
     
     
     // Titulo
-    if (self.imageFlickr.title)
-        cell.lblTitle.text = self.imageFlickr.title;
-    if (self.imageFlickr.description)
-        cell.lblDescription.text = self.imageFlickr.description;
+    if (imageFlickr.title)
+        cell.lblTitle.text = imageFlickr.title;
+    if (imageFlickr.description)
+        cell.lblDescription.text = imageFlickr.description;
     
     
     
@@ -942,22 +967,6 @@
      ---------------------------------------------------------------------*/
     CellAddressLocation * cell = (CellAddressLocation *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
     
-    //    JMFLocation *location = [[JMFLocation alloc] init];
-    
-    
-//    if (locationUser) {
-//        cell.lblLoacationOrigin.text = @"Localización del usuario";
-//    } else
-//        cell.lblLoacationOrigin.text = @"Localización de la imagen";
-    
-    //    CLLocation *lastLocation = [CLLocation alloc  ini]CLLocationCoordinate2DMake(30.0f, -3.0f);
-    //
-    //    [location.coordinate setLatitude:30];
-    //    location.coordinate = CLLocationCoordinate2DMake(43.0f, -3.0f);
-    
-    //            JMFLocationViewController *lVC = [[JMFLocationViewController alloc] initWithMapView:cell.mapkit];
-    //        lVC.delegate = self;
-    
     if (!isDidStartLocalization) {
         isDidStartLocalization = YES;
         
@@ -966,25 +975,10 @@
             longitude = location.coordinate.longitude;
         }
         
-        //    dispatch_async(dispatch_queue_t queue, ^{
-        //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         CLGeocoder *geocoder = [[CLGeocoder alloc]init];
-        //            CLLocation *userCLLocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
         CLLocation *clLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-        //    [geocoder reverseGeocodeLocation:userCLLocation completionHandler:^(NSArray *placemarks. NSError )];
-        
-        //    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        //    CLLocation *userCLLocation = [[CLLocation alloc] itWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-        //             __block JMFLocationViewController *weakSelf = self;
-        //        __block CLLocation *weakLocation = location;
         [geocoder reverseGeocodeLocation:clLocation completionHandler:^(NSArray *placemarks, NSError *error) {
             if (placemarks.count > 0) {
-                
-                //            dispatch_sync(dispatch_get_main_queue(), ^{
-                //                CLPlacemark *info = [placemarks lastObject];
-                //                [self.delegate setInfoGeocoder:info];
-                //            });
-                
                 
                 infoGeocoder = [placemarks lastObject];
                 NSLog(@"%@/n%@, %@/n%@",
@@ -993,20 +987,6 @@
                       [[infoGeocoder addressDictionary] objectForKey:@"ZIP"],
                       [[infoGeocoder addressDictionary] objectForKey:@"Country"]);
                 
-                NSLog(@"FormattedAddressLines: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"FormattedAddressLines"]);
-                NSLog(@"Street: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Street"]);
-                NSLog(@"SubAdministrativeArea: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Thoroughfare"]);
-                NSLog(@"Thoroughfare: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"]);
-                NSLog(@"ZIP: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"ZIP"]);
-                NSLog(@"Name: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Name"]);
-                NSLog(@"City: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"City"]);
-                NSLog(@"Country: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"Country"]);
-                NSLog(@"State: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"State"]);
-                NSLog(@"SubThoroughfare: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"SubThoroughfare"]);
-                NSLog(@"CountryCode: %@", [[infoGeocoder addressDictionary] objectForKey:(NSString*)@"CountryCode"]);
-                
-                
-                //                    [cell.mapView setMapType:MKMapTypeHybrid];
                 cell.mapView.rotateEnabled = YES;
                 cell.mapView.zoomEnabled = YES;
                 cell.mapView.pitchEnabled = YES;
@@ -1076,15 +1056,62 @@
 }
 
 
+-(UITableViewCell *) cellInfo:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    /** ------------------------------------------------------------------
+     *
+     *  CELDA:
+     *
+     *       - Info
+     *       _______
+     *      |       |   ~~~~~~~~~
+     *      |       |   ~~~~~ ~~~~~
+     *      |_______|
+     *       - (imagen de la camara)
+     *
+     ---------------------------------------------------------------------*/
+    CellInfo * cell = (CellInfo *)[tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellInfo];
+    
+    cell.imagenInfo.layer.cornerRadius = 25.0f;
+    cell.imagenInfo.image = image;
+ 
+    NSString *keys = [info allKeys], *text;
+    for (id key in keys) {
+        text  = [NSString stringWithFormat:@"%@ %@",
+                              text,
+                              [info objectForKey:key]];
+    }
+    
+
+   ReadingTimeScrollPanel *scrollPanel = [[ReadingTimeScrollPanel alloc] initWithFrame:CGRectZero];
+    
+    cell.txtInfo.enableReadingTime = YES;
+    cell.txtInfo.editable = NO;
+//    cell.txtInfo.delegate = scrollPanel;
+    
+    // Marco para le textView
+    /*
+    [cell.txtInfo.layer setBorderColor:[[UIColor grayColor] CGColor]];
+    [cell.txtInfo.layer setBorderWidth:1.0];
+    cell.txtInfo.layer.cornerRadius = 5;
+    cell.txtInfo.clipsToBounds = YES;
+     */
+    
+//    cell.lblInfo.lineBreakMode = UILineBreakModeWordWrap;
+//    cell.lblInfo.numberOfLines = 0;
+    cell.txtInfo.text = [NSString stringWithFormat:@"%@\n%@", @"Hacer scroll:",info];
+    return cell;
+    
+}
+
+
 /*.....................................
  *
  * Añadiendo imagen a la localizacion.
  *
  ......................................*/
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
-//    if ([[annotation title] isEqualToString:@"Current Location"]) {
-//        return nil;
-//    }
+
     
     MKAnnotationView *annView = [[MKAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
     /*
@@ -1110,7 +1137,7 @@
      */
 //    UIImage *img = [ UIImage imageNamed:@"PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg" ];
 //    img = [Utils imageToThumbnail:img Size:CGSizeMake(70, 70)];
-    UIImageView *iconView = [[UIImageView alloc] initWithImage:[Utils imageToThumbnail:self.image Size:CGSizeMake(70, 70)]];
+    UIImageView *iconView = [[UIImageView alloc] initWithImage:[Utils imageToThumbnail:image Size:CGSizeMake(70, 70)]];
     annView.leftCalloutAccessoryView = iconView;
     
     /*
@@ -1146,36 +1173,36 @@
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"ID:";
-    if (self.imageFlickr.ID)
-        cell.lbl1content.text = [[NSString alloc] initWithFormat:@"%lld", self.imageFlickr.ID];
+    if (imageFlickr.ID)
+        cell.lbl1content.text = [[NSString alloc] initWithFormat:@"%lld", imageFlickr.ID];
     
     cell.lbl2.text = @"Farm:";
-    if (self.imageFlickr.farm)
-        cell.lbl2content.text = [[NSString alloc] initWithFormat:@"%d", self.imageFlickr.farm];
+    if (imageFlickr.farm)
+        cell.lbl2content.text = [[NSString alloc] initWithFormat:@"%d", imageFlickr.farm];
     
     cell.lbl3.text = @"Servidor:";
-    if (self.imageFlickr.server)
-        cell.lbl3content.text = [[NSString alloc] initWithFormat:@"%d", self.imageFlickr.server];
+    if (imageFlickr.server)
+        cell.lbl3content.text = [[NSString alloc] initWithFormat:@"%d", imageFlickr.server];
     
     cell.lbl4.text = @"Secreto:";
-    if (self.imageFlickr.secret)
-        cell.lbl4content.text = self.imageFlickr.secret;
+    if (imageFlickr.secret)
+        cell.lbl4content.text = imageFlickr.secret;
     
     cell.lbl5.text = @"Familia:";
-    if (self.imageFlickr.isfamily)
-        cell.lbl5content.text = self.imageFlickr.isfamily;
+    if (imageFlickr.isfamily)
+        cell.lbl5content.text = imageFlickr.isfamily;
     
     cell.lbl6.text = @"Amigo:";
-    if (self.imageFlickr.isfriend)
-        cell.lbl6content.text = self.imageFlickr.isfriend;
+    if (imageFlickr.isfriend)
+        cell.lbl6content.text = imageFlickr.isfriend;
     
     cell.lbl7.text = @"Publico:";
-    if (self.imageFlickr.ispublic)
-        cell.lbl7content.text = self.imageFlickr.ispublic;
+    if (imageFlickr.ispublic)
+        cell.lbl7content.text = imageFlickr.ispublic;
     
     cell.lbl8.text = @"Propietario:";
-    if (self.imageFlickr.owner)
-        cell.lbl8content.text = self.imageFlickr.owner;
+    if (imageFlickr.owner)
+        cell.lbl8content.text = imageFlickr.owner;
     
     return cell;
 }
@@ -1186,19 +1213,19 @@
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"Color";
-    cell.lbl1content.text = [self.metaData.allMetaData objectForKey:@"ColorModel"];
+    cell.lbl1content.text = [metaData.allMetaData objectForKey:@"ColorModel"];
     
     cell.lbl2.text = @"Profundidad";
-    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.metaData.allMetaData objectForKey:@"Depth"]];
+    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[metaData.allMetaData objectForKey:@"Depth"]];
     
     cell.lbl3.text = @"Orientacion";
-    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[self.metaData.allMetaData objectForKey:@"Orientation"]];
+    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[metaData.allMetaData objectForKey:@"Orientation"]];
     
     cell.lbl5.text = @"Alto";
-    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[self.metaData.allMetaData objectForKey:@"PixelHeight"]];
+    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[metaData.allMetaData objectForKey:@"PixelHeight"]];
     
     cell.lbl6.text = @"Ancho";
-    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[self.metaData.allMetaData objectForKey:@"PixelWidth"]];
+    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[metaData.allMetaData objectForKey:@"PixelWidth"]];
     
     
     return cell;
@@ -1210,13 +1237,13 @@
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"Color S.";
-    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.metaData.EXIFDictionary objectForKey:@"ColorSpace"]];
+    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[metaData.EXIFDictionary objectForKey:@"ColorSpace"]];
     
     cell.lbl2.text = @"XDimension";
-    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[self.metaData.EXIFDictionary objectForKey:@"PixelXDimension"]];
+    cell.lbl2content.text = [NSString stringWithFormat:@"%@",[metaData.EXIFDictionary objectForKey:@"PixelXDimension"]];
     
     cell.lbl3.text = @"YDimension";
-    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[self.metaData.EXIFDictionary objectForKey:@"PixelYDimension"]];
+    cell.lbl3content.text = [NSString stringWithFormat:@"%@",[metaData.EXIFDictionary objectForKey:@"PixelYDimension"]];
     
     
     return cell;
@@ -1227,18 +1254,18 @@
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"Densidad (ud)";
-    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.metaData.JFIFDictionary objectForKey:@"DensityUnit"]];
+    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[metaData.JFIFDictionary objectForKey:@"DensityUnit"]];
     
-    NSArray *array  = [self.metaData.JFIFDictionary objectForKey:@"JFIFVersion"];
+    NSArray *array  = [metaData.JFIFDictionary objectForKey:@"JFIFVersion"];
 //    NSString *string = [[array valueForKey:@"description"] componentsJoinedByString:@""];
     cell.lbl2.text = @"JFIF versión";
     cell.lbl2content.text = [NSString stringWithFormat:@"%@.%@",array[0],array[1]];
     
     cell.lbl5.text = @"XDensidad";
-    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[self.metaData.JFIFDictionary objectForKey:@"XDensity"]];
+    cell.lbl5content.text = [NSString stringWithFormat:@"%@",[metaData.JFIFDictionary objectForKey:@"XDensity"]];
     
     cell.lbl6.text = @"YDensidad";
-    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[self.metaData.JFIFDictionary objectForKey:@"YDensity"]];
+    cell.lbl6content.text = [NSString stringWithFormat:@"%@",[metaData.JFIFDictionary objectForKey:@"YDensity"]];
     
     
     return cell;
@@ -1249,7 +1276,7 @@
     cell = [self writerEraserMetaDatos:cell];
     
     cell.lbl1.text = @"Orientacion";
-    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[self.metaData.TIFFDictionary objectForKey:@"Orientation"]];
+    cell.lbl1content.text = [NSString stringWithFormat:@"%@",[metaData.TIFFDictionary objectForKey:@"Orientation"]];
     
     
     return cell;
@@ -1313,7 +1340,7 @@
 }
 
 
--(void) loadImage:(UIImage *) image {
+-(void) loadImage:(UIImage *) aImage {
     
     
     // Inicializa locations, tableView, celdas.
@@ -1324,10 +1351,10 @@
      * Redimensiona la imagen al tamaño del imageView
      *
      --------------------------------------------------*/
-    if (image.size.height > cellImage_height || image.size.width > cellImage_width) {
+    if (aImage.size.height > cellImage_height || aImage.size.width > cellImage_width) {
         
         
-        _image = [Utils imageToThumbnail:image Size:CGSizeMake(cellImage_width, cellImage_height)];
+        image = [Utils imageToThumbnail:aImage Size:CGSizeMake(cellImage_width, cellImage_height)];
         
         
         /*-------------------------------------------------
@@ -1336,10 +1363,10 @@
          *
          --------------------------------------------------*/
     } else {
-        _image = image;
+        image = aImage;
     }
     
-    _imageThumbnail = [Utils imageToThumbnail:image Size:CGSizeMake(100, 100)];
+    imageThumbnail = [Utils imageToThumbnail:aImage Size:CGSizeMake(100, 100)];
     
 }
 
@@ -1358,7 +1385,7 @@
     /*
      *  La imagen contiene información de GPS.
      */
-    NSDictionary *gps = [self.metaData GPSDictionary];
+    NSDictionary *gps = [metaData GPSDictionary];
     if ([gps objectForKey:kCGImagePropertyGPSLatitude] &&
         [gps objectForKey:kCGImagePropertyGPSLongitude]) {
         
@@ -1405,7 +1432,7 @@
     [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellFilters bundle:nil] forCellReuseIdentifier:kCellFilters];
     [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellDetail bundle:nil] forCellReuseIdentifier:kCellDetail];
     [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellAddress bundle:nil] forCellReuseIdentifier:kCellAddress];
-    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellUser bundle:nil] forCellReuseIdentifier:kCellUser];
+    [tableViewPhotoSelectMetaData registerNib:[UINib nibWithNibName:kCellInfo bundle:nil] forCellReuseIdentifier:kCellInfo];
     
     
     // Añade la tabla a la vista del controlador
@@ -1417,7 +1444,7 @@
     row_CellFilters = numCell++;
     row_CellDetalle =numCell++;
     row_CellAddress = numCell++;
-    row_CellUser = numCell++;
+    row_CellInfo = numCell++;
     
     // Guarda altura de las celdas personalizadas
     UITableViewCell *cell = [UITableViewCell new];
@@ -1434,8 +1461,8 @@
     cellDetalle_height = cell.frame.size.height;
     cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellAddress];
     cellAddress_height = cell.frame.size.height;
-    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellUser];
-    cellUser_height = cell.frame.size.height;
+    cell = [tableViewPhotoSelectMetaData dequeueReusableCellWithIdentifier:kCellInfo];
+    cellInfo_height = cell.frame.size.height;
     
     
     /*-------------------------------------------------------------------------------
