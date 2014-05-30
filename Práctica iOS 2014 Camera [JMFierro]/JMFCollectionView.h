@@ -14,11 +14,40 @@
 
 /*
  
- En una **collectionView** se muestran las imágenes que se saquen con la cámara, se seleccionen de la galería o se busquen en Flickr.
+ Aplicación para **miniIPad ** que consiste en una *'CollectionView'* con imágenes de busquedas obtenidas de **Flickr** y fotos tomadas de la cámara.
  
- El **diseño** es sencillo y consta de dos partes, una blanca y otra negra, con una líneas de transición de una parte a la otra. En la parte superior blanca esta la busqueda, selección y cámara. En la parte de abajo negra se muestran las imágenes. *Es de mi creación, no me he inspirado en nada, segui mi intuición.*
+ El **diseño** de la 'collectionView' es sencillo y consta de dos partes, una blanca (parte de arriba) y otra negra(parte de abajo), con una líneas de transición entre ambas. En la parte superior blanca esta la busqueda, selección y cámara y en la de abajo negra se muestran las imágenes. *El diseño es mio, no me he inspirado en nigún otro, segui mi intuición.*
  
- Se gestiona por la clase **JMFCollectionView**. Crea una *'CollectionView'*, registra una vista personalizada de las celdas (**'JMFPushpinCell.xib'**) y las cabeceras de las secciones (clase **'JMFHeaderView'**).
+ 
+ **********
+ ## Modelo
+ **********
+ 
+ El modelo esta ubicado en el grupo *'Collection'*. La clase **JMFModel** contiene un *array* (**imagesCamera**) con objetos **JMFImage** para imágenes tomadas con la cámara. Un *diccionario* (**imagesFlickr**) con objetos **imageFlickr**, para imágenes bajadas de Flickr y un *array* (**termsSearchesFlickr**) con objetos , **NSString**, para lo términos de busqueda empleados en la busquedas de Flickr. Estos últimos se usarán como las *'keys'* en el *diccionario* (**imagesFlickr**).
+ 
+ La clase **JMFImage** ubicada en el grupo *Camera* contiene la información relativa a las imágenes de la cámara: *imagen, metadatos, latitud, longitud, rectángulos de las caras.*
+ 
+ La clase **imageFlickr** en el grupo *'Flickr'*, aglutina la información de las imágenes devueltas desde el sitio Flickr: *imageThumbnail, imageLarge y facesRects* junto con un conjunto de datos extra proporcionados por Flickr: *ID, farm, server,secret,isfamily,...* )
+ 
+ Tiene algunos método para *inicializar, conocer el número de elementos almacenados, acceder a una imagen de la cámara*.
+ 
+ -(id)initWith;
+ 
+ -(NSInteger) countTotal;
+ -(NSInteger) countSections;
+ -(NSInteger) countOfImagesCamera;
+ -(NSInteger) countOfTermSearchFlickr:(NSString *)termSearchFlickr;
+ 
+ // Devuelve la imagen correspondiente a una posicion.
+ -(UIImage *) imageCamera:(NSInteger *) item;
+ 
+ 
+ 
+ ***************
+ ** Controlador
+ ***************
+ 
+ Crea una *'CollectionView'*, registra una vista personalizada de las celdas (**'JMFPushpinCell.xib'**) y las cabeceras de las secciones (clase **'JMFHeaderView'**).
  
  Se hace desde **viewWillLayoutSubviews**, para que se redimensione si la orientación cambia, llamando al método de instancia **createCollectionView**.
  
@@ -85,7 +114,10 @@
  3. collectionView **cellForItemAtIndexPath** - *donde se rellena la celda con los datos*.
  
  
+ 
+ *************
  ##### Flickr
+ **************
  
  Para la busqueda de imágenes en flickr, se establece la clase **'JMFCollectionView'** como delegado de un  *'TextField'* que recogerá el término para las búsquedas en Flickr.
  
@@ -94,13 +126,6 @@
  en el método **textFieldShouldReturn** utiliza la *clase	de Flickr* para hacer una busqueda asincrónica en el sitio Flickr.
  
  Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo principal de ejecución** haciendo uso de la *'propiedad privada'  **collectionViewPhotos***
- 
- *******************
- #### Eliminar foto
- *******************
- 
- Hay un botón habilitado en el **'Navigator'**. Envía  una notificación que escucha la clase **'JMFCollectionView'** en el método **onRemove**. La clase guarda con antelación un objeto **'NSIndexPath'**
- que apunta a la imagen actual. *El modelo tiene un método de borrado que recibe un objeto **'NSIndexPath'** y elimina el objeto correspondiente.*
  
  */
 
@@ -123,6 +148,6 @@
 
 
 - (IBAction)clickBackground:(id)sender;
-//@property (weak, nonatomic) IBOutlet UIView *viewMap;
+
 
 @end

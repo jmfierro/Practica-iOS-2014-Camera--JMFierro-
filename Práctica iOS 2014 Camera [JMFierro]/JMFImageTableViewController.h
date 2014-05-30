@@ -13,6 +13,11 @@
  */
 
 /*
+ 
+ *************
+ ** TableView
+ *************
+ 
  Muestra la imagen seleccionada con sus metadatos, la localización y el rectángulo de las caras.
  
  Redimensiona la imagen al tamaño de la imagenView, conservando las proporciones. *(Lo hice porque sino acababa dando un **didReceiveMemoryWarning** al aplicar los filtros.)*

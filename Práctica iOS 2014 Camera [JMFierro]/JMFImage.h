@@ -12,7 +12,6 @@
 @interface JMFImage : NSObject
 
 @property (nonatomic,strong) UIImage *image;
-//@property (nonatomic,strong) NSString *health;
 @property (nonatomic, strong) JMFMetaData *metaData;
 @property (nonatomic, strong) NSDictionary *info;
 @property (nonatomic) CGFloat latitude;

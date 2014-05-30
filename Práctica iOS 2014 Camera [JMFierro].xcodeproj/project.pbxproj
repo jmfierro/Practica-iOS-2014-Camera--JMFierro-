@@ -294,13 +294,10 @@
 		50382F2118F0243D0061B90C /* Práctica iOS 2014 Camera [JMFierro] */ = {
 			isa = PBXGroup;
 			children = (
-				505A7BA21920C971005D0B08 /* Washington.jpg */,
-				508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */,
-				508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */,
-				50C29A02190E997F00879269 /* marilyn.png */,
-				50C1F72718F44A2C004A1296 /* famous-face-dementia-617x416.jpg */,
+				507ED5391938DA55008134C5 /* Assets pruebas */,
 				50382F2A18F0243D0061B90C /* AppDelegate.h */,
 				50382F2B18F0243D0061B90C /* AppDelegate.m */,
+				507E1123190915710038ECB7 /* Model */,
 				50B8594B18F2ED4D00E91D44 /* Collection */,
 				50C1F72918F44ACD004A1296 /* TableView */,
 				507C8E1E1917980B00238C30 /* Camera */,
@@ -409,6 +406,18 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		507ED5391938DA55008134C5 /* Assets pruebas */ = {
+			isa = PBXGroup;
+			children = (
+				505A7BA21920C971005D0B08 /* Washington.jpg */,
+				508A487F190FADD300FFEBAA /* PILAR-GARCIA-MUÑIZ-JOSE-ANGEL-LEIRAS-MAS-GENTE.jpg */,
+				508A487D190FAD0300FFEBAA /* gente_750x469--647x300.jpg */,
+				50C29A02190E997F00879269 /* marilyn.png */,
+				50C1F72718F44A2C004A1296 /* famous-face-dementia-617x416.jpg */,
+			);
+			name = "Assets pruebas";
+			sourceTree = "<group>";
+		};
 		508D1C84192CA94C00063A5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,7 +500,6 @@
 				50B8594818F2EBAB00E91D44 /* JMFPushpinCell.m */,
 				50E94C2218F4145600589BDA /* JMFPushpinCell.xib */,
 				503E381C18F2F96F00A9FBDF /* Assets */,
-				507E1123190915710038ECB7 /* Model */,
 			);
 			name = Collection;
 			sourceTree = "<group>";

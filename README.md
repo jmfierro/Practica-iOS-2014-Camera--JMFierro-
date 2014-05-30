@@ -1,11 +1,13 @@
 # Práctica iOS 2014: Camera
 
-###Asígnatura: iOS
+###Asígnatura: iOS, U-Tad
 ###Alumno: Jose Manuel Fierro Conchouso
 
-Aplicación para **miniIPad ** que consiste en una *'CollectionView'* que muestra imágenes de busquedas obtenidas de **Flickr** y también tomadas por la cámara.
+## Descripción
 
- Seleccionando un imagen muestra sus metadatos en una *'TableView'*.
+Aplicación para **miniIPad ** que consiste en una *'CollectionView'* con imágenes de busquedas obtenidas de **Flickr** y fotos tomadas de la cámara.
+
+ Seleccionando un imagen muestra sus metadatos en una *'TableView'* con celdas personalizadas, donde además se le pude detectar caras y aplicar 5 filtros.
  
 ## Modelo
 
@@ -123,22 +125,6 @@ en el método **textFieldShouldReturn** utiliza la *clase	de Flickr* para hacer 
 
 Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo principal de ejecución** haciendo uso de la *'propiedad privada'  **collectionViewPhotos***
 
-
-# Cámara
-
-La clase **'JMFCameraViewController'** comprueba que el dispositivo cuenta con una cámara, instancia *'UIImagePickerController'*, asigna el delegado y configura (la cámara de fotos, sin vídeo).
-
-**imagePickerController:(UIImagePickerController *)picker** se encarga de guardar la fotografía tomada.
-
-Si se acepta la fotografía se guarda en el dispositivo:
-
-   	if (_newMedia)
-     UIImageWriteToSavedPhotosAlbum(image,
-                     self,                     @selector(image:finishedSavingWithError:contextInfo:),
-                     nil);
-                                                          
-
-
 ## TableView
 
 Muestra la imagen seleccionada con sus metadatos, la localización y el rectángulo de las caras.
@@ -211,6 +197,23 @@ Hay un botón habilitado en el **'Navigator'**. Envía  una notificación que es
 que apunta a la imagen actual. *El modelo tiene un método de borrado que recibe un objeto **'NSIndexPath'** y elimina el objeto correspondiente.*
 
 *El **diseño** de la tableView ha sido tomafo de una ejemplo de Github.*
+
+# Cámara
+
+La clase **'JMFCameraViewController'** comprueba que el dispositivo cuenta con una cámara, instancia *'UIImagePickerController'*, asigna el delegado y configura (la cámara de fotos, sin vídeo).
+
+**imagePickerController:(UIImagePickerController *)picker** se encarga de guardar la fotografía tomada.
+
+Si se acepta la fotografía se guarda en el dispositivo:
+
+   	if (_newMedia)
+     UIImageWriteToSavedPhotosAlbum(image,
+                     self,                     @selector(image:finishedSavingWithError:contextInfo:),
+                     nil);
+                                                          
+
+
+
 
 ## Detección de caras
 
@@ -374,13 +377,13 @@ En el método **cellForRowAtIndexPath**, en segundo plano se hace un
  
 ## UTILS.M
 
- En la clase **Utils** contiene *métodos de clase*. En ella reuno todos aquellos métodos susceptibles de ser usados en otros proyectos.
+ La clase **Utils** contiene *métodos de clase*. En ella reuno todos aquellos métodos susceptibles de ser usados en otros proyectos.
 
 
 
 ## Flickr
 
-Me cree una cuenta y obtuve una APIkey.
+Con una cuenta obtuve una APIkey. La clase **Flickr** hace lo siguiente:
 
 Crea una url para la busqueda en Flickr que continene la API personal y el término de busqueda.
 

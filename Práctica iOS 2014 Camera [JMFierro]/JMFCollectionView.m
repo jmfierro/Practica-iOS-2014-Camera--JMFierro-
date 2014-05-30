@@ -14,9 +14,9 @@
 
 /*
  
- En una **collectionView** se muestran las imágenes que se saquen con la cámara, se seleccionen de la galería o se busquen en Flickr.
+ Aplicación para **miniIPad ** que consiste en una *'CollectionView'* con imágenes de busquedas obtenidas de **Flickr** y fotos tomadas de la cámara.
  
- El **diseño** es sencillo y consta de dos partes, una blanca y otra negra, con una líneas de transición de una parte a la otra. En la parte superior blanca esta la busqueda, selección y cámara. En la parte de abajo negra se muestran las imágenes. *Es de mi creación, no me he inspirado en nada, segui mi intuición.*
+ El **diseño** de la 'collectionView' es sencillo y consta de dos partes, una blanca (parte de arriba) y otra negra(parte de abajo), con una líneas de transición entre ambas. En la parte superior blanca esta la busqueda, selección y cámara y en la de abajo negra se muestran las imágenes. *El diseño es mio, no me he inspirado en nigún otro, segui mi intuición.*
  
  
  **********
@@ -127,13 +127,6 @@ en el método **textFieldShouldReturn** utiliza la *clase	de Flickr* para hacer 
 
 Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo principal de ejecución** haciendo uso de la *'propiedad privada'  **collectionViewPhotos***
  
- *******************
- #### Eliminar foto
- *******************
- 
- Hay un botón habilitado en el **'Navigator'**. Envía  una notificación que escucha la clase **'JMFCollectionView'** en el método **onRemove**. La clase guarda con antelación un objeto **'NSIndexPath'**
- que apunta a la imagen actual. *El modelo tiene un método de borrado que recibe un objeto **'NSIndexPath'** y elimina el objeto correspondiente.*
-
  */
 
 #import "JMFCollectionView.h"
@@ -176,8 +169,6 @@ Cuando finaliza la busqueda actualiza la *'Interface'* del usuario en el **hilo 
          * **   MODELO   **
          *
          -------------------*/
-//        UIImage *img = [UIImage imageWithContentsOfFile:(NSString *)path];
-        
         self.model = [[JMFModel alloc] initWith];
     }
     return self;

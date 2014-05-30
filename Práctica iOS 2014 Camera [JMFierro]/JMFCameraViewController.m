@@ -175,84 +175,6 @@
 
 
 #pragma mark UIImagePickerController Delegate
-
-/*
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)dictionary
-{
-    
-    [picker dismissModalViewControllerAnimated:YES];
-    
-    NSData *dataOfImageFromGallery = UIImageJPEGRepresentation (image,0.5);
-    NSLog(@"Image length:  %d", [dataOfImageFromGallery length]);
-    
-    
-    CGImageSourceRef source;
-    source = CGImageSourceCreateWithData((CFDataRef)dataOfImageFromGallery, NULL);
-    
-    NSDictionary *metadata = (NSDictionary *) CGImageSourceCopyPropertiesAtIndex(source, 0, NULL);
-    
-    NSMutableDictionary *metadataAsMutable = [[metadata mutableCopy]autorelease];
-    [metadata release];
-    
-    NSMutableDictionary *EXIFDictionary = [[[metadataAsMutable objectForKey:(NSString *)kCGImagePropertyExifDictionary]mutableCopy]autorelease];
-    NSMutableDictionary *GPSDictionary = [[[metadataAsMutable objectForKey:(NSString *)kCGImagePropertyGPSDictionary]mutableCopy]autorelease];
-    
-    
-    if(!EXIFDictionary)
-    {
-        //if the image does not have an EXIF dictionary (not all images do), then create one for us to use
-        EXIFDictionary = [NSMutableDictionary dictionary];
-    }
-    
-    if(!GPSDictionary)
-    {
-        GPSDictionary = [NSMutableDictionary dictionary];
-    }
-    
-    //Setup GPS dict -
-    //I am appending my custom data just to test the logic……..
-    
-    [GPSDictionary setValue:[NSNumber numberWithFloat:1.1] forKey:(NSString*)kCGImagePropertyGPSLatitude];
-    [GPSDictionary setValue:[NSNumber numberWithFloat:2.2] forKey:(NSString*)kCGImagePropertyGPSLongitude];
-    [GPSDictionary setValue:@"lat_ref" forKey:(NSString*)kCGImagePropertyGPSLatitudeRef];
-    [GPSDictionary setValue:@"lon_ref" forKey:(NSString*)kCGImagePropertyGPSLongitudeRef];
-    [GPSDictionary setValue:[NSNumber numberWithFloat:3.3] forKey:(NSString*)kCGImagePropertyGPSAltitude];
-    [GPSDictionary setValue:[NSNumber numberWithShort:4.4] forKey:(NSString*)kCGImagePropertyGPSAltitudeRef];
-    [GPSDictionary setValue:[NSNumber numberWithFloat:5.5] forKey:(NSString*)kCGImagePropertyGPSImgDirection];
-    [GPSDictionary setValue:@"_headingRef" forKey:(NSString*)kCGImagePropertyGPSImgDirectionRef];
-    
-    [EXIFDictionary setValue:@"xml_user_comment" forKey:(NSString *)kCGImagePropertyExifUserComment];
-    //add our modified EXIF data back into the image’s metadata
-    [metadataAsMutable setObject:EXIFDictionary forKey:(NSString *)kCGImagePropertyExifDictionary];
-    [metadataAsMutable setObject:GPSDictionary forKey:(NSString *)kCGImagePropertyGPSDictionary];
-    
-    CFStringRef UTI = CGImageSourceGetType(source);
-    NSMutableData *dest_data = [NSMutableData data];
-    
-    CGImageDestinationRef destination = CGImageDestinationCreateWithData((CFMutableDataRef) dest_data, UTI, 1, NULL);
-    
-    if(!destination)
-    {
-        NSLog(@"--------- Could not create image destination---------");
-    }
-    
-    
-    CGImageDestinationAddImageFromSource(destination, source, 0, (CFDictionaryRef) metadataAsMutable);
-    
-    BOOL success = NO;
-    success = CGImageDestinationFinalize(destination);
-    
-    if(!success)
-    {
-        NSLog(@"-------- could not create data from image destination----------");
-    }
-    
-    UIImage * image1 = [[UIImage alloc] initWithData:dest_data];
-    UIImageWriteToSavedPhotosAlbum (image1, self, nil, nil);    
-}
-*/
- 
- 
 -(void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
@@ -313,6 +235,81 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
      [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
+/*
+ - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)dictionary
+ {
+ 
+ [picker dismissModalViewControllerAnimated:YES];
+ 
+ NSData *dataOfImageFromGallery = UIImageJPEGRepresentation (image,0.5);
+ NSLog(@"Image length:  %d", [dataOfImageFromGallery length]);
+ 
+ 
+ CGImageSourceRef source;
+ source = CGImageSourceCreateWithData((CFDataRef)dataOfImageFromGallery, NULL);
+ 
+ NSDictionary *metadata = (NSDictionary *) CGImageSourceCopyPropertiesAtIndex(source, 0, NULL);
+ 
+ NSMutableDictionary *metadataAsMutable = [[metadata mutableCopy]autorelease];
+ [metadata release];
+ 
+ NSMutableDictionary *EXIFDictionary = [[[metadataAsMutable objectForKey:(NSString *)kCGImagePropertyExifDictionary]mutableCopy]autorelease];
+ NSMutableDictionary *GPSDictionary = [[[metadataAsMutable objectForKey:(NSString *)kCGImagePropertyGPSDictionary]mutableCopy]autorelease];
+ 
+ 
+ if(!EXIFDictionary)
+ {
+ //if the image does not have an EXIF dictionary (not all images do), then create one for us to use
+ EXIFDictionary = [NSMutableDictionary dictionary];
+ }
+ 
+ if(!GPSDictionary)
+ {
+ GPSDictionary = [NSMutableDictionary dictionary];
+ }
+ 
+ //Setup GPS dict -
+ //I am appending my custom data just to test the logic……..
+ 
+ [GPSDictionary setValue:[NSNumber numberWithFloat:1.1] forKey:(NSString*)kCGImagePropertyGPSLatitude];
+ [GPSDictionary setValue:[NSNumber numberWithFloat:2.2] forKey:(NSString*)kCGImagePropertyGPSLongitude];
+ [GPSDictionary setValue:@"lat_ref" forKey:(NSString*)kCGImagePropertyGPSLatitudeRef];
+ [GPSDictionary setValue:@"lon_ref" forKey:(NSString*)kCGImagePropertyGPSLongitudeRef];
+ [GPSDictionary setValue:[NSNumber numberWithFloat:3.3] forKey:(NSString*)kCGImagePropertyGPSAltitude];
+ [GPSDictionary setValue:[NSNumber numberWithShort:4.4] forKey:(NSString*)kCGImagePropertyGPSAltitudeRef];
+ [GPSDictionary setValue:[NSNumber numberWithFloat:5.5] forKey:(NSString*)kCGImagePropertyGPSImgDirection];
+ [GPSDictionary setValue:@"_headingRef" forKey:(NSString*)kCGImagePropertyGPSImgDirectionRef];
+ 
+ [EXIFDictionary setValue:@"xml_user_comment" forKey:(NSString *)kCGImagePropertyExifUserComment];
+ //add our modified EXIF data back into the image’s metadata
+ [metadataAsMutable setObject:EXIFDictionary forKey:(NSString *)kCGImagePropertyExifDictionary];
+ [metadataAsMutable setObject:GPSDictionary forKey:(NSString *)kCGImagePropertyGPSDictionary];
+ 
+ CFStringRef UTI = CGImageSourceGetType(source);
+ NSMutableData *dest_data = [NSMutableData data];
+ 
+ CGImageDestinationRef destination = CGImageDestinationCreateWithData((CFMutableDataRef) dest_data, UTI, 1, NULL);
+ 
+ if(!destination)
+ {
+ NSLog(@"--------- Could not create image destination---------");
+ }
+ 
+ 
+ CGImageDestinationAddImageFromSource(destination, source, 0, (CFDictionaryRef) metadataAsMutable);
+ 
+ BOOL success = NO;
+ success = CGImageDestinationFinalize(destination);
+ 
+ if(!success)
+ {
+ NSLog(@"-------- could not create data from image destination----------");
+ }
+ 
+ UIImage * image1 = [[UIImage alloc] initWithData:dest_data];
+ UIImageWriteToSavedPhotosAlbum (image1, self, nil, nil);
+ }
+ */
 
 
 

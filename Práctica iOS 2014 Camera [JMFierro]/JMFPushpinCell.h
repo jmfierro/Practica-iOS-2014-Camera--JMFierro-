@@ -15,7 +15,7 @@
 @interface JMFPushpinCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imagePhoto;
-@property (weak, nonatomic) IBOutlet UILabel *labelPhoto;
+
 
 @property(nonatomic, strong) ImageFlickr *photo;
 

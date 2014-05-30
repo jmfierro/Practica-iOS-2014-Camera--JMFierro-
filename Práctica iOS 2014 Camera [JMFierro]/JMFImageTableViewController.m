@@ -13,6 +13,12 @@
  */
 
 /*
+ 
+ *************
+ ** TableView
+ *************
+ 
+
  Muestra la imagen seleccionada con sus metadatos, la localización y el rectángulo de las caras.
  
  Redimensiona la imagen al tamaño de la imagenView, conservando las proporciones. *(Lo hice porque sino acababa dando un **didReceiveMemoryWarning** al aplicar los filtros.)*
@@ -752,7 +758,9 @@
 #pragma mark - Notificaciones
 
 /*
+ **********************
  ## Detección de caras
+ **********************
  
  Se pueden detectar desde la **'TableView'**, mediante un botón habilitado junto a la imagen mostrada. La ***busqueda se realiza en segundo plano*** desde el método **btnDetectFacialFeatures** llamando a la clase **FaceDetection**. *Al lado del botón se muestra el número de caras encontradas.*
  
@@ -970,7 +978,8 @@
     if (imageFlickr.description)
         cell.lblDescription.text = imageFlickr.description;
     
-    
+    // Puntuacion
+    cell.lblRate.text = [NSString stringWithFormat:@"%d,%d", (arc4random() % 10), (arc4random() % 10)];
     
     //        self.flickrPhoto.description;
     

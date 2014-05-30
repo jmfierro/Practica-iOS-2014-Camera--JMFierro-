@@ -9,7 +9,7 @@
  /*
  ## UTILS.M
  
- En la clase **Utils** contiene *métodos de clase*. Reuno todos aquellos métodos susceptibles de ser usados en otros proyectos.
+ La clase **Utils** contiene *métodos de clase*. Reuno todos aquellos métodos susceptibles de ser usados en otros proyectos.
  */
 
 
